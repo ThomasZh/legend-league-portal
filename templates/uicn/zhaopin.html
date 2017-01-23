@@ -1,0 +1,495 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="renderer" content="webkit">
+        <title>UI中国招聘－找工作-设计师垂直招聘平台-UI中国-专业界面交互设计平台</title>
+        <meta name="Keywords" content="设计师,找工作,找设计师,招设计师,招聘网,人才网,招聘,求职,人才,猎头,交互设计师,UI设计师,网页设计师,平面设计师,设计经理,设计主管,设计助理,设计总监,UI中国招聘,UI中国,UI.CN" />
+        <meta name="Description" content="UI中国招聘，设计师垂直招聘平台,UI中国旗下品牌。用心为设计师和企业服务,为设计师提供更多更好的工作机会，也为企业搭建了最真实、最垂直的设计师招聘平台，提供全面的各类设计师招聘服务及专业建议。" />
+        <link rel="icon" href="/favicon.ico"/>
+
+        <link rel="stylesheet" href="{{ static_url('uicn/css/iconfont.css') }}">
+        <link rel="stylesheet" href="{{ static_url('uicn/css/base.css') }}">
+        <link rel="stylesheet" href="{{ static_url('uicn/css/header.css') }}">
+        <link rel="stylesheet" href="{{ static_url('uicn/css/footer.css') }}">
+        <link rel="stylesheet" href="{{ static_url('uicn/css/jobinfo.css') }}">
+        <link rel="stylesheet" href="{{ static_url('uicn/css/jobtalent.css') }}">
+        <link rel="stylesheet" href="{{ static_url('uicn/css/jobuser.css') }}">
+
+        <script src="{{ static_url('uicn/js/jquery.js') }}"></script>
+        <script src="{{ static_url('uicn/js/msgTip.js') }}"></script>
+        <script src="{{ static_url('uicn/js/header.js') }}"></script>
+        <script src="{{ static_url('uicn/js/form.js') }}"></script>
+
+        <script src="{{ static_url('uicn/js/footer.js') }}"></script>
+        <script src="{{ static_url('uicn/js/lists.min.js') }}"></script>
+
+        <script src="{{ static_url('uicn/js/LazyLoad.js') }}"></script>
+        <script src="{{ static_url('uicn/js/pulic.js') }}"></script>
+        <script src="{{ static_url('uicn/js/froala_editor.js') }}"></script>
+
+	</head>
+	<body class="body-gray">
+  <!-- top menu -->
+  {% module Template("uicn/top-menu-block.html") %}
+  <!-- /top menu -->
+
+
+<script>
+	//动态默认显示
+	var nav_loc='';
+	//var navuid='';
+	//以下兼容个人中心 立即激活
+	  $(".jsemailverify").parent('div').parent('li').css("background","#fff7e7").find('a').addClass('f14').css('display','block');
+</script>        <div id="ajax-hook"></div>
+        <!-- 导航 -->
+
+        <div class="job_info_title">
+    <div class="wpn pos">
+        <!-- <div class="job_info_title_left z cl"> -->
+            <ul class="cl z">
+                <li class="on"><a href="/">找工作</a></li>                            </ul>
+        <!-- </div> -->
+        <!-- 搜索 serch -->
+        <div class="search_navcon mtw pos">
+            <form action="" method="get">
+                <div class="search_navleft">
+                    <div class="search_sel javas-sel">
+                        <span>公司</span>
+                        <i class="icon-down"></i>
+                        <div class="news_select_list javas_sellist hide">
+                            <a data-search="/" class="on" href="javascript:;">公司</a>
+                            <a data-search="/office.html" href="javascript:;">职位</a>
+                        </div>
+                    </div>
+                    <input type="text" name="key" placeholder="请输入关键字" autocomplete="off" value="">
+                </div>
+                <div class="search_navright">
+                    <button><i class="icon-search"></i></button>
+                </div>
+            </form>
+            <!-- 热门搜索 -->
+        </div>
+
+        <div class="y mtw">
+                        <a href="/agreement.html" class="lang-btn lang-btn-fixed-small">立即入驻</a>
+                        <a href="http://uier.ui.cn/" class="lang-btn lang-btn-fixed-small" id='mypro_ss'>我的简历</a>
+        </div>
+    </div>
+</div>
+
+
+        <!-- job list -->
+        <div class="job_def_where wpn pos cl">
+            <div class="jon_com_tab cl z">
+                <div class="job_tab pos">
+                	<span class="z on"><a href="/">公司</a></span>
+                    <span class="posi"><i></i></span>
+                	<span class="y"><a href="/office.html">职位</a></span>
+                </div>
+            	<!-- 筛选 -->
+                <div class="click_table cl">
+                    <div class="click_table_list pos">
+                        <span class="ui_select_val">选择工作地点</span>                        <i class="icon-right"></i>
+                        <dl class="ui_select_list">
+                            <dd><a href="?p=1">不限</a></dd>
+                            <dd><a href="?p=1&loca=45054">上海市</a></dd><dd><a href="?p=1&loca=305">东莞</a></dd><dd><a href="?p=1&loca=45052">北京市</a></dd><dd><a href="?p=1&loca=162">南京</a></dd><dd><a href="?p=1&loca=204">厦门</a></dd><dd><a href="?p=1&loca=186">合肥</a></dd><dd><a href="?p=1&loca=178">嘉兴市</a></dd><dd><a href="?p=1&loca=45053">天津市</a></dd><dd><a href="?p=1&loca=289">广州</a></dd><dd><a href="?p=1&loca=389">德阳市</a></dd><dd><a href="?p=1&loca=385">成都</a></dd><dd><a href="?p=1&loca=163">无锡</a></dd><dd><a href="?p=1&loca=415">昆明</a></dd><dd><a href="?p=1&loca=175">杭州</a></dd><dd><a href="?p=1&loca=258">武汉</a></dd><dd><a href="?p=1&loca=293">汕头市</a></dd><dd><a href="?p=1&loca=291">深圳</a></dd><dd><a href="?p=1&loca=292">珠海</a></dd><dd><a href="?p=1&loca=203">福州市</a></dd><dd><a href="?p=1&loca=438">西安</a></dd><dd><a href="?p=1&loca=240">郑州</a></dd><dd><a href="?p=1&loca=45055">重庆市</a></dd><dd><a href="?p=1&loca=275">长沙</a></dd>                        </dl>
+                    </div>
+                    <div class="click_table_list pos">
+                        <span class="ui_select_val">选择公司方向</span>                        <i class="icon-right"></i>
+                        <dl class="ui_select_list">
+                            <dd><a href="?p=1">不限</a></dd>
+                            <dd><a href="?p=1&area=56">金融</a></dd><dd><a href="?p=1&area=57">IT/软件</a></dd><dd><a href="?p=1&area=58">通讯</a></dd><dd><a href="?p=1&area=59">健康医疗</a></dd><dd><a href="?p=1&area=60">智能硬件</a></dd><dd><a href="?p=1&area=61">其它</a></dd><dd><a href="?p=1&area=55">广告/公共/会展</a></dd><dd><a href="?p=1&area=54">电子商务</a></dd><dd><a href="?p=1&area=53">游戏</a></dd><dd><a href="?p=1&area=52">互联网</a></dd>                        </dl>
+                    </div>
+                    <div class="click_table_list pos">
+                        <span class="ui_select_val">选择融资阶段</span>                        <i class="icon-right"></i>
+                        <dl class="ui_select_list">
+                            <dd><a href="?p=1">不限</a></dd>
+                            <dd><a href="?p=1&fina=83">未融资</a></dd><dd><a href="?p=1&fina=82">不需要融资</a></dd><dd><a href="?p=1&fina=81">上市公司</a></dd><dd><a href="?p=1&fina=80">D轮以上</a></dd><dd><a href="?p=1&fina=79">C轮</a></dd><dd><a href="?p=1&fina=78">B轮</a></dd><dd><a href="?p=1&fina=77">A轮</a></dd><dd><a href="?p=1&fina=76">天使轮</a></dd>                        </dl>
+                    </div>
+                    <div class="click_table_list pos" style="border-bottom:0;">
+                        <span class="ui_select_val">选择公司规模</span>                        <i class="icon-right"></i>
+                        <dl class="ui_select_list">
+                            <dd><a href="?p=1">不限</a></dd>
+                             <dd><a href="?p=1&scale=51">1000以上</a></dd> <dd><a href="?p=1&scale=50">500-1000</a></dd> <dd><a href="?p=1&scale=49">200-500</a></dd> <dd><a href="?p=1&scale=48">100-200</a></dd> <dd><a href="?p=1&scale=47">50-100</a></dd> <dd><a href="?p=1&scale=46">1-50</a></dd>                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <link rel="stylesheet" href="/Public/css/nivo-slider.css?v=20150505" />
+            <div class="slider-wrapper slider-wrapper-job">
+                <div id="slider" class="nivoSlider">
+                    <a target="_blank" class="vipcn" _rel="22" href="http://zhaopin.ui.cn/prev/pid/481.html"><img src="http://7xkee9.dl1.z0.glb.clouddn.com/job/banner/a299212e8765edbfe6b4d77940b1d7d6.png"></a>                </div>
+            </div>
+            <!-- ban -->
+            <!-- ad -->
+            <a class="job_banner_vip vipcn" _rel="14" href="http://zhaopin.ui.cn/high.html"><img src="http://7xkee9.dl1.z0.glb.clouddn.com/job/propa/23ca071dfd43483f592f87e8622a4c80.jpeg" alt="UI中国中高端人才招聘服务"></a>
+        </div>
+
+       <div class="cmp_listIndex">
+       	<ul class="cl">
+            <li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/487.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/fm/7/8/4/1465970615.jpg"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">阿里巴巴</span>
+                            <span class="y"><em>
+                                                            电子商务                                                        </em><i>|</i><em>
+                                                            1000以上人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>聚一群有情有义的人，在一起做一件有价值有意义的事</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/487.html">共<em>3</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>大数据</span><span>可视化</span><span>广阔的平台</span><span>扁平管理</span><span>股票期权</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li><li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/359.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/fm/9/5/3/1452828422.jpg"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">魅族科技</span>
+                            <span class="y"><em>
+                                                            IT/软件                                                        </em><i>|</i><em>
+                                                            1000以上人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>中国智能手机厂商，致力于制造设计优雅、简单易用的智能手机。</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/359.html">共<em>5</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>五险一金</span><span>股票期权</span><span>弹性工作</span><span>扁平管理</span><span>交通便利</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li><li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/537.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/fm/7/3/5/1482204902.jpg"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">Onchain</span>
+                            <span class="y"><em>
+                                                            互联网                                                        </em><i>|</i><em>
+                                                            1-50人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>国内首个正在改变世界的区块链黑科技公司，你来吗？</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/537.html">共<em>1</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>年底双薪</span><span>交通便利</span><span>股票期权</span><span>扁平管理</span><span>弹性工作</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li><li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/515.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/fm/5/1/5/1479449193.png"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">宝宝巴士</span>
+                            <span class="y"><em>
+                                                            互联网                                                        </em><i>|</i><em>
+                                                            200-500人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>  “宝宝巴士，快乐启蒙 ”！</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/515.html">共<em>9</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>送给孩子最好的礼物</span><span>扁平管理</span><span>股票期权</span><span>岗位晋升</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li><li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/481.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/fm/1/8/4/1465878039.png"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">SKYUI</span>
+                            <span class="y"><em>
+                                                            IT/软件                                                        </em><i>|</i><em>
+                                                            1-50人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>&nbsp;</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/481.html">共<em>3</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>岗位晋升</span><span>五险一金</span><span>年底双薪</span><span>交通补助</span><span>扁平管理</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li><li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/399.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/fm/9/9/3/1457584697.jpg"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">ONEW DESIGN</span>
+                            <span class="y"><em>
+                                                            IT/软件                                                        </em><i>|</i><em>
+                                                            1-50人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>让ONEW团队力量凝聚一起，创造无限的可能！</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/399.html">共<em>4</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>出国旅游</span><span>团队聚餐</span><span>年底双薪</span><span>住房补贴</span><span>扁平管理</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li><li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/322.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/fm/2/2/3/1450152975.jpg"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">饿了么</span>
+                            <span class="y"><em>
+                                                            互联网                                                        </em><i>|</i><em>
+                                                            1000以上人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>饿了么和你一起拼！</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/322.html">共<em>2</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>交通便利</span><span>弹性工作</span><span>Aeron椅</span><span>标配MBP</span><span>团队气氛好</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li><li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/288.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/fm/8/8/2/1450151475.png"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">连悦网络</span>
+                            <span class="y"><em>
+                                                            互联网                                                        </em><i>|</i><em>
+                                                            1-50人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>设计师，如果你能加入一个有机会成为下一个Apple或Facebook的公司，是不是会很有趣？</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/288.html">共<em>3</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>岗位晋升</span><span>五险一金</span><span>交通便利</span><span>扁平管理</span><span>股票期权</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li><li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/71.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/basicdadd/1/7/1437906009.png"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">UI中国</span>
+                            <span class="y"><em>
+                                                            互联网                                                        </em><i>|</i><em>
+                                                            1-50人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>加入UI中国，让我们一起为设计师打造一个优秀的平台！</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/71.html">共<em>4</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>税后薪水</span><span>社保福利</span><span>发展空间大</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li><li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/373.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/fm/3/7/3/1454555310.jpg"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">奇虎360</span>
+                            <span class="y"><em>
+                                                            互联网                                                        </em><i>|</i><em>
+                                                            1000以上人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>&nbsp;</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/373.html">共<em>10</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>岗位晋升  五险一金  交通便利  扁平管理  节日礼物</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li><li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/413.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/fm/3/1/4/1459135370.jpg"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">学霸君</span>
+                            <span class="y"><em>
+                                                            互联网                                                        </em><i>|</i><em>
+                                                            200-500人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>我们致力于让科技的光彩赋予工具崭新的生命！</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/413.html">共<em>7</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>移动互联网教育</span><span>大额融资</span><span>扁平管理</span><span>股票期权</span><span>五险一金</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li><li class="item">
+                    <a target="_blank" href="http://zhaopin.ui.cn/prev/pid/8.html"><img width="380" height="170" class="imgloadinglater"  src="/Public/img/1px.png" data-original="http://7xkee9.dl1.z0.glb.clouddn.com/job/fm/8/1436948282.png"/></a>
+                    <div class="cmp_info">
+                        <div class="title">
+                            <span class="z">VIPUI</span>
+                            <span class="y"><em>
+                                                            未知
+                                                        </em><i>|</i><em>
+                                                            1-50人
+                                                        </em></span>
+                        </div>
+                        <!--口号 -->
+                        <p>VIP.Design招募视觉、交互、动效设计师</p>
+                        <!--设计师职位 -->
+                        <div class="list cl">
+                            <a class="move_joblist" target="_blank" href="http://zhaopin.ui.cn/prev/pid/8.html">共<em>4</em>个职位正在招聘</a>
+                        </div>
+                        <!--标签 -->
+                        <div class="label cl">
+                            <span>岗位晋升</span><span>节日礼物</span><span>交通便利</span>                        </div>
+                    </div>
+                    <div class="border-bottom"></div>
+                </li>
+        </ul>
+       </div>
+
+       <div class="min_page mtw">
+                    </div>
+
+		<div class="show wpn">
+            <a style="font-size:18px;color:#3498db;font-weight:normal;" href="/office.html">没有喜欢的企业？点击这里还有更多职位！>进入职位列表</a>
+        </div>
+       <!-- ./合作伙伴 -->
+       <div class="partners_box wpn">
+        	<div class="title">
+            	招聘专场
+            	<span>商务合作：vicky@ui.cn</span>
+            </div>
+            <div class="partners_list">
+            	<ul class="cl">
+                                    </ul>
+
+
+            </div>
+        </div>
+       <!-- ./合作伙伴end -->
+       <!-- ./合作伙伴 -->
+       <div class="partners_box wpn">
+        	<div class="title">
+            	合作伙伴
+            	<span>商务合作：bd@ui.cn</span>
+            </div>
+            <div class="partners_list">
+            	<ul class="cl">
+                                    </ul>
+            </div>
+        </div>
+       <!-- ./合作伙伴end -->
+
+		<!-- loding -->
+<div class="loading_body"></div>
+<!-- footer -->
+{% module Template("uicn/footer-block.html") %}
+<!-- /end footer -->
+<div id="scrollUp" class="scrollup">
+    <a class="arrows" title="返回顶部" href="javascript:;"></a>
+    <a class="feedback" title="反馈" href="http://qa.ui.cn/">反馈</a>
+</div>
+<div class="hide">
+    <script src="http://s4.cnzz.com/stat.php?id=1255380725&web_id=1255380725" language="JavaScript"></script>
+<script src="http://s6.cnzz.com/stat.php?id=5726673&web_id=5726673" language="JavaScript"></script>
+</div>
+<!-- footer end -->
+        <!-- 缩略图轮播 -->
+        <script src="/Public/js/jquery.nivo.slider.js?v=20150505"></script>
+		<script type="text/javascript">
+            $(window).load(function() {
+                $('#slider').nivoSlider({
+                    effect: 'boxRandom',   //轮播动画效果
+                    animSpeed: 500,        // 动画速度
+                    pauseTime: 3000,       // 暂停时间
+                    slices: 10,            // 分为10列
+                    directionNav: false    //不显示左右导航按钮
+                });
+                // 设置小圆点偏移值，使居中
+                var  sliderOffset = $(".nivo-controlNav").width()*(-0.5)-16;
+                $(".nivo-controlNav").css("marginLeft",sliderOffset);
+            });
+        </script>
+		<script type="text/javascript">
+        	$(function(){
+				$("a.def_ck").click(function(){
+					$(this).toggleClass('on');
+					$(".job_more_where").toggleClass('on');
+				})
+				$(".job_tab .y").mouseover(function(){
+					$("span.posi i").addClass("r-pi");
+				}).mouseout(function(){
+					$("span.posi i").removeClass("r-pi");
+				})
+				$(".javas-sel span").mouseover(function(){
+					$(this).parent().find('.javas_sellist').removeClass('hide');
+				});
+				$(".javas-sel").mouseleave(function(){
+					$(".javas_sellist").addClass('hide');
+				})
+				$(".javas_sellist a").click(function(){
+					var data_search = $(this).attr('data-search');
+					$(this).addClass('on').siblings().removeClass('on');
+					$(this).parent().addClass('hide');
+					$(".javas-sel span").text($(this).text());
+					$(".search_navcon form").attr('action',data_search);
+				})
+				//导航筛选
+				$(document).on('mouseenter','.click_table .click_table_list',function(){
+					var $this = $(this);
+					$this.addClass('open');
+				})
+				$(document).on('mouseleave','.click_table .click_table_list',function(){
+					var $this = $(this);
+					$this.removeClass('open');
+				})
+                $(".vipcn").click(function() {
+                    rel = $(this).attr('_rel');
+                    $.ajax({
+                        url: '/vipcn?rel='+rel,
+                        type: 'get',
+                    });
+                });
+			})
+        </script>
+    </body>
+</html>

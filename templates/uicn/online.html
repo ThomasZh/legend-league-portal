@@ -1,0 +1,692 @@
+
+<!--
+-->	<!DOCTYPE HTML>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+
+<meta property="qc:admins" content="1721742224651636" />
+<meta property="wb:webmaster" content="69e23ac12c635da9" />
+<meta name="baidu-site-verification" content="sSrE9nFHHr" />
+<meta baidu-gxt-verify-token="0cedd8469f067b548e2e2a19a196c16e">
+<meta name="360-site-verification" content="5dcd724ad92b8bba9adf192b493f6586" />
+<title>培训-UI中国-专业界面交互设计平台</title>
+<meta name="Keywords" content="培训,UI培训,设计培训,UI学院,UI学习,UI课程,UI教育,UI设计,界面设计,动效设计,游戏界面设计,插画设计,交互设计" />
+<meta name="Description" content="UI中国全部培训课程列表，course list。UI中国，前身为iconfans，是专业的UI设计师交流、学习与展示的平台。我们将打造中国最专业的UI设计交流平台，为UI设计师做最好的职业生涯一站式服务，提高UI设计乃至互联网设计的行业价值!" />
+
+<!-- CSS -->
+<link rel="stylesheet" href="{{ static_url('uicn/css/iconfont.css') }}">
+<link rel="stylesheet" href="{{ static_url('uicn/css/uicn.css') }}">
+<link rel="stylesheet" href="{{ static_url('uicn/css/header.css') }}">
+<link rel="stylesheet" href="{{ static_url('uicn/css/footer.css') }}">
+<link rel="stylesheet" href="{{ static_url('uicn/css/modal.css') }}">
+<link rel="stylesheet" href="{{ static_url('uicn/css/post.css') }}">
+
+<link rel="stylesheet" href="{{ static_url('uicn/css/min_page.css') }}">
+<link rel="stylesheet" href="{{ static_url('uicn/css/nivo-slider.css') }}">
+
+<link rel="stylesheet" href="{{ static_url('uicn/css/home.css') }}">
+<link rel="stylesheet" href="{{ static_url('uicn/css/edu.css') }}">
+<link rel="stylesheet" href="{{ static_url('uicn/css/min_page.css') }}">
+<link rel="stylesheet" href="{{ static_url('uicn/css/icon.css') }}">
+<link rel="stylesheet" href="{{ static_url('uicn/css/peixun.css') }}">
+
+<!-- JS -->
+<script src="{{ static_url('uicn/js/jquery.js') }}"></script>
+<script src="{{ static_url('uicn/js/LazyLoad.js') }}"></script>
+<script src="{{ static_url('uicn/js/msgTip.js') }}"></script>
+<script src="{{ static_url('uicn/js/footer.js') }}"></script>
+<script src="{{ static_url('uicn/js/header.js') }}"></script>
+<!-- <script src="/Public/js/jquery.portamento-min.js?v=1484793697"></script>
+<script src="/Public/js/jquery.scrollTo.js?v=1484793697"></script> -->
+<!-- <script src="/Public/js/jquery.nav.min.js?v=1484793697"></script> --><!-- 导航 -->
+<!--[if (gte IE 6)&(lte IE 8)]>
+  <script src="http://s3.ui.cn/js/selectivizr-min.js?v=1484793697"></script>
+<![endif]-->
+<!--[if lt IE 9]>
+  <script src="http://s3.ui.cn/js/html5.js?v=1484793697"></script>
+<![endif]-->
+</head>
+
+<body>
+	<div id="ajax-hook"></div>
+	<!-- top menu -->
+	{% module Template("uicn/top-menu-block.html") %}
+	<!-- /top menu -->
+
+
+<script>
+	//动态默认显示
+	var nav_loc='';
+	//var navuid='';
+	//以下兼容个人中心 立即激活
+	  $(".jsemailverify").parent('div').parent('li').css("background","#fff7e7").find('a').addClass('f14').css('display','block');
+</script>
+
+	<!--<div class="slider-wrapper mtw">
+		<div id="slider" class="nivoSlider">
+			<a href="" class="adv_img" rel="" target="_blank" title=""><img src="?v=1484793697" alt=""></a>		</div>
+	</div>-->
+	<!--测试-->
+
+	<div class="slider-wrapper mtw cl">
+		<div id="slider" class="nivoSlider">
+			<a href="http://peixun.ui.cn/detail/392.html" rel="17" data-type="ban"><img src="http://imgpeixun.ui.cn/data/upload/201612/1482478426_215.jpeg" data-thumb="http://imgpeixun.ui.cn/data/upload/201612/1482478426_215.jpeg" alt="" /></a>
+		</div>
+		<!-- <div class="gameui">
+			<a href="http://peixun.ui.cn/detail/374.html" target="_blank"><img src="/Public/img/shiheui.jpg" /></a>
+		</div> -->
+        <div class="gameui">
+                <a href="http://peixun.ui.cn/detail/393.html" target="_blank"><img src="http://imgpeixun.ui.cn/data/vip/1480412075.jpeg"></a>
+            </div>	</div>
+
+
+	<div class="white white-p" style="padding-top: 20px;">
+		<div class="wpn cl">
+			<div class="white-left z" style="height: 60px; line-height: 60px;">
+				推荐培训课程
+			</div>
+			<div class="white-right y">
+			<div  class="ruzhu  edu-ruzhu " style="position: relative !important;top: 60px !important;" data-target="#modal-ruzhu" >
+			<i class="icon-activity"></i> 机构入驻
+		</div>
+			</div>
+		</div>
+	</div>
+	<div class="wpn cl up">
+		<div class="edu-main  edu-left1" style="width:600px;">
+			<ul class="edu-list cl">
+				<li class="cl edu-list-li rel">
+
+
+						<div class="add">
+							<div class="original">
+								<a class="cover pos" href="/detail/395.html" title="CG插画进阶班" target="_blank" style="width:160px">
+									<img src="http://imgpeixun.ui.cn/data/px/5/4/1/1/1145.png" width="160" height="140" rel="nofollow">
+								</a>
+								<!-- <span class="ribbon"></span> -->
+								<!--<span class="price">已报名人数：0</span>-->
+								<div class="info" style="width:394px">
+									<h2><a class="pos-span" href="/detail/395.html" title="CG插画进阶班" target="_blank">CG插画进阶班</a></h2>
+									<ul class="edu-li-tag">
+										<li>商业案例全接触</li><li>在线直播互动课堂</li><li>一对一解答辅导</li><li>全职授课老师</li><li>推荐就业与接单</li>									</ul>
+									<div class="edu-li-middle">
+										<span><i class="icon-activity"></i><a class="name  pos-span" href="" target="_blank" title="云中帆教育">云中帆教育</a></span>
+										<span><i class="icon-eye"></i>4407</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					<a class="pos-a" href="/detail/395.html" title="CG插画进阶班" target="_blank"></a>
+
+					</li><li class="cl edu-list-li rel">
+
+
+						<div class="add">
+							<div class="original">
+								<a class="cover pos" href="/detail/394.html" title="平面设计师就业班" target="_blank" style="width:160px">
+									<img src="http://imgpeixun.ui.cn/data/px/6/3/1/1/1136.jpg" width="160" height="140" rel="nofollow">
+								</a>
+								<!-- <span class="ribbon"></span> -->
+								<!--<span class="price">已报名人数：0</span>-->
+								<div class="info" style="width:394px">
+									<h2><a class="pos-span" href="/detail/394.html" title="平面设计师就业班" target="_blank">平面设计师就业班</a></h2>
+									<ul class="edu-li-tag">
+										<li>商业案例全接触</li><li>在线直播互动课堂</li><li>一对一解答辅导</li><li>全职授课老师</li><li>推荐就业与接单</li>									</ul>
+									<div class="edu-li-middle">
+										<span><i class="icon-activity"></i><a class="name  pos-span" href="" target="_blank" title="云中帆教育">云中帆教育</a></span>
+										<span><i class="icon-eye"></i>8131</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					<a class="pos-a" href="/detail/394.html" title="平面设计师就业班" target="_blank"></a>
+
+					</li><li class="cl edu-list-li rel">
+
+
+						<div class="add">
+							<div class="original">
+								<a class="cover pos" href="/detail/367.html" title="[MICU课堂]动效二维码课程" target="_blank" style="width:160px">
+									<img src="http://imgpeixun.ui.cn/data/px/8/1/0/1/1018.png" width="160" height="140" rel="nofollow">
+								</a>
+								<!-- <span class="ribbon"></span> -->
+								<!--<span class="price">已报名人数：0</span>-->
+								<div class="info" style="width:394px">
+									<h2><a class="pos-span" href="/detail/367.html" title="[MICU课堂]动效二维码课程" target="_blank">[MICU课堂]动效二维码课程</a></h2>
+									<ul class="edu-li-tag">
+										<li>顶级知名讲师</li><li>网络直播互动授课</li><li>趋势技能</li>									</ul>
+									<div class="edu-li-middle">
+										<span><i class="icon-activity"></i><a class="name  pos-span" href="" target="_blank" title="MICU课堂">MICU课堂</a></span>
+										<span><i class="icon-eye"></i>5386</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					<a class="pos-a" href="/detail/367.html" title="[MICU课堂]动效二维码课程" target="_blank"></a>
+
+					</li><li class="cl edu-list-li rel">
+
+
+						<div class="add">
+							<div class="original">
+								<a class="cover pos" href="/detail/364.html" title="[MICU课堂]UI特训班" target="_blank" style="width:160px">
+									<img src="http://imgpeixun.ui.cn/data/px/9/1/0/1/1019.png" width="160" height="140" rel="nofollow">
+								</a>
+								<!-- <span class="ribbon"></span> -->
+								<!--<span class="price">已报名人数：300</span>-->
+								<div class="info" style="width:394px">
+									<h2><a class="pos-span" href="/detail/364.html" title="[MICU课堂]UI特训班" target="_blank">[MICU课堂]UI特训班</a></h2>
+									<ul class="edu-li-tag">
+										<li>知名讲师</li><li>八大模块实战</li><li>网络直播互动授课</li><li>初级到进阶</li>									</ul>
+									<div class="edu-li-middle">
+										<span><i class="icon-activity"></i><a class="name  pos-span" href="" target="_blank" title="MICU课堂">MICU课堂</a></span>
+										<span><i class="icon-eye"></i>24492</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					<a class="pos-a" href="/detail/364.html" title="[MICU课堂]UI特训班" target="_blank"></a>
+
+					</li><li class="cl edu-list-li rel">
+
+
+						<div class="add">
+							<div class="original">
+								<a class="cover pos" href="/detail/359.html" title="[H2学院]UI动效速成班" target="_blank" style="width:160px">
+									<img src="http://imgpeixun.ui.cn/data/px/0/0/6/600.jpg" width="160" height="140" rel="nofollow">
+								</a>
+								<!-- <span class="ribbon"></span> -->
+								<!--<span class="price">已报名人数：2000</span>-->
+								<div class="info" style="width:394px">
+									<h2><a class="pos-span" href="/detail/359.html" title="[H2学院]UI动效速成班" target="_blank">[H2学院]UI动效速成班</a></h2>
+									<ul class="edu-li-tag">
+										<li>顶级教师</li><li>免费公益课程</li><li>业余时间学习</li><li>网络直播互动授课</li><li>AE零基础</li>									</ul>
+									<div class="edu-li-middle">
+										<span><i class="icon-activity"></i><a class="name  pos-span" href="" target="_blank" title="H2学院 ">H2学院 </a></span>
+										<span><i class="icon-eye"></i>20389</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					<a class="pos-a" href="/detail/359.html" title="[H2学院]UI动效速成班" target="_blank"></a>
+
+					</li><li class="cl edu-list-li rel">
+
+
+						<div class="add">
+							<div class="original">
+								<a class="cover pos" href="/detail/360.html" title="[叶子学堂]游戏UI 就业提高精品班" target="_blank" style="width:160px">
+									<img src="http://imgpeixun.ui.cn/data/px/4/5/0/1/1054.png" width="160" height="140" rel="nofollow">
+								</a>
+								<!-- <span class="ribbon"></span> -->
+								<!--<span class="price">已报名人数：2600</span>-->
+								<div class="info" style="width:394px">
+									<h2><a class="pos-span" href="/detail/360.html" title="[叶子学堂]游戏UI 就业提高精品班" target="_blank">[叶子学堂]游戏UI 就业提高精品班</a></h2>
+									<ul class="edu-li-tag">
+										<li>项目主美授课</li><li>一对一指导</li><li>免费试听</li><li>推荐就业</li><li>周末班</li>									</ul>
+									<div class="edu-li-middle">
+										<span><i class="icon-activity"></i><a class="name  pos-span" href="" target="_blank" title="叶子学堂">叶子学堂</a></span>
+										<span><i class="icon-eye"></i>6447</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					<a class="pos-a" href="/detail/360.html" title="[叶子学堂]游戏UI 就业提高精品班" target="_blank"></a>
+
+					</li><li class="cl edu-list-li rel">
+
+
+						<div class="add">
+							<div class="original">
+								<a class="cover pos" href="/detail/350.html" title="[H2学院]游戏UI体系课程" target="_blank" style="width:160px">
+									<img src="http://imgpeixun.ui.cn/data/px/9/9/5/599.jpg" width="160" height="140" rel="nofollow">
+								</a>
+								<!-- <span class="ribbon"></span> -->
+								<!--<span class="price">已报名人数：20700</span>-->
+								<div class="info" style="width:394px">
+									<h2><a class="pos-span" href="/detail/350.html" title="[H2学院]游戏UI体系课程" target="_blank">[H2学院]游戏UI体系课程</a></h2>
+									<ul class="edu-li-tag">
+										<li>顶级教师团队</li><li>适合所有阶段</li><li>免费公益课程</li><li>工作推荐</li><li>业余时间学习</li>									</ul>
+									<div class="edu-li-middle">
+										<span><i class="icon-activity"></i><a class="name  pos-span" href="" target="_blank" title="H2学院 ">H2学院 </a></span>
+										<span><i class="icon-eye"></i>13178</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					<a class="pos-a" href="/detail/350.html" title="[H2学院]游戏UI体系课程" target="_blank"></a>
+
+					</li>			</ul>
+		</div>
+		<!-- edu-main -->
+
+		<div class="edu-main   edu-left2" style="width:600px;">
+			<ul class="edu-list cl">
+				<li class="cl edu-list-li rel">
+							<div class="add">
+								<div class="original">
+									<a class="cover pos" href="/detail/392.html" title="[麦子学院]UI设计保就业班-1对1精品课程" target="_blank" style="width:160px">
+										<img src="http://imgpeixun.ui.cn/data/px/3/9/0/1/1093.jpg" width="160" height="140" rel="nofollow" alt="">
+										<!-- <span class="ribbon"></span> -->
+										<!--<span class="price">已报名人数：0</span>-->
+									</a>
+									<div class="info" style="width:394px">
+										<h2><a href="/detail/392.html" title="[麦子学院]UI设计保就业班-1对1精品课程" target="_blank">[麦子学院]UI设计保就业班-1对1精品课程</a></h2>
+										<ul class="edu-li-tag">
+											<li>1V1精品教学</li><li>设计总监亲授</li><li>签协议保就业</li><li>随到随学</li><li>报UI赠PM</li>										</ul>
+										<div class="edu-li-middle">
+											<span><i class="icon-activity"></i><a class="name" href="" target="_blank" title="麦子学院">麦子学院</a></span>
+											<span><i class="icon-eye"></i>3009</span>
+										</div>
+									</div>
+								</div>
+							</div>
+					        <a class="pos-a" href="/detail/392.html" title="[麦子学院]UI设计保就业班-1对1精品课程" target="_blank"></a>
+
+						</li><li class="cl edu-list-li rel">
+							<div class="add">
+								<div class="original">
+									<a class="cover pos" href="/detail/393.html" title="全栈设计师的进阶之路" target="_blank" style="width:160px">
+										<img src="http://imgpeixun.ui.cn/data/px/1/1/1/1/1111.jpg" width="160" height="140" rel="nofollow" alt="">
+										<!-- <span class="ribbon"></span> -->
+										<!--<span class="price">已报名人数：0</span>-->
+									</a>
+									<div class="info" style="width:394px">
+										<h2><a href="/detail/393.html" title="全栈设计师的进阶之路" target="_blank">全栈设计师的进阶之路</a></h2>
+										<ul class="edu-li-tag">
+											<li>商业案例全接触</li><li>在线直播互动课堂</li><li>一对一解答辅导</li><li>全职授课老师</li><li>推荐就业与接单</li>										</ul>
+										<div class="edu-li-middle">
+											<span><i class="icon-activity"></i><a class="name" href="" target="_blank" title="云中帆教育">云中帆教育</a></span>
+											<span><i class="icon-eye"></i>28853</span>
+										</div>
+									</div>
+								</div>
+							</div>
+					        <a class="pos-a" href="/detail/393.html" title="全栈设计师的进阶之路" target="_blank"></a>
+
+						</li><li class="cl edu-list-li rel">
+							<div class="add">
+								<div class="original">
+									<a class="cover pos" href="/detail/363.html" title="[叶子学堂]游戏UI 一对一就业班" target="_blank" style="width:160px">
+										<img src="http://imgpeixun.ui.cn/data/px/9/4/0/1/1049.png" width="160" height="140" rel="nofollow" alt="">
+										<!-- <span class="ribbon"></span> -->
+										<!--<span class="price">已报名人数：400</span>-->
+									</a>
+									<div class="info" style="width:394px">
+										<h2><a href="/detail/363.html" title="[叶子学堂]游戏UI 一对一就业班" target="_blank">[叶子学堂]游戏UI 一对一就业班</a></h2>
+										<ul class="edu-li-tag">
+											<li>项目主美授课</li><li>一对一指导</li><li>免费试听</li><li>推荐就业</li><li>周末班</li>										</ul>
+										<div class="edu-li-middle">
+											<span><i class="icon-activity"></i><a class="name" href="" target="_blank" title="叶子学堂">叶子学堂</a></span>
+											<span><i class="icon-eye"></i>4489</span>
+										</div>
+									</div>
+								</div>
+							</div>
+					        <a class="pos-a" href="/detail/363.html" title="[叶子学堂]游戏UI 一对一就业班" target="_blank"></a>
+
+						</li><li class="cl edu-list-li rel">
+							<div class="add">
+								<div class="original">
+									<a class="cover pos" href="/detail/362.html" title="[叶子学堂]游戏UI新手指南公开课" target="_blank" style="width:160px">
+										<img src="http://imgpeixun.ui.cn/data/px/8/5/0/1/1058.png" width="160" height="140" rel="nofollow" alt="">
+										<!-- <span class="ribbon"></span> -->
+										<!--<span class="price">已报名人数：300</span>-->
+									</a>
+									<div class="info" style="width:394px">
+										<h2><a href="/detail/362.html" title="[叶子学堂]游戏UI新手指南公开课" target="_blank">[叶子学堂]游戏UI新手指南公开课</a></h2>
+										<ul class="edu-li-tag">
+											<li>项目主美授课</li><li>直播示范</li><li>实用案例技巧</li><li>透讲解</li>										</ul>
+										<div class="edu-li-middle">
+											<span><i class="icon-activity"></i><a class="name" href="" target="_blank" title="叶子学堂">叶子学堂</a></span>
+											<span><i class="icon-eye"></i>1940</span>
+										</div>
+									</div>
+								</div>
+							</div>
+					        <a class="pos-a" href="/detail/362.html" title="[叶子学堂]游戏UI新手指南公开课" target="_blank"></a>
+
+						</li><li class="cl edu-list-li rel">
+							<div class="add">
+								<div class="original">
+									<a class="cover pos" href="/detail/361.html" title="[H2学院]CG美术预科班（VIP课程，每期限免80人）" target="_blank" style="width:160px">
+										<img src="http://imgpeixun.ui.cn/data/px/0/1/6/610.jpg" width="160" height="140" rel="nofollow" alt="">
+										<!-- <span class="ribbon"></span> -->
+										<!--<span class="price">已报名人数：700</span>-->
+									</a>
+									<div class="info" style="width:394px">
+										<h2><a href="/detail/361.html" title="[H2学院]CG美术预科班（VIP课程，每期限免80人）" target="_blank">[H2学院]CG美术预科班（VIP课程，每期限免80人）</a></h2>
+										<ul class="edu-li-tag">
+											<li>顶级教师</li><li>免费公益课程</li><li>业余时间学习</li><li>网络直播互动授课</li><li>美术零基础</li>										</ul>
+										<div class="edu-li-middle">
+											<span><i class="icon-activity"></i><a class="name" href="" target="_blank" title="H2学院 ">H2学院 </a></span>
+											<span><i class="icon-eye"></i>4639</span>
+										</div>
+									</div>
+								</div>
+							</div>
+					        <a class="pos-a" href="/detail/361.html" title="[H2学院]CG美术预科班（VIP课程，每期限免80人）" target="_blank"></a>
+
+						</li><li class="cl edu-list-li rel">
+							<div class="add">
+								<div class="original">
+									<a class="cover pos" href="/detail/351.html" title="[H2学院]游戏原画体系课程" target="_blank" style="width:160px">
+										<img src="http://imgpeixun.ui.cn/data/px/6/6/4/466.jpg" width="160" height="140" rel="nofollow" alt="">
+										<!-- <span class="ribbon"></span> -->
+										<!--<span class="price">已报名人数：20400</span>-->
+									</a>
+									<div class="info" style="width:394px">
+										<h2><a href="/detail/351.html" title="[H2学院]游戏原画体系课程" target="_blank">[H2学院]游戏原画体系课程</a></h2>
+										<ul class="edu-li-tag">
+											<li>顶级教师团队</li><li>适合所有阶段</li><li>免费公益课程</li><li>工作推荐</li><li>业余时间学习</li>										</ul>
+										<div class="edu-li-middle">
+											<span><i class="icon-activity"></i><a class="name" href="" target="_blank" title="H2学院 ">H2学院 </a></span>
+											<span><i class="icon-eye"></i>4849</span>
+										</div>
+									</div>
+								</div>
+							</div>
+					        <a class="pos-a" href="/detail/351.html" title="[H2学院]游戏原画体系课程" target="_blank"></a>
+
+						</li>			</ul>
+		</div>
+		<!-- edu-main -->
+	</div>
+	<!--人物banner-->
+	<!-- <div class="nivoSlider person-banner" style="width:1180px; height:260px;">
+		<a href="/detail/365.html?from=banner" target="_blank"><img src="/Public/img/aaa.jpg" style="display: inline; width: 100%;"></a>
+	</div> -->
+
+
+	<div class="cl wpn-bottom ">
+		<div class="bottom-wrap">
+			<ul class="blist mtw cl">
+							</ul>
+		</div>
+		<!--center> #先不显示，等课程量足够多再说
+            <div class="more">
+                <span>更多课程</span>
+            </div>
+        </center-->
+	</div>
+
+    <!-- 打开弹框按钮  data-target="#modal-ruzhu" -->
+	<div id="modal-ruzhu" class="modal">
+		<div class="modal-effect">
+			<div id="ruzhu_in" class="modal-ruzhu-edu">
+				 <div class="hd">
+				 	<h1>申请入驻<small>（以下均为必填项）</small></h1>
+				 </div>
+				 <div class="cont">
+				 	<form id="rzForm">
+				 		<div class="row">
+				 			<label for="">机构名称：</label>
+				 			<input type="text" name="ins_name">
+				 		</div>
+				 		<div class="row">
+				 			<label for="">所在地区：</label>
+				 			<input type="text" name="address">
+				 		</div>
+				 		<div class="row">
+				 			<label for="">联系人姓名：</label>
+				 			<input type="text" name="uname">
+				 		</div>
+				 		<div class="row">
+				 			<label for="">联系人电话：</label>
+				 			<input type="text" name="phone">
+				 		</div>
+				 		<div class="row">
+				 			<label for="">联系人QQ：</label>
+				 			<input type="text" name="qq">
+				 		</div>
+				 		<div class="submit">
+				 			<a href="javascript:;" class="btn btn-primary submit-btn mrw">提交</a>
+				 			<a href="javascript:;" class="btn btn-gray close-btn">取消</a>
+				 		</div>
+				 	</form>
+				 </div>
+				 <i class="icon-close"></i>
+			</div>
+
+			<div id="ruzhu_ok" class="modal-ruzhu-edu">
+				<div class="cont">
+					<h1 class="tit"><i class="icon-succ"></i><span>感谢您对UI中国的支持</span></h1>
+					<p class="txt">我们会尽快与您取得联系</p>
+					<p class="txt">期待与您的联系！</p>
+					<div class="submit">
+						<a id="confirm_btn" href="javascript:;" class="btn btn-primary mrw">确定</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--[if lt IE 9]>
+		<script src="http://s3.ui.cn/js/global/html5.min.js"></script>
+	<![endif]-->
+	<!--[if (gte IE 6)&(lte IE 8)]>
+		<script src="http://s3.ui.cn/js/global/selectivizr.js"></script>
+	<![endif]-->
+	<script src="http://s3.ui.cn/js/global/jquery-1.10.2.js"></script>
+	<script src="/Public/js/modal.js"></script>
+	<script src="http://s3.ui.cn/js/edu/edu.js"></script>
+	<script src="http://s3.ui.cn/js/home/footer.v1.js"></script>
+	<script src="http://s3.ui.cn/js/global/jquery.nivo.slider.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".none1").hide();
+			//限制字符个数
+			$(".blist .info h4").each(function() {
+				var maxwidth = 22;
+				if($(this).text().length > maxwidth) {
+					$(this).text($(this).text().substring(0, maxwidth));
+					$(this).html($(this).html() + '...');
+				}
+			});
+		})
+
+		//jQuery效果
+
+		$(function() {
+			//下拉条效果
+			$(".white-list").each(function(i, e) {
+				$(e).find("ul li").each(function(j, k) {
+					$(k).hover(function() {
+						$(k).css({
+							"background": "#eff3f5"
+						})
+					}, function() {
+						$(k).css({
+							"background": "white"
+						})
+
+					})
+				})
+				$(e).hover(function() {
+					$(e).addClass("addwhite");
+					$(e).find("ul").show();
+				}, function() {
+					$(e).removeClass("addwhite");
+
+					$(e).find("ul").hide();
+
+				})
+			})
+
+			//上部分li的hover效果
+			$(".edu-list-li").each(function(i, e) {
+				$(e).click(function(){
+					event.stopPropagation();
+				})
+				$(e).hover(function() {
+					$(this).find(".add").addClass("addclass").css({
+						"border-color": "#3399cc",
+						"z-index": "1",
+						"box-shadow": "0 0 12px rgba(0, 0, 0, 0.1)"
+					});
+				}, function() {
+					$(this).find(".add").removeClass("addclass").css({
+						"border-color": "transparent",
+						"z-index": "-1",
+						"box-shadow": "0 0 0"
+					});
+
+				})
+
+			})
+
+			//最下面list的hover
+			$(".blist-li").each(function(i, e) {
+				$(e).hover(function() {
+					$(this).css({
+						"border-color": "#3399cc",
+						"background": "white",
+						"z-index": "10",
+						"box-shadow": "0 0 12px rgba(0, 0, 0, 0.1)"
+					}).find(".none2").show();
+					$(this).find(".none1").show();
+					$(this).find(".edu-li-tag2 li").eq(2).show();
+				}, function() {
+					$(this).css({
+						"border-color": "#eff3f5",
+						"background": "#eff3f5",
+						"z-index": "0",
+						"box-shadow": "0 0 0 "
+					}).find(".none2").hide();
+					$(this).find(".none1").hide();
+					$(this).find(" .edu-li-tag2 li").eq(2).hide();
+				})
+			})
+
+			$(window).load(function() {
+				$('#slider').nivoSlider({
+					effect: 'boxRandom', //轮播动画效果
+					animSpeed: 500, // 动画速度
+					pauseTime: 3000, // 暂停时间
+					slices: 10, // 分为10列
+					directionNav: true //显示左右导航按钮
+				});
+				// 设置小圆点偏移值，使居中
+				var sliderOffset = $(".nivo-controlNav").width() * (-0.5) - 16 - 140;
+				$(".nivo-controlNav").css("marginLeft", sliderOffset);
+			})
+
+			$("#slider > a,.edu-ad > a").click(function() {
+				var _id = $(this).attr('rel');
+				var _tp = $(this).attr("data-type");
+				$.post("hit", {
+					id: _id,
+					tp: _tp
+				}, function(data) {
+					return true;
+				}, "json")
+			})
+
+		})
+	</script>
+	<script>
+		$(function() {
+			// 手机号验证
+			var tel = /^0{0,1}1[3|4|5|7|8][0-9]{9}$/;
+			var num = /^[1-9][0-9]{5,10}$/;
+			$(".submit-btn").click(function() {
+				var _this = $(this);
+				var ins_name = $("input[name='ins_name']").val();
+				var address = $("input[name='address']").val();
+				var uname = $("input[name='uname']").val();
+				var phone = $("input[name='phone']").val();
+				var qq = $("input[name='qq']").val();
+
+				if(!$.trim(ins_name).length > 0) {
+					errorTip('机构名称不能为空', 3);
+					$("input[name='ins_name']").focus();
+					return false;
+				}
+
+				if(!$.trim(address).length > 0) {
+					errorTip('所在地区不能为空', 3);
+					$("input[name='address']").focus();
+					return false;
+				}
+
+				if(!$.trim(uname).length > 0) {
+					errorTip('联系人姓名不能为空', 3);
+					$("input[name='uname']").focus();
+					return false;
+				}
+
+				if(!$.trim(phone).length > 0) {
+					errorTip('手机号不能为空', 3);
+					$("input[name='phone']").focus();
+					return false;
+				}
+
+				if(!tel.test(phone)) {
+					errorTip('手机号码格式有误，请输入正确的手机号码', 3);
+					$("input[name='phone']").focus();
+					return false;
+				}
+
+				if(!$.trim(qq).length > 0) {
+					errorTip('联系人QQ不能为空', 3);
+					$("input[name='qq']").focus();
+					return false;
+				}
+
+				if(qq != "" && !num.test(qq)) {
+					errorTip('请输入正确的qq号码', 3);
+					$("input[name='qq']").focus();
+					return false;
+				}
+
+				$(_this).attr('class', 'btn mrw btn-primary loading');
+				$(_this).text("");
+
+				$.post("/index.php/rz.html", $("#rzForm").serialize(), function(data) {
+					if(data.state) {
+						$('#ruzhu_in').hide();
+						$('#ruzhu_ok').show();
+						$(_this).attr('class', 'btn btn-primary submit-btn mrw');
+					} else {
+						errorTip(data.msg, 3);
+						$(_this).attr('class', 'btn btn-primary submit-btn mrw');
+						$(_this).text("提交");
+						return false;
+					}
+				}, "json");
+			});
+
+			$('#confirm_btn').click(function() {
+				$('#modal-ruzhu').removeClass("in");
+				$('.modal-backdrop').remove();
+				$('body').removeClass("modal-open");
+				$('body').css('padding-right', '0');
+			})
+		});
+	</script>
+
+	<!-- footer -->
+  {% module Template("uicn/footer-block.html") %}
+  <!-- /end footer -->
+
+<!---->
+<div id="scrollUp" class="scrollup">
+    <a class="arrows" title="返回顶部" href="javascript:;"></a>
+    <a class="feedback" title="反馈" href="http://qa.ui.cn/">反馈</a>
+</div>
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=1256571225&web_id=1256571225" language="JavaScript"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?10e362da2e1d87e1e361bf4463fa64a7";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+</body>
+</html>

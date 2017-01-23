@@ -1,0 +1,100 @@
+
+
+a { color: #34495e; }
+/*鍥句功宸﹁竟*/
+.mag-main { width: 1180px; margin: 0 auto;}
+.mag-cont { float: left; width: 1016px;}
+/*鏍囬--鍥句功/鏉傚織*/
+.mag-cont .mag-tit { margin-top: 40px; text-align: center; width: 982px;
+	background: url("../img/read-tit.png") no-repeat center center;
+	background-image: -webkit-image-set(url("../img/read-tit.png") 1x, url("../img/@2x/read-tit@2x.png") 2x);
+    background-image: -moz-image-set(url("../img/read-tit.png") 1x, url("../img/@2x/read-tit@2x.png") 2x);
+    background-image: -ms-image-set(url("../img/read-tit.png") 1x, url("../img/@2x/read-tit@2x.png") 2x);
+    background-image: -o-image-set(url("../img/read-tit.png") 1x, url("../img/@2x/read-tit@2x.png") 2x);
+}
+.mag-cont .mag-tit a { font-size: 18px; color: #a8b2b9; height: 25px; line-height: 25px; width: 60px; margin: 0 20px; text-align: center; display: inline-block; }
+.mag-cont .mag-tit a.active { color: #3499da;  font-weight: bold; }
+.mag-cont .mag-tit a:hover { color: #3499da;  font-weight: bold; }
+/*鍒嗙被*/
+.mag-cont .mag-filter { width: 982px; border-bottom: 1px solid #e4e6e9; /*margin-bottom: 20px;*/}
+.mag-cont .mag-filter .filter-l { float: left;}
+.mag-cont .mag-filter .filter-r {text-align: right;}
+.mag-cont .mag-filter li { display: inline; }
+.mag-cont .mag-filter li:first-child a { margin-left: 0;}
+.mag-cont .mag-filter li a { display: inline-block; font-size: 14px; color: #9aabb8; height: 34px; line-height: 34px; padding-bottom: 6px; margin-left: 15px;}
+.mag-cont .mag-filter li a.active { color: #3499da; }
+.mag-cont .mag-filter li a:hover { color: #3499da; }
+/*鍥句功銆佹潅蹇楀垪琛�*/
+.mag-cont .mag-list { margin-left: -17px; margin-bottom: 45px; }
+.mag-cont .mag-list .mag-item { float: left; width: 254px; position: relative;}
+
+.mag-item .mag-item-wp { position: absolute; top: 0; left: 0; width: 254px; height: 330px;}
+
+.mag-item .mag-i-img,
+.mag-item .book-i-img{ height: 330px; position: relative; margin-top: 20px; background: url("../img/read-bg.png") no-repeat left top;}
+
+.mag-item .mag-i-img .mag-img,
+.mag-item .book-i-img .book-img{ position: absolute; top: 0; left: 17px; width: 220px; height: 300px; display: block;}
+
+.mag-item .mag-i-img .mag-img img,
+.mag-item .book-i-img .book-img img{ width: 100%; height: 100%;}
+
+.mag-item .book-i-img { position: absolute; top: 0; left: 0; width: 100%;}
+
+.mag-item .mag-i-img .tag { position: absolute; top: 300px; left: 37px; display: block; width: 32px; height: 26px; background: url("../img/read-tag.png") no-repeat center center;}
+/*鏉傚織閬僵灞�*/
+.mag-item .mag-shade { position: absolute; top: 0; left: 0; width: 184px; height: 300px; display: none; padding: 0 18px; background: rgba(7, 7, 7, 0.7);}
+.mag-item .mag-shade h1,
+.mag-item .mag-shade p {position: absolute; width: 184px; text-align: justify;}
+.mag-item .mag-shade h1 { color: #7f8c8d; top: 22px; font-size: 18px; line-height: 25px; font-weight: normal;}
+.mag-item .mag-shade p {color: #fff; bottom: 35px; padding: 0 5px; width: 174px;}
+
+.mag-item .mag-i-det { width: 220px; padding: 0 17px; margin-bottom: 15px; }
+.mag-item .mag-i-det h1 { font-size: 20px; height: 32px; line-height: 32px; text-align: center; width: 220px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+
+.mag-item .book-i-det { margin-top: 350px;}
+
+.mag-item .mag-i-det .name { font-size: 14px; width: 220px; height: 40px; text-align: center; overflow: hidden; position: relative; display:table-cell; vertical-align:middle;}
+.mag-item .mag-i-det .name p { height: 20px; line-height: 20px; color: #bdc3c7; position:static; top:50%; width:220px; margin-left:auto; margin-right:auto; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+
+/*
+涓嬭浇icon
+*/
+.mag-item .mag-i-det .link {display: table; margin: 0 auto; height: 42px;}
+.mag-item .mag-i-det .link a { position: relative; display: inline-block; float: left; margin: 6px 3px; width: 46px; height: 28px; line-height: 28px; text-align: center; border: 1px solid #34495e; border-radius: 2px; }
+.mag-item .mag-i-det .link a span { font-size: 12px; color: #34495e; height: 26px; line-height: 26px; font-weight: bold; }
+.mag-item .mag-i-det .link a i { display: none; position: absolute; top: 0; left: 0; font-size: 18px; color: #34495e; width: 46px; height: 28px; text-align: center; line-height: 28px; float: left;}
+.mag-item .mag-i-det .link a i.icon-dang,
+.mag-item .mag-i-det .link a i.icon-zcn { display: block;}
+
+/*榧犳爣婊戣繃鏁堟灉*/
+.mag-item .mag-i-det .link a:hover span {display: none; }
+.mag-item .mag-i-det .link a:hover { border: 1px solid #3499da; background-color: #3499da; transition: all 0.3s ease 0s;}
+.mag-item .mag-i-det .link a:hover i {display: block; color: #fff; }
+
+
+/**
+*鍙充晶
+**/
+.mag-side { float: right; width: 160px;}
+/*鏉傚織涓撹緫*/
+.mag-side .mag-set { margin-top: 65px;}
+.mag-set h1 { height: 34px; line-height: 34px; font-size: 14px; color: #34495e;}
+.mag-set h2 { font-size: 14px; color: #394a58; font-weight: normal; line-height: 22px;}
+.mag-set .mag-set-list { margin: 186px 0 20px; position: relative;}
+.mag-set .mag-set-list li { }
+.mag-set .mag-set-list a { display: block; font-size: 12px; color: #bdbdbd; line-height: 22px; width: 120px; }
+.mag-set .mag-set-list a.active { color: #3499da;}
+.mag-set .mag-set-list a:hover { color: #3499da;}
+.mag-set .mag-set-list img {position: absolute; top: -181px; left: 0; width: 120px; height: 163px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);}
+
+/*鍥句功鐣呴攢姒�*/
+.mag-side .book-rank { margin-top: 65px; }
+.book-rank h1 { height: 34px; line-height: 34px; font-size: 14px; color: #34495e; border-bottom: 1px solid #e4e6e9; padding-bottom: 6px;}
+.book-rank h1 span { float: right; }
+.book-rank h1 span a { font-size: 12px; color: #bdbdbd; font-weight: normal; }
+.book-rank h1 span a:hover { text-decoration: underline;}
+.book-rank .book-rank-list li { margin-top: 20px;}
+.book-rank .book-rank-list li a { display: block;}
+.book-rank .book-rank-list li a img { width: 120px; height: 163px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
+.book-rank .book-rank-list li a p { height: 30px; line-height: 30px; font-size: 14px; color: #394a58; margin-top: 3px; width: 160px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}

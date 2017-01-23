@@ -1,0 +1,224 @@
+/**
+ * login Common Style
+ * @author: LangLee;
+ * 鍩轰簬 common.css
+ **/
+
+html, body { background: #eff2f5;}
+
+.wpl { width: 100%; max-width: 1080px; margin: 0 auto; }
+.log-row-cx {width:92.5925925%; margin:0 3.7037037%;}/*1000/1080,40/1080*/
+.log-row {position: relative; height:80px;width:92.5925925%; margin:0 3.7037037%;}/*1000/1080,40/1080*/
+.log-wrap { position: relative; padding: 25px 0 0 0; z-index: 5; }
+.log-logo, .log-title, .log-nav { float: left; }
+/* 涓讳綋 */
+.log-content { min-height: 330px; height:auto;  border-top: 2px solid #e4e9ee; position:relative; background-color: #fff; /*background: #FFF url("../img/log-content-bg.png") repeat-x 0 100%;*/}
+.login-wrap { width: 70%;/*700/1000*/  }
+
+/* ====鐧婚檰娉ㄥ唽鎵惧洖瀵嗙爜鍏敤澶撮儴==== */
+.log-hd { height: 80px; margin-bottom: 20px; position: relative; }
+/* logo */
+.log-hd .log-logo { margin-right: 20px; position: absolute; left: 0;}
+.log-hd .log-logo a {width:94px;height:74px; display: block; }
+.log-hd .log-logo img {width:94px;height:74px; display: block; }
+/* logo 鏍囬/鍓爣棰� */
+.log-hd .log-title { height: 66px; padding: 7px 0; position: absolute; left: 0; margin-left: 115px;}
+.log-hd .log-title strong, .log-title p { display: block; }
+.log-hd .log-title strong { font-size: 26px; }
+.log-hd .log-title p { font-size: 16px; }
+/* 瀵艰埅 */
+.log-hd .log-nav { display: block; height: 40px; margin: 20px 0 20px 376px;}
+.log-hd .log-nav li { float: left;  }
+.log-hd .log-nav li a { display: block; padding: 0 11px; font-size: 14px; line-height: 40px; color: #7b8b95; }
+.log-hd .log-nav li a:hover { text-decoration: none; color: #369; }
+/* ====鐧婚檰娉ㄥ唽鎵惧洖瀵嗙爜鍏敤澶撮儴 缁撴潫 ==== */
+
+/* 杈撳叆妗嗗浘鏍� */
+#password{ position:absolute; z-index:10; background:none;left: 0;}
+.mls { margin-left: 30px !important; }
+.la_password{color: #b8c4ce;font-size: 16px;position: absolute;padding: 12px 2.5%;top: 0;height: 16px;line-height: 16px;left: 0; z-index:1;}
+/* 蹇樿瀵嗙爜 */
+.login-msg { height: 28px; line-height: 28px; margin-top:15px; display: block; font-size: 14px; color: #b8c4ce;}
+.login-msg .login-forget { text-decoration: none; color: #369; }
+.login-msg .login-forget:hover { color: #3498db; }
+
+/* 鍗￠€�-缇庝汉楸� */
+.log-shade { width: 50px; height: 228px; position: absolute; top: 40px; /*left: 690px;*/ right: 330px; background: url("../img/log-shade.png") no-repeat 0 0; border-right: 1px solid #e9ecee;}
+.log-cartoon { width: 335px; height: 307px; position: absolute; top: 38px; /*left: 700px;*/ right: 40px;
+	background: url("../img/log-cartoon.png") no-repeat 0 0;
+	background-image: -webkit-image-set(url("../img/log-cartoon.png") 1x, url("../img/@2x/log-cartoon@2x.png") 2x);
+    background-image: -moz-image-set(url("../img/log-cartoon.png") 1x,url("../img/@2x/log-cartoon@2x.png") 2x);
+    background-image: -ms-image-set(url("../img/log-cartoon.png") 1x,url("../img/@2x/log-cartoon@2x.png") 2x);
+    background-image: -o-image-set(url("../img/log-cartoon.png") 1x,url("../img/@2x/log-cartoon@2x.png") 2x);
+}
+/* 鐧婚檰娉ㄥ唽鏍囬150113 */
+.lr_title_txt {height:40px;color:#34495e;}
+.lr_title_txt h2{line-height:40px;float:left;font-size:20px;font-weight:normal;}
+.lr_title_txt span{font-size:14px;padding-top:12px;float:right;}
+.lr_title_txt span a{color:#3498db;}
+/* 鎴愬姛鎻愮ず 瀵逛笌閿� */
+.icon-warn{font-size:20px;color: #fcab2b;width:21px;display:block;float:right;text-align:center;line-height:21px;}
+.icon-ok{font-size:20px;color: #1abc9c;width:21px;display:block;float:right;text-align:center;line-height:21px;}
+.spanTip{color:#feac05;font-size:12px;}
+
+/* ====鏂扮増鐧婚檰 150113 ==== */
+.login_left .log-input{width: 350px;}
+.login_left{width:400px;float:left;padding-top:35px;padding-bottom:80px;margin-left: 115px;}
+/* 绗笁鏂瑰笎鍙风櫥褰� */
+.login-wrap-party{width:160px;margin-left:100px;}
+.login-wrap-party h2{height:40px;width:100%;line-height:40px;text-align:center;font-size:18px;color:#34495e;font-weight:normal;margin-bottom:40px;padding-top:35px;}
+.login-wrap-party h2.h2 { line-height: 26px; height: 52px;}
+.login-party a{width:160px;display:block;float:left;margin-bottom:20px;opacity:1;/*opacity:0.7; filter:alpha(opacity=70);*/ }
+.login-party a p {width:80px;font-size:12px; height: 40px; line-height: 40px;float:left;text-align:center; display:block;text-align:center;color:#fff;}
+.login-party i{margin-left:15px;float:left;font-size:25px;line-height:40px;display:block;width:100%;width:40px;text-align:center;color:#fff;}
+.login-party a:hover{ opacity:1; filter:alpha(opacity=100); transition:all 0.2s;}
+.login-party span{ border-radius:2px;display:block;width:100%;height:40px;}
+.login-party .log-mi span{background:#ff9f2d;}/* mi */
+.login-party .log-sina span{background:#ff424f;}/* 鏂版氮 */
+.login-party .log-qq span{background:#22a4ff;}/* qq */
+
+/* ====鏂扮増娉ㄥ唽 150113 ==== */
+/*.reg_left{width:400px;padding-top:35px;padding-bottom:80px;margin:0 auto;}*/
+.reg_left{width:400px;float:left;padding-top:35px;padding-bottom:80px;margin-left: 115px;}
+.reg_left .icon-warn{position:absolute;bottom:5px;right:0;}
+.reg_left .icon-ok{position:absolute;bottom:5px;right:0;}
+.reg_left .spanTip{position:absolute;right:0;bottom:-22px;}
+/* 缇庝汉楸� */
+.reg_left .log-cartoon{top:50%;margin-top:-155px;right:-400px;}
+/* 鏄惁鍚屾剰鍗忚 */
+.reg_checkboxline{font-size:14px;color:#b8c4ce;height:30px;margin:20px 0;line-height:30px;}
+.reg_checkboxline p a{font-size:14px;color:#34495e;}
+.reg_checkboxline i.boxcol{background:#3498db;color:#fff;}
+.icon-ok-sign{background:#b8c4ce;border-radius:2px;margin-right:10px;cursor:pointer; overflow:hidden;width:16px;height:16px;font-size:12px;display:block;margin-top:7px;line-height:16px;text-align:center;}
+/* ICON 瀛椾綋澶у皬 */
+.reg_cont_input i.iconfont{font-size:24px;position: absolute;top: 8px;}
+.reg_cont_input .log-input{width: 350px;}
+.reg_cont_input .lang-btn{width:100%;font-size:18px;height:50px;line-height:50px;}
+
+/* ====瀵嗙爜鎵惧洖==== */
+.fg-code{width:50%;float:left}
+.fg-code-wp{height:40px;margin-top:30px;width:50%;float:left}
+.fg-code-pic{display:block;float:left;margin-left:10%;width:128px;height:40px}
+.fg-code-pic img{width:100%;height:auto}
+.fg-code-t{line-height: 40px;margin-left: 2%;}
+/* 鐧婚檰鎴栨敞鍐岄獙璇侀敊璇� */
+.user-input-er-span{color:#b8c4ce;position:absolute;top:1px;right:1px;line-height:38px;height:38px;display:block;padding-right:35px;padding-left:8px;font-size:14px;background:#FFF}
+.user-input-er-span b{line-height:40px;}
+.user-input-er-span i:before{content:"\e606";position:absolute;top:0;right:0;height:38px;width:35px;display:block;font-size:20px;color:#fcab2b;
+line-height:38px;text-align:center}
+/* 楠岃瘉姝ｇ‘ */
+.user-input-ri-span i:before{content:"\e600";position:absolute;top:1px;right:1px;line-height:38px;height:48px;display:block;width:35px;font-size:20px;
+color:#1abc9c;line-height:38px;text-align:center}
+
+.login-on .log-i{color:#3498db;}
+/*瀛椾綋鍥炬爣闄勫姞鏍峰紡*/
+.log-i{ position: absolute; top: 8px; }
+.mls { margin-left: 30px !important; }
+.la_password{color: #b8c4ce;font-size: 16px;position: absolute;padding: 12px 2.5%;top: 0;height: 16px;line-height: 16px;left: 0; z-index:1;}
+/*鍥炬爣瀛椾綋澶у皬*/
+.fsi {font-size: 20px!important;}
+.fsn {font-size: 22px!important;}
+.fss {font-size: 24px!important;}
+.fsm {font-size: 32px!important;}
+
+/*鍥炬爣棰滆壊*/
+.white {color: #fff!important; }
+.gray {color: #b8c5cf!important;}
+.dimgray {color: #6B7B8A!important;}
+.blue {color: #3498db!important;}  /*椤甸潰涓昏壊*/
+.navy {color: #369!important;}  /*娣辫摑鑹�-閾炬帴a*/
+.green {color: #1abc9c!important;}  /*璇勮*/
+.yellow {color: #fcab2b!important;}  /*鏀惰棌*/
+.black {color: #34495e!important;} /*鍥炲*/
+.red {color: #D52F17!important;} /*閿欒*/
+
+
+/* ====瀵嗙爜鎵惧洖 end==== */
+
+/*缁戝畾*/
+.bound-avatar { width: 100px; height: 100px; border-radius: 50%; margin: 25px 150px 0;}
+
+/* 椤佃剼 */
+.log-footer { color: #b8c4cc; font-size: 14px; height: 30px; line-height: 30px; margin-top: 10px; }
+.log-footer p{display: inline-block;float: left;}
+
+/* 浜戞湹 */
+.log-cloud-1 { width: 155px; height: 88px; top: 50px; position: absolute; left: 3.9285714%; z-index: 0; }
+.log-cloud-2 { width: 74px; height: 40px; top: 15px; position: absolute; left: 17.8571428%;  z-index: 0; }
+.log-cloud-3 { width: 155px; height: 88px; top: 160px; position: absolute; right: 9.2857142%;  z-index: 0; }
+.log-cloud-4 { width: 74px; height: 40px; top: 300px; position: absolute; right: 3.5714285%;  z-index: 0; }
+.log-cloud-1 i, .log-cloud-3 i{ font-size: 160px; line-height: 85px; color: #fff; }
+.log-cloud-2 i, .log-cloud-4 i{ font-size: 80px; line-height: 30px; color: #fff; }
+
+/*褰撴祻瑙堝櫒鐨勫彲瑙嗗尯鍩熷皬浜�960px*/
+@media screen and (max-width: 960px) {
+.log-nav { display: none; }
+.log-cartoon,.log-shade{display: none;}
+.login-wrap{width: 100%}
+.login-wrap-party{margin-right: 0;}
+/*.fg-code-pic{width: 13%;}*/
+.fg-msg{ width: 90%;}
+}
+
+/* 鏂扮粦瀹�
+2015-05-08
+淇敼2015-06-18 */
+
+.bind-log { width: 400px; margin: 0 auto; padding: 30px 0; }
+.bind-log h1 { font-size: 20px; color: #34495e; font-weight: normal; }
+.bind-log h1 small { margin-left: 10px; font-size: 14px; color: #b8c4ce;}
+.bind-log .other { float: right; padding-top: 5px; font-size: 14px; }
+.bind-log .other a { color: #3498db;}
+.bind-log .info { width: 100px; margin: 25px auto 0; }
+.bind-log .info .avatar { width: 100px; height: 100px; border-radius: 50%;}
+.bind-log .info i { position: absolute; top: 65px; left: 50%; margin-left: 15px; width: 40px; height: 40px; border-radius: 50%;
+	font-size: 22px; color: #fff; line-height: 40px; text-align: center;}
+/*.bind-log .info i.i-ui { background: url('../img/i-ui.png') no-repeat center center;}*/
+.bind-log .info i.icon-ui4 { background-color: #348fca; }
+.bind-log .info i.icon-mi { background-color: #f57923;}
+.bind-log .info i.icon-qq { background-color: #20a4ff;}
+.bind-log .info i.icon-sina { background-color: #ff414e;}
+.bind-log .info p { margin-top: 15px; font-size: 16px; color: #b8c4ce; text-align: center; }
+.bind-log .icon-relating { font-size: 45px; color:#b0bec9; width: 100%; padding-top: 55px; text-align: center; display: block;}
+
+.bind-control { display: block; height: 40px; width: 100%; border-bottom: #d7dcde 1px solid; margin-top: 20px;}
+.bind-control i { position: absolute; top: 8px; font-size: 24px;}
+.bind-control input { width: 350px; margin-left: 30px; padding: 10px; height: 20px; border: none; font-size: 16px; line-height: 20px; color: #34495e; background: #fff; }
+.bind-control.login-on { border-bottom-color: #3A99D8;}
+.bind-control.login-on i { color: #3A99D8;}
+
+.bind-control input::-moz-placeholder { color: #b8c4ce;}
+.bind-control input::-ms-input-placeholder { color: #b8c4ce;}
+.bind-control input::-webkit-input-placeholder { color: #b8c4ce;}
+.bind-control input:placeholder { color: #b8c4ce;}
+
+.tips-hide { display: none; }
+.tips-box { position: relative;}
+.tips-box .text { opacity: 0; visibility: hidden; position: absolute; bottom: 60px; left: 0; width: 360px; height: 60px; padding: 20px; background-color: #3499DA; font-size: 14px; color: #fff; text-align: justify; border-radius: 2px;
+	-webkit-transform: -webkit-translate(0,15px);
+	   -moz-transform:    -moz-translate(0,15px);
+	    -ms-transform:     -ms-translate(0,15px);
+	     -o-transform:      -o-translate(0,15px);
+			transform:         translate(0,15px);
+	-webkit-transition: all .2s;
+	   -moz-transition: all .2s;
+	    -ms-transition: all .2s;
+	     -o-transition: all .2s;
+	        transition: all .2s; }
+.tips-box .text:before { content: ""; position: absolute; bottom: -10px; left: 50%; margin-left: -8px; width: 0; height: 0; border-style: solid; border-color: #3499DA transparent transparent transparent; border-width: 10px 8px 0 8px; }
+.tips-box .lang-btn:hover + .text { opacity: 1; visibility: visible;
+	-webkit-transform: -webkit-translate(0,0);
+	   -moz-transform:    -moz-translate(0,0);
+	    -ms-transform:     -ms-translate(0,0);
+	     -o-transform:      -o-translate(0,0);
+	        transform:         translate(0,0); }
+.reg-link { float: right; height: 60px; font-size: 14px; color: #3498db; line-height: 40px; background-color: transparent; border: none; cursor: pointer;}
+
+/*楠岃瘉鎻愮ず淇℃伅*/
+.bind-log i.icon-ok,
+.bind-log i.icon-warn { position: absolute; bottom: 5px; right: 0;
+	font-size: 20px; width: 20px; display: block; float: right; text-align: center; line-height: 24px;}
+.bind-log i.icon-ok { color: #1abc9c; }
+.bind-log i.icon-warn { color: #fcab2b; }
+
+.bind-log .spanTip { position: absolute; right: 0; bottom: -22px; color: #feac05; font-size: 12px;}

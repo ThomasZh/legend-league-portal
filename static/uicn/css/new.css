@@ -1,0 +1,9 @@
+/*用户信息*/
+.post .info .user { margin-top: 7px; }
+.post .info .user a { display: block; height: 20px; line-height: 20px;}
+.post .info .user a img { float: left; width: 20px; height: 20px; }
+.post .info .user a .name { float: left; margin-left: 10px; color: #34495e; font-weight: normal;display:flex;align-items: center; }
+.post .info .user.on a .name { color: #3498db; }
+.post .info .user a .name i{margin-right: 3px;}
+.post .info .user a .name em{margin-right: 3px;}
+.post .info .user a .name .moon{width:14px;height:14px;border-radius: 0;float: none; }

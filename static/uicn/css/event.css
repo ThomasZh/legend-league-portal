@@ -1,0 +1,50 @@
+/*娲诲姩*/
+a { color: #34495e; }
+a:hover { color: #3498db; }
+img { vertical-align: middle; }
+
+/*.event-hd { margin-top:20px; margin-bottom:20px; font-size:14px }
+.event-hd li { float: left; margin-right: 20px; }
+.event-hd li a { display: block; height: 40px; text-align: center; line-height: 40px; }*/
+
+.event-hd { float: left; margin: 15px 0; }
+.event-hd li { position: relative; float: left; }
+.event-hd li a {display: block; height: 40px; margin-right: 25px; padding: 0 20px; font-size: 14px; line-height: 40px; text-align: center; }
+.event-hd li a.active { border: 1px solid #bdc3c7; border-radius: 20px; }
+.event-hd li a.active:hover { border-color: #3498db; }
+
+
+/*鍒嗙被绛涢€�*/
+.event-select { position: absolute; top: 0; right: 0; width: 102px; font-size: 14px;}
+.event-select .select-tit { display: inline-block; width: 100px; height: 40px; margin-top:15px; line-height: 40px; text-indent: 15px; color: #34495e; border: 1px solid #d7dcde; }
+.event-select .select-tit i {float: right; width: 30px; line-height: 40px; font-size: 10px; text-align: center; text-indent: 0; color: #34495e; transform: rotate(0); }
+.event-select.open .select-tit i {
+	-webkit-transform: rotate(180deg);
+	   -moz-transform: rotate(180deg);
+	    -ms-transform: rotate(180deg);
+	     -o-transform: rotate(180deg);
+	        transform: rotate(180deg);
+}
+.event-select .select-menu { display: none; position: absolute; width: 100px; top: 100%; left: 0; margin-top: -1px; background-color: #fff; border: 1px solid #d7dcde; }
+.event-select.open .select-menu { display: block; }
+.event-select .select-menu a { display: inline-block; line-height: 40px; width: 100%; text-indent: 15px; color: #34495e;}
+.event-select .select-menu a:hover, .event-select .select-menu .on a { background-color: #ecf0f1; }
+
+.event-list { width: 1180px; float: left; margin-top: 20px; border-top: #eff2f5 solid 1px }
+.event-list li { width: 580px; height: 470px; margin: 10px 20px 30px 0; float: left; overflow: hidden; }
+.event-list li:nth-child(2n) { margin-right: 0; }
+
+.event-tit h1 { color: #2c3e50; font-size: 16px; }
+.event-tit h1 a { color: #2c3e50;font-size: 16px; font-weight: bold; }
+.event-tit h1 span { color: #ee4b4b; font-size: 16px; padding-left: 10px; }
+.event-tit p { color: #b8c4ce; font-size: 14px; }
+.event-tit p time { color: #3498db; }
+
+.event-img { display: block; margin-top: 20px; }
+.event-img img { width: 580px; height: 321px; }
+
+.event-det { color: #2c3e50; font-size: 14px; display: block; margin-top: 20px; text-align: left; text-align: justify; text-justify: inter-ideograph; }
+
+
+/*鎼滅储涓虹┖鍥剧墖鍗犱綅*/
+.search-null { margin: 0 auto; width: 340px; margin-top: 50px; }

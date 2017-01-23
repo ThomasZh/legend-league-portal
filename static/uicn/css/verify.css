@@ -1,0 +1,37 @@
+/**
+ * login Common Style
+ * @author: LangLee;
+ * 鍩轰簬 base.css
+ * data : 闄や簡鐧婚檰娉ㄥ唽鎰忓鎵惧洖瀵嗙爜淇敼璧勬枡绛夐潤鎬佹枃浠剁殑css
+ **/
+
+
+/* ====娉ㄥ唽鎴愬姛婵€娲婚偖绠遍〉 2014/12/25=== */
+.fg-msg{margin:100px auto;display:table;}
+.fg-msg .fg-mail{display:block;width:95px;height:95px;background-size:contain;float:left;margin-right:20px}
+.fg-msg .clo{
+	background: url("../img/fg-mail.png") no-repeat center center ;
+	background-image: -webkit-image-set(url("../img/fg-mail.png") 1x, url("../img/@2x/fg-mail@2x.png") 2x);
+    background-image: -moz-image-set(url("../img/fg-mail.png") 1x,url("../img/@2x/fg-mail@2x.png") 2x);
+    background-image: -ms-image-set(url("../img/fg-mail.png") 1x,url("../img/@2x/fg-mail@2x.png") 2x);
+    background-image: -o-image-set(url("../img/fg-mail.png") 1x,url("../img/@2x/fg-mail@2x.png") 2x);
+}
+.fg-msg .fg-cont{font-size:14px;padding:5px 0;color:#b8c4ce;margin-left:115px}
+.fg-msg .fg-cont .fg-cont-t{font-size: 20px;color: #5d6d7e;}
+
+/* ====閭婵€娲绘垚鍔熼〉 2014/12/25=== */
+.fg-msg .ope{
+	background: url("../img/fg-mail-s.png") ;
+	background-image: -webkit-image-set(url("../img/fg-mail-s.png") 1x, url("../img/@2x/fg-mail-s@2x.png") 2x);
+    background-image: -moz-image-set(url("../img/fg-mail-s.png") 1x,url("../img/@2x/fg-mail-s@2x.png") 2x);
+    background-image: -ms-image-set(url("../img/fg-mail-s.png") 1x,url("../img/@2x/fg-mail-s@2x.png") 2x);
+    background-image: -o-image-set(url("../img/fg-mail-s.png") 1x,url("../img/@2x/fg-mail-s@2x.png") 2x);
+}
+/* ====閭婵€娲诲け璐ラ〉 2014/12/25=== */
+.fg-msg .worn{
+	background: url("../img/fg-mail-w.png") ;
+	background-image: -webkit-image-set(url("../img/fg-mail-w.png") 1x, url("../img/@2x/fg-mail-w@2x.png") 2x);
+    background-image: -moz-image-set(url("../img/fg-mail-w.png") 1x,url("../img/@2x/fg-mail-w@2x.png") 2x);
+    background-image: -ms-image-set(url("../img/fg-mail-w.png") 1x,url("../img/@2x/fg-mail-w@2x.png") 2x);
+    background-image: -o-image-set(url("../img/fg-mail-w.png") 1x,url("../img/@2x/fg-mail-w@2x.png") 2x);
+}
