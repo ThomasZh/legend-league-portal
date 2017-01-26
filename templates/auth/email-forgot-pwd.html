@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>密码找回-UI中国-专业界面交互设计平台</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="Keywords" content="ui设计,界面设计,ui平台,学ui,ui教程,ui源文件,ui下载,ui问答,ui杂志,ui活动,ui软件,ui工具,ui灵感,ui经验">
+	<meta name="Description" content="UI中国,前身为iconfans.com。是专业的界面设计师交流、学习/展示平台.同时也是UI设计师人才流动的集散地,会员均为一线UI设计师,覆盖主流互联网公司.我们希望借助互联网的力量打造国内最专业的UI设计平台,为UI设计师做最好的服务,提高UI设计行业价值!">
+
+	<link rel="icon" href="{{ static_url('img/logo.ico') }}" type="image/png/ico">
+	<link rel="stylesheet" href="{{ static_url('uicn/css/base.css') }}">
+	<link rel="stylesheet" href="{{ static_url('uicn/css/login-fluid.css') }}">
+	<link rel="stylesheet" href="{{ static_url('uicn/css/verify.css') }}">
+	<link rel="stylesheet" href="{{ static_url('uicn/css/iconfont.css') }}">
+</head>
+
+<body>
+	<div id="ajax-hook"></div>
+	<div class="wp cl">
+		<div class="log-wrap cl">
+			<div class="log-hd">
+				<div class="wpl cl">
+					<div class="log-row cl">
+						<div class="log-logo">
+							<a href="/"> <img src="{{ static_url('img/logo-64.png') }}" srcset="{{ static_url('img/logo-128.png') }} 2x" /> </a>
+						</div>
+						<div class="log-title">
+							<strong>密码找回!</strong>
+							<p>请填入您的邮箱进行密码找回</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="log-content cl">
+				<div class="wpl pos cl">
+					<div class="log-row-cx cl">
+						<div class="reg_left pos z">
+							<form id="LoginForm" action="" method="post">
+								<label class="login-icon pos">
+                  <i class="iconfont fss log-i icon-envelope-line"></i>
+                  <input id="forgot-email" type="text" name="forgot-email" value="请输入注册邮箱" class="log-input login-email mls" />
+                </label>
+								<button id="forgot-button" class="lang-btn lang-btn-huge lang-btn-fixed-Large mtw">
+                  <span class="lang-btn-content">发送验证邮件</span>
+                </button>
+							</form>
+							<div class="log-cartoon"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="log-footer cl">
+			<div class="wpl cl">
+				<div class="log-row cl">
+					<p style="display:block;width:100%;text-align:center;">京ICP备14007358号-1 \ 京公网安备11010802014104号 \ Powered by © 2008-2016 UI.CN</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="{{ static_url('uicn/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ static_url('uicn/js/migrate.js') }}"></script>
+	<script type="text/javascript" src="{{ static_url('uicn/js/msgTip.js') }}"></script>
+
+	<script>
+		//用户框失去、得到焦点事件处理
+		var email_10 = '<span id="password_errtext" class="user-input-er-span iconfont"><b>未检测到邮箱</b><i></i></span>';
+		var password_10 = '<span id="password_errtext" class="user-input-er-span iconfont"><b></b><i></i></span>';
+		var username_10 = '<span id="password_errtext" class="user-input-er-span iconfont"><b></b><i></i></span>';
+		var code_10 = '<span id="password_code" class="user-input-er-span iconfont"><b></b><i></i></span>';
+
+		var emaildef = $('#forgot-email').val();
+		var userdef = $('#forgot-user').val();
+		var codedelf = $('#forgot-code').val();
+		var userErro = null;
+		var ckuser = false;
+		$('#forgot-email').blur(function() {
+			if ($.trim($(this).val()).length <= 0 || $(this).val() == emaildef) {
+				$(this).parent().removeClass('login-on'); //给#username的父元素添加class
+				$(this).val(emaildef);
+				$(this).after(password_10);
+			} else {
+				$.ajax({
+					type: 'post',
+					url: '/verifyemail',
+					dataType: "json",
+					data: 'email=' + $(this).val(),
+					success: function(msg) {
+						if (msg.code == 200) {
+							if (msg.multiple) {
+								ckuser = true;
+								alert(msg.msg);
+								$('#username').show().focus();
+							} else {
+								ckuser = false;
+								$('#username').hide();
+							}
+							userErro = 0;
+							$(this).next("span").remove();
+						} else {
+							$("#forgot-email").after('<span id="password_errtext" class="user-input-er-span iconfont"><b>' + msg.msg + '</b><i></i></span>');
+							userErro = 20;
+							return false;
+						}
+						return false;
+					}
+				});
+			}
+			return false;
+		}).focus(function() {
+			$(this).parent().addClass('login-on');
+			if ($(this).val() == emaildef)
+				$(this).val('');
+			$(this).next("span").remove();
+		});
+
+		$('#forgot-user').blur(function() {
+			if (userErro == 20) {
+				$('#forgot-email').focus();
+				return;
+			}
+			if ($.trim($(this).val()).length <= 0 || $(this).val() == userdef) {
+				$(this).parent().removeClass('login-on'); //给#username的父元素添加class
+				$(this).val(userdef)
+				//$(this).focus();
+				$(this).after(username_10);
+			}
+		}).focus(function() {
+			if (userErro == 20) {
+				$('#forgot-email').focus();
+				return;
+			}
+			$(this).parent().addClass('login-on');
+			if ($(this).val() == userdef)
+				$(this).val('');
+			$(this).next("span").remove();
+		});
+
+
+		$('#forgot-button').click(function() {
+			if ($.trim($('#forgot-email').val()).length <= 0 || $('#forgot-email').val() == emaildef) {
+				errorTip('请填写注册邮箱', 3) //当密码不为空并且不是“请输入密码”时，弹出提示信息“密码不能为空”
+				$('#forgot-email').focus();
+				return false; //如果判断为真，停止执行下面的代码，
+			}
+
+			if (ckuser) {
+				if ($.trim($('#forgot-user').val()).length <= 0 || $('#forgot-user').val() == userdef) {
+					errorTip('请填写用户名', 3) //当密码不为空并且不是“请输入密码”时，弹出提示信息“密码不能为空”
+					$('#forgot-user').focus();
+					return false; //如果判断为真，停止执行下面的代码，
+				}
+			}
+
+
+			data = {
+				email: $('#forgot-email').val(),
+				code: "eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
+			};
+			var json = JSON.stringify(data);
+
+			$.ajax({
+				type: "POST",
+				url: "/api/auth/email/forgot-pwd",
+				data: json,
+				crossDomain: true,
+				dataType: "json",
+				contentType: 'application/json',
+				success: function(data, status, xhr) {
+					console.log(data);
+					redirectTip('邮件已经发出，请注意查收!', true, '/portal/auth/forgot-pwd', 0);
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+					if (XMLHttpRequest.status == 202) {
+						redirectTip('邮件已经发出，请注意查收!', true, '/portal/auth/forgot-pwd', 0);
+					} else {
+						redirectTip('网络异常,刷新重试', true, '/portal/auth/forgot-pwd', 3);
+					}
+				},
+				complete: function(XMLHttpRequest, textStatus) {
+					this; // 调用本次AJAX请求时传递的options参数
+				}
+			});
+			return false;
+		});
+	</script>
+
+</body>
+
+</html>

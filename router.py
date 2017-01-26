@@ -9,6 +9,7 @@ import tornado.web
 
 from foo import comm
 from foo.ui import ui_cn
+from foo.auth import auth_email
 
 
 def map():
@@ -28,6 +29,7 @@ def map():
         (r'/uicn/topic', getattr(ui_cn, 'UicnTopicHandler')),
         (r'/uicn/online', getattr(ui_cn, 'UicnOnlineHandler')),
         (r'/uicn/zhaopin', getattr(ui_cn, 'UicnZhaopinHandler')),
+
         # 注册 登录 找回
         (r'/auth/login', getattr(ui_cn, 'AuthLoginHandler')),
         (r'/auth/getpass', getattr(ui_cn, 'AuthGetpassHandler')),
@@ -35,6 +37,11 @@ def map():
         (r'/auth/findpassbymail', getattr(ui_cn, 'AuthFindpassHandler')),
         (r'/auth/changepass', getattr(ui_cn, 'AuthChangepassHandler')),
         (r'/auth/editsuccess', getattr(ui_cn, 'AuthEditsuccessHandler')),
+
+        (r'/portal/auth/login', getattr(auth_email, 'AuthEmailLoginHandler')),
+        (r'/portal/auth/register', getattr(auth_email, 'AuthEmailRegisterHandler')),
+        (r'/portal/auth/forgot-pwd', getattr(auth_email, 'AuthEmailForgotPwdHandler')),
+        (r'/portal/auth/reset-pwd', getattr(auth_email, 'AuthEmailResetPwdHandler')),
 
         # comm
         ('.*', getattr(comm, 'PageNotFoundHandler'))

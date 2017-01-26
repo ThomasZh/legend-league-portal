@@ -1,5 +1,5 @@
 $(function() {
-  //鐢ㄦ埛妗嗗け鍘汇€佸緱鍒扮劍鐐逛簨浠跺鐞�
+  //用户框失去、得到焦点事件处理
 
   var userdel = $('#username').val();
   $('#username').blur(function() {
@@ -51,7 +51,7 @@ $(function() {
     var username = $.trim($('#username').val());
     if (username.length <= 0 || username == userdel) {
       globalTip({
-        'msg': '璇峰～鍐欑敤鎴峰悕鎴栭偖绠�'
+        'msg': '请填写用户名或邮箱'
       });
       $('#username').focus();
       return false;
@@ -62,7 +62,7 @@ $(function() {
 
     if (password.length <= 0 || password == passdel) {
       globalTip({
-        'msg': '璇峰～鍐欏瘑鐮�'
+        'msg': '请填写密码'
       });
       $('#password').focus();
       return false;
@@ -73,7 +73,7 @@ $(function() {
     if (verify) {
       if ($.trim($('input[name=code]').val()).length <= 0 || $('input[name=code]').val() == code) {
         globalTip({
-          'msg': '璇峰～鍐欓獙璇佺爜'
+          'msg': '请填写验证码'
         });
         $('input[name=code]').focus();
         return false;
@@ -106,11 +106,12 @@ $(function() {
         return false;
       },
       error: function() {
-        redirectTip('缃戠粶寮傚父,鍒锋柊閲嶈瘯', true, '/login', 3);
+        redirectTip('网络异常,刷新重试', true, '/auth/login', 3);
       }
     });
     return false;
   });
+
   $(window).keydown(function(event) {
     switch (event.keyCode) {
       case 13:
