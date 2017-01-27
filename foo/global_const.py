@@ -17,10 +17,5 @@
 # under the License.
 
 
-STP = "123.56.105.78"
-
-# mongodb
-MONGO_HOST = "123.57.136.99"
-MONGO_PORT = 27017
-MONGO_USR = "7x24hs"
-MONGO_PWD = "123456"
+TOKEN_EXPIRES_IN = 7200 # 2hours
+LEAGUE_ID = "f24794c7e1d511e68c0aa45e60efbf2d"

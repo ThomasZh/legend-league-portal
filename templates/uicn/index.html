@@ -50,6 +50,7 @@
   <script src="{{ static_url('uicn/js/LazyLoad.js') }}"></script>
   <script src="{{ static_url('uicn/js/contentover.js') }}"></script>
   <script src="{{ static_url('uicn/js/cnzz.js') }}"></script>
+  <script src="{{ static_url('js/tornado_cookie.js') }}" type="text/javascript"></script>
   <!--[if lt IE 9]>
 	<script src="http://s1.ui.cn/js/global/html5.js"></script>
 <![endif]-->
@@ -61,9 +62,9 @@
 
 <body>
   <div id="ajax-hook"></div>
-    <!-- top menu -->
-    {% module Template("uicn/top-menu-block.html") %}
-    <!-- /top menu -->
+  <!-- top menu -->
+  {% module Template("uicn/top-menu-block.html") %}
+  <!-- /top menu -->
 
 
   <script>
@@ -1508,6 +1509,15 @@
       })();
     </script>
   </div>
+
+  <script>
+    $(function() {
+      var tc = new TornadoCookie('cookie', 'bZJc2sWbQLKos6GkHn/VB9oXwQt8S0R0kRvJ5/xJ89E=', {
+        days: 31
+      });
+      console.log("access_token: ", tc.getSecureCookie('access_token'));
+    });
+  </script>
 
 </body>
 

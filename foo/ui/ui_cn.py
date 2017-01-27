@@ -35,53 +35,66 @@ from comm import timestamp_date
 
 class UicnIndexHandler(tornado.web.RequestHandler):
     def get(self):
+        access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r] from cookie", access_token)
+
         logging.info(self.request)
         self.render('uicn/index.html')
+
 
 class UicnListHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('uicn/list.html')
 
+
 class UicnExpHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('uicn/exp.html')
+
 
 class UicnBookHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('uicn/book.html')
 
+
 class UicnStudyHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('uicn/study.html')
+
 
 class UicnGameHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('uicn/game.html')
 
+
 class UicnPeixunHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('uicn/peixun.html')
+
 
 class UicnTopicHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('uicn/topic.html')
 
+
 class UicnOnlineHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('uicn/online.html')
 
+
 class UicnZhaopinHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('uicn/zhaopin.html')
+
 
 # 登录 注册 找回handler
 class AuthLoginHandler(tornado.web.RequestHandler):
@@ -89,25 +102,30 @@ class AuthLoginHandler(tornado.web.RequestHandler):
         logging.info(self.request)
         self.render('auth/login.html')
 
+
 class AuthGetpassHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('auth/getpass.html')
+
 
 class AuthRegHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('auth/reg.html')
 
+
 class AuthFindpassHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('auth/findpassbymail.html')
 
+
 class AuthChangepassHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('auth/changepass.html')
+
 
 class AuthEditsuccessHandler(tornado.web.RequestHandler):
     def get(self):

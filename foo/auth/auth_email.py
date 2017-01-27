@@ -44,20 +44,18 @@ from global_const import *
 class AuthEmailLoginHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
-        err_msg = ""
-        self.render('auth/email-login.html', err_msg=err_msg)
+        self.render('auth/email-login.html',
+                league_id=LEAGUE_ID)
 
 
 class AuthEmailRegisterHandler(BaseHandler):
     def get(self):
-        err_msg = ""
-        self.render('auth/email-register.html', err_msg=err_msg)
+        self.render('auth/email-register.html')
 
 
 class AuthEmailForgotPwdHandler(BaseHandler):
     def get(self):
-        err_msg = "When you fill in your registered email address, you will be sent instructions on how to reset your password."
-        self.render('auth/email-forgot-pwd.html', err_msg=err_msg)
+        self.render('auth/email-forgot-pwd.html')
 
 
 class AuthEmailResetPwdHandler(BaseHandler):
@@ -67,9 +65,7 @@ class AuthEmailResetPwdHandler(BaseHandler):
         email = self.get_argument("email", "")
         logging.info("try reset email=[%r] password by ekey=[%r]", email, ekey)
 
-        err_msg = ""
         self.render('auth/email-reset-pwd.html',
-                err_msg=err_msg,
                 email=email,
                 ekey=ekey)
 
@@ -94,3 +90,25 @@ class AuthLogoutHandler(AuthorizationHandler):
         self.clear_cookie("expires_at")
 
         self.redirect("/");
+
+
+class AuthRegisterIntoLeagueXHR(BaseHandler):
+    def post(self):
+        logging.info(self.request)
+        logging.info(self.request.body)
+        session_ticket = json_decode(self.request.body)
+
+        self.set_secure_cookie("access_token", session_ticket['access_token'])
+        self.set_secure_cookie("expires_at", str(session_ticket['expires_at']))
+
+        # signup into league
+        url = "http://api.7x24hs.com/api/leagues/"+LEAGUE_ID+"/signup"
+        http_client = HTTPClient()
+        body = {"role":"user"}
+        _json = json_encode(body)
+        response = http_client.fetch(url, method="PUT", headers={"Authorization":"Bearer "+session_ticket['access_token']}, body=_json)
+        logging.info("got response %r", response.body)
+
+        self.set_status(200) # OK
+        self.finish()
+        return

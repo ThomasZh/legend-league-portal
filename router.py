@@ -42,6 +42,7 @@ def map():
         (r'/portal/auth/register', getattr(auth_email, 'AuthEmailRegisterHandler')),
         (r'/portal/auth/forgot-pwd', getattr(auth_email, 'AuthEmailForgotPwdHandler')),
         (r'/portal/auth/reset-pwd', getattr(auth_email, 'AuthEmailResetPwdHandler')),
+        (r'/portal/auth/register/into-league', getattr(auth_email, 'AuthRegisterIntoLeagueXHR')),
 
         # comm
         ('.*', getattr(comm, 'PageNotFoundHandler'))
