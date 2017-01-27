@@ -9,10 +9,22 @@
   <meta name="Description" content="UI中国,前身为iconfans.com。是专业的界面设计师交流、学习/展示平台.同时也是UI设计师人才流动的集散地,会员均为一线UI设计师,覆盖主流互联网公司.我们希望借助互联网的力量打造国内最专业的UI设计平台,为UI设计师做最好的服务,提高UI设计行业价值!">
 
   <link rel="icon" href="{{ static_url('img/logo.ico') }}" type="image/png/ico">
-  <link rel="stylesheet" href="{{ static_url('uicn/css/iconfont.css') }}">
   <link rel="stylesheet" href="{{ static_url('uicn/css/base.css') }}">
   <link rel="stylesheet" href="{{ static_url('uicn/css/login-fluid.css') }}">
-  <script src="{{ static_url('uicn/js/jquery.js') }}" type="text/javascript"></script>
+  <link rel="stylesheet" href="{{ static_url('uicn/css/verify.css') }}">
+  <link rel="stylesheet" href="{{ static_url('uicn/css/iconfont.css') }}">
+
+  <style type="text/css">
+    .loginForm label {
+      cursor: default;
+    }
+  </style>
+
+  <script src="{{ static_url('uicn/js/jquery.js') }}"></script>
+  <script src="{{ static_url('uicn/js/msgTip.js') }}"></script>
+  <script src="{{ static_url('uicn/js/agree.js') }}"></script>
+  <script src="{{ static_url('uicn/js/placeholder.js') }}"></script>
+  <script src="{{ static_url('uicn/js/Validform_v5.3.2.js') }}"></script>
   <script src="{{ static_url('uicn/js/md5.min.js') }}" type="text/javascript"></script>
   <script src="{{ static_url('js/json2.js') }}" type="text/javascript"></script>
 </head>
@@ -55,34 +67,24 @@
                 <h2>欢迎回来</h2>
                 <span>还没有账号？<a href="/portal/auth/register">立即注册</a></span>
               </div>
-              <form id="LoginForm" action="" method="post">
-                <label class="login-icon pos">
-                  <i class="icon-user-line fss log-i"></i>
-                  <input style="display:none"><!-- for disable autocomplete on chrome -->
-                  <input id="username" type="text" name="username" class="log-input login-name mls" placeholder="请输入用户名/邮箱" autocomplete="off" />
-                </label>
-                <label class="login-icon pos">
-                  <i class="icon-lock-line fss log-i"></i>
-                  <!-- <input type="text" name="placeholderpwd" class="log-input mls" value="请输入密码" style="display: none;"> -->
-                  <input style="display:none"><!-- for disable autocomplete on chrome -->
-                  <input id="password" type="password" name="password" autocomplete="off" class="log-input login-pwd mls" placeholder="请输入密码"/>
-                </label>
-                <div class="hide" id='verify'>
-                  <label class="login-icon fg-code pos">
-                    <i class="icon-captcha fss log-i"></i>
-                    <input type="text" name="code" autocomplete="off" class="log-input login-pwd mls" style="width: 180px;" placeholder="请输入验证码">
+              <form id="loginForm" class='loginForm'>
+                <div class="reg_cont_input">
+                  <label class="login-icon pos">
+                    <i class="iconfont icon-envelope-line"></i>
+                    <input type="text" id="email" name="email" dataType='e' autocomplete="off"  nullmsg="邮箱不能为空!" class="log-input mls" placeholder='输入邮箱'>
+                    <div class='Validform_checktip'></div>
                   </label>
-                  <div class="fg-code-wp">
-                    <span class="fg-code-pic">
-                      <img src="/code" onclick="this.src='/code?'+Math.random()" alt="换一张">
-                    </span>
-                    <a class="fg-code-t" href="javascript:;" onclick="$('.fg-code-pic img').attr('src','/code?'+Math.random())">换一张</a>
-                  </div>
+                  <label class="login-icon pos">
+                    <i class="iconfont icon-lock-line"></i>
+                    <input type="text" name="placeholderpwd" class="log-input mls" value='输入密码'>
+                    <input type="password" id="password" datatype='*6-20' errormsg="密码范围在6~20位之间!" autocomplete="off" class="log-input mls" nullmsg="请输入密码!" placeholder='输入密码'>
+                    <div class='Validform_checktip'></div>
+                  </label>
+                  <button id="login-button" class="lang-btn lang-btn-huge mtw lang-btn-fixed-Large">
+                    <span class="lang-btn-content">登录</span>
+                  </button>
+                  <p class="login-msg"><a class="y login-forget" href="/portal/auth/forgot-pwd" target="_blank">忘记密码?</a> 如登录出现异常,请清理浏览器缓存后再尝试。</p>
                 </div>
-                <button id="login-button" class="lang-btn lang-btn-huge mtw lang-btn-fixed-Large">
-                  <span class="lang-btn-content">登录</span>
-                </button>
-                <p class="login-msg"><a class="y login-forget" href="/portal/auth/forgot-pwd" target="_blank">忘记密码?</a> 如登录出现异常,请清理浏览器缓存后再尝试。</p>
               </form>
             </div>
             <div class="login-wrap-party z">
@@ -110,129 +112,133 @@
         </div>
       </div>
     </div>
-
-    <script type="text/javascript">
-      $(function() {
-        //用户框失去、得到焦点事件处理
-
-        var userdel = $('#username').val();
-        $('#username').blur(function() {
-          if ($.trim($(this).val()).length <= 0) {
-            $(this).val(userdel)
-            $(this).parent().removeClass('login-on');
-          } else {
-            $(this).parent().addClass('login-on');
-          }
-        }).focus(function() {
-          $(this).parent().addClass('login-on');
-          if ($(this).val() == userdel)
-            $(this).val('');
-          userdel = "";
-        });
-
-        var passdel = $('#password').val();
-        $('#password').blur(function() {
-          if ($.trim($(this).val()).length <= 0) {
-            $(".la_password").remove();
-            $(this).parent().removeClass('login-on');
-          } else {
-            $(this).parent().addClass('login-on');
-          }
-        }).focus(function() {
-          $(this).parent().addClass('login-on');
-          $(".la_password").remove();
-          if ($(this).val() == passdel)
-            $(this).val('');
-          passdel = "";
-        });
-        var code = $('input[name=code]').val();
-        var verify = false;
-        $('input[name=code]').blur(function() {
-          if ($.trim($(this).val()).length <= 0) {
-            $(this).val(code);
-            $(this).parent().removeClass('login-on');
-          } else {
-            $(this).parent().addClass('login-on');
-          }
-        }).focus(function() {
-          $(this).parent().addClass('login-on');
-          if ($(this).val() == code)
-            $(this).val('');
-        });
-
-        $('#login-button').click(function() {
-          var data = {};
-          var username = $.trim($('#username').val());
-          if (username.length <= 0 || username == userdel) {
-            globalTip({
-              'msg': '请填写用户名或邮箱'
-            });
-            $('#username').focus();
-            return false;
-          }
-          data.login = username;
-
-          password = $.trim($('#password').val());
-
-          if (password.length <= 0 || password == passdel) {
-            globalTip({
-              'msg': '请填写密码'
-            });
-            $('#password').focus();
-            return false;
-          }
-
-          data.pwd = $.md5(password);
-
-          if (verify) {
-            if ($.trim($('input[name=code]').val()).length <= 0 || $('input[name=code]').val() == code) {
-              globalTip({
-                'msg': '请填写验证码'
-              });
-              $('input[name=code]').focus();
-              return false;
-            }
-            data.code = $.trim($('input[name=code]').val());
-          }
-
-          data.code = "eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q=";
-          var json = JSON.stringify(data);
-          console.log('login-button');
-          $('#login-button').attr('disabled', 'true');
-          $.ajax({
-            type: "POST",
-            url: "/api/auth/token",
-            data: json,
-            crossDomain: true,
-            dataType: "json",
-            contentType: 'application/json',
-            success: function(data, status, xhr) {
-              console.log(data);
-              redirectTip('恭喜你，登录成功!', true, '/', 0);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-              console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
-              if (XMLHttpRequest.status == 200) {}
-              redirectTip('网络异常,刷新重试', true, '/portal/auth/login', 3);
-            },
-            complete: function(XMLHttpRequest, textStatus) {
-              this; // 调用本次AJAX请求时传递的options参数
-            }
-          });
-          return false;
-        });
-
-        $(window).keydown(function(event) {
-          switch (event.keyCode) {
-            case 13:
-              $('#login-button').trigger('click');
-              break;
-          }
-        });
-      });
-    </script>
-    <script type="text/javascript" src="{{ static_url('uicn/js/msgTip.js') }}"></script>
   </div>
+
+  <script type="text/javascript">
+    $(function() {
+      $('.loginForm input').focus(function() {
+        $(this).parent().addClass('login-on')
+      }).blur(function() {
+        if ($(this).val() == '') {
+          $(this).parent().removeClass('login-on')
+        }
+      });
+
+      //email框失去、得到焦点事件处理
+      var emaildel = $('#email').val();
+      $('#email').blur(function() {
+        if ($.trim($(this).val()).length <= 0) {
+          $(this).val(emaildel)
+          $(this).parent().removeClass('login-on');
+        } else {
+          $(this).parent().addClass('login-on');
+        }
+      }).focus(function() {
+        $(this).parent().addClass('login-on');
+        if ($(this).val() == emaildel)
+          $(this).val('');
+        emaildel = "";
+      });
+
+      //password框失去、得到焦点事件处理
+      var passdel = $('#password').val();
+      $('#password').blur(function() {
+        if ($.trim($(this).val()).length <= 0) {
+          $(this).val(passdel)
+          $(this).parent().removeClass('login-on');
+        } else {
+          $(this).parent().addClass('login-on');
+        }
+      }).focus(function() {
+        $(this).parent().addClass('login-on');
+        if ($(this).val() == passdel)
+          $(this).val('');
+        passdel = "";
+      });
+
+      /**表单验证*/
+      var forminfo = $(".loginForm").Validform({
+        tiptype: function(msg, o, cssctl) {
+          if (!o.obj.is("form")) {
+            var objtip = o.obj.siblings(".Validform_checktip");
+            cssctl(objtip, o.type);
+            if (o.type == 2) {
+              msg = "<i class='icon-ok'></i>";
+            } else {
+              msg = "<i class='icon-warn'></i><span class='spanTip'>" + msg + '</span>';
+            }
+            objtip.html(msg);
+          }
+        },
+        ignoreHidden: true, //当为true时对:hidden的表单元素将不做验证;
+        ajaxPost: true,
+        beforeSubmit: function(curform) {}
+      });
+
+      $('#login-button').click(function() {
+        var email = $.trim($('#email').val());
+        if (email.length <= 0 || email == emaildel) {
+          globalTip({
+            'msg': '请输入邮箱',
+            'setTime': 2, // seconds
+          });
+          $('#email').focus();
+          return false;
+        }
+
+        password = $.trim($('#password').val());
+        if (password.length <= 0 || password == passdel) {
+          globalTip({
+            'msg': '请输入密码',
+            'setTime': 2, // seconds
+          });
+          $('#password').focus();
+          return false;
+        }
+
+        var data = {
+          code: "eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q=",
+          login: email,
+          pwd: $.md5(password),
+        };
+        var json = JSON.stringify(data);
+        console.log(data);
+
+        $('#login-button').attr('disabled', 'true');
+        $.ajax({
+          type: "POST",
+          url: "/api/auth/token",
+          data: json,
+          dataType: "json",
+          contentType: 'application/json',
+          success: function(data, status, xhr) {
+            console.log(data);
+            redirectTip('恭喜你，登录成功!', true, '/', 2);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+            if (XMLHttpRequest.status == 404) {
+              $('#login-button').attr('disabled', 'false');
+              redirectTip('邮箱或密码不正确, 请重试', false, '/portal/auth/login', 3);
+            }
+          },
+          complete: function(XMLHttpRequest, textStatus) {
+            this; // 调用本次AJAX请求时传递的options参数
+          }
+        });
+
+        return false;
+      });
+
+      $(window).keydown(function(event) {
+        switch (event.keyCode) {
+          case 13:
+            $('#login-button').trigger('click');
+            break;
+        }
+      });
+    });
+  </script>
 
 </body>
 

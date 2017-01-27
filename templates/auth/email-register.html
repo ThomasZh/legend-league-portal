@@ -63,17 +63,17 @@
 								<h2></h2>
 								<span>已有账号？<a href="/portal/auth/login">马上登录</a></span>
 							</div>
-							<form action='' method="post" onsubmit="return false" class='regForm'>
+							<form id='regForm' class='regForm'>
 								<div class="reg_cont_input">
 									<label class="login-icon pos">
 										<i class="iconfont icon-envelope-line"></i>
-                    <input type="text" id="email" name="email" dataType='e' autocomplete="off"  nullmsg="邮箱不能为空!" class="log-input mls" placeholder='设置邮箱'>
+                    <input type="text" id="email" name="email" dataType='e' autocomplete="off"  nullmsg="邮箱不能为空!" class="log-input mls" placeholder='输入邮箱'>
                     <div class='Validform_checktip'></div>
 									</label>
 									<label class="login-icon pos">
 										<i class="iconfont icon-lock-line"></i>
                     <input type="text" name="placeholderpwd" class="log-input mls" value='设置密码'>
-                    <input type="password" name="password" id="pwd" datatype='*6-20' errormsg="密码范围在6~20位之间!" autocomplete="off" class="log-input mls" nullmsg="请输入您的账号密码!" placeholder='设置密码'>
+                    <input type="password" id="password" datatype='*6-20' errormsg="密码范围在6~20位之间!" autocomplete="off" class="log-input mls" nullmsg="请输入您的密码!" placeholder='输入密码'>
                     <div class='Validform_checktip'></div>
 									</label>
 									<div class="reg_checkboxline pos">
@@ -83,7 +83,7 @@
 										<p>我已阅读并接受 <a href="http://www.ui.cn/about.php#section-2" target="_brack">《版权声明》</a> 和 <a href="http://www.ui.cn/about.php#section-3" target="_brack">《隐私保护》</a></p>
 										<div id="errormsg" class="hide"><i class="icon-warn"></i><span class="spanTip">请接受 《版权声明》 和 《隐私保护》</span></div>
 									</div>
-									<button class="lang-btn" id="regInputSubmit">
+									<button class="lang-btn" id="reg-button">
                     <span>注 册</span>
                   </button>
 								</div>
@@ -126,6 +126,39 @@
 					$(this).parent().removeClass('login-on')
 				}
 			});
+
+			//email框失去、得到焦点事件处理
+			var emaildel = $('#email').val();
+			$('#email').blur(function() {
+				if ($.trim($(this).val()).length <= 0) {
+					$(this).val(emaildel)
+					$(this).parent().removeClass('login-on');
+				} else {
+					$(this).parent().addClass('login-on');
+				}
+			}).focus(function() {
+				$(this).parent().addClass('login-on');
+				if ($(this).val() == emaildel)
+					$(this).val('');
+				emaildel = "";
+			});
+
+			//password框失去、得到焦点事件处理
+			var passdel = $('#password').val();
+			$('#password').blur(function() {
+				if ($.trim($(this).val()).length <= 0) {
+					$(this).val(passdel)
+					$(this).parent().removeClass('login-on');
+				} else {
+					$(this).parent().addClass('login-on');
+				}
+			}).focus(function() {
+				$(this).parent().addClass('login-on');
+				if ($(this).val() == passdel)
+					$(this).val('');
+				passdel = "";
+			});
+
 			/**表单验证*/
 			var forminfo = $(".regForm").Validform({
 				tiptype: function(msg, o, cssctl) {
@@ -140,20 +173,6 @@
 						objtip.html(msg);
 					}
 				},
-				datatype: {
-					'username': function(gets, obj, curform, regxp) {
-						var reg_email = /^([a-zA-Z0-9]+[_|\_|\.\-]?)*[a-zA-Z0-9\-]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/,
-							reg_feif = /^[a-zA-Z0-9_\u4e00-\u9fa5]{3,20}$/;
-						if (reg_email.test(gets)) {
-							return '用户名不能为邮箱';
-						} else if (!reg_feif.test(gets)) {
-							return '用户名,3~20个字符,支持字母/中文/数字/下划线';
-						} else {
-							return true;
-						}
-					},
-
-				},
 				ignoreHidden: true, //当为true时对:hidden的表单元素将不做验证;
 				ajaxPost: true,
 				beforeSubmit: function(curform) {
@@ -167,12 +186,30 @@
 				}
 			});
 
-			$('#regInputSubmit').click(function() {
-				console.log('regInputSubmit');
+			$('#reg-button').click(function() {
+				var email = $.trim($('#email').val());
+				if (email.length <= 0 || email == emaildel) {
+					globalTip({
+						'msg': '请输入邮箱',
+						'setTime': 2, // seconds
+					});
+					$('#email').focus();
+					return false;
+				}
+
+				password = $.trim($('#password').val());
+				if (password.length <= 0 || password == passdel) {
+					globalTip({
+						'msg': '请输入密码',
+						'setTime': 2, // seconds
+					});
+					$('#password').focus();
+					return false;
+				}
 
 				data = {
 					login: $("#email").val(),
-					pwd: $.md5($("#pwd").val()),
+					pwd: $.md5($("#password").val()),
 					code: "eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
 				};
 				var json = JSON.stringify(data);
@@ -198,6 +235,14 @@
 					}
 				});
 				return false;
+			});
+
+			$(window).keydown(function(event) {
+				switch (event.keyCode) {
+					case 13:
+						$('#login-button').trigger('click');
+						break;
+				}
 			});
 		});
 	</script>

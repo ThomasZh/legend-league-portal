@@ -12,15 +12,25 @@
   <link rel="stylesheet" href="{{ static_url('uicn/css/login-fluid.css') }}">
   <link rel="stylesheet" href="{{ static_url('uicn/css/verify.css') }}">
   <link rel="stylesheet" href="{{ static_url('uicn/css/iconfont.css') }}">
+
+  <style type="text/css">
+    .loginForm label {
+      cursor: default;
+    }
+  </style>
+
   <script src="{{ static_url('uicn/js/jquery.js') }}"></script>
   <script src="{{ static_url('uicn/js/msgTip.js') }}"></script>
+  <script src="{{ static_url('uicn/js/agree.js') }}"></script>
   <script src="{{ static_url('uicn/js/placeholder.js') }}"></script>
   <script src="{{ static_url('uicn/js/Validform_v5.3.2.js') }}"></script>
   <script src="{{ static_url('uicn/js/md5.min.js') }}" type="text/javascript"></script>
   <script src="{{ static_url('js/json2.js') }}" type="text/javascript"></script>
+
 </head>
 
 <body>
+  <div id="ajax-hook"></div>
   <div class="wp cl">
     <div class="log-wrap cl">
       <div class="log-hd">
@@ -40,14 +50,17 @@
         <div class="wpl pos cl">
           <div class="log-row-cx cl">
             <div class="reg_left pos z">
-              <form id="LoginForm">
-                <label class="login-icon pos">
-                  <i class="iconfont fss log-i icon-lock-line"></i>
-                  <input id="newpass" type="text" name="newpass" value="请输入您的新密码" class="log-input login-pwd mls" />
+              <form id="loginForm" class="loginForm">
+                <label class=" login-icon pos ">
+                  <i class="iconfont icon-lock-line "></i>
+                  <input type="text" name="placeholderpwd" class="log-input mls" value='设置密码'>
+                  <input type="password" id="password" datatype='*6-20' errormsg="密码范围在6~20位之间!" autocomplete="off" class="log-input mls" nullmsg="请输入您的密码!" placeholder='输入密码'>
+                  <div class='Validform_checktip'></div>
                 </label>
                 <button id="re-button" class="lang-btn lang-btn-huge lang-btn-fixed-Large mtw">
                   <span class="lang-btn-content">立即重置</span>
                 </button>
+                <p class="login-msg"><a class="y login-forget" href="/portal/auth/forgot-pwd" target="_blank">忘记密码?</a> 如登录出现异常,请清理浏览器缓存后再尝试。</p>
               </form>
               <div class="log-cartoon"></div>
             </div>
@@ -65,83 +78,80 @@
   </div>
 
   <script>
-    //用户框失去、得到焦点事件处理
-
-    var newpass_10 = '<span id="password_qsr" class="user-input-er-span"><b></b><i class="iconfont"></i></span>';
-    var renewpass_10 = '<span id="password_qqe" class="user-input-er-span"><b></b><i class="iconfont"></i></span>';
-    var renewpass_20 = '<span id="password_errtext" class="user-input-er-span"><b>需至少6位</b><i class="iconfont"></i></span>';
-    var renewpass_30 = '<span id="password_byz" class="user-input-er-span"><b>两次输入不符</b><i class="iconfont"></i></span>';
-    var code_10 = '<span id="password_code" class="user-input-er-span"><b></b><i class="iconfont"></i></span>';
-
-    var newpassdef = $('#newpass').val();
-    var repassdef = $('#repass').val();
-    $('#newpass').blur(function() {
-      if ($.trim($(this).val()).length <= 0 || $.trim($(this).val()) == newpassdef) {
-        $(this).val(newpassdef);
-        //globalTip({'msg':'请输入您的新密码'});
-        $("#newpass").after(newpass_10);
-        $(this).attr('type', 'text');
-        $(this).parent().removeClass('login-on'); //给#username的父元素添加class
-      } else if ($(this).val().length < 6) {
-        $("#password_errtext").remove();
-        $("#newpass").after(renewpass_20);
-        return false;
-      }
-      $("#password_errtext").remove();
-    }).focus(function() {
-      $(this).parent().addClass('login-on');
-      if ($(this).val() == newpassdef)
-        $(this).val('');
-      $(this).attr('type', 'password');
-      $("#password_errtext").remove();
-      $("#password_qsr").remove();
-    });
-
-
-    $('#re-button').click(function() {
-      console.log('button');
-
-      //是否为空
-      if ($("#newpass").val() == '' || $("#newpass").val() == '请输入您的新密码') {
-        globalTip({
-          'msg': '请输入您的新密码'
-        });
-        return false;
-      }
-
-
-      var data = {
-        email: "{{ email }}",
-        ekey: "{{ ekey }}",
-        pwd: $.md5($("#newpass").val()),
-        code: "eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
-      };
-      var json = JSON.stringify(data);
-      console.log(data);
-
-      $.ajax({
-        type: "POST",
-        url: "/api/auth/email/reset-pwd",
-        data: json,
-        crossDomain: true,
-        dataType: "json",
-        contentType: 'application/json',
-        success: function(data, status, xhr) {
-          console.log(data);
-          redirectTip('密码已经重置，请重新登录!', true, '/portal/auth/login', 0);
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-          console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
-          if (XMLHttpRequest.status == 200) {} else {
-            redirectTip('网络异常,刷新重试', true, '/portal/auth/reset-pwd?email={{ email }}&ekey={{ ekey }}', 3);
-          }
-        },
-        complete: function(XMLHttpRequest, textStatus) {
-          this; // 调用本次AJAX请求时传递的options参数
+    $(function() {
+      $('.loginForm input').focus(function() {
+        $(this).parent().addClass('login-on')
+      }).blur(function() {
+        if ($(this).val() == '') {
+          $(this).parent().removeClass('login-on')
         }
       });
 
-      return false;
+      //password框失去、得到焦点事件处理
+      var passdel = $('#password').val();
+      $('#password').blur(function() {
+        if ($.trim($(this).val()).length <= 0) {
+          $(this).val(passdel)
+          $(this).parent().removeClass('login-on');
+        } else {
+          $(this).parent().addClass('login-on');
+        }
+      }).focus(function() {
+        $(this).parent().addClass('login-on');
+        if ($(this).val() == passdel)
+          $(this).val('');
+        passdel = "";
+      });
+
+      $('#re-button').click(function() {
+        password = $.trim($('#password').val());
+        if (password.length <= 0 || password == passdel) {
+          globalTip({
+            'msg': '请输入密码',
+            'setTime': 2, // seconds
+          });
+          $('#password').focus();
+          return false;
+        }
+
+
+        var data = {
+          email: "{{ email }}",
+          ekey: "{{ ekey }}",
+          pwd: $.md5($("#password").val()),
+          code: "eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
+        };
+        var json = JSON.stringify(data);
+        console.log(data);
+
+        $.ajax({
+          type: "POST",
+          url: "/api/auth/email/reset-pwd",
+          data: json,
+          dataType: "json",
+          contentType: 'application/json',
+          success: function(data, status, xhr) {
+            console.log(data);
+            redirectTip('密码已经重置，请重新登录!', true, '/portal/auth/login', 0);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("XMLHttpRequest.status: " + XMLHttpRequest.status);
+            if (XMLHttpRequest.status == 200) {
+              redirectTip('密码已经重置，请重新登录!', true, '/portal/auth/login', 0);
+            } else if (XMLHttpRequest.status == 408) {
+              redirectTip('邮件验证码已经超时, 请重新申请邮件', false, '/portal/auth/reset-pwd?email={{ email }}&ekey={{ ekey }}', 3);
+            } else {
+              redirectTip('网络异常,刷新重试', true, '/portal/auth/reset-pwd?email={{ email }}&ekey={{ ekey }}', 3);
+            }
+          },
+          complete: function(XMLHttpRequest, textStatus) {
+            this; // 调用本次AJAX请求时传递的options参数
+          }
+        });
+
+        return false;
+      });
+
     });
   </script>
 
