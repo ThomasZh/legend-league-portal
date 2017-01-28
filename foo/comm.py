@@ -240,6 +240,8 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class AuthorizationHandler(BaseHandler):
     def get_current_user(self):
+        self.set_secure_cookie("login_next", self.request.uri)
+
         access_token = self.get_secure_cookie("access_token")
         if not access_token:
             return None

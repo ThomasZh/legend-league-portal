@@ -29,8 +29,8 @@ from bson import json_util
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../"))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../dao"))
 
-from comm import cur_file_dir
-from comm import timestamp_date
+from comm import *
+from global_const import *
 
 
 class UicnIndexHandler(tornado.web.RequestHandler):
@@ -131,3 +131,12 @@ class AuthEditsuccessHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
         self.render('auth/editsuccess.html')
+
+
+# 认证页面
+class UicnCertHandler(AuthorizationHandler):
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def get(self):
+        logging.info(self.request)
+        self.render('uicn/cert.html',
+                league_id=LEAGUE_ID)

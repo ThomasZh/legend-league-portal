@@ -258,7 +258,7 @@
 								this; // 调用本次AJAX请求时传递的options参数
 							}
 						});
-						redirectTip('恭喜你，注册成功!', true, '/', 0);
+						redirectTip('恭喜你，注册成功!', true, '{{ login_next }}', 0);
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) {
 						console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);

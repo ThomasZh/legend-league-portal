@@ -1,0 +1,100 @@
+
+* 小米主题列表
+* 2015-03-25
+*/
+
+.theme-list.col-5 { width: 1180px; }
+.theme-list.col-4 { width: 940px; }
+.theme-list li.item { position: relative; float: left; width: 220px; /*margin-right: 20px;*/ margin-bottom: 15px; }
+.theme-list.col-5 li:nth-child(5n), .theme-list.col-4 li:nth-child(4n) { margin-right: 0;}
+/*滑过阴影*/
+.theme-list .theme-list-shade { opacity: 0; position: absolute; top: -16px; right: -14px; bottom: 0; left: -14px; background-color: #fff; box-shadow: 0 0 12px rgba(0, 0, 0, 0.2); }
+.theme-list .theme-list-shade:after { content:""; position: absolute; top: -1px; right: -1px; bottom: -1px; left: -1px; border: 1px solid rgba(0, 0, 0, 0.05); }
+/*主题内容*/
+/*主题封面*/
+.theme-list-cover { position: relative; }
+.theme-list-cover a { display: block; width: 220px; height: 390px; }
+/*封面上PSD标示*/
+.theme-list-cover .mark { position: absolute; bottom: 10px; right: 10px; width: 80px; height: 40px; background-color: #f57527; border-radius: 2px; font-size: 24px; color: #fff; height: 40px; line-height: 40px; text-align: center;}
+/*主题信息*/
+.theme-list-info { position: relative; padding: 5px 0 20px 0;}
+/*主题标题*/
+.theme-list-info .title { width: 165px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: bold; color: #394a58; }
+/*米币显示*/
+.theme-list-info .tag { position: absolute; top: 6px; right: 0; padding: 0 5px; font-size: 12px; color: #fff; height: 20px; line-height: 20px; text-align: center; border-radius: 2px;}
+/*查看、评论、点赞数量*/
+.theme-list-info .msg { margin-top: 5px; height: 27px; line-height: 27px; }
+.theme-list-info .msg .sort { float: left; margin-right: 10px; padding: 0 5px; height: 20px; line-height: 20px; font-size: 12px; color: #9aabb8; text-align: center; border-radius: 3px; background: #dfe5e9;}
+.theme-list-info .msg .item { margin-right: 10px;}
+.theme-list-info .msg .item i { font-size: 18px; color: #9aabb8; margin-right: 5px; }
+.theme-list-info .msg .item em { font-size: 14px; color: #9aabb8; }
+/*用户信息*/
+.theme-list-info .user { margin-top: 7px; }
+.theme-list-info .user.hover a { color: #3498db; }
+.theme-list-info .user a { display: block; height: 20px; line-height: 20px; color: #34495e;}
+.theme-list-info .user a img { float: left; width: 20px; height: 20px; border-radius: 50%; }
+.theme-list-info .user a span { float: left; margin-left: 10px; font-size: 14px; }
+/*底线*/
+.theme-list .theme-list-line { width: 100%; height: 1px; background: #f1f3f5; position: absolute; bottom: 0; z-index: -2;}
+/*优秀主题源文件*/
+.theme-list-info.down .title { width: 200px; }
+.theme-list-info.down .down-i { position: absolute; top: 5px; right: 0;}
+.theme-list-info.down .down-i i { font-size: 22px; color: #DFE5E9; }
+
+.theme-list li.item280 { width: 280px; height: 310px; }
+.theme-list li.item280 .theme-list-cover a { width: 280px; height: 210px; }
+.theme-list li.item280 .theme-list-cover a img { width: 100%; height: 100%; }
+/*.theme-list.col-280 li:nth-child(4n) { margin-right: 0; }*/
+
+
+/*
+* 小米主题列表-个人中心列表
+* 2015-03-27
+*/
+.theme-list.mt50 { margin-top: 50px; }
+.theme-list li.item { width: 280px; height: auto; }
+.theme-list-cover a { width: 280px; height: 497px; }
+.theme-list-cover a img { width: 100%; height: 100%; }
+.theme-list-info .title { width: 230px; font-size: 14px; line-height: 22px; }
+.theme-list-info .lang-btn { margin-top: 19px; }
+
+/*收费橙色背景*/
+.bg-orange { background-color: #fb793c !important; color: #fff !important; }
+.bg-green { background-color: #1abc9c !important; color: #fff !important; }
+
+/*未发布主题遮罩层*/
+.unused-theme-msg { opacity: 0; position: absolute; width: 300px; height: 497px; z-index: 1; }
+.unused-theme-msg a { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #FFF; opacity: 0.5; z-index: 1;}
+.unused-theme-explain { position: absolute; width: 220px; height: 437px; padding: 30px; top: 0; left: 0; z-index: 2; }
+.unused-theme-explain h2 { font-size: 26px; margin-top: 30px; color:#2c3e50; }
+.unused-theme-explain p { font-size: 18px; color:#2c3e50; }
+.unused-theme-explain span { display: block; }
+/*未发布主题标题*/
+.unused-theme .iInspir-title { height: 37px; line-height: 37px; }
+
+/* 未导入主题 */
+.relating-msg { display: block;  min-height: 650px; margin-top: 30px;}
+.relating-msg .relating-cartoon { display: table; width: 530px; margin: 0 auto; }
+.relating-msg .relating-cartoon strong { display: block; width: 500px; height: 300px; background: url("../img/cartoon-no.png") no-repeat 0 50px; margin: 0 auto; }
+.relating-msg .relating-cartoon i { display: block; width: 530px; height: 80px; background: url("../img/relating-msg.png") no-repeat 0 0; margin: 0 auto; padding-bottom: 50px; }
+
+
+/*
+主题教程列表视频
+*/
+.coll-list {}
+.coll-list li.coll-item { float: left; /*margin-right: 20px;*/ width: 280px; height: 193px; margin-bottom: 0;}
+.coll-list li.coll-item .pic { position: relative; width: 280px; height: 152px; }
+.coll-list li.coll-item .pic .cover { display: inline-block; width: 280px; height: 152px; }
+.coll-list li.coll-item .pic .play { opacity: 0; position: absolute; left: 50%; top: 50%; margin: -25px 0 0 -25px; width: 50px; height: 50px; border-radius: 50%; background-color: rgba(0,0,0,0.5); border: 2px solid #fff; box-sizing: border-box; cursor: pointer; }
+.coll-list li.coll-item .pic .play em { position: absolute; left: 20px; top: 17px; border-color: transparent transparent transparent #fff; border-style: solid; border-width: 6px 0 6px 10px; height: 0; width: 0; }
+.coll-list li.coll-item .pic:hover .play { opacity: 1; transition: all 0.3s;}
+.coll-list li.coll-item .pic .time { position: absolute; bottom: 3px; right: 3px; display: inline-block; width: 40px; height: 20px; line-height: 20px; background-color: rgba(0,0,0,0.7); color: #fff; text-align: center; border-radius: 2px; }
+
+.coll-list li.coll-item .title { padding: 5px 0 15px; width: 100%; }
+.coll-list li.coll-item .title a { display: block; width: 100%; height: 21px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;  font-size: 14px; color: #34495e;}
+.coll-list li.coll-item .title a:hover { color: #3498db;}
+
+/*
+主题教程列表视频
+个人中心收藏*/

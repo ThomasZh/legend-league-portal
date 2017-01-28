@@ -19,8 +19,8 @@ html, body { background: #eff2f5;}
 .log-hd { height: 80px; margin-bottom: 20px; position: relative; }
 /* logo */
 .log-hd .log-logo { margin-right: 20px; position: absolute; left: 0;}
-.log-hd .log-logo a {width:74px;height:74px; display: block; }
-.log-hd .log-logo img {width:74px;height:74px; display: block; }
+.log-hd .log-logo a {width:94px;height:74px; display: block; }
+.log-hd .log-logo img {width:94px;height:74px; display: block; }
 /* logo 鏍囬/鍓爣棰� */
 .log-hd .log-title { height: 66px; padding: 7px 0; position: absolute; left: 0; margin-left: 115px;}
 .log-hd .log-title strong, .log-title p { display: block; }

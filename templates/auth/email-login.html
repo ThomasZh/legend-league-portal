@@ -232,7 +232,7 @@
               }
             });
 
-            redirectTip('恭喜你，登录成功!', true, '/', 2);
+            redirectTip('恭喜你，登录成功!', true, '{{ login_next }}', 2);
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);

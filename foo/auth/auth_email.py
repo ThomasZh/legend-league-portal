@@ -44,13 +44,23 @@ from global_const import *
 class AuthEmailLoginHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
+        login_next = self.get_secure_cookie("login_next")
+        if not login_next:
+            login_next = "/"
+
         self.render('auth/email-login.html',
-                league_id=LEAGUE_ID)
+                login_next=login_next)
 
 
 class AuthEmailRegisterHandler(BaseHandler):
     def get(self):
-        self.render('auth/email-register.html')
+        logging.info(self.request)
+        login_next = self.get_secure_cookie("login_next")
+        if not login_next:
+            login_next = "/"
+
+        self.render('auth/email-register.html',
+                login_next=login_next)
 
 
 class AuthEmailForgotPwdHandler(BaseHandler):
@@ -78,16 +88,17 @@ class AuthWelcomeHandler(AuthorizationHandler):
 
 class AuthLogoutHandler(AuthorizationHandler):
     @tornado.web.authenticated  # if no session, redirect to login page
-    def post(self):
+    def get(self):
         access_token = self.get_secure_cookie("access_token")
 
         # logout
-        url = "http://api.7x24hs.com/auth/token"
+        url = "http://api.7x24hs.com/api/auth/token"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="DELETE", headers={"Authorization":"Bearer "+access_token})
         logging.info("got response %r", response.body)
         self.clear_cookie("access_token")
         self.clear_cookie("expires_at")
+        self.clear_cookie("login_next")
 
         self.redirect("/");
 

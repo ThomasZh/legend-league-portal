@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <title>设计师认证开始了</title>
+  <meta name="Keywords" content="UI中国,竞赛,设计师认证,认证设计师" />
+  <meta name="Description" content="UI中国推出设计师认证活动，欢迎设计师申请！" />
+  <link rel="shortcut icon" href="/Public/img/favicon.ico">
+
+  <link rel="stylesheet" href="{{ static_url('uicn/css/iconfont.css') }}">
+  <link rel="stylesheet" href="{{ static_url('uicn/css/uicn.css') }}">
+  <link rel="stylesheet" href="{{ static_url('uicn/css/header.css') }}">
+  <link rel="stylesheet" href="{{ static_url('uicn/css/base.css') }}">
+  <link rel="stylesheet" href="{{ static_url('uicn/css/modal.css') }}">
+
+  <link rel="stylesheet" href="{{ static_url('uicn/css/contentover.css') }}">
+  <link rel="stylesheet" href="{{ static_url('uicn/css/min_page.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ static_url('uicn/css/index.css') }}">
+
+  <script src="{{ static_url('uicn/js/jquery.js') }}"></script>
+  <script src="{{ static_url('uicn/js/msgTip.js') }}"></script>
+  <script src="{{ static_url('uicn/js/header.js') }}"></script>
+  <script src="{{ static_url('uicn/js/contentover.js') }}"></script>
+  <script src="{{ static_url('uicn/js/modal.js') }}"></script>
+  <script src="{{ static_url('js/json2.js') }}" type="text/javascript"></script>
+
+</head>
+
+<body>
+  <div id="ajax-hook"></div>
+  <div class="bg-white" style="border-bottom: 2px solid #d8b424;">
+    <div class="wpn cl bg-white">
+      <!--<a class="icon-uimini logo-hd" href="http://www.ui.cn/" title="UI中国"></a>-->
+      <!--春节-->
+      <a class="logo-hd" style="position: relative;" href="http://www.ui.cn/" title="UI中国">
+        <img style="width: 132px;height: 63px;position: absolute;pointer-events: none;top: 0;left: -36px;z-index: 10;" src="http://activity.ui.cn/Public/logo/logo2017.png" />
+      </a>
+      <ul class="nav-hd cl">
+        <li id="nav-index"><a href="http://www.ui.cn/">首页</a></li>
+        <li>
+          <a href="javascript:;" target="_blank">发现							<i class="icon-down"></i>													</a>
+          <div class="subnav-hd cl">
+            <ul class="subnav-ct-hd">
+              <li>
+                <a href="http://www.ui.cn/list.html" target="_self">作品</a>
+              </li>
+              <li>
+                <a href="http://www.ui.cn/exp.html" target="_self">文章</a>
+              </li>
+              <li>
+                <a href="http://activity.ui.cn/game.html" target="_self">设计大赛</a>
+              </li>
+              <li>
+                <a href="http://activity.ui.cn/offline.html" target="_blank">线下活动</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;" target="_blank">学习							<i class="icon-down"></i>													</a>
+          <div class="subnav-hd cl">
+            <ul class="subnav-ct-hd">
+              <li>
+                <a href="http://www.ui.cn/exp.html?scatid=11" target="_self">教程</a>
+              </li>
+              <li>
+                <a href="http://topic.ui.cn/" target="_self">专题</a>
+              </li>
+              <li>
+                <a href="http://read.ui.cn/book" target="_blank">书籍</a>
+              </li>
+              <li>
+                <a href="http://activity.ui.cn/utalk.html" target="_self">UTalk</a>
+              </li>
+              <li>
+                <a href="http://study.ui.cn/" target="_self">每周临摹</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:;" target="_blank">培训							<i class="icon-down"></i>													</a>
+          <div class="subnav-hd cl">
+            <ul class="subnav-ct-hd">
+              <li>
+                <a href="http://peixun.ui.cn" target="_blank">线下培训</a>
+              </li>
+              <li>
+                <a href="http://peixun.ui.cn/online" target="_blank">在线课程</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="http://zhaopin.ui.cn/" target="_blank">招聘																				</a>
+        </li>
+        <li>
+          <a href="http://jingsai.ui.cn/" target="_blank">竞赛														<em class="new-hd"></em>						</a>
+        </li>
+        <li>
+          <a href="javascript:;" target="_blank">更多							<i class="icon-down"></i>													</a>
+          <div class="subnav-hd cl">
+            <ul class="subnav-ct-hd">
+              <li>
+                <a href="http://shop.ui.cn/" target="_blank">创意汇</a>
+              </li>
+              <li>
+                <a href="http://talk.ui.cn/" target="_self">话题</a>
+              </li>
+              <li>
+                <a href="http://idea.ui.cn/" target="_blank">灵感</a>
+              </li>
+              <li>
+                <a href="http://tool.ui.cn/" target="_self">工具</a>
+              </li>
+              <li>
+                <a href="http://mi.ui.cn/" target="_blank">主题学院</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+      <div class="y cl">
+        <div class="search-hd cl">
+          <form action="http://s.ui.cn/index.html" method="get" id="searchForm">
+            <div class="search-status">
+              <div class="search-filter">
+                <a href="javascript:;"><span class="tit">作品</span><i class="icon-down"></i></a>
+                <ul class="options">
+                  <li><a href="javascript:;" data-rel="project">作品</a></li>
+                  <li><a href="javascript:;" data-rel="experience">文章</a></li>
+                  <li><a href="javascript:;" data-rel="source">源文件</a></li>
+                  <li><a href="javascript:;" data-rel="designer">设计师</a></li>
+                  <li><a href="javascript:;" data-rel="inspiration">灵感</a></li>
+                  <li><a href="javascript:;" data-rel="talk">话题</a></li>
+                </ul>
+              </div>
+              <div class="search-select">
+                <input type="text" class="search-val" placeholder="请输入您要查找的内容" autocomplete="off" value="" name="keywords" id="keywords" />
+                <ul class="options">
+                  <li><a href="javascript:;">icon</a></li>
+                  <li><a href="javascript:;">春节</a></li>
+                  <li><a href="javascript:;">app</a></li>
+                  <li><a href="javascript:;">作品集</a></li>
+                  <li><a href="javascript:;">AE</a></li>
+                </ul>
+              </div>
+            </div>
+            <input type="hidden" name="type" value='project' id="sType" />
+            <a class="search-hd-btn" href="javascript:;"><i class="icon-search"></i></a>
+          </form>
+        </div>
+
+        <ul class="quick-hd cl">
+          <li class="quick-item">
+            <a class="quick-toggle" href="javascript:;">
+              <i class="icon-upload"></i>
+            </a>
+            <ul class="quick-menu quick-list">
+              <li><a href="http://upload.ui.cn/work.html"><i class="icon-up-pic"></i>上传作品</a></li>
+              <li><a href="http://upload.ui.cn/exp.html"><i class="icon-up-experience"></i>上传经验</a></li>
+            </ul>
+          </li>
+          <!-- quick-item -->
+
+          <li class="quick-item">
+            <a class="quick-toggle new" href="javascript:;">
+              <i class="icon-bell f22" style="color:#CED7DE"></i> </a>
+            <div id="quickTab" class="quick-menu quick-tab">
+              <ul class="tab-bar cl">
+                <li rel="letter">
+                  <a href="javascript:;">
+                    <i class="icon-envelope-thin"></i>
+                  </a>
+                </li>
+                <li rel="comment">
+                  <a href="javascript:;">
+                    <i class="icon-comment"></i>
+                  </a>
+                </li>
+                <li rel="collect">
+                  <a href="javascript:;">
+                    <i class="icon-star"></i>
+                  </a>
+                </li>
+                <li rel="praise">
+                  <a href="javascript:;">
+                    <i class="icon-leaf-line"></i>
+                  </a>
+                </li>
+                <li rel="fans">
+                  <a href="javascript:;">
+                    <i class="icon-fans"></i>
+                  </a>
+                </li>
+                <li rel="system">
+                  <a href="javascript:;">
+                    <i class="icon-horn"></i>
+                  </a>
+                </li>
+              </ul>
+
+              <div class="tab-wrap">
+                <!-- 1私信、2评论、3收藏、4赞、5粉丝、6通知 -->
+                <ul class="tab-cont">
+                  <!-- 01私信 -->
+                  <li class="tab-info-none">没有私信类消息</li>
+
+                </ul>
+                <ul class="tab-cont">
+                  <!-- 02评论 -->
+                  <li class="tab-info-none">没有评论类消息</li>
+
+                </ul>
+                <ul class="tab-cont">
+                  <!-- 03收藏 -->
+                  <li class="tab-info-none">没有收藏类消息</li>
+
+                </ul>
+                <ul class="tab-cont">
+                  <!-- 04点赞 -->
+                  <li class="tab-info-none">没有点赞类消息</li>
+
+                </ul>
+                <ul class="tab-cont">
+                  <!-- 05粉丝 -->
+                  <li class="tab-info-none">没有粉丝类消息</li>
+
+                </ul>
+                <ul class="tab-cont">
+                  <!-- 06通知 -->
+
+                  <li class="tab-info-none">没有通知类消息</li>
+
+                </ul>
+              </div>
+            </div>
+          </li>
+          <!-- quick-item -->
+
+          <li class="quick-item">
+            <a class="quick-toggle" href="http://i.ui.cn/ucenter/965670.html">
+              <!--新春-->
+              <img style="width: 53px;height: 53px;position: absolute;pointer-events: none;left: 4px;top: 4px;" src="http://activity.ui.cn/Public/logo/fu2017.png" />
+              <img class="avatar" src="http://imgavater.ui.cn/avatar/small.png" alt="">
+            </a>
+            <ul class="quick-menu quick-list">
+              <li><a href="http://i.ui.cn/ucenter/965670.html"><i class="icon-pic"></i>我的作品</a></li>
+              <li><a href="http://i.ui.cn/ucenter/965670.html?act=fav"><i class="icon-star"></i>我的收藏</a></li>
+              <li><a href="http://uier.ui.cn"><i class="icon-res"></i>我的简历</a></li>
+              <li><a href="http://account.ui.cn/basicinfo.html"><i class="icon-info"></i>修改资料</a></li>
+              <li><a href="/portal/auth/logout"><i class="icon-exit"></i>退出登录</a></li>
+            </ul>
+          </li>
+          <!-- quick-item -->
+        </ul>
+      </div>
+    </div>
+    <!-- wpn -->
+  </div>
+  <!-- 	bg-white -->
+
+
+  <script>
+    //动态默认显示
+    var nav_loc = '';
+    //var navuid='965670';
+    //以下兼容个人中心 立即激活
+    $(".jsemailverify").parent('div').parent('li').css("background", "#fff7e7").find('a').addClass('f14').css('display', 'block');
+  </script>
+
+  <div class="banner cl">
+    <a href="javascript:;" class="b_right apply" data-target="#modal_right">立即认证</a>
+  </div>
+  <div class="index_description">
+    <div class="wpn cl">
+      <div class="i_c i_l ">
+        <p>UI中国全新竞赛平台</p>
+        <p>为参加竞赛的设计师提供上帝般待遇</p>
+        <p>提供最优质服务条件</p>
+        <p>实力打造设计师公平公正的专业平台</p>
+      </div>
+      <div class="i_c i_r">
+        <p>做设计师贴心小棉袄</p>
+        <p>在玩耍中进阶提升技能获取真实回报</p>
+        <p>邀请认证入驻竞赛平台</p>
+        <p>进入设计新纪元坐拥丰厚巨额奖金!</p>
+      </div>
+    </div>
+    <div class="index_xing">
+      <ul>
+        <li><i class="icon-xingxing"></i></li>
+        <li><i class="icon-xingxing"></i></li>
+        <li><i class="icon-xingxing"></i></li>
+      </ul>
+    </div>
+    <div class="index_xline">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+  <div class="index_main">
+    <div class="wpn">
+      <div class="index_img"><img src="/Public/img/js_pic1.png" /></div>
+      <div class="index_info cl">
+        <div class="logo"></div>
+        <div class="index_top">
+          <ul>
+            <li class="cl">
+              <div class="index_l index_660">
+                <div class="title">UI中国和初探网合作，版权问题不再敏感 </div>
+                <div class="line line1"></div>
+                <p>面对版权敏感问题，UI中国让你不再敏感！</p>
+                <p>2008年国家授时中心推出的为著作权人提供有效原创证明的工具“时间戳”。</p>
+                <p>为著作权人提供有效的原创证明。</p>
+                <p>每个参加竞赛的设计师都可以通过“时间戳”给自己的作品时间、权属、内容完整性取得一个法律效力证明，保护自己的著作权。</p>
+                <p>面对仿冒和剽窃，UI中国时间戳帮你证明一切！</p>
+              </div>
+              <div class="index_r index_200">
+                <i class="icon-hexagon1"></i>
+                <i class="icon-bq1 icon-txt"></i>
+              </div>
+            </li>
+            <li class="cl">
+
+              <div class="index_l index_200">
+                <i class="icon-hexagon1"></i>
+                <i class=" icon-txt icon-tiexin01"></i>
+
+              </div>
+              <div class="index_r index_660">
+                <div class="title">UI中国竞赛平台，你不知道的贴心之处</div>
+                <div class="line line1"></div>
+                <p>这里汇集大大小小的设计竞赛！</p>
+                <p>挑你钟意的设计你所爱的拿你所得的奖金，就是这么简单粗暴！</p>
+                <p>不看专业，不问经验，看的是创意，问的是你的能力；不玩虚的，</p>
+                <p>你负责 在竞赛场拼杀，我们给你解决金钱、名誉、版权等一切后援工作！</p>
+                <p>0佣金，赏金高，收益无需担心，绝对保障。</p>
+                <p>记住，我们喜欢回归本真不玩套路的友爱社会。</p>
+              </div>
+            </li>
+            <li class="cl">
+              <div class="index_l index_660">
+                <div class="title">UI中国认证设计师申请同步护航，给你尊贵体验</div>
+                <div class="line line1"></div>
+                <p>认证设计师申请通道开启，会员身份的象征，从打开一扇只有你才能开启的大门。</p>
+                <p>你肯定不能拒绝登上UI中国推荐设计师荣誉之榜，你一定抵挡不了明星般私人订制独家专访，你更加无法抗拒的优质职位内部推荐！</p>
+                <p>竞赛平台等级直升，抢先最优竞赛，占取绝佳的位置！</p>
+                <p>还有更多你想不到我们已经正在为你们打造的尊贵体验！</p>
+              </div>
+              <div class="index_r index_200">
+                <i class="icon-hexagon1"></i>
+                <i class="icon-zungui01 icon-txt"></i>
+
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="index_bottom cl">
+          <p class="p1">申请条件</p>
+          <ul class="cl">
+            <li>
+              <div class="index_icon"><i class="icon-tuijian"></i></div>
+              <p class="p_1">拥有推荐作品</p>
+              <p class="p_2">用户至少有一个及以上推荐作品</p>
+            </li>
+            <li class="li_c">
+              <div class="index_icon"><i class="icon-huoju"></i></div>
+              <p class="p_1">活跃度高</p>
+              <p class="p_2">根据申请用户在平台活跃度进行审核，授予相应的参赛头衔</p>
+
+            </li>
+            <li>
+              <div class="index_icon"><i class="icon-shiming"></i></div>
+              <p class="p_1">实名认证</p>
+              <p class="p_2">请在个人信息中申请<br>实名<a target="_blank" href="http://account.ui.cn/authinfo.html">身份认证</a><br>（不公开）</p>
+            </li>
+          </ul>
+          <p class="p2">审核结果将在7-15个工作日后陆续发送到你的验证邮箱，请保证邮箱正常接收邮件。<br>提高在竞赛平台参与度，即可提高平台初次授予的头衔，头衔越高，越容易收获巨额奖金哦！</p>
+          <div class="tb"></div>
+        </div>
+
+      </div>
+      <div class="index_right">
+        <a class="apply" href="JavaScript:;" data-target="#modal_right">立即申请</a>
+        <img src="/Public/img/js_pic2.png" alt="">
+      </div>
+    </div>
+  </div>
+  <div class="index_desc">
+    <div class="wpn index_descp">
+      <div class="l"></div>
+      <div class="r"></div>
+      <p>探索新纪元的时代就要开启</p>
+      <p>是否要登上这艘全心全意为设计师打造的巨轮，</p>
+      <p>由你说了算！</p>
+    </div>
+  </div>
+  <div class="footer cl">
+    <div class="logo"></div>
+    <span>京ICP备14007358号-1 / 京公网安备11010802014104号 / Powered by © 2008-2017 UI.CN</span>
+  </div>
+  <div class="modal" id="modal_right">
+    <div class="modal_effect">
+      <div class="modal_main right_modal_main">
+        <div class="modal_title">
+          申请成功！
+          <i class=" icon-close hg_i"></i>
+        </div>
+        <div class="modal_info">
+          <div class="modal_img"></div>
+          <p class="modal_p1">申请成功！</p>
+          <p class="modal_p2">审核结果将在活动结束后陆续发送到你的验证邮箱，<br>请保证邮箱正常接收邮件。</p>
+          <div class="sure_11">确定</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="display:none">
+    <script src="http://s4.cnzz.com/stat.php?id=1259898513&web_id=1259898513" language="JavaScript"></script>
+    <script src="http://s6.cnzz.com/stat.php?id=5726673&web_id=5726673" language="JavaScript"></script>
+  </div>
+  <script type="text/javascript">
+    $(function() {
+      $(document).on('click', '.apply', function() {
+        data = {
+          "name": "name",
+          "imgs": "..."
+        };
+        var json = JSON.stringify(data);
+
+        $.ajax({
+          url: "/api/leagues/{{ league_id }}/franchises",
+          type: 'post',
+          data: json,
+          dataType: 'json',
+          success: function(data) {
+            console.log(data);
+
+            if (data.stats != 9) {
+              globalTip({
+                "msg": data.msg,
+                "setTime": 3
+              });
+            }
+
+            if (data.stats == 1 || data.stats == 2) { //未登录
+              setTimeout(function() {
+                window.location.href = "http://ui.cn/login.html";
+              }, 2000);
+            }
+
+            if (data.stats == 6 || data.stats == 8) { //延时跳转
+              setTimeout(function() {
+                window.location.href = "http://account.ui.cn/authinfo.html";
+              }, 2000);
+            }
+
+            if (data.stats == 9) { //申请提交成功
+              var modalBox = $(".modal")
+              var modalBoxPos = $(modalBox).find(".modal_effect");
+              modal(modalBox, modalBoxPos);
+            }
+          },
+          error: function() {
+            globalTip({
+              "msg": "请求错误,请重试！",
+              "setTime": 3
+            });
+          },
+        });
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>
