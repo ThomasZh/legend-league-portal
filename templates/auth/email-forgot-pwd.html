@@ -113,15 +113,19 @@
 				}
 
 				data = {
+					action: "lost-pwd",
+					login_type: "email",
 					email: email,
-					code: "eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
 				};
 				var json = JSON.stringify(data);
 				console.log(json);
 
 				$.ajax({
 					type: "POST",
-					url: "/api/auth/email/forgot-pwd",
+					url: "/api/auth/verify-codes",
+					headers: {
+						"Authorization": "Bearer eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
+					},
 					data: json,
 					dataType: "json",
 					contentType: 'application/json',

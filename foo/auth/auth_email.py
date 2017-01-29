@@ -115,9 +115,10 @@ class AuthRegisterIntoLeagueXHR(BaseHandler):
         # signup into league
         url = "http://api.7x24hs.com/api/leagues/"+LEAGUE_ID+"/signup"
         http_client = HTTPClient()
+        headers={"Authorization":"Bearer "+session_ticket['access_token']}
         body = {"role":"user"}
         _json = json_encode(body)
-        response = http_client.fetch(url, method="PUT", headers={"Authorization":"Bearer "+session_ticket['access_token']}, body=_json)
+        response = http_client.fetch(url, method="POST", headers=headers, body=_json)
         logging.info("got response %r", response.body)
 
         self.set_status(200) # OK

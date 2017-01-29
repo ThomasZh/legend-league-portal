@@ -439,39 +439,31 @@
           type: 'post',
           data: json,
           dataType: 'json',
-          success: function(data) {
+          success: function(data, status, xhr) {
             console.log(data);
-
-            if (data.stats != 9) {
-              globalTip({
-                "msg": data.msg,
-                "setTime": 3
-              });
-            }
-
-            if (data.stats == 1 || data.stats == 2) { //未登录
-              setTimeout(function() {
-                window.location.href = "http://ui.cn/login.html";
-              }, 2000);
-            }
-
-            if (data.stats == 6 || data.stats == 8) { //延时跳转
-              setTimeout(function() {
-                window.location.href = "http://account.ui.cn/authinfo.html";
-              }, 2000);
-            }
-
-            if (data.stats == 9) { //申请提交成功
+            //申请提交成功
+            var modalBox = $(".modal")
+            var modalBoxPos = $(modalBox).find(".modal_effect");
+            modal(modalBox, modalBoxPos);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+            if (XMLHttpRequest.status == 200) {
+              //申请提交成功
               var modalBox = $(".modal")
               var modalBoxPos = $(modalBox).find(".modal_effect");
               modal(modalBox, modalBoxPos);
+            } else if (XMLHttpRequest.status == 409) {
+              globalTip({
+                "msg": "已经申请过特许经营许可，不必重复申请！",
+                "setTime": 3
+              });
+            } else {
+              globalTip({
+                "msg": "请求错误,请重试！",
+                "setTime": 3
+              });
             }
-          },
-          error: function() {
-            globalTip({
-              "msg": "请求错误,请重试！",
-              "setTime": 3
-            });
           },
         });
       });

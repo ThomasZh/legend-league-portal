@@ -116,17 +116,20 @@
 
 
         var data = {
+          login_type: "email",
           email: "{{ email }}",
-          ekey: "{{ ekey }}",
+          verify_code: "{{ ekey }}",
           pwd: $.md5($("#password").val()),
-          code: "eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
         };
         var json = JSON.stringify(data);
         console.log(data);
 
         $.ajax({
-          type: "POST",
-          url: "/api/auth/email/reset-pwd",
+          type: "PUT",
+          url: "/api/auth/pwds",
+          headers: {
+            "Authorization": "Bearer eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
+          },
           data: json,
           dataType: "json",
           contentType: 'application/json',
