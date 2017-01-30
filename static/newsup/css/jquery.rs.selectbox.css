@@ -1,0 +1,66 @@
+.rs-select-box {
+    background:#0080A8;
+    color: #FFFFFF;
+    font-size: 12px;
+    height: 23px;
+    line-height: 23px;
+    width: 210px;
+	cursor: pointer;
+	position:relative;
+	display:inline-block
+}
+.rs-select-box.dark{
+	 background:#636363;
+}
+.rs-select-inner{
+	position:absolute;
+	width:100%;
+}
+.rs-select-box.expanded .rs-select-inner {
+    z-index:100;
+}
+.rs-select-selected {
+    font-weight: bold;
+    padding-left: 5px;
+	margin-right:24px;
+	overflow:hidden;
+}
+.rs-select-value{
+	width:200%;
+}
+.rs-select-arrow{
+	position:absolute; 
+	width:24px; 
+	height: 23px; 
+	right:0; 
+	top:0;
+	background: url("arrow.png") no-repeat scroll center center transparent;
+}
+.rs-select-box .rs-select-options {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #999999;
+    color: #969696;  
+	display:none;
+	position:relative; 
+	z-index:9999;
+	min-height:20px;
+}
+.rs-select-box.rs-select-box-bottom .rs-select-options
+{
+    position:absolute;
+    bottom:100%;
+    width:100%;
+}
+.rs-select-box .rs-select-item {
+    line-height: 12px;
+    padding: 4px 5px;
+	display:block;
+}
+.rs-select-box .rs-select-item:hover, .rs-select-box .rs-select-item.active {
+    color: #0080A8;
+	background:#ececec;
+}
+.rs-select-hidden{
+	position:absolute;
+	left:-9999px;	
+}

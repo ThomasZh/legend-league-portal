@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Basic Page Needs
+    ================================================== -->
+  <meta charset="utf-8">
+  <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NewsUp - News, Magazine and Article Directory Theme</title>
+  <meta name="description" content="NewsUp is a multi-page oriented template perfect for NewsUp - News, Magazine, Blogging and Article Directory.">
+  <meta name="keywords" content="news theme, magazine, blog, article directory, article submission, writer, author, publication, html, bootstrap">
+  <meta name="author" content="Sempy Themes">
+
+  <!-- Favicons
+        ================================================== -->
+  <link rel="shortcut icon" href="/static/newsup/img/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/static/newsup/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/static/newsup/img/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/static/newsup/img/apple-touch-icon-114x114.png">
+
+  <!-- Bootstrap
+        ================================================== -->
+  <link href="{{ static_url('newsup/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/fonts/font-awesome-4.2.0.css') }}" rel="stylesheet" type="text/css" />
+
+  <!-- Animate
+        ================================================== -->
+  <link href="{{ static_url('newsup/css/effect2.css') }}" rel='stylesheet' type='text/css' />
+  <link href="{{ static_url('newsup/css/animate.css') }}" rel='stylesheet' type='text/css' />
+
+  <!-- Add fancyBox CSS files -->
+  <link href="{{ static_url('newsup/js/fancybox/jquery.fancybox.css?v=2.1.5') }}" media="screen" rel="stylesheet" type="text/css" />
+
+  <!-- Owl Slider CSS -->
+  <link href="{{ static_url('newsup/css/owl.carousel.css') }}" media="screen" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/owl.theme.css') }}" media="screen" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/owl.transitions.css') }}" media="screen" rel="stylesheet" type="text/css" />
+
+  <!-- Custom Css
+        ================================================== -->
+  <link href="{{ static_url('newsup/css/rs-wp-v1.2.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/jquery.rs.selectbox.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('css/style.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/responsive.css') }}" rel="stylesheet" type="text/css" />
+
+  <!-- Custom Fonts
+        ================================================== -->
+  <link href="{{ static_url('newsup/fonts/stylesheet.css') }}" rel="stylesheet" type="text/css" />
+
+  <!-- Google Fonts
+        ================================================== -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+  <!--- Wrapper -->
+  <section id="wrapper" class="clearfix">
+
+    <!--- Header -->
+    <header>
+
+      <!-- socialbar -->
+      {% module Template("newsup/block-socialbar.html") %}
+      <!-- /socialbar -->
+
+      <!-- menubar -->
+      {% module Template("newsup/block-menubar.html") %}
+      <!-- /menubar -->
+
+    </header>
+    <!--- End Header -->
+
+    <!-- Page Breadcrumb -->
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="rst-breadcrumb">
+            <a href="#"><span>Home</span></a>
+            <span>></span>
+            <a href="#"><span>Sport</span></a>
+            <span>></span>
+            <a href="#"><span>Item Detail</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Page Breadcrumb -->
+
+    <!-- Category Banner -->
+    <section id="rst-catbanner-item">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="rst-catbanner-post">
+              <div class="rst-mainslide">
+                <img src="/static/newsup/images/cat-01.jpg" alt="" />
+                <div class="rst-boxinfo">
+                  <a href="#"><span>Football</span></a>
+                  <p><a href="#">One killer workout with some delicious chickpea cookies</a></p>
+                  <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                </div>
+              </div>
+            </div>
+            <div class="rst-catbanner-listpost">
+              <div class="rst-postpic">
+                <a href="#"><img src="/static/newsup/images/cat-03.jpg" alt="" /></a>
+              </div>
+              <div class="rst-postpic">
+                <a href="#"><img src="/static/newsup/images/cat-04.jpg" alt="" /></a>
+              </div>
+              <div class="rst-postvideo">
+                <a href="#"><img src="/static/newsup/images/cat-05.jpg" alt="" /></a>
+              </div>
+              <div class="rst-postpic">
+                <a href="#"><img src="/static/newsup/images/cat-06.jpg" alt="" /></a>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Category Banner -->
+
+    <!-- Category Page Content -->
+    <section id="rst-itemcontent">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="rst-section-title rst-section-title-box rst-item-content-title">
+              <h2>Heading 2</h2>
+              <div class="rst-shortmenu">
+                <p>
+                  <span class="rst-item-likes"><i class="fa fa-heart"></i>10</span>
+                  <span class="rst-item-comments"><i class="fa fa-comment"></i>25</span>
+                  <span class="rst-item-author"><b>BY</b><a href="#">john doe</a></span>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <article class="col-xs-12 rst-item-content">
+                <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec eros at leo condimentum semper.</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec eros at leo condimentum semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu auctor mauris. Aenean vestibulum aliquam orci sed ullamcorper. Sed
+                  vitae dolor in ipsum elementum scelerisque. Praesent vulputate maximus nunc eget mollis. Suspendisse potenti. Morbi id diam mattis, vulputate lectus sit amet, mattis ligula.</p>
+                <p>Nulla volutpat magna at varius cursus. Maecenas varius non nisi vel ultrices. Nullam justo neque, luctus nec congue non, ullamcorper vitae elit. </p>
+                <blockquote>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec eros at leo condimentum semper. Lorem ipsum dolor sit amet, consectetur.
+                </blockquote>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec eros at leo condimentum semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu auctor mauris. Aenean vestibulum aliquam orci sed ullamcorper. Sed
+                  vitae dolor in ipsum elementum scelerisque. Praesent vulputate maximus nunc eget mollis. Suspendisse potenti. Morbi id diam mattis, vulputate lectus sit amet, mattis ligula.</p>
+                <figure class="wp-caption alignleft">
+                  <img src="/static/newsup/images/item-detail-01.jpg" alt="" />
+                </figure>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec eros at leo condimentum semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu auctor mauris. Aenean vestibulum aliquam orci sed ullamcorper. Sed
+                  vitae dolor in ipsum elementum scelerisque. Praesent vulputate maximus nunc eget mollis. Suspendisse potenti. Morbi id diam mattis, vulputate lectus sit amet, mattis ligula.</p>
+                <p>Nulla volutpat magna at varius cursus. Maecenas varius non nisi vel ultrices. Nullam justo neque, luctus nec congue non, ullamcorper vitae elit. Suspendisse eget quam tellus. Sed ac varius tortor. Nam vestibulum congue turpis at egestas.
+                </p>
+                <h3>Heading 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec eros at leo condimentum semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu auctor mauris. Aenean vestibulum aliquam orci sed ullamcorper. Sed
+                  vitae dolor in ipsum elementum scelerisque. Praesent vulputate maximus nunc eget mollis. Suspendisse potenti. Morbi id diam mattis, vulputate lectus sit amet, mattis ligula.</p>
+                <p>Integer vitae leo pulvinar, eleifend enim a, sodales dolor. Nam est elit, efficitur ut dapibus non, ornare vel magna. Praesent tempor, orci sit amet efficitur feugiat, ante neque rutrum urna, fermentum pretium ligula sem vel augue. Pellentesque
+                  sit amet velit a neque pellentesque commodo eget in mauris.</p>
+              </article>
+              <!-- End Posts Contents -->
+
+
+              <div class="col-xs-12">
+                <div class="rst-tagsandshare">
+                  <div class="rst-catlist rst-catlisttags">
+                    <a href="#">sport</a>
+                    <a href="#">hockey</a>
+                  </div>
+                  <div class="rst-catlist rst-catlistshare">
+                    <ul>
+                      <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                      <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                      <li><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+                      <li><a href="#" target="_blank"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+              <!-- End Tags and Share -->
+
+              <!-- Comment list -->
+              <div class="col-xs-12 rst-content-comment">
+                <div class="rst-section-title rst-section-title-box">
+                  <h4>3 Comments</h4>
+                </div>
+                <ol class="commentlist">
+                  <li class="comment">
+                    <div class="comment-container">
+                      <div class="comment-avatar">
+                        <img src="/static/newsup/images/account.jpg" alt="" />
+                      </div>
+                      <div class="comment-data">
+                        <div class="comment-header">
+                          <a href="#" class="comment-author">John Doe</a>
+                          <time class="comment-date"><i class="fa fa-clock-o"></i>on 12 sep, 2015</time>
+                          <a href="#" class="comment-reply-link">REPLY</a>
+                        </div>
+                        <div class="comment-body">
+                          <p>Curabitur posuere eros sed tortor porttitor pretium. Praesent tincidunt neque eget euismod malesuada. Sed gravida finibus est eu dignissim. Fusce malesuada sodales interdum. Mauris sagittis interdum enim vel sodales. Vestibulum
+                            at tellus id libero mollis maximus sed quis ligula.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <ul class="children">
+                      <li class="comment">
+                        <div class="comment-container">
+                          <div class="comment-avatar">
+                            <img src="/static/newsup/images/account.jpg" alt="" />
+                          </div>
+                          <div class="comment-data">
+                            <div class="comment-header">
+                              <a href="#" class="comment-author">John Doe</a>
+                              <time class="comment-date"><i class="fa fa-clock-o"></i>on 12 sep, 2015</time>
+                              <a href="#" class="comment-reply-link">REPLY</a>
+                            </div>
+                            <div class="comment-body">
+                              <p>Curabitur posuere eros sed tortor porttitor pretium. Praesent tincidunt neque eget euismod malesuada. Sed gravida finibus est eu dignissim. Fusce malesuada sodales interdum. Mauris sagittis interdum enim vel sodales. Vestibulum
+                                at tellus id libero mollis maximus sed quis ligula.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="comment">
+                    <div class="comment-container">
+                      <div class="comment-avatar">
+                        <img src="/static/newsup/images/account.jpg" alt="" />
+                      </div>
+                      <div class="comment-data">
+                        <div class="comment-header">
+                          <a href="#" class="comment-author">John Doe</a>
+                          <time class="comment-date"><i class="fa fa-clock-o"></i>on 12 sep, 2015</time>
+                          <a href="#" class="comment-reply-link">REPLY</a>
+                        </div>
+                        <div class="comment-body">
+                          <p>Curabitur posuere eros sed tortor porttitor pretium. Praesent tincidunt neque eget euismod malesuada. Sed gravida finibus est eu dignissim. Fusce malesuada sodales interdum. Mauris sagittis interdum enim vel sodales. Vestibulum
+                            at tellus id libero mollis maximus sed quis ligula.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ol>
+                <a href="#" class="rst-loadmore">2 new comments</a>
+              </div>
+              <!-- End comment list -->
+
+
+
+            </div>
+            <div class="row rst-comments">
+              <div class="col-xs-12">
+                <div class="rst-section-title rst-section-title-box">
+                  <h4>Add Comment</h4>
+                </div>
+                <div class="rst-getintouch-form">
+                  <form action="#">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <input class="rst-pageinput" type="text" placeholder="Artem" />
+                      </div>
+                      <div class="col-sm-6">
+                        <input class="rst-pageinput" type="text" placeholder="Email" />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <textarea class="rst-pageinput" name="" id="" cols="30" rows="10" placeholder="Add your comment"></textarea>
+                        <input class="rst-pagebutton" type="submit" value="SEND" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- End Comment Form -->
+          </div>
+          <div class="col-sm-4">
+            <aside class="widget widget_social">
+              <h3>Social</h3>
+              <a href="#" target="_blank">
+                <i class="fa fa-facebook"></i>
+                <b>15,000</b>
+                <span>Fans</span>
+              </a>
+              <a href="#" target="_blank">
+                <i class="fa fa-twitter"></i>
+                <b>30,000</b>
+                <span>Followers</span>
+              </a>
+              <a href="#" target="_blank">
+                <i class="fa fa-rss"></i>
+                <b>9,000</b>
+                <span>Subscribers</span>
+              </a>
+            </aside>
+            <!-- end widget social -->
+
+            <aside class="widget widget_popular">
+              <ul>
+                <li>
+                  <a href="#">Popular</a>
+                  <ul>
+                    <li>
+                      <article>
+                        <div class="rst-postpic">
+                          <a href="#"><img src="/static/newsup/images/slider/category/pol01.jpg" alt="" /></a>
+                        </div>
+                        <div class="rst-postinfo">
+                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
+                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                        </div>
+                      </article>
+                    </li>
+                    <li>
+                      <article>
+                        <div class="rst-postpic">
+                          <a href="#"><img src="/static/newsup/images/slider/category/pol02.jpg" alt="" /></a>
+                        </div>
+                        <div class="rst-postinfo">
+                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
+                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                        </div>
+                      </article>
+                    </li>
+                    <li>
+                      <article>
+                        <div class="rst-postpic">
+                          <a href="#"><img src="/static/newsup/images/slider/category/pol03.jpg" alt="" /></a>
+                        </div>
+                        <div class="rst-postinfo">
+                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
+                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                        </div>
+                      </article>
+                    </li>
+                    <li>
+                      <article>
+                        <div class="rst-postpic">
+                          <a href="#"><img src="/static/newsup/images/slider/category/pol04.jpg" alt="" /></a>
+                        </div>
+                        <div class="rst-postinfo">
+                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
+                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                        </div>
+                      </article>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">Latest</a>
+                  <ul>
+                    <li>
+                      <article>
+                        <div class="rst-postpic">
+                          <a href="#"><img src="/static/newsup/images/slider/category/pol02.jpg" alt="" /></a>
+                        </div>
+                        <div class="rst-postinfo">
+                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
+                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                        </div>
+                      </article>
+                    </li>
+                    <li>
+                      <article>
+                        <div class="rst-postpic">
+                          <a href="#"><img src="/static/newsup/images/slider/category/pol03.jpg" alt="" /></a>
+                        </div>
+                        <div class="rst-postinfo">
+                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
+                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                        </div>
+                      </article>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </aside>
+            <!-- end widget popular -->
+
+            <aside class="widget widget_adv">
+              <h3>Advertisement</h3>
+              <a href="#"><img src="/static/newsup/images/ad01.png" alt="" /></a>
+              <a href="#"><img src="/static/newsup/images/ad01.png" alt="" /></a>
+              <a href="#"><img src="/static/newsup/images/ad01.png" alt="" /></a>
+              <a href="#"><img src="/static/newsup/images/ad01.png" alt="" /></a>
+              <div class="clear"></div>
+            </aside>
+            <!-- end widget adv -->
+
+            <aside class="widget widget_video">
+              <h3>Video</h3>
+              <a href="#"><img src="/static/newsup/images/cat-09.jpg" alt="" /></a>
+            </aside>
+            <!-- end widget adv -->
+
+            <aside class="widget widget_newsletter">
+              <h3>Newsletter</h3>
+              <form action="#">
+                <input class="rst-pageinput" type="text" value="Email and hit enter" onblur="if (this.value == '') {this.value = 'Email and hit enter';}" onclick=" if (this.value == 'Email and hit enter') {this.value = '';}" />
+                <input class="rst-pagebutton" type="submit" value="Subscribe" />
+              </form>
+            </aside>
+            <!-- end widget newsletter -->
+
+          </div>
+          <!-- End Content Sidebar -->
+        </div>
+      </div>
+    </section>
+    <!-- End Category Page Content -->
+
+    <!-- Section Latest Comments -->
+    <section id="rst-latestcomments">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="rst-section-title rst-section-title-box">
+              <h4>Latest Comment</h4>
+            </div>
+            <!-- end section title -->
+            <div class="row commentlist owl-carousel">
+              <div class="col-sm-12 comment">
+                <div class="comment-avatar">
+                  <img src="/static/newsup/images/slider/category/hm01.jpg" alt="" />
+                </div>
+                <div class="comment-data">
+                  <a href="#" class="comment-author">John Doe</a>
+                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
+                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+                </div>
+              </div>
+              <div class="col-sm-12 comment">
+                <div class="comment-avatar">
+                  <img src="/static/newsup/images/slider/category/hm02.jpg" alt="" />
+                </div>
+                <div class="comment-data">
+                  <a href="#" class="comment-author">John Doe</a>
+                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
+                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+                </div>
+              </div>
+              <div class="col-sm-12 comment">
+                <div class="comment-avatar">
+                  <img src="/static/newsup/images/slider/category/hm03.jpg" alt="" />
+                </div>
+                <div class="comment-data">
+                  <a href="#" class="comment-author">John Doe</a>
+                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
+                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+                </div>
+              </div>
+              <div class="col-sm-12 comment">
+                <div class="comment-avatar">
+                  <img src="/static/newsup/images/slider/category/hm02.jpg" alt="" />
+                </div>
+                <div class="comment-data">
+                  <a href="#" class="comment-author">John Doe</a>
+                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
+                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+                </div>
+              </div>
+              <div class="col-sm-12 comment">
+                <div class="comment-avatar">
+                  <img src="/static/newsup/images/slider/category/hm01.jpg" alt="" />
+                </div>
+                <div class="comment-data">
+                  <a href="#" class="comment-author">John Doe</a>
+                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
+                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Section Latest Comments -->
+
+    <!-- Footer -->
+    {% module Template("newsup/block-footer.html") %}
+    <!-- End Footer -->
+
+  </section>
+  <!--- End Wrapper -->
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.1.11.1.js') }}"></script>
+
+  <!-- Bootstrap Js Compiled Plugins -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap.min.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap-tagsinput.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('newsup/js/jqBootstrapValidation.js') }}"></script>
+
+  <!-- WoW Js -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/wow.min.js') }}"></script>
+
+  <!-- Add Fancybox -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/jquery.fancybox.js?v=2.1.5') }}"></script>
+  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6') }}"></script>
+
+  <!-- Owl Slider Js -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
+
+  <!-- Weather Js -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.simpleWeather.js') }}"></script>
+
+  <!-- Custome Selectbox Js -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
+
+  <script type="text/javascript" src="{{ static_url('newsup/js/main.js') }}"></script>
+
+</body>
+
+</html>

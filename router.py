@@ -10,14 +10,26 @@ import tornado.web
 from foo import comm
 from foo.ui import ui_cn
 from foo.auth import auth_email
+from foo.portal import portal_newsup
 
 
 def map():
 
     config = [
 
-        # GET: 根据 HTTP header 收集客户端相关信息：是否手机、操作系统、浏览器等信息。
-        (r'/', getattr(ui_cn, 'UicnIndexHandler')),
+        # homepage
+        (r'/', getattr(portal_newsup, 'NewsupIndexHandler')),
+
+        (r'/portal/newsup/index', getattr(portal_newsup, 'NewsupIndexHandler')),
+        (r'/portal/newsup/account', getattr(portal_newsup, 'NewsupAccountHandler')),
+        (r'/portal/newsup/author', getattr(portal_newsup, 'NewsupAuthorHandler')),
+        (r'/portal/newsup/media', getattr(portal_newsup, 'NewsupMediaHandler')),
+        (r'/portal/newsup/shortcodes', getattr(portal_newsup, 'NewsupShortcodesHandler')),
+        (r'/portal/newsup/contact', getattr(portal_newsup, 'NewsupContactHandler')),
+        (r'/portal/newsup/item-detail', getattr(portal_newsup, 'NewsupItemDetailHandler')),
+        (r'/portal/newsup/new', getattr(portal_newsup, 'NewsupNewHandler')),
+        (r'/portal/newsup/register', getattr(portal_newsup, 'NewsupRegisterHandler')),
+        (r'/portal/newsup/category', getattr(portal_newsup, 'NewsupCategoryHandler')),
 
         (r'/uicn', getattr(ui_cn, 'UicnIndexHandler')),
         (r'/uicn/list', getattr(ui_cn, 'UicnListHandler')),
