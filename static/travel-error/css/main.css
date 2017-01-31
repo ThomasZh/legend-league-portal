@@ -1,0 +1,316 @@
+/*------------------------------------------------------------------
+[Theme-3 Stylesheet]
+
+Project:	Travel Error Page
+Version:	0.0
+-------------------------------------------------------------------*/
+
+/*
+-> GENERAL CSS 					: css for reset default style and general page style.;
+-> CONTENT 						: css for main content wrappers of page.;
+-> BALLON SHIP /.balloon-ship	: cs for balloon ship.;
+-> 404 MESSAGE /.message-wrp	: css for 404 text in balloon-ship;
+-> MESSAGE /.message			: css for page message;
+-> NAVIGATION /.nav-wrapper 	: css for navigation of the page;
+-> SOCIAL LINKS /.social-links 	: css for social link area;
+-> HOVER EFFECTS 				: css for hover effects of the page;
+-> CAR MESSAGE /.msg 			: css for yellow car message;
+*/
+
+/*====================*/
+
+/* GENERAL CSS */
+*{
+	margin: 0px;
+	padding: 0px;
+	-webkit-box-sizing: border-box; 
+     -moz-box-sizing: border-box; 
+          box-sizing: border-box;
+}
+body{
+	color: #fff;
+	font-family: 'Signika', sans-serif;
+}
+
+/* CONTENT */
+.main-wrapper{
+	position: relative;
+	top: 0px;
+	left: 0px;
+}
+.main-wrapper > .container{
+	padding-top: 30px; 
+	/* width: 600px; */
+	margin: auto;
+	text-align: center;
+}
+
+/* BALLON SHIP */
+.balloon-ship {
+	width: 600px;
+	margin: 0 auto;
+	position: relative;
+}
+.balloon-ship img {
+	width: 100%;
+}
+/* 404 MESSAGE */
+.message-wrp {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 270px;
+}
+.message-wrp strong {
+	font-family: 'Signika', sans-serif;
+	font-weight: 700;
+	display: block;
+	text-align: center;
+	position: absolute;
+	line-height: 1;
+}
+.message-wrp .t1 {
+	font-size: 60px;
+	top: 44px;
+	left: 231px;
+	text-shadow: 
+		0px 4px 0px rgba(153,131,97,0.4), 
+		2px 2px 1px rgba(153,131,97,0.4), 
+		-2px 2px 1px rgba(153,131,97,0.4),
+		0px 0px 1px rgba(153,131,97,0.4);
+}
+.message-wrp .t2 {
+	font-size: 50px;
+	top: 109px;
+	left: 190px;
+	text-shadow: 
+		0px 4px 0px rgba(153,131,97,0.4), 
+		2px 2px 1px rgba(153,131,97,0.4), 
+		-2px 2px 1px rgba(153,131,97,0.4),
+		0px 0px 1px rgba(153,131,97,0.4);
+}
+.message-wrp .t3 {
+	font-size: 44px;
+	top: 172px;
+	left: 143px;
+	color: rgba(135,113,80, 1);
+	-ms-transform: rotate(0.5deg);
+	-webkit-transform: rotate(0.5deg);
+	transform: rotate(0.5deg);
+	text-shadow: 1px 2px 0px rgba(255,255,255,0.6);
+}
+
+
+/* MESSAGE */
+.message { 
+	color: #FFF; 
+	background-color: rgba(78, 180, 219, 0.5);
+	box-shadow: 0 1px 0px 1px rgba(78, 180, 219, 0.6);
+	padding: 10px;
+	margin: 15px 0; 
+}
+.message .t1 { font-size: 16px; }
+
+/* NAVIGATION */
+.nav-wrapper{
+	display: table;
+	margin: 0 auto 30px auto;
+	width: 600px;
+	/* border: 2px solid #fff; */
+	border-radius: 40px;
+	background-color: rgba(78, 180, 219, 0.5);
+	box-shadow: 0 1px 0px 1px rgba(78, 180, 219, 0.6);
+}
+.nav-wrapper a{
+	display: table-cell;
+	font-size: 18px;
+	color: #fff;
+	padding: 11px 0 10px 0;
+	text-decoration: none;
+	text-align: center;
+	border-right: 1px solid rgba(78, 180, 219, 0.8);
+	width: 25%;
+	vertical-align: middle;
+}
+.nav-wrapper a:last-child{
+	border-right: none;
+}
+.nav-wrapper a:first-child{
+	border-radius: 40px 0 0 40px;
+}
+.nav-wrapper a:last-child {
+	border-radius: 0 40px 40px 0;	
+}
+
+.nav-wrapper a:hover{
+	background: #fff;
+	color: #000;
+}
+
+/* SOCIAL LINKS */
+.social-links{
+	width: 100%;
+	text-align: center;
+	margin-bottom: 15px;
+	clear: both;
+}
+.social-links a{
+	width: 40px;
+	height: 40px;
+	background: rgba(78, 180, 219, 0.5);
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	color: #fff;
+	font-size: 19px;
+	margin: 1px;
+	padding: 9px 0 0 0;
+	border-radius: 20px;
+	box-shadow: 0 1px 0px 1px rgba(78, 180, 219, 0.7);
+}
+p.copyrights{
+	font-size: 12px;
+	text-align: center;
+	font-family: arial;
+}
+
+/* HOVER EFFECTS */
+.nav-wrapper a:hover,.search-box .btn:hover,.social-links a:hover{
+	background: #fff;
+	color: rgb(78, 180, 219);
+}
+
+/* CAR MESSAGE */
+.msg b { 
+	font-weight: 600; 
+	color: #7ac8e4; 
+	font-size: 18px;
+	top: 34px;
+	padding: 0 30px;
+}
+.msg b span { 
+	font-weight: 700; 
+	font-size: 30px;
+	line-height: 1.1;
+	text-transform: uppercase;
+}
+
+
+/* MEDIA QUARIES */
+
+/*===========================================*/
+/*	TABLET LAYOUT 
+/*===========================================*/
+/* @media only screen and (min-width: 768px) and (max-width: 979px) {
+	.nav-wrapper { width: 50%; }
+	.balloon-ship { width: 80%; }
+} */
+
+/*===========================================*/
+/*	MOBILE LAYOUT 
+/*===========================================*/
+@media only screen and (min-width: 200px) and (max-width: 767px) {
+	.nav-wrapper,.outer-wrapper { width: 80%; }
+	.main-wrapper > .container{ padding-top: 20px; padding-bottom: 20px; }
+	.balloon-ship { margin-bottom: 0px; }
+
+	.nav-wrapper{ display: block; }
+	.nav-wrapper a{ display: block; width: 100%; }
+}
+@media only screen and (min-width: 200px) and (max-width: 419px) {
+	.nav-wrapper a{ padding: 5px; }
+	.nav-wrapper{ border-radius: 10px; }
+	.nav-wrapper a{ border-bottom: 1px solid rgba(78, 180, 219, 0.8); }
+	.nav-wrapper a:first-child{	border-radius: 8px 8px 0 0; }
+	.nav-wrapper a:last-child { border-radius: 0 0 8px 8px; }
+
+	.balloon-ship {width: 300px;}
+	.message-wrp { height: 180px; }
+	.message-wrp .t1 {
+		font-size: 32px;
+		top: 20px;
+		left: 120px;
+		text-shadow:
+			0px 3px 0px rgba(153,131,97,0.4), 
+			1px 1px 0px rgba(153,131,97,0.4),
+			-1px 1px 0px rgba(153,131,97,0.4),
+			0px 0px 0px rgba(153,131,97,0.4);
+	}
+	.message-wrp .t2 {
+		font-size: 24px;
+		top: 54px;
+		left: 102px;
+		text-shadow: 
+			0px 3px 0px rgba(153,131,97,0.4), 
+			1px 1px 0px rgba(153,131,97,0.4),
+			-1px 1px 0px rgba(153,131,97,0.4),
+			0px 0px 0px rgba(153,131,97,0.4);
+	}
+	.message-wrp .t3 {
+		font-size: 21px;
+		top: 85px;
+		left: 73px;
+		text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+	}
+}
+@media only screen and (min-width: 420px) and (max-width: 599px) {
+	/* .nav-wrapper,.main-wrapper { width: 350px; } */
+	.balloon-ship {width: 400px;}
+	.message-wrp { height: 240px; }
+	.message-wrp .t1 {
+		font-size: 42px;
+		top: 28px;
+		left: 152px;
+		text-shadow:
+			0px 3px 0px rgba(153,131,97,0.4), 
+			1px 1px 0px rgba(153,131,97,0.4),
+			-1px 1px 0px rgba(153,131,97,0.4),
+			0px 0px 0px rgba(153,131,97,0.4);
+	}
+	.message-wrp .t2 {
+		font-size: 34px;
+		top: 72px;
+		left: 128px;
+		text-shadow: 
+			0px 3px 0px rgba(153,131,97,0.4), 
+			1px 1px 0px rgba(153,131,97,0.4),
+			-1px 1px 0px rgba(153,131,97,0.4),
+			0px 0px 0px rgba(153,131,97,0.4);
+	}
+	.message-wrp .t3 {
+		font-size: 27px;
+		top: 116px;
+		left: 103px;
+		text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+	}
+
+	.nav-wrapper{ display: block; }
+	.nav-wrapper a{ display: block; width: 100%; }
+	.nav-wrapper{ border-radius: 10px; }
+	.nav-wrapper a{ border-bottom: 1px solid rgba(78, 180, 219, 0.8); }
+	.nav-wrapper a:first-child{	border-radius: 8px 8px 0 0; }
+	.nav-wrapper a:last-child { border-radius: 0 0 8px 8px; }
+}
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+	.balloon-ship {width: 570px;}
+	.message-wrp { height: 340px; }
+	.message-wrp .t1 {
+		font-size: 58px;
+		top: 40px;
+		left: 227px;
+	}
+	.message-wrp .t2 {
+		font-size: 48px;
+		top: 105px;
+		left: 189px;
+	}
+	.message-wrp .t3 {
+		font-size: 42px;
+		top: 164px;
+		left: 139px;
+	}
+
+	/* .nav-wrapper,.main-wrapper { width: 650px; } */
+	.nav-wrapper{ display: table; }
+	.nav-wrapper a{ display: table-cell; width: 25%; }
+}
