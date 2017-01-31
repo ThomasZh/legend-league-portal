@@ -33,6 +33,15 @@ from comm import *
 from global_const import *
 
 
+class NewsupLoginNextHandler(tornado.web.RequestHandler):
+    def get(self):
+        login_next = self.get_secure_cookie("login_next")
+        if login_next:
+            self.redirect(login_next)
+        else:
+            self.redirect("/portal/newsup/index")
+
+
 class NewsupIndexHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)

@@ -19,6 +19,9 @@ def map():
         # homepage
         (r'/', getattr(portal_newsup, 'NewsupIndexHandler')),
 
+        # login_next redirect to index
+        # 页面重定向后，可以将cookie加载
+        (r'/portal/newsup/login-next', getattr(portal_newsup, 'NewsupLoginNextHandler')),
         (r'/portal/newsup/index', getattr(portal_newsup, 'NewsupIndexHandler')),
         (r'/portal/newsup/account', getattr(portal_newsup, 'NewsupAccountHandler')),
         (r'/portal/newsup/author', getattr(portal_newsup, 'NewsupAuthorHandler')),
