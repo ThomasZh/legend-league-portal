@@ -90,9 +90,9 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="rst-breadcrumb">
-            <a href="#"><span>Home</span></a>
+            <a href="/portal/newsup/index"><span>Home</span></a>
             <span>></span>
-            <a href="#"><span>Register</span></a>
+            <a href="/portal/newsup/register"><span>Register</span></a>
           </div>
         </div>
       </div>
@@ -341,7 +341,7 @@
               // 登录成功后，注册入联盟
               $.ajax({
                 type: "POST",
-                url: "/portal/auth/register/into-league",
+                url: "/portal/auth/league-signup",
                 data: json,
                 dataType: "json",
                 contentType: 'application/json',
@@ -359,7 +359,7 @@
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
               if (XMLHttpRequest.status == 404) {
-                $('.login-form-main-message').addClass('show error').html('邮箱或密码不正确, 请重试');
+                $('.login-form-main-message').addClass('show error').html('手机号码或密码不正确, 请重试');
               }
             },
             complete: function(XMLHttpRequest, textStatus) {
@@ -429,7 +429,7 @@
                   // 登录成功后，加入联盟
                   $.ajax({
                     type: "POST",
-                    url: "/portal/auth/register/into-league",
+                    url: "/portal/auth/league-signup",
                     data: json,
                     dataType: "json",
                     contentType: 'application/json',

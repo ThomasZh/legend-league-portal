@@ -41,49 +41,17 @@ from comm import *
 from global_const import *
 
 
-class AuthEmailLoginHandler(BaseHandler):
+class AuthRegisterHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
-        login_next = self.get_secure_cookie("login_next")
-        if not login_next:
-            login_next = "/"
 
-        self.render('auth/email-login.html',
-                login_next=login_next)
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
 
-
-class AuthEmailRegisterHandler(BaseHandler):
-    def get(self):
-        logging.info(self.request)
-        login_next = self.get_secure_cookie("login_next")
-        if not login_next:
-            login_next = "/"
-
-        self.render('auth/email-register.html',
-                login_next=login_next)
-
-
-class AuthEmailForgotPwdHandler(BaseHandler):
-    def get(self):
-        self.render('auth/email-forgot-pwd.html')
-
-
-class AuthEmailResetPwdHandler(BaseHandler):
-    def get(self):
-        logging.info(self.request)
-        ekey = self.get_argument("ekey", "")
-        email = self.get_argument("email", "")
-        logging.info("try reset email=[%r] password by ekey=[%r]", email, ekey)
-
-        self.render('auth/email-reset-pwd.html',
-                email=email,
-                ekey=ekey)
-
-
-class AuthWelcomeHandler(AuthorizationHandler):
-    @tornado.web.authenticated  # if no session, redirect to login page
-    def get(self):
-        self.render('auth/welcome.html')
+        self.render('newsup/register.html',
+                is_login=is_login)
 
 
 class AuthLogoutHandler(AuthorizationHandler):
@@ -92,7 +60,7 @@ class AuthLogoutHandler(AuthorizationHandler):
         access_token = self.get_secure_cookie("access_token")
 
         # logout
-        url = "http://api.7x24hs.com/api/auth/token"
+        url = "http://api.7x24hs.com/api/auth/tokens"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="DELETE", headers={"Authorization":"Bearer "+access_token})
         logging.info("got response %r", response.body)
@@ -103,7 +71,7 @@ class AuthLogoutHandler(AuthorizationHandler):
         self.redirect("/");
 
 
-class AuthRegisterIntoLeagueXHR(BaseHandler):
+class AuthLeagueSignupXHR(BaseHandler):
     def post(self):
         logging.info(self.request)
         logging.info(self.request.body)

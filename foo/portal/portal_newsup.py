@@ -137,19 +137,6 @@ class NewsupNewHandler(tornado.web.RequestHandler):
                 is_login=is_login)
 
 
-class NewsupRegisterHandler(tornado.web.RequestHandler):
-    def get(self):
-        logging.info(self.request)
-
-        is_login = False
-        access_token = self.get_secure_cookie("access_token")
-        if access_token:
-            is_login = True
-
-        self.render('newsup/register.html',
-                is_login=is_login)
-
-
 class NewsupCategoryHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
