@@ -32,7 +32,7 @@
   <link href="{{ static_url('newsup/css/animate.css') }}" rel='stylesheet' type='text/css' />
 
   <!-- Add fancyBox CSS files -->
-  <link href="{{ static_url('newsup/js/fancybox/jquery.fancybox.css?v=2.1.5') }}" media="screen" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/js/fancybox/jquery.fancybox.css') }}" media="screen" rel="stylesheet" type="text/css" />
 
   <!-- Owl Slider CSS -->
   <link href="{{ static_url('newsup/css/owl.carousel.css') }}" media="screen" rel="stylesheet" type="text/css" />
@@ -72,7 +72,7 @@
     <header>
 
       <!-- socialbar -->
-      {% module Template("newsup/block-socialbar.html") %}
+      {% module Template("newsup/block-socialbar.html", is_login=is_login) %}
       <!-- /socialbar -->
 
       <!-- menubar -->
@@ -500,19 +500,21 @@
   <script type="text/javascript" src="{{ static_url('newsup/js/wow.min.js') }}"></script>
 
   <!-- Add Fancybox -->
-  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/jquery.fancybox.js?v=2.1.5') }}"></script>
-  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6') }}"></script>
+  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/jquery.fancybox.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/helpers/jquery.fancybox-media.js') }}"></script>
 
   <!-- Owl Slider Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
 
   <!-- Weather Js -->
+  <!--
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.simpleWeather.js') }}"></script>
+  -->
 
   <!-- Custome Selectbox Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
 
-  <script type="text/javascript" src="{{ static_url('newsup/js/main.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
 
 </body>
 

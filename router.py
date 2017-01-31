@@ -30,6 +30,8 @@ def map():
         (r'/portal/newsup/new', getattr(portal_newsup, 'NewsupNewHandler')),
         (r'/portal/newsup/register', getattr(portal_newsup, 'NewsupRegisterHandler')),
         (r'/portal/newsup/category', getattr(portal_newsup, 'NewsupCategoryHandler')),
+        (r'/portal/newsup/franchise', getattr(portal_newsup, 'NewsupFranchiseHandler')),
+
 
         (r'/uicn', getattr(ui_cn, 'UicnIndexHandler')),
         (r'/uicn/list', getattr(ui_cn, 'UicnListHandler')),

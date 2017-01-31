@@ -37,67 +37,141 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
-        self.render('newsup/index.html')
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/index.html',
+                is_login=is_login)
 
 
 class NewsupAccountHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
-        self.render('newsup/account.html')
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/account.html',
+                is_login=is_login)
 
 
 class NewsupAuthorHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
-        self.render('newsup/author.html')
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/author.html',
+                is_login=is_login)
 
 
 class NewsupMediaHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
-        self.render('newsup/media.html')
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/media.html',
+                is_login=is_login)
 
 
 class NewsupShortcodesHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
-        self.render('newsup/shortcodes.html')
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/shortcodes.html',
+                is_login=is_login)
 
 
 class NewsupContactHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
-        self.render('newsup/contact.html')
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/contact.html',
+                is_login=is_login)
 
 
 class NewsupItemDetailHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
-        self.render('newsup/item-detail.html')
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/item-detail.html',
+                is_login=is_login)
 
 
 class NewsupNewHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
-        self.render('newsup/new.html')
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/new.html',
+                is_login=is_login)
 
 
 class NewsupRegisterHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
-        self.render('newsup/register.html')
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/register.html',
+                is_login=is_login)
 
 
 class NewsupCategoryHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
-        self.render('newsup/category.html')
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/category.html',
+                is_login=is_login)
+
+
+class NewsupFranchiseHandler(AuthorizationHandler):
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def get(self):
+        logging.info(self.request)
+
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/franchise.html',
+                is_login=is_login)
