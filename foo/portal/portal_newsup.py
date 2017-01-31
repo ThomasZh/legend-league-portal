@@ -29,6 +29,11 @@ from bson import json_util
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../"))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../dao"))
 
+from tornado.escape import json_encode, json_decode
+from tornado.httpclient import *
+from tornado.httputil import url_concat
+from bson import json_util
+
 from comm import *
 from global_const import *
 
@@ -169,5 +174,19 @@ class NewsupFranchiseHandler(AuthorizationHandler):
         if access_token:
             is_login = True
 
+        url = "http://api.7x24hs.com/api/myinfo/franchises"
+        http_client = HTTPClient()
+        headers={"Authorization":"Bearer "+access_token}
+        response = http_client.fetch(url, method="GET", headers=headers)
+        logging.info("got response %r", response.body)
+        franchises = json_decode(response.body)
+        franchise_in_this_league = None
+        for franchise in franchises:
+            if franchise['league_id'] == LEAGUE_ID:
+                franchise_in_this_league = franchise
+                break
+
         self.render('newsup/franchise.html',
-                is_login=is_login)
+                is_login=is_login,
+                league_id=LEAGUE_ID,
+                franchise=franchise_in_this_league)

@@ -336,8 +336,7 @@ function main() {
 		});
 
 		// Set width search input
-		if ( $(window).width() < 981 )
-		{
+		if ( $(window).width() < 981 ) {
 			search_width();
 		}
 

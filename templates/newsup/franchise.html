@@ -103,15 +103,21 @@
           <div class="col-sm-8">
             <!-- Author zone -->
             <div class="rst-section-title rst-section-title-box">
-              <h4>Apply Franchise</h4>
+              <h4>Apply Franchise</h4> {% if franchise %} {% if franchise['_status'] == 0 %}
+              <h6/>待审核</h6>
+              {% elif franchise['_status'] == 10 %}
+              <h6/>被拒绝（可以重新发起请求）</h6>
+              {% elif franchise['_status'] == 20 %}
+              <h6>已批准</h6> {% end %} {% end %}
             </div>
 
+            {% if not franchise %}
             <div class="rst-getintouch-form">
-              <form method="post" action="submit.php" name="sentMessage" id="contactForm" novalidate>
+              <form onsubmit="return false;" id="apply-form">
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="Company Name" name="company" id="company" data-validation-required-message="Please enter your company name." />
+                      <input class="rst-pageinput" type="text" placeholder="Club Name" name="name" id="name" data-validation-required-message="Please enter your club name." />
                       <!-- required data-validation-required-message="Please enter your name." -->
                       <p class="help-block text-danger"></p>
                     </div>
@@ -123,7 +129,7 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="Address" name="address" id="address" data-validation-required-message="Please enter your company address." />
+                      <input class="rst-pageinput" type="text" placeholder="Address" name="address" id="address" data-validation-required-message="Please enter your club address." />
                       <!-- required data-validation-required-message="Please enter your company." -->
                       <p class="help-block text-danger"></p>
                     </div>
@@ -137,7 +143,7 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
-                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="Add your company introduction" name="introduction" id="introduction" data-validation-required-message="Please enter your company introduction."></textarea>
+                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="Add your club introduction" name="introduction" id="introduction" data-validation-required-message="Please enter your club introduction."></textarea>
                       <!-- required data-validation-required-message="Please enter your message." -->
                       <p class="help-block text-danger"></p>
                       <div id="success"></div>
@@ -147,6 +153,93 @@
                 </div>
               </form>
             </div>
+            {% else %} {% if franchise['_status'] == 10 %}
+            <div class="rst-getintouch-form">
+              <form onsubmit="return false;" id="apply-form">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <input class="rst-pageinput" type="text" placeholder="Club Name" name="name" id="name" value="{{ franchise['club']['name'] }}" data-validation-required-message="Please enter your club name." />
+                      <!-- required data-validation-required-message="Please enter your name." -->
+                      <p class="help-block text-danger"></p>
+                    </div>
+                    <div class="form-group">
+                      <input class="rst-pageinput" type="email" placeholder="Email" name="email" id="email" value="{{ franchise['club']['email'] }}" data-validation-required-message="Please enter your email." />
+                      <!-- required data-validation-required-message="Please enter your email." -->
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <input class="rst-pageinput" type="text" placeholder="Address" name="address" id="address" value="{{ franchise['club']['address'] }}" data-validation-required-message="Please enter your club address." />
+                      <!-- required data-validation-required-message="Please enter your company." -->
+                      <p class="help-block text-danger"></p>
+                    </div>
+                    <div class="form-group">
+                      <input class="rst-pageinput" type="text" placeholder="Phone" name="phone" id="phone" value="{{ franchise['club']['phone'] }}" data-validation-required-message="Please enter your phone." />
+                      <!-- required data-validation-required-message="Please enter your phone." -->
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="Add your club introduction" name="introduction" id="introduction" data-validation-required-message="Please enter your club introduction.">
+                        {{ franchise['club']['introduction'] }}
+                      </textarea>
+                      <!-- required data-validation-required-message="Please enter your message." -->
+                      <p class="help-block text-danger"></p>
+                      <div id="success"></div>
+                    </div>
+                    <button class="rst-pagebutton" type="submit">Apply</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            {% else %}
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Status</td>
+                  {% if franchise['_status'] == 0 %}
+                  <td>待审核</td> {% elif franchise['_status'] == 20 %}
+                  <td>已批准</td> {% end %}
+                </tr>
+                <tr>
+                  <td>Create Time</td>
+                  <td>{{ franchise['create_time'] }}</td>
+                </tr>
+                <tr>
+                  <td>Name</td>
+                  <td>{{ franchise['club']['name'] }}</td>
+                </tr>
+                <tr>
+                  <td>Phone</td>
+                  <td>{{ franchise['club']['phone'] }}</td>
+                </tr>
+                <tr>
+                  <td>email</td>
+                  <td>{{ franchise['club']['email'] }}</td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td>{{ franchise['club']['address'] }}</td>
+                </tr>
+                <tr>
+                  <td>Introduction</td>
+                  <td>{{ franchise['club']['introduction'] }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- End Tables -->
+            {% end %} {% end %}
 
           </div>
           <div class="col-sm-4">
@@ -287,6 +380,78 @@
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
 
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('js/json2.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('js/jquery.validate.min.js') }}"></script>
+
+  <script>
+    $(function() {
+      // Apply Franchise Form
+      //----------------------------------------------
+      // Validation
+      $("#apply-form").validate({
+        rules: {
+          phone: {
+            minlength: 11,
+            required: true,
+          },
+          email: {
+            minlength: 6,
+            required: true,
+          },
+          name: {
+            required: true,
+            minlength: 6,
+          },
+          address: {
+            required: true,
+            minlength: 6
+          },
+          introduction: {
+            required: true,
+            minlength: 6
+          },
+        },
+        errorClass: "form-invalid",
+        submitHandler: function(form) {
+          var data = {
+            phone: $('#phone').val(),
+            email: $('#email').val(),
+            name: $('#name').val(),
+            address: $('#address').val(),
+            introduction: $('#introduction').val(),
+          };
+          var json = JSON.stringify(data);
+          console.log(json);
+
+          $.ajax({
+            type: "POST",
+            url: "/api/leagues/{{ league_id }}/franchises",
+            data: json,
+            dataType: "json",
+            contentType: 'application/json',
+            success: function(data, status, xhr) {
+              console.log(data);
+              $('.appy-form-main-message').addClass('show error').html('申请成功，请等待审核!');
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log("XMLHttpRequest.status: " + XMLHttpRequest.status);
+              if (XMLHttpRequest.status == 200) {
+                $('.appy-form-main-message').addClass('show error').html('申请成功，请等待审核!');
+              } else if (XMLHttpRequest.status == 409) {
+                $('.appy-form-main-message').addClass('show error').html('已经申请完毕, 不必重新申请');
+              } else {
+                $('.appy-form-main-message').addClass('show error').html('网络异常,刷新重试');
+              }
+            },
+            complete: function(XMLHttpRequest, textStatus) {
+              this; // 调用本次AJAX请求时传递的options参数
+            }
+          });
+        }
+      });
+
+    });
+  </script>
 
 </body>
 
