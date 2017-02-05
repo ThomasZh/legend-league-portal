@@ -51,13 +51,59 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
+        # sceneries(景点)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"9b876004e94711e69b1c00163e023e51", "idx":0, "limit":4}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        sceneries = json_decode(response.body)
+
+        # journey(游记)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":4}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        journeies = json_decode(response.body)
+
+        # news(新闻)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        news = json_decode(response.body)
+
+        # popular(流行)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"6af3e348eac011e6bf5000163e023e51", "idx":0, "limit":6}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        populars = json_decode(response.body)
+
+        # hot(热点新闻)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"6340864ceac011e6bf5000163e023e51", "idx":0, "limit":12}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        hots = json_decode(response.body)
+
+
         is_login = False
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
 
         self.render('newsup/index.html',
-                is_login=is_login)
+                is_login=is_login,
+                sceneries=sceneries,
+                journeies=journeies,
+                news=news,
+                populars=populars,
+                hots=hots)
 
 
 class NewsupAccountHandler(tornado.web.RequestHandler):
@@ -154,6 +200,31 @@ class NewsupNewHandler(tornado.web.RequestHandler):
 class NewsupCategoryHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
+        category_id = self.get_argument("id", "")
+
+        # sceneries(景点)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":6}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        articles = json_decode(response.body)
+
+        # news(新闻)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        news = json_decode(response.body)
+
+        # popular(流行)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"6af3e348eac011e6bf5000163e023e51", "idx":0, "limit":6}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        populars = json_decode(response.body)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -161,7 +232,10 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
             is_login = True
 
         self.render('newsup/category.html',
-                is_login=is_login)
+                is_login=is_login,
+                articles=articles,
+                news=news,
+                populars=populars)
 
 
 class NewsupFranchiseHandler(AuthorizationHandler):

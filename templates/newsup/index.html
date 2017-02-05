@@ -162,56 +162,25 @@
               </div>
             </div>
           </div>
+          {% for article in populars %}
           <article class="col-sm-3 col-xs-6">
             <div class="rst-postpic">
-              <a href="#"><img src="/static/newsup/images/slider/category/po01.jpg" alt="" /></a>
+              <a href="#"><img src="{{ article['img'] }}!270x190" alt="" /></a>
               <a class="rst-postpic-cat" href="#"><span>world</span></a>
             </div>
             <div class="rst-postinfo">
-              <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-              <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+              <h6><a href="#">{{ article['title'] }}</a></h6>
+              <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
+              <p>{{ article['subtitle'] }}</p>
             </div>
           </article>
-          <article class="col-sm-3 col-xs-6">
-            <div class="rst-postpic">
-              <a href="#"><img src="/static/newsup/images/slider/category/po02.jpg" alt="" /></a>
-              <a class="rst-postpic-cat" href="#"><span>world</span></a>
-            </div>
-            <div class="rst-postinfo">
-              <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-              <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-            </div>
-          </article>
-          <article class="col-sm-3 col-xs-6">
-            <div class="rst-postpic">
-              <a href="#"><img src="/static/newsup/images/slider/category/po03.jpg" alt="" /></a>
-              <a class="rst-postpic-cat" href="#"><span>world</span></a>
-            </div>
-            <div class="rst-postinfo">
-              <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-              <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-            </div>
-          </article>
-          <article class="col-sm-3 col-xs-6">
-            <div class="rst-postpic">
-              <a href="#"><img src="/static/newsup/images/slider/category/po04.jpg" alt="" /></a>
-              <a class="rst-postpic-cat" href="#"><span>world</span></a>
-            </div>
-            <div class="rst-postinfo">
-              <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-              <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-            </div>
-          </article>
+          {% end %}
         </div>
       </div>
     </section>
     <!-- End Section Popular -->
 
-    <!-- Section Life -->
+    <!-- Section Scenery -->
     <section id="rst-life">
       <div class="container">
         <div class="row">
@@ -219,7 +188,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-xs-12">
-                  <h4>Life</h4>
+                  <h4>Scenery</h4>
                   <div class="rst-section-title-short">
                     <a href="#"><span>View all</span></a>
                     <div class="rst-shortmenu">
@@ -248,51 +217,23 @@
             </div>
           </article>
           <div class="col-sm-6 rst-rightpost">
+            {% for article in sceneries %}
             <article>
               <div class="rst-postpic">
-                <a href="#"><img src="/static/newsup/images/slider/category/li02.jpg" alt="" /></a>
+                <a href="#"><img src="{{ article['img'] }}!140x106" alt="" /></a>
               </div>
               <div class="rst-postinfo">
-                <h6><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h6>
-                <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                <p>Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
+                <h6><a href="#">{{ article['title'] }}</a></h6>
+                <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
+                <p>{{ article['subtitle'] }}</p>
               </div>
             </article>
-            <article>
-              <div class="rst-postpic">
-                <a href="#"><img src="/static/newsup/images/slider/category/li03.jpg" alt="" /></a>
-              </div>
-              <div class="rst-postinfo">
-                <h6><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h6>
-                <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                <p>Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
-              </div>
-            </article>
-            <article>
-              <div class="rst-postpic">
-                <a href="#"><img src="/static/newsup/images/slider/category/li04.jpg" alt="" /></a>
-              </div>
-              <div class="rst-postinfo">
-                <h6><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h6>
-                <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                <p>Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
-              </div>
-            </article>
-            <article>
-              <div class="rst-postpic">
-                <a href="#"><img src="/static/newsup/images/slider/category/li05.jpg" alt="" /></a>
-              </div>
-              <div class="rst-postinfo">
-                <h6><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h6>
-                <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                <p>Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
-              </div>
-            </article>
+            {% end %}
           </div>
         </div>
       </div>
     </section>
-    <!-- End Section Life -->
+    <!-- End Section Scenery -->
 
     <!-- Pageline -->
     <div class="rst-pageline container">
@@ -311,13 +252,13 @@
     <!-- end pageline -->
 
 
-    <!-- Section Sport -->
+    <!-- Section journey -->
     <section id="rst-sport">
       <div class="rst-section-title rst-section-title-box">
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
-              <h4>Sport</h4>
+              <h4>Journey</h4>
               <div class="rst-section-title-short">
                 <a href="#"><span>View all</span></a>
                 <div class="rst-shortmenu">
@@ -348,51 +289,23 @@
             </div>
           </article>
           <div class="col-sm-6 rst-rightpost">
+            {% for article in journeies %}
             <article>
               <div class="rst-postpic">
-                <a href="#"><img src="/static/newsup/images/slider/category/sp02.jpg" alt="" /></a>
+                <a href="#"><img src="{{ article['img'] }}!140x106" alt="" /></a>
               </div>
               <div class="rst-postinfo">
-                <h6><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h6>
-                <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                <p>Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
+                <h6><a href="#">{{ article['title'] }}</a></h6>
+                <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
+                <p>{{ article['subtitle'] }}</p>
               </div>
             </article>
-            <article>
-              <div class="rst-postpic">
-                <a href="#"><img src="/static/newsup/images/slider/category/sp03.jpg" alt="" /></a>
-              </div>
-              <div class="rst-postinfo">
-                <h6><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h6>
-                <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                <p>Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
-              </div>
-            </article>
-            <article>
-              <div class="rst-postpic">
-                <a href="#"><img src="/static/newsup/images/slider/category/sp04.jpg" alt="" /></a>
-              </div>
-              <div class="rst-postinfo">
-                <h6><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h6>
-                <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                <p>Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
-              </div>
-            </article>
-            <article>
-              <div class="rst-postpic">
-                <a href="#"><img src="/static/newsup/images/slider/category/sp05.jpg" alt="" /></a>
-              </div>
-              <div class="rst-postinfo">
-                <h6><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h6>
-                <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                <p>Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
-              </div>
-            </article>
+            {% end %}
           </div>
         </div>
       </div>
     </section>
-    <!-- End Section Sport -->
+    <!-- End Section journey -->
 
     <!-- One minute for advertising -->
     <div class="rst-adv">
@@ -415,90 +328,22 @@
             </div>
             <div class="rst-newsandhot-post">
               <div class="rst-newsandhot-post-content">
+                {% for article in news %}
                 <article>
                   <div class="row">
                     <div class="rst-postpic col-sm-6">
-                      <a href="#"><img src="/static/newsup/images/slider/category/new01.jpg" alt="" /></a>
+                      <a href="#"><img src="{{ article['img'] }}!370x278" alt="" /></a>
                       <a href="#" class="rst-postpic-cat"><span>world</span></a>
                     </div>
                     <div class="rst-postinfo col-sm-6">
-                      <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                      <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero vitae magna sollicitudin pulvinar vel et tellus. Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
+                      <h6><a href="#">{{ article['title'] }}</a></h6>
+                      <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
+                      <p>{{ article['subtitle'] }}</p>
                       <a href="#" class="rst-info-viewlink"><span>read more</span><i class="fa fa-comments"></i></a>
                     </div>
                   </div>
                 </article>
-                <article>
-                  <div class="row">
-                    <div class="rst-postpic col-sm-6">
-                      <a href="#"><img src="/static/newsup/images/slider/category/new02.jpg" alt="" /></a>
-                      <a href="#" class="rst-postpic-cat"><span>world</span></a>
-                    </div>
-                    <div class="rst-postinfo col-sm-6">
-                      <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                      <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero vitae magna sollicitudin pulvinar vel et tellus. Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
-                      <a href="#" class="rst-info-viewlink"><span>read more</span><i class="fa fa-comments"></i></a>
-                    </div>
-                  </div>
-                </article>
-                <article>
-                  <div class="row">
-                    <div class="rst-postpic col-sm-6">
-                      <a href="#"><img src="/static/newsup/images/slider/category/new03.jpg" alt="" /></a>
-                      <a href="#" class="rst-postpic-cat"><span>world</span></a>
-                    </div>
-                    <div class="rst-postinfo col-sm-6">
-                      <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                      <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero vitae magna sollicitudin pulvinar vel et tellus. Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
-                      <a href="#" class="rst-info-viewlink"><span>read more</span><i class="fa fa-comments"></i></a>
-                    </div>
-                  </div>
-                </article>
-                <article>
-                  <div class="row">
-                    <div class="rst-postpic col-sm-6">
-                      <a href="#"><img src="/static/newsup/images/slider/category/new04.jpg" alt="" /></a>
-                      <a href="#" class="rst-postpic-cat"><span>world</span></a>
-                    </div>
-                    <div class="rst-postinfo col-sm-6">
-                      <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                      <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero vitae magna sollicitudin pulvinar vel et tellus. Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
-                      <a href="#" class="rst-info-viewlink"><span>read more</span><i class="fa fa-comments"></i></a>
-                    </div>
-                  </div>
-                </article>
-                <article>
-                  <div class="row">
-                    <div class="rst-postpic col-sm-6">
-                      <a href="#"><img src="/static/newsup/images/slider/category/new05.jpg" alt="" /></a>
-                      <a href="#" class="rst-postpic-cat"><span>world</span></a>
-                    </div>
-                    <div class="rst-postinfo col-sm-6">
-                      <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                      <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero vitae magna sollicitudin pulvinar vel et tellus. Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
-                      <a href="#" class="rst-info-viewlink"><span>read more</span><i class="fa fa-comments"></i></a>
-                    </div>
-                  </div>
-                </article>
-                <article>
-                  <div class="row">
-                    <div class="rst-postpic col-sm-6">
-                      <a href="#"><img src="/static/newsup/images/slider/category/new06.jpg" alt="" /></a>
-                      <a href="#" class="rst-postpic-cat"><span>world</span></a>
-                    </div>
-                    <div class="rst-postinfo col-sm-6">
-                      <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                      <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero vitae magna sollicitudin pulvinar vel et tellus. Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>
-                      <a href="#" class="rst-info-viewlink"><span>read more</span><i class="fa fa-comments"></i></a>
-                    </div>
-                  </div>
-                </article>
+                {% end %}
               </div>
               <a href="#" class="rst-loadmore">Load more</a>
             </div>
@@ -508,56 +353,24 @@
               <h3>hot</h3>
               <div class="rst-hotnews owl-carousel">
                 <ul>
+                  {% for i in range(len(hots)) %}
+                  {% if i < 6 %}
                   <li>
                     <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
+                    <p><a href="#">{{ hots[i]['title'] }}</a></p>
                   </li>
-                  <li>
-                    <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
-                  </li>
-                  <li>
-                    <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
-                  </li>
-                  <li>
-                    <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
-                  </li>
-                  <li>
-                    <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
-                  </li>
-                  <li>
-                    <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
-                  </li>
+                  {% end %}
+                  {% end %}
                 </ul>
                 <ul>
+                  {% for i in range(len(hots)) %}
+                  {% if i >= 6 %}
                   <li>
                     <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
+                    <p><a href="#">{{ hots[i]['title'] }}</a></p>
                   </li>
-                  <li>
-                    <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
-                  </li>
-                  <li>
-                    <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
-                  </li>
-                  <li>
-                    <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
-                  </li>
-                  <li>
-                    <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
-                  </li>
-                  <li>
-                    <a href="#">Sport</a>
-                    <p><a href="#">Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</a></p>
-                  </li>
+                  {% end %}
+                  {% end %}
                 </ul>
               </div>
             </aside>
@@ -588,77 +401,39 @@
                 <li>
                   <a href="#">Popular</a>
                   <ul>
+                    {% for article in populars %}
                     <li>
                       <article>
                         <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol01.jpg" alt="" /></a>
+                          <a href="#"><img src="{{ article['img'] }}!100x76" alt="" /></a>
                         </div>
                         <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                          <h6><a href="#">{{ article['title'] }}</a></h6>
+                          <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
                         </div>
                       </article>
                     </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol02.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol03.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol04.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
+                    {% end %}
                   </ul>
                 </li>
                 <li>
                   <a href="#">Latest</a>
                   <ul>
+                    {% for i in range(len(news)) %}
+                    {% if i < 4 %}
                     <li>
                       <article>
                         <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol02.jpg" alt="" /></a>
+                          <a href="#"><img src="{{ news[i]['img'] }}!100x76" alt="" /></a>
                         </div>
                         <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                          <h6><a href="#">{{ news[i]['title'] }}</a></h6>
+                          <time><i class="fa fa-clock-o"></i>{{ news[i]['publish_time'] }}</time>
                         </div>
                       </article>
                     </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol03.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
+                    {% end %}
+                    {% end %}
                   </ul>
                 </li>
               </ul>

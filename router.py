@@ -9,7 +9,7 @@ import tornado.web
 
 from foo import comm
 from foo.auth import auth_newsup
-from foo.portal import portal_newsup
+from foo.portal import newsup
 
 
 def map():
@@ -17,21 +17,21 @@ def map():
     config = [
 
         # homepage
-        (r'/', getattr(portal_newsup, 'NewsupIndexHandler')),
+        (r'/', getattr(newsup, 'NewsupIndexHandler')),
 
         # login_next redirect to index
         # 页面重定向后，可以将cookie加载
-        (r'/portal/newsup/login-next', getattr(portal_newsup, 'NewsupLoginNextHandler')),
-        (r'/portal/newsup/index', getattr(portal_newsup, 'NewsupIndexHandler')),
-        (r'/portal/newsup/account', getattr(portal_newsup, 'NewsupAccountHandler')),
-        (r'/portal/newsup/author', getattr(portal_newsup, 'NewsupAuthorHandler')),
-        (r'/portal/newsup/media', getattr(portal_newsup, 'NewsupMediaHandler')),
-        (r'/portal/newsup/shortcodes', getattr(portal_newsup, 'NewsupShortcodesHandler')),
-        (r'/portal/newsup/contact', getattr(portal_newsup, 'NewsupContactHandler')),
-        (r'/portal/newsup/item-detail', getattr(portal_newsup, 'NewsupItemDetailHandler')),
-        (r'/portal/newsup/new', getattr(portal_newsup, 'NewsupNewHandler')),
-        (r'/portal/newsup/category', getattr(portal_newsup, 'NewsupCategoryHandler')),
-        (r'/portal/newsup/franchise', getattr(portal_newsup, 'NewsupFranchiseHandler')),
+        (r'/portal/newsup/login-next', getattr(newsup, 'NewsupLoginNextHandler')),
+        (r'/portal/newsup/index', getattr(newsup, 'NewsupIndexHandler')),
+        (r'/portal/newsup/account', getattr(newsup, 'NewsupAccountHandler')),
+        (r'/portal/newsup/author', getattr(newsup, 'NewsupAuthorHandler')),
+        (r'/portal/newsup/media', getattr(newsup, 'NewsupMediaHandler')),
+        (r'/portal/newsup/shortcodes', getattr(newsup, 'NewsupShortcodesHandler')),
+        (r'/portal/newsup/contact', getattr(newsup, 'NewsupContactHandler')),
+        (r'/portal/newsup/item-detail', getattr(newsup, 'NewsupItemDetailHandler')),
+        (r'/portal/newsup/new', getattr(newsup, 'NewsupNewHandler')),
+        (r'/portal/newsup/category', getattr(newsup, 'NewsupCategoryHandler')),
+        (r'/portal/newsup/franchise', getattr(newsup, 'NewsupFranchiseHandler')),
 
         (r'/portal/auth/register', getattr(auth_newsup, 'AuthRegisterHandler')),
         (r'/portal/auth/login', getattr(auth_newsup, 'AuthRegisterHandler')),

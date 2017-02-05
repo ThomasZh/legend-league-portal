@@ -89,7 +89,7 @@
           <div class="rst-breadcrumb">
             <a href="/portal/newsup/index"><span>Home</span></a>
             <span>></span>
-            <a href="/portal/newsup/category"><span>Sport</span></a>
+            <a href="#"><span>Sport</span></a>
           </div>
         </div>
       </div>
@@ -147,90 +147,21 @@
               </div>
             </div>
             <div class="row rst-cat-postlist">
+              {% for article in articles %}
               <article class="col-sm-12 rst-catpost">
                 <div class="rst-postpic">
-                  <a href="#"><img src="/static/newsup/images/cat-03.jpg" alt="" /></a>
+                  <a href="#"><img src="{{ article['img'] }}!370x370" alt="" /></a>
                   <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
                 </div>
                 <div class="rst-postinfo">
                   <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                  <h6><a href="#">Lorem ipsum dolor sit amet, Ut congue ex eget nulla lacinia.</a></h6>
-                  <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut congue ex eget nulla lacinia, id efficitur felis luctus. Nam vitae dui id ex faucibus tincidunt id non eros. Pellentesque varius dapibus lacinia. Quisque eu arcu efficitur nibh
-                    hendrerit pulvinar sed quis nunc.</p>
+                  <h6><a href="#">{{ article['title'] }}</a></h6>
+                  <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
+                  <p>{{ article['subtitle'] }}</p>
                 </div>
                 <div class="clear"></div>
               </article>
-              <article class="col-sm-12 rst-catpost">
-                <div class="rst-postpic">
-                  <a href="#"><img src="/static/newsup/images/cat-04.jpg" alt="" /></a>
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                </div>
-                <div class="rst-postinfo">
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                  <h6><a href="#">Lorem ipsum dolor sit amet, Ut congue ex eget nulla lacinia.</a></h6>
-                  <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut congue ex eget nulla lacinia, id efficitur felis luctus. Nam vitae dui id ex faucibus tincidunt id non eros. Pellentesque varius dapibus lacinia. Quisque eu arcu efficitur nibh
-                    hendrerit pulvinar sed quis nunc.</p>
-                </div>
-                <div class="clear"></div>
-              </article>
-              <article class="col-sm-12 rst-catpost">
-                <div class="rst-postpic">
-                  <a href="#"><img src="/static/newsup/images/cat-05.jpg" alt="" /></a>
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                </div>
-                <div class="rst-postinfo">
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                  <h6><a href="#">Lorem ipsum dolor sit amet, Ut congue ex eget nulla lacinia.</a></h6>
-                  <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut congue ex eget nulla lacinia, id efficitur felis luctus. Nam vitae dui id ex faucibus tincidunt id non eros. Pellentesque varius dapibus lacinia. Quisque eu arcu efficitur nibh
-                    hendrerit pulvinar sed quis nunc.</p>
-                </div>
-                <div class="clear"></div>
-              </article>
-              <article class="col-sm-12 rst-catpost">
-                <div class="rst-postpic">
-                  <a href="#"><img src="/static/newsup/images/cat-06.jpg" alt="" /></a>
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                </div>
-                <div class="rst-postinfo">
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                  <h6><a href="#">Lorem ipsum dolor sit amet, Ut congue ex eget nulla lacinia.</a></h6>
-                  <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut congue ex eget nulla lacinia, id efficitur felis luctus. Nam vitae dui id ex faucibus tincidunt id non eros. Pellentesque varius dapibus lacinia. Quisque eu arcu efficitur nibh
-                    hendrerit pulvinar sed quis nunc.</p>
-                </div>
-                <div class="clear"></div>
-              </article>
-              <article class="col-sm-12 rst-catpost">
-                <div class="rst-postpic">
-                  <a href="#"><img src="/static/newsup/images/cat-07.jpg" alt="" /></a>
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                </div>
-                <div class="rst-postinfo">
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                  <h6><a href="#">Lorem ipsum dolor sit amet, Ut congue ex eget nulla lacinia.</a></h6>
-                  <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut congue ex eget nulla lacinia, id efficitur felis luctus. Nam vitae dui id ex faucibus tincidunt id non eros. Pellentesque varius dapibus lacinia. Quisque eu arcu efficitur nibh
-                    hendrerit pulvinar sed quis nunc.</p>
-                </div>
-                <div class="clear"></div>
-              </article>
-              <article class="col-sm-12 rst-catpost">
-                <div class="rst-postpic">
-                  <a href="#"><img src="/static/newsup/images/cat-08.jpg" alt="" /></a>
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                </div>
-                <div class="rst-postinfo">
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                  <h6><a href="#">Lorem ipsum dolor sit amet, Ut congue ex eget nulla lacinia.</a></h6>
-                  <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut congue ex eget nulla lacinia, id efficitur felis luctus. Nam vitae dui id ex faucibus tincidunt id non eros. Pellentesque varius dapibus lacinia. Quisque eu arcu efficitur nibh
-                    hendrerit pulvinar sed quis nunc.</p>
-                </div>
-                <div class="clear"></div>
-              </article>
+              {% end %}
               <!-- End Category Posts -->
             </div>
             <div class="row">
@@ -274,77 +205,37 @@
                 <li>
                   <a href="#">Popular</a>
                   <ul>
+                    {% for article in populars %}
                     <li>
                       <article>
                         <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol01.jpg" alt="" /></a>
+                          <a href="#"><img src="{{ article['img'] }}!100x76" alt="" /></a>
                         </div>
                         <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                          <h6><a href="#">{{ article['title'] }}</a></h6>
+                          <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
                         </div>
                       </article>
                     </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol02.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol03.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol04.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
+                    {% end %}
                   </ul>
                 </li>
                 <li>
                   <a href="#">Latest</a>
                   <ul>
+                    {% for article in news %}
                     <li>
                       <article>
                         <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol02.jpg" alt="" /></a>
+                          <a href="#"><img src="{{ article['img'] }}!100x76" alt="" /></a>
                         </div>
                         <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                          <h6><a href="#">{{ article['title'] }}</a></h6>
+                          <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
                         </div>
                       </article>
                     </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol03.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
+                    {% end %}
                   </ul>
                 </li>
               </ul>
