@@ -102,16 +102,24 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
+            {% for i in range(len(sceneries)) %}
+            {% if i == 0 %}
             <div class="rst-catbanner-post">
               <div class="rst-mainslide">
                 <div class="rst-boxinfo">
-                  <a href="#"><span>Football</span></a>
-                  <p><a href="#">One killer workout with some delicious chickpea cookies</a></p>
-                  <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                  <a href="#"><span>
+                    {% for category in sceneries[i]['categories'] %}
+                      {{ category['title'] }}&nbsp;
+                    {% end %}
+                  </span></a>
+                  <p><a href="/portal/newsup/item-detail?id={{ sceneries[i]['_id'] }}">{{ sceneries[i]['title'] }}</a></p>
+                  <time><i class="fa fa-clock-o"></i>{{ sceneries[i]['publish_time'] }}</time>
                 </div>
-                <img src="/static/newsup/images/cat-01.jpg" alt="" />
+                <img src="{{ sceneries[i]['img'] }}!800x370" alt="" />
               </div>
             </div>
+            {% end %}
+            {% end %}
             <div class="rst-catbanner-slider owl-carousel rst-postpic">
               <img src="/static/newsup/images/cat-03.jpg" alt="" />
               <img src="/static/newsup/images/cat-04.jpg" alt="" />
@@ -147,20 +155,26 @@
               </div>
             </div>
             <div class="row rst-cat-postlist">
-              {% for article in articles %}
+              {% for i in range(len(sceneries)) %}
+              {% if i > 0 %}
               <article class="col-sm-12 rst-catpost">
                 <div class="rst-postpic">
-                  <a href="#"><img src="{{ article['img'] }}!370x370" alt="" /></a>
+                  <a href="/portal/newsup/item-detail?id={{ sceneries[i]['_id'] }}"><img src="{{ sceneries[i]['img'] }}!370x370" alt="" /></a>
                   <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
                 </div>
                 <div class="rst-postinfo">
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                  <h6><a href="#">{{ article['title'] }}</a></h6>
-                  <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
-                  <p>{{ article['subtitle'] }}</p>
+                  <a class="rst-postpic-cat" href="#"><span>
+                    {% for category in sceneries[i]['categories'] %}
+                      {{ category['title'] }}&nbsp;
+                    {% end %}
+                  </span></a>
+                  <h6><a href="/portal/newsup/item-detail?id={{ sceneries[i]['_id'] }}">{{ sceneries[i]['title'] }}</a></h6>
+                  <time><i class="fa fa-clock-o"></i>{{ sceneries[i]['publish_time'] }}</time>
+                  <p>{{ sceneries[i]['subtitle'] }}</p>
                 </div>
                 <div class="clear"></div>
               </article>
+              {% end %}
               {% end %}
               <!-- End Category Posts -->
             </div>
@@ -209,10 +223,10 @@
                     <li>
                       <article>
                         <div class="rst-postpic">
-                          <a href="#"><img src="{{ article['img'] }}!100x76" alt="" /></a>
+                          <a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!100x76" alt="" /></a>
                         </div>
                         <div class="rst-postinfo">
-                          <h6><a href="#">{{ article['title'] }}</a></h6>
+                          <h6><a href="/portal/newsup/item-detail?id={{ article['_id'] }}">{{ article['title'] }}</a></h6>
                           <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
                         </div>
                       </article>
@@ -227,10 +241,10 @@
                     <li>
                       <article>
                         <div class="rst-postpic">
-                          <a href="#"><img src="{{ article['img'] }}!100x76" alt="" /></a>
+                          <a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!100x76" alt="" /></a>
                         </div>
                         <div class="rst-postinfo">
-                          <h6><a href="#">{{ article['title'] }}</a></h6>
+                          <h6><a href="/portal/newsup/item-detail?id={{ article['_id'] }}">{{ article['title'] }}</a></h6>
                           <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
                         </div>
                       </article>
@@ -242,6 +256,7 @@
             </aside>
             <!-- end widget popular -->
 
+            <!--
             <aside class="widget widget_adv">
               <h3>Advertisement</h3>
               <a href="#"><img src="/static/newsup/images/ad01.png" alt="" /></a>
@@ -250,6 +265,7 @@
               <a href="#"><img src="/static/newsup/images/ad01.png" alt="" /></a>
               <div class="clear"></div>
             </aside>
+            -->
             <!-- end widget adv -->
 
             <aside class="widget widget_video">

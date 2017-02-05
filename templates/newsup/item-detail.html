@@ -105,11 +105,15 @@
           <div class="col-xs-12">
             <div class="rst-catbanner-post">
               <div class="rst-mainslide">
-                <img src="/static/newsup/images/cat-01.jpg" alt="" />
+                <img src="{{ article_info['img'] }}!800x370" alt="" />
                 <div class="rst-boxinfo">
-                  <a href="#"><span>Football</span></a>
-                  <p><a href="#">One killer workout with some delicious chickpea cookies</a></p>
-                  <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                  <a href="#"><span>
+                    {% for category in article_info['categories'] %}
+                      {{ category['title'] }}&nbsp;
+                    {% end %}
+                  </span></a>
+                  <p><a href="#">{{ article_info['title'] }}</a></p>
+                  <time><i class="fa fa-clock-o"></i>{{ article_info['publish_time'] }}</time>
                 </div>
               </div>
             </div>
@@ -319,77 +323,37 @@
                 <li>
                   <a href="#">Popular</a>
                   <ul>
+                    {% for article in populars %}
                     <li>
                       <article>
                         <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol01.jpg" alt="" /></a>
+                          <a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!100x76" alt="" /></a>
                         </div>
                         <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                          <h6><a href="/portal/newsup/item-detail?id={{ article['_id'] }}">{{ article['title'] }}</a></h6>
+                          <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
                         </div>
                       </article>
                     </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol02.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol03.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol04.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
+                    {% end %}
                   </ul>
                 </li>
                 <li>
                   <a href="#">Latest</a>
                   <ul>
+                    {% for article in news %}
                     <li>
                       <article>
                         <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol02.jpg" alt="" /></a>
+                          <a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!100x76" alt="" /></a>
                         </div>
                         <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                          <h6><a href="/portal/newsup/item-detail?id={{ article['_id'] }}">{{ article['title'] }}</a></h6>
+                          <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
                         </div>
                       </article>
                     </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol03.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
+                    {% end %}
                   </ul>
                 </li>
               </ul>
