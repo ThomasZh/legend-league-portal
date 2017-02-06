@@ -23,7 +23,7 @@ CSS Style Structure
 
 
 /*=======================
-        General 
+        General
 =======================*/
 
 
@@ -35,7 +35,7 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
-.clear { 
+.clear {
 	clear: both;
 	float: none;
 }
@@ -46,13 +46,13 @@ img { max-width: 100%; height: auto; }
    color: #111;
 }
 :-moz-placeholder { /* Firefox 18- */
-   color: #111;  
+   color: #111;
 }
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #111;  
+   color: #111;
 }
-:-ms-input-placeholder {  
-   color: #111;  
+:-ms-input-placeholder {
+   color: #111;
 }
 
 a,
@@ -126,11 +126,11 @@ footer li a:hover,
 {
   color: #39e6ac;
 }
-.rst-mainslider .owl-controls .owl-page.active span, 
+.rst-mainslider .owl-controls .owl-page.active span,
 .rst-mainslider .owl-controls.clickable .owl-page:hover span,
-.rst-specpost .owl-controls .owl-page.active span, 
+.rst-specpost .owl-controls .owl-page.active span,
 .rst-specpost .owl-controls.clickable .owl-page:hover span,
-.rst-hotnews .owl-controls .owl-page.active span, 
+.rst-hotnews .owl-controls .owl-page.active span,
 .rst-hotnews .owl-controls.clickable .owl-page:hover span,
 .owl-theme .owl-controls .owl-page.active span,
 .owl-theme .owl-controls .owl-page:hover span
@@ -144,7 +144,7 @@ footer li a:hover,
   background: #39e6ac
 }
 .page-next:hover,
-.page-prev:hover  
+.page-prev:hover
 {
   border: 1px solid #39e6ac;
   background: #39e6ac;
@@ -155,7 +155,7 @@ footer li a:hover,
   -o-transition: all 0.2s ease-in-out 0s;
 }
 .page-numbers.current,
-.page-numbers:hover 
+.page-numbers:hover
 {
   color: #fff;
   background: #39e6ac;
@@ -377,7 +377,7 @@ footer li a:hover,
   border: 1px solid #e8ecf0;
   display: block;
   padding: 20px 20px 12px;
-  
+
 }
 .rst-loginform > div {
   padding: 17px 0 0;
@@ -444,7 +444,7 @@ footer li a:hover,
   display: inline-block;
 }
 .rst-header-menu-content > ul > li:hover a,
-.rst-header-menu-content > ul > li:hover a i 
+.rst-header-menu-content > ul > li:hover a i
 {
   color: #fff;
    -webkit-transition: all 0.3s ease-in-out 0s;
@@ -519,7 +519,7 @@ footer li a:hover,
 
 
 /*=======================
-   Content Home Page 
+   Content Home Page
 =======================*/
 
 .rst-mainslider {
@@ -543,7 +543,7 @@ footer li a:hover,
   position: relative;
 }
 .rst-boxinfo span,
-#rst-multimedia .rst-postinfo span 
+#rst-multimedia .rst-postinfo span
 {
   font-size: 12px;
   font-weight: 700;
@@ -661,7 +661,7 @@ footer li a:hover,
   z-index: 1;
 }
 .rst-pageline-slider .owl-controls .owl-buttons div,
-.commentlist .owl-controls .owl-buttons div 
+.commentlist .owl-controls .owl-buttons div
 {
   background: transparent;
   border-radius: 30px;
@@ -712,7 +712,7 @@ h2 {
   text-transform: uppercase;
 }
 #rst-popular .rst-postinfo,
-.col-sm-6.rst-catpost .rst-postinfo 
+.col-sm-6.rst-catpost .rst-postinfo
 {
   border: 1px solid #e8ecf0;
   padding: 16px 20px 23px;
@@ -789,7 +789,7 @@ h2 {
 }
 .rst-section-title {
   position: relative;
-} 
+}
 .rst-section-title-short .rst-shortmenu {
   position: relative;
   display: inline-block;
@@ -865,8 +865,8 @@ h2 {
   position: absolute;
   width: 100%;
 }
-.rst-leftpost .rst-postinfo h6, 
-.rst-leftpost .rst-postinfo h6 a 
+.rst-leftpost .rst-postinfo h6,
+.rst-leftpost .rst-postinfo h6 a
 {
   color: #2f3e42;
   font-family: Lato;
@@ -916,10 +916,10 @@ h2 {
 .rst-newsandhot-post .rst-postpic-cat {
   left: 35px;
 }
-.rst-newsandhot-post .rst-postinfo h6, 
+.rst-newsandhot-post .rst-postinfo h6,
 .rst-newsandhot-post .rst-postinfo h6 a,
 .rst-catpost .rst-postinfo h6,
-.rst-catpost .rst-postinfo h6 a 
+.rst-catpost .rst-postinfo h6 a
 {
   color: #2f3e42;
   font-size: 21px;
@@ -950,7 +950,7 @@ h2 {
   padding: 0 15px;
 }
 .rst-newsandhot-post .rst-loadmore,
-#rst-itemcontent .rst-loadmore 
+#rst-itemcontent .rst-loadmore
 {
   border: 1px solid #e8ecf0;
   display: block;
@@ -975,7 +975,7 @@ h2 {
   margin: 0 0 10px;
 }
 .widget_hot_news ul li > a,
-.rst-catlist > a 
+.rst-catlist > a
 {
   display: block;
   font-family: Lato;
@@ -1007,7 +1007,7 @@ h2 {
   text-align: center;
   width: 30%;
 }
-.widget.widget_social > a i, 
+.widget.widget_social > a i,
 .widget.widget_social > a b,
 .widget.widget_social > a span
 {
@@ -1168,8 +1168,8 @@ h2 {
 }
 #rst-multimedia .rst-postpic.rst-postvideo::before,
 .rst-catbanner-slider.rst-postvideo .owl-item::before,
-.rst-catbanner-listpost .rst-postvideo::before, 
-.rst-mediapost .rst-postvideo::before 
+.rst-catbanner-listpost .rst-postvideo::before,
+.rst-mediapost .rst-postvideo::before
 {
   background: #44bb9d;
   border-radius: 50%;
@@ -1254,7 +1254,7 @@ h2 {
 
 
 /*=======================
-        Footer 
+        Footer
 =======================*/
 
 .rst-footerline {
@@ -1273,7 +1273,7 @@ footer li {
   margin: 0 0 14px;
 }
 footer li a {
-  font-family: 'HelveticaNeueCyrRoman';	
+  font-family: 'HelveticaNeueCyrRoman';
   color: #a9acb0;
   font-size: 16px;
 }
@@ -1307,7 +1307,7 @@ footer li a {
 
 
 /*=======================
-     Register Page 
+     Register Page
 =======================*/
 
 #rst-register-page {
@@ -1326,7 +1326,7 @@ footer li a {
 .rst-pageinput,
 .bootstrap-tagsinput
 {
-  border: 1px solid #e8ecf0;	
+  border: 1px solid #e8ecf0;
   border-radius: 0;
   color: #223040;
   display: block;
@@ -1374,7 +1374,7 @@ footer li a {
   margin: 0 0 30px;
 }
 .rst-setting:nth-of-type(3),
-.rst-setting:nth-of-type(5) 
+.rst-setting:nth-of-type(5)
 {
   margin: 0 0 80px;
 }
@@ -1490,7 +1490,7 @@ footer li a {
   border: 1px solid #e8ecf0;
   padding: 0;
 }
-.rst-account-socialbar ul ul:after 
+.rst-account-socialbar ul ul:after
 {
   border: medium solid transparent;
   bottom: 100%;
@@ -1558,7 +1558,7 @@ footer li a {
 
 
 /*=======================
-     Category Page 
+     Category Page
 =======================*/
 #rst-catcontent,
 #rst-mediacontent {
@@ -1566,15 +1566,15 @@ footer li a {
 }
 #rst-catcontent .rst-shortmenu,
 #rst-itemcontent .rst-shortmenu,
-.rst-shortmenu 
+.rst-shortmenu
 {
   position: absolute;
   right: 0;
   top: 23px;
 }
 #rst-life .rst-shortmenu,
-#rst-sport .rst-shortmenu, 
-#rst-multimedia .rst-shortmenu 
+#rst-sport .rst-shortmenu,
+#rst-multimedia .rst-shortmenu
 {
   top: 0;
 }
@@ -1621,8 +1621,8 @@ footer li a {
   line-height: 12px;
   padding: 10px;
 }
-.rs-select-box .rs-select-item:hover, 
-.rs-select-box .rs-select-item.active 
+.rs-select-box .rs-select-item:hover,
+.rs-select-box .rs-select-item.active
 {
   background: #ececec ;
   color: #2f3e42;
@@ -1704,7 +1704,7 @@ footer li a {
   top: 0;
 }
 .page-next,
-.page-prev 
+.page-prev
 {
   position: absolute;
   border: 1px solid #e8ecf0;
@@ -1725,7 +1725,7 @@ footer li a {
   padding: 10px 14px;
 }
 .page-numbers.current,
-.page-numbers:hover 
+.page-numbers:hover
 {
   color: #fff;
   background: #39e6ac;
@@ -1809,7 +1809,7 @@ p.help-block.text-danger ul li {
   border-left: 0;
 }
 .rst-author-contactinfo li,
-.rst-catlist li 
+.rst-catlist li
 {
   border-left: 1px solid #e8ecf0;
   display: inline-block;
@@ -1817,13 +1817,13 @@ p.help-block.text-danger ul li {
   width: 34px;
 }
 .rst-author-contactinfo li a,
-.rst-catlist li a 
+.rst-catlist li a
 {
   display: block;
   padding: 17px 0;
 }
 .rst-author-contactinfo li a i,
-.rst-catlist li a i 
+.rst-catlist li a i
 {
   color: #a9acb0;
   font-size: 15px;
@@ -1874,14 +1874,14 @@ p.help-block.text-danger ul li {
   width: 31.7%;
 }
 .rst-catbanner-listpost .rst-postpic,
-.rst-catbanner-listpost .rst-postvideo 
+.rst-catbanner-listpost .rst-postvideo
 {
   background: #000;
   float: left;
   position: relative;
 }
 .rst-catbanner-listpost .rst-postpic img,
-.rst-catbanner-listpost .rst-postvideo img 
+.rst-catbanner-listpost .rst-postvideo img
 {
   max-width: 185px;
   opacity: 0.7;
@@ -2159,7 +2159,7 @@ span.checkbox, span.radio {
 
 
 /*=======================
-     Shortcodes 
+     Shortcodes
 =======================*/
 .panel-group .panel {
   border: 1px solid #e8ecf0;
@@ -2237,7 +2237,7 @@ span.checkbox, span.radio {
 }
 .close i {
   font-size: 15px;
-}	
+}
 .nav-tabs {
   border-bottom: 1px solid #e8ecf0;
 }
@@ -2260,7 +2260,7 @@ span.checkbox, span.radio {
 }
 .nav-tabs > li.active a,
 .nav-tabs > li.active:hover a,
-.nav-tabs > li.active:focus a  
+.nav-tabs > li.active:focus a
 {
   border-right: 0;
 }
@@ -2288,26 +2288,26 @@ span.checkbox, span.radio {
 .rst-pagebutton.rst-pagebutton1:hover {
   background: #fff;
   border: 1px solid #e8ecf0;
-} 
-.table > caption + thead > tr:first-child > th, 
-.table > colgroup + thead > tr:first-child > th, 
-.table > thead:first-child > tr:first-child > th, 
-.table > caption + thead > tr:first-child > td, 
-.table > colgroup + thead > tr:first-child > td, 
-.table > thead:first-child > tr:first-child > td 
+}
+.table > caption + thead > tr:first-child > th,
+.table > colgroup + thead > tr:first-child > th,
+.table > thead:first-child > tr:first-child > th,
+.table > caption + thead > tr:first-child > td,
+.table > colgroup + thead > tr:first-child > td,
+.table > thead:first-child > tr:first-child > td
 {
-  background: #f7fafd;	
+  background: #f7fafd;
   border-top: 0 none;
   font-size: 12px;
   color: #2f3e42;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.table-bordered > thead > tr > th, 
-.table-bordered > tbody > tr > th, 
-.table-bordered > tfoot > tr > th, 
-.table-bordered > thead > tr > td, 
-.table-bordered > tbody > tr > td, 
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
   border: 0;
   color: #1b1b1b;
@@ -2323,13 +2323,13 @@ span.checkbox, span.radio {
 .table tbody tr:last-child td {
   border-bottom: 0 none;
 }
-.rst-shortcodeslist ol, 
+.rst-shortcodeslist ol,
 .rst-shortcodeslist ul {
   font-family: 'HelveticaNeueCyrRoman';
   padding: 0 0 0 15px;
-  color: #1b1b1b; 
+  color: #1b1b1b;
 }
-.rst-shortcodeslist ol > li, 
+.rst-shortcodeslist ol > li,
 .rst-shortcodeslist ul > li {
   margin: 0 0 13px;
   padding: 0 0 0 12px;
@@ -2429,5 +2429,3 @@ span.checkbox, span.radio {
 .btn-file > input {
   z-index: 99;
 }
-
-

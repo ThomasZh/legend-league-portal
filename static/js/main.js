@@ -262,51 +262,7 @@ function main() {
 			}, 3000);
 
 		});
-		$('#rst-itemcontent .rst-loadmore').on('click',function(e){
-			e.preventDefault();
-			var load_more = $(this);
-			load_more.text('Loading...');
-			setTimeout(function(){
-				load_more.css('display','none');
-				var data = '\
-					<li class="comment">\
-						<div class="comment-container">\
-							<div class="comment-avatar">\
-								<img src="images/account.jpg" alt="" />\
-							</div>\
-							<div class="comment-data">\
-								<div class="comment-header">\
-									<a href="#" class="comment-author">John Doe</a>\
-									<time class="comment-date"><i class="fa fa-clock-o"></i>on 12 sep, 2015</time>\
-									<a href="#" class="comment-reply-link">REPLY</a>\
-								</div>\
-								<div class="comment-body">\
-									<p>Curabitur posuere eros sed tortor porttitor pretium. Praesent tincidunt neque eget euismod malesuada. Sed gravida finibus est eu dignissim. Fusce malesuada sodales interdum. Mauris sagittis interdum enim vel sodales. Vestibulum at tellus id libero mollis maximus sed quis ligula.</p>\
-								</div>\
-							</div>\
-						</div>\
-					</li>\
-					<li class="comment">\
-						<div class="comment-container">\
-							<div class="comment-avatar">\
-								<img src="images/account.jpg" alt="" />\
-							</div>\
-							<div class="comment-data">\
-								<div class="comment-header">\
-									<a href="#" class="comment-author">John Doe</a>\
-									<time class="comment-date"><i class="fa fa-clock-o"></i>on 12 sep, 2015</time>\
-									<a href="#" class="comment-reply-link">REPLY</a>\
-								</div>\
-								<div class="comment-body">\
-									<p>Curabitur posuere eros sed tortor porttitor pretium. Praesent tincidunt neque eget euismod malesuada. Sed gravida finibus est eu dignissim. Fusce malesuada sodales interdum. Mauris sagittis interdum enim vel sodales. Vestibulum at tellus id libero mollis maximus sed quis ligula.</p>\
-								</div>\
-							</div>\
-						</div>\
-					</li>\
-				';
-				$('#rst-itemcontent .commentlist').append(data);
-			}, 3000);
-		});
+
 
 
 		// Custom Selectbox

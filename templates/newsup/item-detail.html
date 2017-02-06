@@ -148,8 +148,9 @@
               <h2>Heading 2</h2>
               <div class="rst-shortmenu">
                 <p>
-                  <span class="rst-item-likes"><i class="fa fa-heart"></i>10</span>
-                  <span class="rst-item-comments"><i class="fa fa-comment"></i>25</span>
+                  <span class="rst-item-comments"><i class="fa fa-eye"></i>{{ article_info['view_num'] }}</span>
+                  <span class="rst-item-likes"><i class="fa fa-heart"></i>{{ article_info['like_num'] }}</span>
+                  <span class="rst-item-comments"><i class="fa fa-comment"></i>{{ article_info['comment_num'] }}</span>
                   <span class="rst-item-author"><b>BY</b><a href="#">john doe</a></span>
                 </p>
               </div>
@@ -180,6 +181,15 @@
               </article>
               <!-- End Posts Contents -->
 
+              <!-- like button -->
+              <div class="row">
+                <div class="col-xs-12">
+                  <nav class="wp-pagenavi">
+                    <a v-on:click="sendLike" class="rst-item-likes" href="#"><i id="like-icons" class="fa fa-3x fa-heart-o"></i></a>
+                  </nav>
+                </div>
+              </div>
+              <!-- / like button -->
 
               <div class="col-xs-12">
                 <div class="rst-tagsandshare">
@@ -201,73 +211,33 @@
               <!-- End Tags and Share -->
 
               <!-- Comment list -->
-              <div class="col-xs-12 rst-content-comment">
+              <div id="comment-list" class="col-xs-12 rst-content-comment">
                 <div class="rst-section-title rst-section-title-box">
-                  <h4>3 Comments</h4>
+                  <h4>{{! comment_num }} Comments</h4>
                 </div>
                 <ol class="commentlist">
-                  <li class="comment">
+
+                  <li v-for="comment in comments" class="comment">
                     <div class="comment-container">
                       <div class="comment-avatar">
-                        <img src="/static/newsup/images/account.jpg" alt="" />
+                        <img v-bind:src="comment.avatar" alt="" />
                       </div>
                       <div class="comment-data">
                         <div class="comment-header">
-                          <a href="#" class="comment-author">John Doe</a>
-                          <time class="comment-date"><i class="fa fa-clock-o"></i>on 12 sep, 2015</time>
+                          <a href="#" class="comment-author">{{! comment.nickname }}</a>
+                          <time class="comment-date"><i class="fa fa-clock-o"></i>{{! comment.create_time }}</time>
                           <a href="#" class="comment-reply-link">REPLY</a>
                         </div>
                         <div class="comment-body">
-                          <p>Curabitur posuere eros sed tortor porttitor pretium. Praesent tincidunt neque eget euismod malesuada. Sed gravida finibus est eu dignissim. Fusce malesuada sodales interdum. Mauris sagittis interdum enim vel sodales. Vestibulum
-                            at tellus id libero mollis maximus sed quis ligula.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <ul class="children">
-                      <li class="comment">
-                        <div class="comment-container">
-                          <div class="comment-avatar">
-                            <img src="/static/newsup/images/account.jpg" alt="" />
-                          </div>
-                          <div class="comment-data">
-                            <div class="comment-header">
-                              <a href="#" class="comment-author">John Doe</a>
-                              <time class="comment-date"><i class="fa fa-clock-o"></i>on 12 sep, 2015</time>
-                              <a href="#" class="comment-reply-link">REPLY</a>
-                            </div>
-                            <div class="comment-body">
-                              <p>Curabitur posuere eros sed tortor porttitor pretium. Praesent tincidunt neque eget euismod malesuada. Sed gravida finibus est eu dignissim. Fusce malesuada sodales interdum. Mauris sagittis interdum enim vel sodales. Vestibulum
-                                at tellus id libero mollis maximus sed quis ligula.</p>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="comment">
-                    <div class="comment-container">
-                      <div class="comment-avatar">
-                        <img src="/static/newsup/images/account.jpg" alt="" />
-                      </div>
-                      <div class="comment-data">
-                        <div class="comment-header">
-                          <a href="#" class="comment-author">John Doe</a>
-                          <time class="comment-date"><i class="fa fa-clock-o"></i>on 12 sep, 2015</time>
-                          <a href="#" class="comment-reply-link">REPLY</a>
-                        </div>
-                        <div class="comment-body">
-                          <p>Curabitur posuere eros sed tortor porttitor pretium. Praesent tincidunt neque eget euismod malesuada. Sed gravida finibus est eu dignissim. Fusce malesuada sodales interdum. Mauris sagittis interdum enim vel sodales. Vestibulum
-                            at tellus id libero mollis maximus sed quis ligula.</p>
+                          <p>{{! comment.comment }}</p>
                         </div>
                       </div>
                     </div>
                   </li>
                 </ol>
-                <a href="#" class="rst-loadmore">2 new comments</a>
+                <a id="loadMoreBtn" v-on:click="loadMore" class="rst-loadmore">more comments</a>
               </div>
               <!-- End comment list -->
-
-
 
             </div>
             <div class="row rst-comments">
@@ -276,23 +246,13 @@
                   <h4>Add Comment</h4>
                 </div>
                 <div class="rst-getintouch-form">
-                  <form action="#">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <input class="rst-pageinput" type="text" placeholder="Artem" />
-                      </div>
-                      <div class="col-sm-6">
-                        <input class="rst-pageinput" type="text" placeholder="Email" />
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-xs-12">
-                        <textarea class="rst-pageinput" name="" id="" cols="30" rows="10" placeholder="Add your comment"></textarea>
-                        <input class="rst-pagebutton" type="submit" value="SEND" />
-                      </div>
-                    </div>
-                  </form>
-                </div>
+									<div class="row">
+										<div class="col-xs-12">
+											<textarea class="rst-pageinput" name="" id="comment" cols="30" rows="10" placeholder="Add your comment" ></textarea>
+											<input class="rst-pagebutton" type="button" v-on:click="sendComment" value="SEND"/>
+										</div>
+									</div>
+								</div>
               </div>
             </div>
             <!-- End Comment Form -->
@@ -402,56 +362,18 @@
             </div>
             <!-- end section title -->
             <div class="row commentlist owl-carousel">
+              {% for comment in last_comments %}
               <div class="col-sm-12 comment">
                 <div class="comment-avatar">
-                  <img src="/static/newsup/images/slider/category/hm01.jpg" alt="" />
+                  <img src="{{ comment['avatar'] }}" alt="" />
                 </div>
                 <div class="comment-data">
-                  <a href="#" class="comment-author">John Doe</a>
-                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
-                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
+                  <a href="#" class="comment-author">{{ comment['nickname'] }}</a>
+                  <span class="comment-time"><i class="fa fa-clock-o"></i>{{ comment['create_time'] }}</span>
+                  <p class="comment-body">{{ comment['comment'] }}</p>
                 </div>
               </div>
-              <div class="col-sm-12 comment">
-                <div class="comment-avatar">
-                  <img src="/static/newsup/images/slider/category/hm02.jpg" alt="" />
-                </div>
-                <div class="comment-data">
-                  <a href="#" class="comment-author">John Doe</a>
-                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
-                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                </div>
-              </div>
-              <div class="col-sm-12 comment">
-                <div class="comment-avatar">
-                  <img src="/static/newsup/images/slider/category/hm03.jpg" alt="" />
-                </div>
-                <div class="comment-data">
-                  <a href="#" class="comment-author">John Doe</a>
-                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
-                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                </div>
-              </div>
-              <div class="col-sm-12 comment">
-                <div class="comment-avatar">
-                  <img src="/static/newsup/images/slider/category/hm02.jpg" alt="" />
-                </div>
-                <div class="comment-data">
-                  <a href="#" class="comment-author">John Doe</a>
-                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
-                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                </div>
-              </div>
-              <div class="col-sm-12 comment">
-                <div class="comment-avatar">
-                  <img src="/static/newsup/images/slider/category/hm01.jpg" alt="" />
-                </div>
-                <div class="comment-data">
-                  <a href="#" class="comment-author">John Doe</a>
-                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
-                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                </div>
-              </div>
+              {% end %}
             </div>
           </div>
         </div>
@@ -493,6 +415,136 @@
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
 
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('js/json2.js') }}"></script>
+  <script src="{{ static_url('js/vue-2.1.4.js') }}" type="text/javascript"></script>
+
+  <script>
+    new Vue({
+      el: '#rst-itemcontent',
+      data: {
+        comments: [],
+        comment_num: 0,
+        limlt: 2
+      },
+      created: function() {
+        this.queryComments(0, this.limlt);
+      },
+      methods: {
+        sendLike: function() {
+          console.log('like');
+          $.ajax({
+            type: "POST",
+            url: "/api/articles/{{ article_info['_id'] }}/like",
+            dataType: "json",
+            contentType: 'application/json',
+            success: function(data, status, xhr) {
+              console.log(data);
+              $("#like-icons").removeClass("fa-heart-o").addClass("fa-heart");
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+              if (XMLHttpRequest.status == 200) {
+                $("#like-icons").removeClass("fa-heart-o").addClass("fa-heart");
+              }
+            },
+            complete: function(XMLHttpRequest, textStatus) {
+              this; // 调用本次AJAX请求时传递的options参数
+            }
+          });
+        },
+        sendComment: function() {
+          var _self = this;
+          var comment = $("#comment").val();
+          console.log(comment);
+          var data = {
+            "comment": comment,
+          };
+          var json = JSON.stringify(data);
+          console.log(json);
+
+          $.ajax({
+            type: "POST",
+            url: "/api/articles/{{ article_info['_id'] }}/comment",
+            dataType: "json",
+            data: json,
+            contentType: 'application/json',
+            success: function(data, status, xhr) {
+              console.log(data);
+              $("#comment").val("");
+              _self.queryNewComment();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+              if (XMLHttpRequest.status == 200) {
+                $("#comment").val("");
+                _self.queryNewComment();
+              }
+            },
+            complete: function(XMLHttpRequest, textStatus) {
+              this; // 调用本次AJAX请求时传递的options参数
+            }
+          });
+        },
+        loadMore: function() {
+          $("#loadMoreBtn").text('Loading...');
+          setTimeout(function(){
+            $("#loadMoreBtn").text('Loading...');
+          }, 1000);
+          this.queryComments(this.comment_num, this.limlt);
+          $("#loadMoreBtn").css('display','none');
+          // setTimeout(function(){
+          //   $("#loadMoreBtn").css('display','none');
+          // }, 1000);
+        },
+        queryComments: function(idx, limit) {
+          var _self = this;
+          $.ajax({
+            type: "GET",
+            url: "/api/articles/{{ article_info['_id'] }}/comment?idx=" + idx + "&limit=" + limit,
+            async: false,
+            dataType: "json",
+            contentType: 'application/json',
+            success: function(datas, status, xhr) {
+              console.log(datas);
+              for(var i = 0, l = datas.length; i < l; i++) {
+                _self.comments.push(datas[i]);
+                _self.comment_num += 1;
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+            },
+            complete: function(XMLHttpRequest, textStatus) {
+              this; // 调用本次AJAX请求时传递的options参数
+            }
+          });
+        },
+        queryNewComment: function() {
+          var _self = this;
+          $.ajax({
+            type: "GET",
+            url: "/api/articles/{{ article_info['_id'] }}/comment?idx=0&limit=1",
+            async: false,
+            dataType: "json",
+            contentType: 'application/json',
+            success: function(datas, status, xhr) {
+              console.log(datas);
+              for(var i = 0, l = datas.length; i < l; i++) {
+                _self.comments.splice(0, 0, datas[i]);
+                _self.comment_num += 1;
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+            },
+            complete: function(XMLHttpRequest, textStatus) {
+              this; // 调用本次AJAX请求时传递的options参数
+            }
+          });
+        },
+      }
+    });
+  </script>
 
 </body>
 
