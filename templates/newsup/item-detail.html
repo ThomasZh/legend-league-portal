@@ -353,32 +353,7 @@
     <!-- End Category Page Content -->
 
     <!-- Section Latest Comments -->
-    <section id="rst-latestcomments">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="rst-section-title rst-section-title-box">
-              <h4>Latest Comment</h4>
-            </div>
-            <!-- end section title -->
-            <div class="row commentlist owl-carousel">
-              {% for comment in last_comments %}
-              <div class="col-sm-12 comment">
-                <div class="comment-avatar">
-                  <img src="{{ comment['avatar'] }}" alt="" />
-                </div>
-                <div class="comment-data">
-                  <a href="#" class="comment-author">{{ comment['nickname'] }}</a>
-                  <span class="comment-time"><i class="fa fa-clock-o"></i>{{ comment['create_time'] }}</span>
-                  <p class="comment-body">{{ comment['comment'] }}</p>
-                </div>
-              </div>
-              {% end %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    {% module Template("newsup/block-lastest-comments.html", lastest_comments=lastest_comments) %}
     <!-- End Section Latest Comments -->
 
     <!-- Footer -->
@@ -424,7 +399,7 @@
       data: {
         comments: [],
         comment_num: 0,
-        limlt: 2
+        limlt: 20
       },
       created: function() {
         this.queryComments(0, this.limlt);
@@ -486,12 +461,16 @@
           });
         },
         loadMore: function() {
+          var _self = this;
           $("#loadMoreBtn").text('Loading...');
+          _self.queryComments(_self.comment_num, _self.limlt);
           setTimeout(function(){
-            $("#loadMoreBtn").text('Loading...');
+            if (_self.comment_num % _self.limlt == 0){
+              $("#loadMoreBtn").text('More comments');
+            } else {
+              $("#loadMoreBtn").css('display','none');
+            }
           }, 1000);
-          this.queryComments(this.comment_num, this.limlt);
-          $("#loadMoreBtn").css('display','none');
           // setTimeout(function(){
           //   $("#loadMoreBtn").css('display','none');
           // }, 1000);

@@ -101,6 +101,15 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         for article in hots:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
+        # lastest comments(最新的评论)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
+        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        lastest_comments = json_decode(response.body)
+        for comment in lastest_comments:
+            comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -113,7 +122,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
                 journeies=journeies,
                 news=news,
                 populars=populars,
-                hots=hots)
+                hots=hots,
+                lastest_comments=lastest_comments)
 
 
 class NewsupAccountHandler(tornado.web.RequestHandler):
@@ -138,13 +148,34 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
         if access_token:
             is_login = True
 
+        # lastest comments(最新的评论)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
+        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        lastest_comments = json_decode(response.body)
+        for comment in lastest_comments:
+            comment['create_time'] = timestamp_friendly_date(comment['create_time'])
+
         self.render('newsup/author.html',
-                is_login=is_login)
+                is_login=is_login,
+                lastest_comments=lastest_comments)
 
 
 class NewsupMediaHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
+
+        # lastest comments(最新的评论)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
+        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        lastest_comments = json_decode(response.body)
+        for comment in lastest_comments:
+            comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -152,7 +183,8 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
             is_login = True
 
         self.render('newsup/media.html',
-                is_login=is_login)
+                is_login=is_login,
+                lastest_comments=lastest_comments)
 
 
 class NewsupShortcodesHandler(tornado.web.RequestHandler):
@@ -172,13 +204,24 @@ class NewsupContactHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
+        # lastest comments(最新的评论)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
+        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        lastest_comments = json_decode(response.body)
+        for comment in lastest_comments:
+            comment['create_time'] = timestamp_friendly_date(comment['create_time'])
+
         is_login = False
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
 
         self.render('newsup/contact.html',
-                is_login=is_login)
+                is_login=is_login,
+                lastest_comments=lastest_comments)
 
 
 class NewsupItemDetailHandler(tornado.web.RequestHandler):
@@ -223,14 +266,14 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
         response = http_client.fetch(url, method="POST", body=_json)
         logging.info("got update view_num response %r", response.body)
 
-        # comments(评论)
+        # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
         url = url_concat("http://api.7x24hs.com/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        last_comments = json_decode(response.body)
-        for comment in last_comments:
+        lastest_comments = json_decode(response.body)
+        for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
         is_login = False
@@ -243,7 +286,7 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
                 article_info=article_info,
                 news=news,
                 populars=populars,
-                last_comments=last_comments)
+                lastest_comments=lastest_comments)
 
 
 class NewsupNewHandler(tornado.web.RequestHandler):
@@ -257,6 +300,30 @@ class NewsupNewHandler(tornado.web.RequestHandler):
 
         self.render('newsup/new.html',
                 is_login=is_login)
+
+
+class NewsupCategoryTileHandler(tornado.web.RequestHandler):
+    def get(self):
+        logging.info(self.request)
+
+        # lastest comments(最新的评论)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
+        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        lastest_comments = json_decode(response.body)
+        for comment in lastest_comments:
+            comment['create_time'] = timestamp_friendly_date(comment['create_time'])
+
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/category-tile.html',
+                is_login=is_login,
+                lastest_comments=lastest_comments)
 
 
 class NewsupCategoryHandler(tornado.web.RequestHandler):
@@ -294,6 +361,16 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
+        # lastest comments(最新的评论)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
+        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        lastest_comments = json_decode(response.body)
+        for comment in lastest_comments:
+            comment['create_time'] = timestamp_friendly_date(comment['create_time'])
+
         is_login = False
         access_token = self.get_secure_cookie("access_token")
         if access_token:
@@ -303,7 +380,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
                 is_login=is_login,
                 sceneries=sceneries,
                 news=news,
-                populars=populars)
+                populars=populars,
+                lastest_comments=lastest_comments)
 
 
 class NewsupFranchiseHandler(AuthorizationHandler):
@@ -328,7 +406,18 @@ class NewsupFranchiseHandler(AuthorizationHandler):
                 franchise_in_this_league = franchise
                 break
 
+        # lastest comments(最新的评论)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
+        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        lastest_comments = json_decode(response.body)
+        for comment in lastest_comments:
+            comment['create_time'] = timestamp_friendly_date(comment['create_time'])
+
         self.render('newsup/franchise.html',
                 is_login=is_login,
                 league_id=LEAGUE_ID,
-                franchise=franchise_in_this_league)
+                franchise=franchise_in_this_league,
+                lastest_comments=lastest_comments)

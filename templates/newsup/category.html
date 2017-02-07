@@ -291,70 +291,7 @@
     <!-- End Category Page Content -->
 
     <!-- Section Latest Comments -->
-    <section id="rst-latestcomments">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="rst-section-title rst-section-title-box">
-              <h4>Latest Comment</h4>
-            </div>
-            <!-- end section title -->
-            <div class="row commentlist owl-carousel">
-              <div class="col-sm-12 comment">
-                <div class="comment-avatar">
-                  <img src="/static/newsup/images/slider/category/hm01.jpg" alt="" />
-                </div>
-                <div class="comment-data">
-                  <a href="#" class="comment-author">John Doe</a>
-                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
-                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                </div>
-              </div>
-              <div class="col-sm-12 comment">
-                <div class="comment-avatar">
-                  <img src="/static/newsup/images/slider/category/hm02.jpg" alt="" />
-                </div>
-                <div class="comment-data">
-                  <a href="#" class="comment-author">John Doe</a>
-                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
-                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                </div>
-              </div>
-              <div class="col-sm-12 comment">
-                <div class="comment-avatar">
-                  <img src="/static/newsup/images/slider/category/hm03.jpg" alt="" />
-                </div>
-                <div class="comment-data">
-                  <a href="#" class="comment-author">John Doe</a>
-                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
-                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                </div>
-              </div>
-              <div class="col-sm-12 comment">
-                <div class="comment-avatar">
-                  <img src="/static/newsup/images/slider/category/hm02.jpg" alt="" />
-                </div>
-                <div class="comment-data">
-                  <a href="#" class="comment-author">John Doe</a>
-                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
-                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                </div>
-              </div>
-              <div class="col-sm-12 comment">
-                <div class="comment-avatar">
-                  <img src="images/slider/category/hm01.jpg" alt="" />
-                </div>
-                <div class="comment-data">
-                  <a href="#" class="comment-author">John Doe</a>
-                  <span class="comment-time"><i class="fa fa-clock-o"></i>20 minute ago</span>
-                  <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    {% module Template("newsup/block-lastest-comments.html", lastest_comments=lastest_comments) %}
     <!-- End Section Latest Comments -->
 
     <!-- Footer -->
