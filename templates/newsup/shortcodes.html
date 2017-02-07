@@ -24,7 +24,7 @@
   <link href="{{ static_url('newsup/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static_url('newsup/fonts/font-awesome-4.2.0.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
 
   <!-- Animate
         ================================================== -->
@@ -351,86 +351,8 @@
             {% module Template("newsup/block-widget-social.html") %}
             <!-- end widget social -->
 
-            <aside class="widget widget_popular">
-              <ul>
-                <li>
-                  <a href="#">Popular</a>
-                  <ul>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol01.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol02.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol03.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol04.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">Latest</a>
-                  <ul>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol02.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="#"><img src="/static/newsup/images/slider/category/pol03.jpg" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                          <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                        </div>
-                      </article>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </aside>
+            <!-- begin widget popular -->
+            {% module Template("newsup/block-widget-popular.html", populars=populars, news=news) %}
             <!-- end widget popular -->
 
             <!-- begin widget adv -->

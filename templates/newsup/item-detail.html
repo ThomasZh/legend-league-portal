@@ -262,46 +262,8 @@
             {% module Template("newsup/block-widget-social.html") %}
             <!-- end widget social -->
 
-            <aside class="widget widget_popular">
-              <ul>
-                <li>
-                  <a href="#">Popular</a>
-                  <ul>
-                    {% for article in populars %}
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!100x76" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="/portal/newsup/item-detail?id={{ article['_id'] }}">{{ article['title'] }}</a></h6>
-                          <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
-                        </div>
-                      </article>
-                    </li>
-                    {% end %}
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">Latest</a>
-                  <ul>
-                    {% for article in news %}
-                    <li>
-                      <article>
-                        <div class="rst-postpic">
-                          <a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!100x76" alt="" /></a>
-                        </div>
-                        <div class="rst-postinfo">
-                          <h6><a href="/portal/newsup/item-detail?id={{ article['_id'] }}">{{ article['title'] }}</a></h6>
-                          <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
-                        </div>
-                      </article>
-                    </li>
-                    {% end %}
-                  </ul>
-                </li>
-              </ul>
-            </aside>
+            <!-- begin widget popular -->
+            {% module Template("newsup/block-widget-popular.html", populars=populars, news=news) %}
             <!-- end widget popular -->
 
             <!-- begin widget adv -->
