@@ -463,69 +463,18 @@
           <div class="col-xs-12">
             <div class="rst-mediagrid">
               <div class="div">
-                <div class="rst-col rst-col-50">
-                  <div class="rst-postpic">
-                    <a href="#"><img src="/static/newsup/images/slider/category/ha01.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-postinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <h6><a href="#">Lorem ipsum dolor sit amet consectetur. dolor sit amet, consectetur adipiscing.</a></h6>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
+                {% for multimedia in multimedias %}
                 <div class="rst-col rst-col-25">
-                  <div class="rst-postpic rst-postvideo">
-                    <a href="#"><img src="/static/newsup/images/slider/category/ha02.jpg" alt="" /></a>
+                  <div class="rst-postpic">
+                    <a href="#"><img src="{{ multimedia['url'] }}!293x293" alt="" /></a>
                   </div>
                   <div class="rst-postinfo">
                     <a href="#"><span>Sport</span></a>
                     <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                    <time><i class="fa fa-clock-o"></i>{{ multimedia['publish_time'] }}</time>
                   </div>
                 </div>
-                <div class="rst-col rst-col-25">
-                  <div class="rst-postpic">
-                    <a href="#"><img src="/static/newsup/images/slider/category/ha03.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-postinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
-                <div class="clear"></div>
-              </div>
-              <div class="div">
-                <div class="rst-col rst-col-25">
-                  <div class="rst-postpic">
-                    <a href="#"><img src="/static/newsup/images/slider/category/ha04.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-postinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
-                <div class="rst-col rst-col-25">
-                  <div class="rst-postpic rst-postvideo">
-                    <a href="#"><img src="/static/newsup/images/slider/category/ha05.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-postinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
-                <div class="rst-col rst-col-50">
-                  <div class="rst-postpic">
-                    <a href="#"><img src="/static/newsup/images/slider/category/ha06.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-postinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <h6><a href="#">Lorem ipsum dolor sit amet consectetur. dolor sit amet, consectetur adipiscing.</a></h6>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
+                {% end %}
                 <div class="clear"></div>
               </div>
             </div>

@@ -111,6 +111,14 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
+        # multimedia
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":8}
+        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        multimedias = json_decode(response.body)
+
         is_login = False
         access_token = self.get_secure_cookie("access_token")
         if access_token:
@@ -123,7 +131,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
                 news=news,
                 populars=populars,
                 hots=hots,
-                lastest_comments=lastest_comments)
+                lastest_comments=lastest_comments,
+                multimedias=multimedias)
 
 
 class NewsupAccountHandler(tornado.web.RequestHandler):
@@ -189,6 +198,14 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
+        # multimedia
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":14}
+        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        multimedias = json_decode(response.body)
+
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
         url = url_concat("http://api.7x24hs.com/api/articles", params)
@@ -228,7 +245,8 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
                 is_login=is_login,
                 news=news,
                 populars=populars,
-                lastest_comments=lastest_comments)
+                lastest_comments=lastest_comments,
+                multimedias=multimedias)
 
 
 class NewsupShortcodesHandler(tornado.web.RequestHandler):
@@ -429,6 +447,14 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         for article in sceneries:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
+        # multimedia
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":4}
+        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        multimedias = json_decode(response.body)
+
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
         url = url_concat("http://api.7x24hs.com/api/articles", params)
@@ -469,7 +495,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
                 sceneries=sceneries,
                 news=news,
                 populars=populars,
-                lastest_comments=lastest_comments)
+                lastest_comments=lastest_comments,
+                multimedias=multimedias)
 
 
 class NewsupFranchiseHandler(AuthorizationHandler):

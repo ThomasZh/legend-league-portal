@@ -113,10 +113,11 @@
               </div>
             </div>
             <div class="rst-catbanner-slider owl-carousel rst-postpic">
-              <img src="/static/newsup/images/cat-03.jpg" alt="" />
-              <img src="/static/newsup/images/cat-04.jpg" alt="" />
-              <img src="/static/newsup/images/cat-05.jpg" alt="" />
-              <img src="/static/newsup/images/cat-06.jpg" alt="" />
+              {% for i in range(len(multimedias)) %}
+              {% if i < 4 %}
+              <img src="{{ multimedias[i]['url'] }}!370x370" alt="" />
+              {% end %}
+              {% end %}
             </div>
             <div class="clear"></div>
           </div>
@@ -139,102 +140,22 @@
               </div>
             </div>
             <div class="row rst-media-postlist">
+              {% for i in range(len(multimedias)) %}
+              {% if i >= 4 %}
               <article class="col-xs-6">
                 <div class="rst-mediapost">
                   <div class="rst-postpic">
-                    <a href="#"><img src="/static/newsup/images/cat-03.jpg" alt="" /></a>
+                    <a href="#"><img src="{{ multimedias[i]['url'] }}!370x370" alt="" /></a>
                   </div>
                   <div class="rst-boxinfo">
                     <a href="#"><span>Sport</span></a>
                     <p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></p>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
+                    <time><i class="fa fa-clock-o"></i>{{ multimedias[i]['publish_time'] }}</time>
                   </div>
                 </div>
               </article>
-              <article class="col-xs-6">
-                <div class="rst-mediapost">
-                  <div class="rst-postvideo">
-                    <a href="#"><img src="/static/newsup/images/cat-04.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-boxinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></p>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
-              </article>
-              <article class="col-xs-12">
-                <div class="rst-mediapost">
-                  <div class="rst-postpic">
-                    <a href="#"><img src="/static/newsup/images/cat-10.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-boxinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></p>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
-              </article>
-              <article class="col-xs-6">
-                <div class="rst-mediapost">
-                  <div class="rst-postpic">
-                    <a href="#"><img src="/static/newsup/images/cat-05.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-boxinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></p>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
-              </article>
-              <article class="col-xs-6">
-                <div class="rst-mediapost">
-                  <div class="rst-postpic">
-                    <a href="#"><img src="/static/newsup/images/cat-06.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-boxinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></p>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
-              </article>
-              <article class="col-xs-12">
-                <div class="rst-mediapost">
-                  <div class="rst-postvideo">
-                    <a href="#"><img src="/static/newsup/images/cat-11.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-boxinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></p>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
-              </article>
-              <article class="col-xs-6">
-                <div class="rst-mediapost">
-                  <div class="rst-postpic">
-                    <a href="#"><img src="/static/newsup/images/cat-07.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-boxinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></p>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
-              </article>
-              <article class="col-xs-6">
-                <div class="rst-mediapost">
-                  <div class="rst-postpic">
-                    <a href="#"><img src="/static/newsup/images/cat-08.jpg" alt="" /></a>
-                  </div>
-                  <div class="rst-boxinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></p>
-                    <time><i class="fa fa-clock-o"></i>12 sep, 2015</time>
-                  </div>
-                </div>
-              </article>
+              {% end %}
+              {% end %}
               <!-- End Category Posts -->
             </div>
             <div class="row">

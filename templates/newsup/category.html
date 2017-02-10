@@ -121,10 +121,9 @@
             {% end %}
             {% end %}
             <div class="rst-catbanner-slider owl-carousel rst-postpic">
-              <img src="/static/newsup/images/cat-03.jpg" alt="" />
-              <img src="/static/newsup/images/cat-04.jpg" alt="" />
-              <img src="/static/newsup/images/cat-05.jpg" alt="" />
-              <img src="/static/newsup/images/cat-06.jpg" alt="" />
+              {% for multimedia in multimedias %}
+              <img src="{{ multimedia['url'] }}!370x370" alt="" />
+              {% end %}
             </div>
             <div class="clear"></div>
           </div>
