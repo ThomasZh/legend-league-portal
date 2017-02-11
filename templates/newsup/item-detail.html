@@ -118,18 +118,11 @@
               </div>
             </div>
             <div class="rst-catbanner-listpost">
+              {% for multimedia in multimedias %}
               <div class="rst-postpic">
-                <a href="#"><img src="/static/newsup/images/cat-03.jpg" alt="" /></a>
+                <a href="#"><img src="{{ multimedia['url'] }}!370x370" alt="" /></a>
               </div>
-              <div class="rst-postpic">
-                <a href="#"><img src="/static/newsup/images/cat-04.jpg" alt="" /></a>
-              </div>
-              <div class="rst-postvideo">
-                <a href="#"><img src="/static/newsup/images/cat-05.jpg" alt="" /></a>
-              </div>
-              <div class="rst-postpic">
-                <a href="#"><img src="/static/newsup/images/cat-06.jpg" alt="" /></a>
-              </div>
+              {% end %}
               <div class="clear"></div>
             </div>
             <div class="clear"></div>

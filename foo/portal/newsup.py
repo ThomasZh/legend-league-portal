@@ -360,6 +360,14 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
+        # multimedia
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":4}
+        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        multimedias = json_decode(response.body)
+
         is_login = False
         access_token = self.get_secure_cookie("access_token")
         if access_token:
@@ -370,6 +378,7 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
                 article_info=article_info,
                 news=news,
                 populars=populars,
+                multimedias=multimedias,
                 lastest_comments=lastest_comments)
 
 
