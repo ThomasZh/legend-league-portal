@@ -45,6 +45,7 @@
   <link href="{{ static_url('newsup/css/jquery.rs.selectbox.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('css/style.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/responsive.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('css/self.css') }}" rel="stylesheet" type="text/css" />
 
   <!-- Custom Fonts
         ================================================== -->
@@ -178,7 +179,7 @@
               <div class="row">
                 <div class="col-xs-12">
                   <nav class="wp-pagenavi">
-                    <a v-on:click="sendLike" class="rst-item-likes" href="#"><i id="like-icons" class="fa fa-3x fa-heart-o"></i></a>
+                    <a v-on:click="sendLike" class="rst-item-likes" style="cursor:pointer"><i id="like-icons" class="fa fa-3x fa-heart-o"></i></a>
                   </nav>
                 </div>
               </div>
@@ -242,6 +243,7 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<textarea class="rst-pageinput" name="" id="comment" cols="30" rows="10" placeholder="Add your comment" ></textarea>
+                      <div class="send-ok-message"></div>
 											<input class="rst-pagebutton" type="button" v-on:click="sendComment" value="SEND"/>
 										</div>
 									</div>
@@ -367,7 +369,9 @@
           };
           var json = JSON.stringify(data);
           console.log(json);
-
+          function hide(){
+            $(".send-ok-message").hide(1000);
+          }
           $.ajax({
             type: "POST",
             url: "/api/articles/{{ article_info['_id'] }}/comment",
@@ -378,10 +382,13 @@
               console.log(data);
               $("#comment").val("");
               _self.queryNewComment();
+
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
               if (XMLHttpRequest.status == 200) {
+                $(".send-ok-message").html("留言成功！");
+                setTimeout(hide,3000);
                 $("#comment").val("");
                 _self.queryNewComment();
               }
@@ -406,6 +413,9 @@
           //   $("#loadMoreBtn").css('display','none');
           // }, 1000);
         },
+        getLocalTime: function(nS) { //时间戳转换
+           return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+        },
         queryComments: function(idx, limit) {
           var _self = this;
           $.ajax({
@@ -417,6 +427,8 @@
             success: function(datas, status, xhr) {
               console.log(datas);
               for(var i = 0, l = datas.length; i < l; i++) {
+                datas[i].create_time = _self.getLocalTime(datas[i].create_time);
+                // console.log(datas[i].create_time);
                 _self.comments.push(datas[i]);
                 _self.comment_num += 1;
               }
@@ -440,6 +452,7 @@
             success: function(datas, status, xhr) {
               console.log(datas);
               for(var i = 0, l = datas.length; i < l; i++) {
+                datas[i].create_time = _self.getLocalTime(datas[i].create_time);
                 _self.comments.splice(0, 0, datas[i]);
                 _self.comment_num += 1;
               }

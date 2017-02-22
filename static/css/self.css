@@ -19,6 +19,11 @@ textarea::-webkit-input-placeholder {
   margin-bottom: 15px;
   color: red;
 }
+.send-ok-message{
+  color: #72e8b1;
+  position: relative;
+  top:-20px;
+}
 #code-button{
   height: 50px;
   width: 100px;
@@ -26,8 +31,4 @@ textarea::-webkit-input-placeholder {
   position:absolute;
   top:0;
   right: 0;
-}
-.lostpwd-verify-code-message{
-  margin-top: -15px;
-  margin-bottom: 45px;
 }
