@@ -1,8 +1,7 @@
 <aside class="widget widget_adv">
   <h3>Advertisement</h3>
-  <a href="#"><img src="/static/newsup/images/ad01.png" alt="" /></a>
-  <a href="#"><img src="/static/newsup/images/ad01.png" alt="" /></a>
-  <a href="#"><img src="/static/newsup/images/ad01.png" alt="" /></a>
-  <a href="#"><img src="/static/newsup/images/ad01.png" alt="" /></a>
+  {% for article in activities %}
+  <a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!170x170" alt="" /></a>
+  {% end %}
   <div class="clear"></div>
 </aside>
