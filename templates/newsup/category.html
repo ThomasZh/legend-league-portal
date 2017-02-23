@@ -61,7 +61,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.1.11.1.js') }}"></script>
 
@@ -213,14 +213,8 @@
             {% module Template("newsup/block-widget-video.html") %}
             <!-- end widget video -->
 
-            <aside class="widget widget_newsletter">
-              <h3>Newsletter</h3>
-              <form action="#">
-                <input class="rst-pageinput" type="text" value="Email and hit enter" onblur="if (this.value == '') {this.value = 'Email and hit enter';}" onclick=" if (this.value == 'Email and hit enter') {this.value = '';}" />
-                <input class="rst-pagebutton" type="submit" value="Subscribe" />
-              </form>
-            </aside>
-            <!-- end widget newsletter -->
+            {% module Template("newsup/block-widget-contactus.html") %}
+
 
           </div>
           <!-- End Content Sidebar -->

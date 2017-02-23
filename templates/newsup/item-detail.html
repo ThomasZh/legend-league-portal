@@ -272,14 +272,8 @@
             {% module Template("newsup/block-widget-video.html") %}
             <!-- end widget video -->
 
-            <aside class="widget widget_newsletter">
-              <h3>Newsletter</h3>
-              <form action="#">
-                <input class="rst-pageinput" type="text" value="Email and hit enter" onblur="if (this.value == '') {this.value = 'Email and hit enter';}" onclick=" if (this.value == 'Email and hit enter') {this.value = '';}" />
-                <input class="rst-pagebutton" type="submit" value="Subscribe" />
-              </form>
-            </aside>
-            <!-- end widget newsletter -->
+            {% module Template("newsup/block-widget-contactus.html") %}
+
 
           </div>
           <!-- End Content Sidebar -->
