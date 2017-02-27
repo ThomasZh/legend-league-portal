@@ -55,14 +55,6 @@
       ================================================== -->
   <link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.1.11.1.js') }}"></script>
 
 </head>
@@ -121,35 +113,35 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="Club Name" name="name" id="name" data-validation-required-message="Please enter your club name." />
+                      <input class="rst-pageinput" type="text" placeholder="Club Name" name="name" id="name"  />
                       <!-- required data-validation-required-message="Please enter your name." -->
-                      <p class="help-block text-danger"></p>
+                      <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
-                      <input class="rst-pageinput" type="email" placeholder="Email" name="email" id="email" data-validation-required-message="Please enter your email." />
+                      <input class="rst-pageinput" type="email" placeholder="Email" name="email" id="email"  />
                       <!-- required data-validation-required-message="Please enter your email." -->
-                      <p class="help-block text-danger"></p>
+                      <!-- <p class="help-block text-danger"></p> -->
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="Address" name="address" id="address" data-validation-required-message="Please enter your club address." />
+                      <input class="rst-pageinput" type="text" placeholder="Address" name="address" id="address"  />
                       <!-- required data-validation-required-message="Please enter your company." -->
-                      <p class="help-block text-danger"></p>
+                      <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="Phone" name="phone" id="phone" data-validation-required-message="Please enter your phone." />
+                      <input class="rst-pageinput" type="text" placeholder="Phone" name="phone" id="phone" />
                       <!-- required data-validation-required-message="Please enter your phone." -->
-                      <p class="help-block text-danger"></p>
+                      <!-- <p class="help-block text-danger"></p> -->
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
-                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="Add your club introduction" name="introduction" id="introduction" data-validation-required-message="Please enter your club introduction."></textarea>
+                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="Add your club introduction" name="introduction" id="introduction" ></textarea>
                       <!-- required data-validation-required-message="Please enter your message." -->
-                      <p class="help-block text-danger"></p>
+                      <!-- <p class="help-block text-danger"></p> -->
                       <div id="success"></div>
                     </div>
                     <button class="rst-pagebutton" type="submit">Apply</button>
@@ -163,37 +155,37 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="Club Name" name="name" id="name" value="{{ franchise['club']['name'] }}" data-validation-required-message="Please enter your club name." />
+                      <input class="rst-pageinput" type="text" placeholder="Club Name" name="name" id="name" value="{{ franchise['club']['name'] }}" />
                       <!-- required data-validation-required-message="Please enter your name." -->
-                      <p class="help-block text-danger"></p>
+                      <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
-                      <input class="rst-pageinput" type="email" placeholder="Email" name="email" id="email" value="{{ franchise['club']['email'] }}" data-validation-required-message="Please enter your email." />
+                      <input class="rst-pageinput" type="email" placeholder="Email" name="email" id="email" value="{{ franchise['club']['email'] }}" />
                       <!-- required data-validation-required-message="Please enter your email." -->
-                      <p class="help-block text-danger"></p>
+                      <!-- <p class="help-block text-danger"></p> -->
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="Address" name="address" id="address" value="{{ franchise['club']['address'] }}" data-validation-required-message="Please enter your club address." />
+                      <input class="rst-pageinput" type="text" placeholder="Address" name="address" id="address" value="{{ franchise['club']['address'] }}" />
                       <!-- required data-validation-required-message="Please enter your company." -->
-                      <p class="help-block text-danger"></p>
+                      <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="Phone" name="phone" id="phone" value="{{ franchise['club']['phone'] }}" data-validation-required-message="Please enter your phone." />
+                      <input class="rst-pageinput" type="text" placeholder="Phone" name="phone" id="phone" value="{{ franchise['club']['phone'] }}" />
                       <!-- required data-validation-required-message="Please enter your phone." -->
-                      <p class="help-block text-danger"></p>
+                      <!-- <p class="help-block text-danger"></p> -->
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
-                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="Add your club introduction" name="introduction" id="introduction" data-validation-required-message="Please enter your club introduction.">
+                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="Add your club introduction" name="introduction" id="introduction" >
                         {{ franchise['club']['introduction'] }}
                       </textarea>
                       <!-- required data-validation-required-message="Please enter your message." -->
-                      <p class="help-block text-danger"></p>
+                      <!-- <p class="help-block text-danger"></p> -->
                       <div id="success"></div>
                     </div>
                     <button class="rst-pagebutton" type="submit">Apply</button>
@@ -275,25 +267,15 @@
   <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap.min.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap-tagsinput.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('newsup/js/jqBootstrapValidation.js') }}"></script>
-
   <!-- WoW Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/wow.min.js') }}"></script>
-
   <!-- Add Fancybox -->
   <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/jquery.fancybox.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/helpers/jquery.fancybox-media.js') }}"></script>
-
   <!-- Owl Slider Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
-
-  <!-- Weather Js -->
-  <!--
-  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.simpleWeather.js') }}"></script>
-  -->
-
   <!-- Custome Selectbox Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
-
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/json2.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/jquery.validate.min.js') }}"></script>
@@ -305,34 +287,42 @@
       // Validation
       $("#apply-form").validate({
         rules: {
-          phone: {
-            minlength: 11,
-            required: true,
-          },
-          email: {
-            minlength: 6,
-            required: true,
-          },
           name: {
             required: true,
-            minlength: 6,
           },
           address: {
             required: true,
-            minlength: 6
+          },
+          phone: {
+            minlength: 11,
+            maxlength:11,
+            required: true,
+          },
+          email: {
+            required: true,
           },
           introduction: {
             required: true,
-            minlength: 6
+            minlength: 10,
           },
         },
-        errorClass: "form-invalid",
+        messages:{
+          name: "请为您的俱乐部取个名吧！",
+          address: "请填写您俱乐部的所在地址!",
+          phone:  "请填写正确的手机号码！",
+          email: "请输入正确的邮箱地址",
+          introduction: {
+            required: "请输入俱乐部简介！",
+            minlength: "至少10个字符！",
+          },
+        },
+        errorClass: "error",
         submitHandler: function(form) {
           var data = {
-            phone: $('#phone').val(),
-            email: $('#email').val(),
             name: $('#name').val(),
             address: $('#address').val(),
+            phone: $('#phone').val(),
+            email: $('#email').val(),
             introduction: $('#introduction').val(),
           };
           var json = JSON.stringify(data);
