@@ -157,40 +157,20 @@
                 </div>
               </div>
             </div>
-            <div class="row rst-cat-postlist">
-              {% for i in range(len(sceneries)) %}
-              {% if i > 0 %}
-              <article class="col-sm-12 rst-catpost">
-                <div class="rst-postpic">
-                  <a href="/portal/newsup/item-detail?id={{ sceneries[i]['_id'] }}"><img src="{{ sceneries[i]['img'] }}!370x370" alt="" /></a>
-                  <a class="rst-postpic-cat" href="#"><span>fitness</span></a>
-                </div>
-                <div class="rst-postinfo">
-                  <a class="rst-postpic-cat" href="#"><span>
-                    {% for category in sceneries[i]['categories'] %}
-                      {{ category['title'] }}&nbsp;
-                    {% end %}
-                  </span></a>
-                  <h6><a href="/portal/newsup/item-detail?id={{ sceneries[i]['_id'] }}">{{ sceneries[i]['title'] }}</a></h6>
-                  <time><i class="fa fa-clock-o"></i>{{ sceneries[i]['publish_time'] }}</time>
-                  <p>{{ sceneries[i]['subtitle'] }}</p>
-                </div>
-                <div class="clear"></div>
-              </article>
-              {% end %}
-              {% end %}
-              <!-- End Category Posts -->
+            <div class="row rst-cat-postlist" id="articleBox">
+
             </div>
-            <div class="row">
+            <div class="row" id="page-bar">
               <div class="col-xs-12">
-                <nav class="wp-pagenavi">
-                  <a class="page-prev" href="#">Prev</a>
-                  <a class="page-numbers current" href="#">1</a>
+                <nav class="wp-pagenavi" id="pagenavi">
+                  <a class="page-prev" id="prev">Prev</a>
+
+                  <!-- <a class="page-numbers current" href="#">1</a>
                   <a class="page-numbers" href="#">2</a>
                   <a class="page-numbers" href="#">3</a>
                   <a class="page-numbers" href="#">4</a>
-                  <a class="page-numbers" href="#">5</a>
-                  <a class="page-next" href="#">Next</a>
+                  <a class="page-numbers" href="#">5</a> -->
+                  <a class="page-next" id="next">Next</a>
                 </nav>
                 <div class="clear"></div>
               </div>
@@ -251,6 +231,7 @@
 
   <!-- Owl Slider Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
+  <script src="{{ static_url('js/vue-2.1.4.js') }}" type="text/javascript"></script>
 
   <!-- Weather Js -->
   <!--
@@ -263,5 +244,94 @@
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
 
 </body>
+<script>
+        var preAllow = true;   // when ajax not completed, cannot do the next request
+        var limit = 2;//每页显示数
+        var currentPage;//当前页
+        var total_page;//总页数
+        function query(currentPage) {
+          $.get("/api/articles-pagination?filter=league&league_id={{ league_id }}&status=publish&category={{ category_id }}&page="+currentPage+"&limit="+limit+"",function(data,status){
+                console.log(data);
+            var pageData = data.data;
+            var total_page = data.total_pgae;//总页数
+
+            // num = ajaxobj.length;
+            for (var i in pageData) {
+              var inner_html = '<article class="col-sm-12 rst-catpost">';
+              inner_html += '<div class="rst-postpic">';
+              inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i]._id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
+              inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
+              inner_html += '</div>';
+              inner_html += '<div class="rst-postinfo">';
+              inner_html += '<a class="rst-postpic-cat" href="#"><span>';
+                for (var j in pageData[i].categories){
+                  inner_html += pageData[i].categories[j].title + '&nbsp;';
+                }
+              inner_html += '</span></a>';
+              inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i]._id +'">'+ pageData[i].title +'</a></h6>'
+              inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].publish_time) +'</time>';
+              inner_html += '<p>'+ pageData[i].subtitle +'</p>';
+              inner_html += '</div>';
+              inner_html += '<div class="clear"></div>';
+              inner_html += '</article>';
+
+              $('#articleBox').append(inner_html);
+              // member_num += 1;
+            };
+            for (var k=1;k<=total_page;k++){
+              var inner_html = '<a class="page-numbers" id="num'+k+'" onclick="query('+k+')">'+ k +'</a>';
+              $("#pagenavi").append(inner_html);
+            };
+            preAllow = true;
+          });
+        }
+        query(1);
+
+        function gotoPage(currentPage) {
+          $.get("/api/articles-pagination?filter=league&league_id={{ league_id }}&status=publish&category={{ category_id }}&page="+currentPage+"&limit="+limit+"",function(data,status){
+                console.log(data);
+            var pageData = data.data;
+            var total_page = data.total_pgae;//总页
+            $('#articleBox').empty();
+            for (var i in pageData) {
+              var inner_html = '<article class="col-sm-12 rst-catpost">';
+              inner_html += '<div class="rst-postpic">';
+              inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i]._id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
+              inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
+              inner_html += '</div>';
+              inner_html += '<div class="rst-postinfo">';
+              inner_html += '<a class="rst-postpic-cat" href="#"><span>';
+                for (var j in pageData[i].categories){
+                  inner_html += pageData[i].categories[j].title + '&nbsp;';
+                }
+              inner_html += '</span></a>';
+              inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i]._id +'">'+ pageData[i].title +'</a></h6>'
+              inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].publish_time) +'</time>';
+              inner_html += '<p>'+ pageData[i].subtitle +'</p>';
+              inner_html += '</div>';
+              inner_html += '<div class="clear"></div>';
+              inner_html += '</article>';
+
+              $('#articleBox').append(inner_html);
+              // member_num += 1;
+            };
+            preAllow = true;
+          });
+
+        };
+        // $("#next").click(function(){ // This event fires when a button is clicked
+        //   if(preAllow){
+        //       preAllow = false;
+        //       query();
+        //       if(num<limit){
+        //         $.alert("没有更多了！");
+        //       }
+        //   }
+        // });
+
+      function getLocalTime(nS) { //时间戳转换
+         return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+      }
+</script>
 
 </html>

@@ -568,7 +568,9 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
                 populars=populars,
                 activities=activities,
                 lastest_comments=lastest_comments,
-                multimedias=multimedias)
+                multimedias=multimedias,
+                league_id=LEAGUE_ID,
+                category_id=category_id)
 
 
 class NewsupFranchiseHandler(AuthorizationHandler):
