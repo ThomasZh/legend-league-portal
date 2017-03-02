@@ -113,39 +113,21 @@
                 <div class="rst-account-setting">
                   <div class="rst-setting">
                     <span>Name</span>
-                    <input class="rst-pageinput" type="text" placeholder="John" />
-                  </div>
-                  <div class="rst-setting">
-                    <span>Subname</span>
-                    <input class="rst-pageinput" type="text" placeholder="Doe" />
-                  </div>
-                  <div class="rst-setting">
-                    <span>Specialization</span>
-                    <input class="rst-pageinput" type="text" placeholder="Reporter, Blogger" />
+                    <input class="rst-pageinput" type="text" id="nickName" value="{{ user['nickname'] }}" placeholder="John" />
                   </div>
                   <div class="rst-setting">
                     <span>Phone</span>
-                    <input class="rst-pageinput" type="text" placeholder="+48 122 33 66" />
+                    <input class="rst-pageinput" type="text" placeholder="010-6666 6666" />
                   </div>
-                  <div class="rst-setting">
-                    <span>Email</span>
-                    <input class="rst-pageinput" type="email" placeholder="john@gmail.com" />
+                  <div class="rst-account-img">
+                    <img id="user_img" src="{{ user['avatar'] }}" alt="touxiang" />
+                    <input class="rst-pagebutton" type="button" value="更改" onclick="openBrowse()" />
+                    <input type="file" id="file" name="file" style="display:none;">
                   </div>
-                  <div class="rst-setting">
-                    <span>Password</span>
-                    <input class="rst-pageinput" type="password" placeholder="••••••••" />
-                  </div>
-                  <div class="rst-setting">
-                    <span>Repeat password</span>
-                    <input class="rst-pageinput" type="password" placeholder="••••••••" />
-                  </div>
-                  <input class="rst-pagebutton" type="submit" value="SAVE CHANGES" />
-                  <input class="rst-pagebutton" type="submit" value="DO NOT SAVE" />
+                  <input class="rst-pagebutton" type="submit" value="保存" onclick="saveInfo();"/>
+                  <input class="rst-pagebutton" type="submit" value="取消" />
                 </div>
-                <div class="rst-account-img">
-                  <img src="/static/newsup/images/account.jpg" alt="" />
-                  <input class="rst-pagebutton" type="submit" value="CHANGE" />
-                </div>
+
               </div>
             </div>
             <div class="col-sm-4">
@@ -211,7 +193,109 @@
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
 
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
+  <!-- fileinput -->
+  <script src="{{ static_url('upyun/js/fileinput.min.js') }}"></script>
+  <script src="{{ static_url('upyun/js/spark-md5.min.js') }}"></script>
+  <script src="{{ static_url('upyun/js/async.js') }}"></script>
+  <script src="{{ static_url('upyun/js/upyun-mu.js') }}"></script>
 
 </body>
+
+<script>
+
+  function uuid() {
+    var s = [];
+    var hexDigits = "0123456789abcdef";
+    for (var i = 0; i < 36; i++) {
+      s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+    }
+    s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+    s[8] = s[13] = s[18] = s[23] = "-";
+
+    var uuid = s.join("");
+    return uuid;
+  }
+
+  function uploadUpyun(file, elementId) {
+    var ext = '.' + file.name.split('.').pop();
+
+    var config = {
+      // 空间名称
+      bucket: 'tripc2c-club-title',
+      // 上传请求过期时间
+      expiration: parseInt((new Date().getTime() + 3600000) / 1000),
+      // 尽量不要使用直接传表单 API 的方式，以防泄露造成安全隐患
+      form_api_secret: 'CRKAOsKHGbbCnU+yztBxUT0bYR0='
+    };
+
+    var instance = new Sand(config);
+    var options = {
+      'notify_url': 'http://upyun.com'
+    };
+    instance.setOptions(options);
+    instance.setElementId(elementId);
+
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var filename = '/avatar/' + d.getFullYear() + '/' + month + '/' + d.getDate() + '/' + uuid() + ext;
+    console.log(filename);
+    instance.upload(filename);
+
+    return 'https://tripc2c-club-title.b0.upaiyun.com' + filename;
+  };
+
+  $("#file").on("change",function(){
+      var times = 0;
+      var imgUrl = uploadUpyun(this.files[0],"file");
+      document.addEventListener('uploaded',function(e){
+        if(times == 0){
+          $("#user_img").attr('src',imgUrl);
+        }
+        times ++;
+      });
+
+  });
+</script>
+
+
+<script type="text/javascript">
+
+    function saveInfo(){
+      var data = { nickname:$("#nickName").val(),
+                   avatar:$("#user_img").attr('src'),
+                 };
+      var json = JSON.stringify(data);
+      console.log(json);
+
+      $.ajax({
+        url:'/api/myinfo',
+        type:'PUT',
+        data:json,
+        dataType:JSON,
+        contentType: 'application/json',
+        success: function(data, status, xhr) {
+          alert("ok")
+        },
+        error:function(){
+
+        }
+
+      });
+
+    };
+
+    function openBrowse(){
+        var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false;
+        if(ie){
+            document.getElementById("file").click();
+            document.getElementById("filename").value=document.getElementById("file").value;
+        }else{
+            var a=document.createEvent("MouseEvents");//FF的处理
+            a.initEvent("click", true, true);
+            document.getElementById("file").dispatchEvent(a);
+        }
+    }
+</script>
 
 </html>
