@@ -67,6 +67,7 @@ class AuthLogoutHandler(AuthorizationHandler):
         self.clear_cookie("access_token")
         self.clear_cookie("expires_at")
         self.clear_cookie("login_next")
+        self.clear_cookie("refresh_token")
 
         self.redirect("/");
 
