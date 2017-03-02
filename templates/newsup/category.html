@@ -336,9 +336,10 @@
               $(".pageBox").html("");
               for (var k=start;k<=end;k++){
                 var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
-                $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+
                 $(".pageBox").append(inner_html);
               };
+               $("#num"+currentPage).addClass("current").siblings().removeClass("current");
 
 
           });
@@ -350,7 +351,7 @@
           $(document).on('click','.pageBox > a',function(){
             var num = $(this).text();
             gotoPage(num);
-            $(this).addClass("current").siblings().removeClass("current");
+            //  $(this).addClass("current").siblings().removeClass("current");
           })
 
           $("#prev").on("click",function(){
@@ -358,8 +359,7 @@
 
               }else{
                   gotoPage(--currentPage);
-                  $("#num"+currentPage).addClass("current").siblings().removeClass("current");
-
+                  // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
               }
           });
 
@@ -368,7 +368,7 @@
 
               }else{
                   gotoPage(++currentPage);
-                  $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+                  // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
               }
           })
         });
