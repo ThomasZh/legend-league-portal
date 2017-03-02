@@ -137,6 +137,7 @@
                   <div class="col-xs-12">
                     <div class="form-group">
                       <textarea class="rst-pageinput" cols="30" rows="10" placeholder="Add your comment" name="message" id="message" ></textarea>
+                      <div class="send-ok-message"></div>
                       <!-- required data-validation-required-message="Please enter your message." -->
                       <p class="help-block text-danger"></p>
                       <div id="success"></div>
@@ -230,7 +231,11 @@
           };
           var json = JSON.stringify(data);
           console.log(json);
-
+          function hide(){
+            $(".send-ok-message").hide(1000);
+            $("#message").val("");
+            $("#phone").val("");
+          }
           $.ajax({
             type: "POST",
             data: json,
@@ -239,12 +244,18 @@
             contentType: 'application/json',
             success: function(data, status, xhr) {
               console.log(data);
-              $('.appy-form-main-message').addClass('show error').html('留言成功!');
+              $(".send-ok-message").html("留言成功！");
+              setTimeout(hide,2500);
+              $("#message").val("");
+              $("#phone").val("");
+
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("XMLHttpRequest.status: " + XMLHttpRequest.status);
               if (XMLHttpRequest.status == 200) {
-                $('.appy-form-main-message').addClass('show error').html('留言成功，稍后我们会和您联系!');
+                $(".send-ok-message").html("留言成功！");
+                setTimeout(hide,2500);
+
               } else {
                 $('.appy-form-main-message').addClass('show error').html('网络异常,刷新重试');
               }
