@@ -283,12 +283,17 @@
               $('#articleBox').append(inner_html);
               // member_num += 1;
             };
-        if(total_page>5){
-            for (var k=1;k<=5;k++){
-              var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
-              $(".pageBox").append(inner_html);
-            };
-          }
+          if(total_page>5){
+              for (var k=1;k<=5;k++){
+                var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+                $(".pageBox").append(inner_html);
+              };
+            }else if(total_page<=5){
+              for (var k=1;k<=total_page;k++){
+                var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+                $(".pageBox").append(inner_html);
+              };
+            }
             $("#num1").addClass("current");
             preAllow = true;
           });
