@@ -15,9 +15,6 @@
   <!-- Favicons
       ================================================== -->
   <link rel="shortcut icon" href="/static/newsup/img/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="/static/newsup/img/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/static/newsup/img/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/static/newsup/img/apple-touch-icon-114x114.png">
 
   <!-- Bootstrap
       ================================================== -->
@@ -167,6 +164,7 @@
     {% module Template("newsup/block-lastest-comments.html", lastest_comments=lastest_comments) %}
     <!-- End Section Latest Comments -->
 
+
     <!-- Footer -->
     {% module Template("newsup/block-footer.html") %}
     <!-- End Footer -->
@@ -193,13 +191,15 @@
   <!--
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.simpleWeather.js') }}"></script>
   -->
-
-  <script src="http://webapi.amap.com/maps?v=1.3&key=f72ae6a1b42b43ed29f1c7981f57bc53&callback=init"></script>
   <!-- Custome Selectbox Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
   <!-- <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script> -->
   <script type="text/javascript" src="{{ static_url('js/json2.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/jquery.validate.min.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
+
+  <script src="http://webapi.amap.com/maps?v=1.3&key=f72ae6a1b42b43ed29f1c7981f57bc53&callback=init"></script>
+
   <script>
     $(function() {
       // Apply Franchise Form

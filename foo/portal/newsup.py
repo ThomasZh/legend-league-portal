@@ -281,6 +281,7 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
                 populars=populars,
                 activities=activities,
                 lastest_comments=lastest_comments,
+                league_id=LEAGUE_ID,
                 multimedias=multimedias)
 
 

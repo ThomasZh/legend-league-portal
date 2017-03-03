@@ -142,35 +142,16 @@
                 <a href="#"><i class="fa fa-camera"></i>PHOTO</a>
               </div>
             </div>
-            <div class="row rst-media-postlist">
-              {% for i in range(len(multimedias)) %}
-              {% if i >= 4 %}
-              <article class="col-xs-6">
-                <div class="rst-mediapost">
-                  <div class="rst-postpic">
-                    <a href="#"><img src="{{ multimedias[i]['url'] }}!370x370" alt="" /></a>
-                  </div>
-                  <div class="rst-boxinfo">
-                    <a href="#"><span>Sport</span></a>
-                    <p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></p>
-                    <time><i class="fa fa-clock-o"></i>{{ multimedias[i]['publish_time'] }}</time>
-                  </div>
-                </div>
-              </article>
-              {% end %}
-              {% end %}
+            <div class="row rst-media-postlist" id="mediaBox">
+
               <!-- End Category Posts -->
             </div>
             <div class="row">
               <div class="col-xs-12">
                 <nav class="wp-pagenavi">
-                  <a class="page-prev" href="#">Prev</a>
-                  <a class="page-numbers current" href="#">1</a>
-                  <a class="page-numbers" href="#">2</a>
-                  <a class="page-numbers" href="#">3</a>
-                  <a class="page-numbers" href="#">4</a>
-                  <a class="page-numbers" href="#">5</a>
-                  <a class="page-next" href="#">Next</a>
+                  <a class="page-prev" style="cursor:pointer;" id="prev">Prev</a>
+                  <div class="pageBox"></div>
+                  <a class="page-next" style="cursor:pointer;" id="next">Next</a>
                 </nav>
                 <div class="clear"></div>
               </div>
@@ -241,5 +222,129 @@
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
 
 </body>
+<script>
+
+        function getLocalTime(nS) { //时间戳转换
+           return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+        };
+
+        var preAllow = true;   // when ajax not completed, cannot do the next request
+        var limit = 6;//每页显示数
+        var currentPage = 0;//当前页
+        var total_page = 0;//总页数
+        function query(pageNum) {
+          $.get("/api/multimedias-pagination?filter=league&league_id={{ league_id }}&page=1&limit="+limit+"",function(data,status){
+                console.log(data);
+                currentPage = 1;
+            var multimedias = data.data;
+                total_page = data.total_pgae;//总页
+            // num = ajaxobj.length;
+            for (var i in multimedias) {
+              var inner_html = '<article class="col-sm-6">';
+              inner_html += '<div class="rst-mediapost">';
+              inner_html += '<div class="rst-postpic">';
+              inner_html += '<a href="#"><img src="'+ multimedias[i].url +'!370x370" alt="" /></a>';
+              inner_html += '</div>';
+              inner_html += '<div class="rst-boxinfo">';
+              inner_html += '<a href="#"><span>Sport</span></a>';
+              inner_html += '<p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></p>';
+              inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(multimedias[i].publish_time) +'</time>';
+              inner_html += '</div>';
+              inner_html += '</div>';
+              inner_html += '</article>';
+
+              $('#mediaBox').append(inner_html);
+              // member_num += 1;
+            };
+          if(total_page>5){
+              for (var k=1;k<=5;k++){
+                var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+                $(".pageBox").append(inner_html);
+              };
+            }else if(total_page<=5){
+              for (var k=1;k<=total_page;k++){
+                var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+                $(".pageBox").append(inner_html);
+              };
+            }
+            $("#num1").addClass("current");
+            preAllow = true;
+          });
+        };
+
+        function gotoPage(pageNum) {
+          $.get("/api/multimedias-pagination?filter=league&league_id={{ league_id }}&page="+pageNum+"&limit="+limit+"",function(data,status){
+                console.log(data);
+                currentPage = pageNum;
+            var multimedias = data.data;
+                total_page = data.total_pgae;//总页
+            $('#mediaBox').html("");
+
+            for (var i in multimedias) {
+              var inner_html = '<article class="col-sm-6">';
+              inner_html += '<div class="rst-mediapost">';
+              inner_html += '<div class="rst-postpic">';
+              inner_html += '<a href="#"><img src="'+ multimedias[i].url +'!370x370" alt="" /></a>';
+              inner_html += '</div>';
+              inner_html += '<div class="rst-boxinfo">';
+              inner_html += '<a href="#"><span>Sport</span></a>';
+              inner_html += '<p><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></p>';
+              inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(multimedias[i].publish_time) +'</time>';
+              inner_html += '</div>';
+              inner_html += '</div>';
+              inner_html += '</article>';
+
+              $('#mediaBox').append(inner_html);
+              // member_num += 1;
+            };
+
+            pageNext = parseInt((currentPage-1)/5) + 1;
+
+              start = (pageNext-1)*5+1;
+              end = pageNext*5;
+              if(end > total_page){
+                end = total_page;
+              }
+
+              $(".pageBox").html("");
+              for (var k=start;k<=end;k++){
+                var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+
+                $(".pageBox").append(inner_html);
+              };
+               $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+
+
+          });
+
+        };
+
+        $(function(){
+          query();
+          $(document).on('click','.pageBox > a',function(){
+            var num = $(this).text();
+            gotoPage(num);
+            //  $(this).addClass("current").siblings().removeClass("current");
+          })
+
+          $("#prev").on("click",function(){
+              if(currentPage<=1){
+
+              }else{
+                  gotoPage(--currentPage);
+                  // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+              }
+          });
+
+          $("#next").on("click",function(){
+              if(currentPage>=total_page){
+
+              }else{
+                  gotoPage(++currentPage);
+                  // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+              }
+          })
+        });
+</script>
 
 </html>
