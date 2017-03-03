@@ -1,13 +1,13 @@
 /*=======================
-Theme: 
+Theme:
 This is the Responsive Query For This Template
 
-Author: 
-Email: 
+Author:
+Email:
 Version: 1.0
 =======================*/
 
-@media (min-width: 769px) { 
+@media (min-width: 769px) {
 /*
 	Search Form
 */
@@ -15,16 +15,17 @@ Version: 1.0
   position: relative;
 }
 .rst-socialbar-social .rst-search input[type="text"] {
-  background: #fff;
+  background: #EAEAEA;
   border: 0 none;
+  border-radius: 3px;
   height: 35px;
   padding: 0 0 0 10px;
   position: absolute;
   right: 25px;
   top: -8px;
-  width: 0;
+  width: 210px;
 }
-.rst-socialbar-social .rst-search.exit input[type="text"] {
+/*.rst-socialbar-social .rst-search.exit input[type="text"] {
   transition: width 1s ease-in-out 0s;
   -webkit-transition: width 1s ease-in-out 0s,background 1s ease-in-out 0s;
   -moz-transition: width 1s ease-in-out 0s,background 1s ease-in-out 0s;
@@ -32,7 +33,7 @@ Version: 1.0
   -o-transition: width 1s ease-in-out 0s,background 1s ease-in-out 0s;
   width: 0;
   background: #fff;
-}
+}*/
 .rst-socialbar-social .rst-search.open input[type="text"] {
   padding-right: 40px;
   transition: all 1s ease-in-out 0s;
@@ -40,7 +41,7 @@ Version: 1.0
   -moz-transition: all 1s ease-in-out 0s;
   -ms-transition: all 1s ease-in-out 0s;
   -o-transition: all 1s ease-in-out 0s;
-  width: 290px!important;
+  width: 210px!important;
   background: #fafafa ;
 }
 .rst-socialbar-social .rst-search .sb {
@@ -85,8 +86,8 @@ Version: 1.0
 
 
 
-@media (min-width: 769px) { 
-.rst-header-menu-content > ul { 
+@media (min-width: 769px) {
+.rst-header-menu-content > ul {
 	display: inline-block !important;
 }
 .rst-socialbar-menu li:hover ul
@@ -105,7 +106,7 @@ Version: 1.0
 
 
 
-@media (max-width: 1200px) { 
+@media (max-width: 1200px) {
 .widget.widget_social > a {
   margin-right: 3.25%;
 }
@@ -126,14 +127,14 @@ Version: 1.0
   max-width: none;
 }
 .rst-share-fb,
-.rst-share-tw 
+.rst-share-tw
 {
   width: 100%;
   position: relative;
   margin: 0 0 10px;
 }
-.rst-share-fb span.checkbox, 
-.rst-share-tw span.checkbox 
+.rst-share-fb span.checkbox,
+.rst-share-tw span.checkbox
 {
   left: 15px;
   margin: 0;
@@ -141,8 +142,8 @@ Version: 1.0
   position: absolute;
   top: 14px;
 }
-.rst-share-fb span, 
-.rst-share-tw span 
+.rst-share-fb span,
+.rst-share-tw span
 {
   float: right;
   text-align: center;
@@ -154,15 +155,15 @@ Version: 1.0
 }
 
 
-@media (max-width: 980px) { 
+@media (max-width: 980px) {
 .rst-mainslider,
 .rst-mainslider img,
 .rst-mainslider-posts,
 .rst-mainslider-posts .rst-posttype > img,
-.rst-header-menu-content > ul 
+.rst-header-menu-content > ul
 {
   width: 100%;
-}	
+}
 .rst-mainslider-posts .rst-posttype {
   float: left;
   width: 50%;
@@ -244,7 +245,7 @@ Version: 1.0
 }
 
 
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
 .rst-socialbar-menu li:last-child {
   display: block;
   margin: 0;
@@ -333,7 +334,7 @@ footer li {
 }
 
 
-@media (max-width: 767px) { 
+@media (max-width: 767px) {
 #rst-popular .rst-postpic img,
 #rst-life .rst-leftpost img,
 #rst-sport .rst-leftpost img,
@@ -411,7 +412,7 @@ footer li {
 }
 
 
-@media (max-width: 680px) { 
+@media (max-width: 680px) {
 .rst-copyright {
   padding: 10px 0;
   text-align: center;
@@ -476,7 +477,7 @@ footer li {
   opacity: 1;
 }
 .rst-media-postlist article,
-.rst-media-postlist article img 
+.rst-media-postlist article img
 {
   width: 100%;
 }
@@ -487,7 +488,7 @@ footer li {
 }
 
 
-@media (max-width: 600px) { 
+@media (max-width: 600px) {
 .rst-mainslide .rst-boxinfo p {
   font-size: 25px;
   line-height: 30px;
@@ -498,7 +499,7 @@ footer li {
 .rst-socialbar-social li {
   display: none;
 }
-.rst-socialbar-social li:first-child, 
+.rst-socialbar-social li:first-child,
 .rst-socialbar-social li:last-child {
   display: inline-block;
 }
@@ -512,7 +513,7 @@ footer li {
 }
 
 
-@media (max-width: 480px) { 
+@media (max-width: 480px) {
 .rst-socialbar-menu li {
   margin: 0 10px;
   padding: 10px 0 20px;
@@ -660,7 +661,7 @@ footer li {
 
 
 
-@media (max-width: 430px) { 
+@media (max-width: 430px) {
 .rst-col .rst-postinfo {
   bottom: auto;
   left: auto;
@@ -687,7 +688,7 @@ footer li {
 }
 
 
-@media (max-width: 360px) { 
+@media (max-width: 360px) {
 .rst-socialbar-menu li {
   margin: 0 7px;
   padding: 10px 0 20px;
@@ -711,12 +712,9 @@ footer li {
 }
 
 
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
 
 
 
 /* End Screen */
 }
-
-
-

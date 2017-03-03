@@ -98,41 +98,6 @@
     <!-- End Page Breadcrumb -->
 
 
-    <!-- Category Banner -->
-    <section id="rst-catbanner">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            {% for i in range(len(sceneries)) %}
-            {% if i == 0 %}
-            <div class="rst-catbanner-post">
-              <div class="rst-mainslide">
-                <div class="rst-boxinfo">
-                  <a href="#"><span>
-                    {% for category in sceneries[i]['categories'] %}
-                      {{ category['title'] }}&nbsp;
-                    {% end %}
-                  </span></a>
-                  <p><a href="/portal/newsup/item-detail?id={{ sceneries[i]['_id'] }}">{{ sceneries[i]['title'] }}</a></p>
-                  <time><i class="fa fa-clock-o"></i>{{ sceneries[i]['publish_time'] }}</time>
-                </div>
-                <img src="{{ sceneries[i]['img'] }}!800x370" alt="" />
-              </div>
-            </div>
-            {% end %}
-            {% end %}
-            <div class="rst-catbanner-slider owl-carousel rst-postpic">
-              {% for multimedia in multimedias %}
-              <img src="{{ multimedia['url'] }}!370x370" alt="" />
-              {% end %}
-            </div>
-            <div class="clear"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Category Banner -->
-
     <!-- Category Page Content -->
     <section id="rst-catcontent">
       <div class="container">
@@ -233,7 +198,7 @@
   <!--
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.simpleWeather.js') }}"></script>
   -->
-
+  <script type="text/javascript" src="{{ static_url('js/json2.js') }}"></script>
   <!-- Custome Selectbox Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
 
@@ -242,16 +207,25 @@
 </body>
 <script>
 
+        function GetQueryString(name){        //获取URL参数
+          var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+          var r = window.location.search.substr(1).match(reg);
+          if(r!=null)
+             return  decodeURI(r[2]);
+             return null;
+          }
+
         function getLocalTime(nS) { //时间戳转换
            return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
         };
-
         var preAllow = true;   // when ajax not completed, cannot do the next request
         var limit = 6;//每页显示数
         var currentPage = 0;//当前页
         var total_page = 0;//总页数
+        var q = GetQueryString("q");
+        console.log(q);
         function query(pageNum) {
-          $.get("/api/articles-pagination?filter=league&league_id={{ league_id }}&status=publish&category={{ category_id }}&page=1&limit="+limit+"",function(data,status){
+          $.get("/api/articles-search?q=" + q + "&page=1&limit="+limit+"",function(data,status){
                 console.log(data);
                 currentPage = 1;
             var pageData = data.data;
@@ -296,7 +270,7 @@
         };
 
         function gotoPage(pageNum) {
-          $.get("/api/articles-pagination?filter=league&league_id={{ league_id }}&status=publish&category={{ category_id }}&page="+pageNum+"&limit="+limit+"",function(data,status){
+          $.get("/api/articles-search?q=" + q + "&page=1&limit="+limit+"",function(data,status){
                 console.log(data);
                 currentPage = pageNum;
             var pageData = data.data;

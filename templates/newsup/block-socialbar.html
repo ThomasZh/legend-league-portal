@@ -26,10 +26,10 @@
         <nav class="rst-socialbar-social">
           <ul>
             <li>
-              <form action="#" class="rst-search">
-                <input type="text" value="Search Words" onblur="if (this.value == '') {this.value = 'Search Words';}" onclick=" if (this.value == 'Search Words') {this.value = '';} " name="s">
-                <button class="sb"><i class="fa fa-search"></i></button>
-              </form>
+              <div class="rst-search">
+                <input type="text" value="Search Words" id="searchText" onblur="if (this.value == '') {this.value = 'Search Words';}" onclick=" if (this.value == 'Search Words') {this.value = '';} " name="s">
+                <button class="sb" id="searchBtn"><i class="fa fa-search"></i></button>
+              </div>
             </li>
             <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
             <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>

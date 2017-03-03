@@ -619,3 +619,81 @@ class NewsupFranchiseHandler(AuthorizationHandler):
                 league_id=LEAGUE_ID,
                 franchise=franchise_in_this_league,
                 lastest_comments=lastest_comments)
+
+
+class NewsupSearchResultHandler(tornado.web.RequestHandler):
+    def get(self):
+        logging.info(self.request)
+        category_id = self.get_argument("id", "")
+
+        # query by category_id
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":6}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        sceneries = json_decode(response.body)
+        for article in sceneries:
+            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+
+        # multimedia
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":4}
+        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        multimedias = json_decode(response.body)
+
+        # news(新闻)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        news = json_decode(response.body)
+        for article in news:
+            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+
+        # popular(流行)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"3801d62cf73411e69a3c00163e023e51", "idx":0, "limit":6}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        populars = json_decode(response.body)
+        for article in populars:
+            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+
+        # activity(活动)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":4}
+        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        activities = json_decode(response.body)
+
+        # lastest comments(最新的评论)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
+        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        lastest_comments = json_decode(response.body)
+        for comment in lastest_comments:
+            comment['create_time'] = timestamp_friendly_date(comment['create_time'])
+
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        self.render('newsup/search-result.html',
+                is_login=is_login,
+                sceneries=sceneries,
+                news=news,
+                populars=populars,
+                activities=activities,
+                lastest_comments=lastest_comments,
+                multimedias=multimedias,
+                league_id=LEAGUE_ID,
+                category_id=category_id)

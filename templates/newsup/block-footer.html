@@ -51,4 +51,15 @@
     </div>
   </div>
 </footer>
+
+<script type="text/javascript">
+
+    $(function(){
+      $("#searchBtn").on('click',function(){
+        var q = $("#searchText").val();
+        location.href="/portal/newsup/search?q="+q;
+      });
+    })
+
+</script>
 <!--- End Footer -->
