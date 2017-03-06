@@ -42,6 +42,7 @@
   <link href="{{ static_url('newsup/css/jquery.rs.selectbox.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('css/style.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/responsive.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('css/self.css') }}" rel="stylesheet" type="text/css" />
 
   <!-- Custom Fonts
       ================================================== -->
@@ -99,7 +100,7 @@
 
 
     <!-- Category Banner -->
-    <section id="rst-catbanner">
+    <section id="rst-catbanner-item">
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
@@ -121,12 +122,17 @@
             </div>
             {% end %}
             {% end %}
-            <div class="rst-catbanner-slider owl-carousel rst-postpic">
+
+            <div class="rst-catbanner-listpost">
               {% for multimedia in multimedias %}
-              <img src="{{ multimedia['url'] }}!370x370" alt="" />
+              <div class="rst-postpic">
+                <a href="#"><img src="{{ multimedia['url'] }}!370x370" alt="" /></a>
+              </div>
               {% end %}
+              <div class="clear"></div>
             </div>
-            <div class="clear"></div>
+
+            <!-- <div class="clear"></div> -->
           </div>
         </div>
       </div>
@@ -227,8 +233,6 @@
 
   <!-- Owl Slider Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
-  <script src="{{ static_url('js/vue-2.1.4.js') }}" type="text/javascript"></script>
-
   <!-- Weather Js -->
   <!--
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.simpleWeather.js') }}"></script>
@@ -236,8 +240,8 @@
 
   <!-- Custome Selectbox Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
-
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
+  <script src="{{ static_url('js/vue-2.1.4.js') }}" type="text/javascript"></script>
 
 </body>
 <script>
