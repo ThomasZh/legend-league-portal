@@ -101,7 +101,7 @@
 
 
     <!-- Category Banner -->
-    <section id="rst-catbanner">
+    <section id="rst-catbanner-item">
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
@@ -115,13 +115,17 @@
                 <img src="http://tripc2c-club-title.b0.upaiyun.com/default/multimedia.jpg!800x370" alt="" />
               </div>
             </div>
-            <div class="rst-catbanner-slider owl-carousel rst-postpic">
+
+            <div class="rst-catbanner-listpost">
               {% for i in range(len(multimedias)) %}
               {% if i < 4 %}
-              <img src="{{ multimedias[i]['url'] }}!370x370" alt="" />
+              <div class="rst-postpic">
+                <a href="#"><img src="{{ multimedias[i]['url'] }}!370x370" alt="" /></a>
+              </div>
               {% end %}
               {% end %}
             </div>
+
             <div class="clear"></div>
           </div>
         </div>
