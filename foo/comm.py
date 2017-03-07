@@ -200,6 +200,12 @@ class PageNotFoundHandler(tornado.web.RequestHandler):
 
 
 class BaseHandler(tornado.web.RequestHandler):
+    def set_default_headers(self):
+        self.set_header("pragma","no-cache")
+        self.set_header("Cache-Control","no-store")
+        self.set_header("Cache-Control","no-cache")
+        self.set_header("expires","0")
+        
     def get_code(self):
         url = "http://api.7x24hs.com/auth/code"
         http_client = HTTPClient()

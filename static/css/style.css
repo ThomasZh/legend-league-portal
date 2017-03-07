@@ -1956,7 +1956,7 @@ h3 {
 }
 .rst-item-content blockquote::before {
   background: #fff;
-  content: url("images/icon/blockquote.png");
+  content: url("/static/img/blockquote.png");
   height: 25px;
   left: -10px;
   margin-top: -12px;
