@@ -15,9 +15,6 @@
   <!-- Favicons
       ================================================== -->
   <link rel="shortcut icon" href="/static/newsup/img/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="/static/newsup/img/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/static/newsup/img/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/static/newsup/img/apple-touch-icon-114x114.png">
 
   <!-- Bootstrap
       ================================================== -->
@@ -38,7 +35,7 @@
   <link href="{{ static_url('newsup/css/owl.carousel.css') }}" media="screen" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/owl.theme.css') }}" media="screen" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/owl.transitions.css') }}" media="screen" rel="stylesheet" type="text/css" />
-
+  <link rel="stylesheet" href="{{ static_url('weui/lib/weui.min.css') }}">
   <!-- Custom Css
       ================================================== -->
   <link href="{{ static_url('newsup/css/rs-wp-v1.2.css') }}" rel="stylesheet" type="text/css" />
@@ -110,6 +107,29 @@
             {% if not franchise %}
             <div class="rst-getintouch-form">
               <form action="" method="" onsubmit="return false;" id="apply-form">
+
+                <!-- uploading toast -->
+                <div id="loadingToast" class="weui_loading_toast" style="display:none;">
+                    <div class="weui_mask_transparent"></div>
+                    <div class="weui_toast">
+                        <div class="weui_loading">
+                            <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+                            <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+                            <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+                            <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+                            <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+                            <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+                            <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+                            <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+                            <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+                            <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+                            <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+                            <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+                        </div>
+                        <p class="weui_toast_content">图片上传中...</p>
+                    </div>
+                </div>
+
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
@@ -122,8 +142,6 @@
                       <!-- required data-validation-required-message="Please enter your email." -->
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
-                  </div>
-                  <div class="col-sm-6">
                     <div class="form-group">
                       <input class="rst-pageinput" type="text" placeholder="Address" name="address" id="address"  />
                       <!-- required data-validation-required-message="Please enter your company." -->
@@ -135,7 +153,19 @@
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
                   </div>
+                  <div class="col-sm-6">
+
+                    <div class="form-group">
+                      <div class="rst-account-img" style="position:static;">
+                        <img id="user_img" src="" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #79eec7"/>
+                        <input class="rst-pagebutton" type="button" value="上传背景图" onclick="openBrowse()" />
+                        <input type="file" id="file" name="file" style="display:none;">
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
+
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
@@ -164,8 +194,6 @@
                       <!-- required data-validation-required-message="Please enter your email." -->
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
-                  </div>
-                  <div class="col-sm-6">
                     <div class="form-group">
                       <input class="rst-pageinput" type="text" placeholder="Address" name="address" id="address" value="{{ franchise['club']['address'] }}" />
                       <!-- required data-validation-required-message="Please enter your company." -->
@@ -177,6 +205,15 @@
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
                   </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <div class="rst-account-img" style="position:static;">
+                        <img id="user_img" src="{{ franchise['club']['img'] }}" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #79eec7"/>
+                        <input class="rst-pagebutton" type="button" value="上传背景图" onclick="openBrowse()" />
+                        <input type="file" id="file" name="file" style="display:none;">
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-xs-12">
@@ -186,7 +223,8 @@
                       </textarea>
                       <!-- required data-validation-required-message="Please enter your message." -->
                       <!-- <p class="help-block text-danger"></p> -->
-                      <div id="success"></div>
+
+                      <div class="appy-form-main-message" id="success"></div>
                     </div>
                     <button class="rst-pagebutton" type="submit">Apply</button>
                   </div>
@@ -227,6 +265,10 @@
                 <tr>
                   <td>Address</td>
                   <td>{{ franchise['club']['address'] }}</td>
+                </tr>
+                <tr>
+                  <td>Image</td>
+                  <td><img src="{{ franchise['club']['img'] }}" alt="背景图"></td>
                 </tr>
                 <tr>
                   <td>Introduction</td>
@@ -279,6 +321,86 @@
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/json2.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/jquery.validate.min.js') }}"></script>
+  <!-- fileinput -->
+  <script src="{{ static_url('upyun/js/fileinput.min.js') }}"></script>
+  <script src="{{ static_url('upyun/js/spark-md5.min.js') }}"></script>
+  <script src="{{ static_url('upyun/js/async.js') }}"></script>
+  <script src="{{ static_url('upyun/js/upyun-mu.js') }}"></script>
+
+  <script>
+
+    function uuid() {
+      var s = [];
+      var hexDigits = "0123456789abcdef";
+      for (var i = 0; i < 36; i++) {
+        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+      }
+      s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+      s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+      s[8] = s[13] = s[18] = s[23] = "-";
+
+      var uuid = s.join("");
+      return uuid;
+    }
+
+    function uploadUpyun(file, elementId) {
+      var ext = '.' + file.name.split('.').pop();
+
+      var config = {
+        // 空间名称
+        bucket: 'tripc2c-club-title',
+        // 上传请求过期时间
+        expiration: parseInt((new Date().getTime() + 3600000) / 1000),
+        // 尽量不要使用直接传表单 API 的方式，以防泄露造成安全隐患
+        form_api_secret: 'CRKAOsKHGbbCnU+yztBxUT0bYR0='
+      };
+
+      var instance = new Sand(config);
+      var options = {
+        'notify_url': 'http://upyun.com'
+      };
+      instance.setOptions(options);
+      instance.setElementId(elementId);
+
+      var d = new Date();
+      var month = d.getMonth() + 1;
+      var filename = '/avatar/' + d.getFullYear() + '/' + month + '/' + d.getDate() + '/' + uuid() + ext;
+      console.log(filename);
+      instance.upload(filename);
+
+      return 'https://tripc2c-club-title.b0.upaiyun.com' + filename;
+    };
+
+    $("#file").on("change",function(){
+        var times = 0;
+        var imgUrl = uploadUpyun(this.files[0],"file");
+        $('#loadingToast').show();
+        document.addEventListener('uploaded',function(e){
+          if(times == 0){
+            $("#user_img").attr('src',imgUrl);
+            $('#loadingToast').hide();
+          }
+          times ++;
+        });
+
+    });
+  </script>
+
+
+  <script type="text/javascript">
+
+      function openBrowse(){
+          var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false;
+          if(ie){
+              document.getElementById("file").click();
+              document.getElementById("filename").value=document.getElementById("file").value;
+          }else{
+              var a=document.createEvent("MouseEvents");//FF的处理
+              a.initEvent("click", true, true);
+              document.getElementById("file").dispatchEvent(a);
+          }
+      }
+  </script>
 
   <script>
     $(function() {
@@ -323,6 +445,7 @@
             address: $('#address').val(),
             phone: $('#phone').val(),
             email: $('#email').val(),
+            img: $("#user_img").attr('src'),
             introduction: $('#introduction').val(),
           };
           var json = JSON.stringify(data);
@@ -336,12 +459,12 @@
             contentType: 'application/json',
             success: function(data, status, xhr) {
               console.log(data);
-              $('.appy-form-main-message').addClass('show error').html('申请成功，请等待审核!');
+              $('.appy-form-main-message').addClass('show').html('发送申请成功，请等待审核!');
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("XMLHttpRequest.status: " + XMLHttpRequest.status);
               if (XMLHttpRequest.status == 200) {
-                $('.appy-form-main-message').addClass('show error').html('申请成功，请等待审核!');
+                $('.appy-form-main-message').addClass('show').html('发送申请成功，请等待审核!');
               } else if (XMLHttpRequest.status == 409) {
                 $('.appy-form-main-message').addClass('show error').html('已经申请完毕, 不必重新申请');
               } else {

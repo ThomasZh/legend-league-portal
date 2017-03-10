@@ -600,8 +600,10 @@ class NewsupFranchiseHandler(AuthorizationHandler):
         franchises = json_decode(response.body)
         franchise_in_this_league = None
         for franchise in franchises:
+            franchise['create_time'] = timestamp_datetime(franchise['create_time'])
             if franchise['league_id'] == LEAGUE_ID:
                 franchise_in_this_league = franchise
+
                 break
 
         # lastest comments(最新的评论)
