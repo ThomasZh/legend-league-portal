@@ -169,13 +169,6 @@
           <article class="col-sm-3 col-xs-6">
             <div class="rst-postpic">
               <a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!270x190" alt="" /></a>
-              <a class="rst-postpic-cat" href="#">
-                <span>
-                  {% for category in article['categories'] %}
-                    {{ category['title'] }}&nbsp;
-                  {% end %}
-                </span>
-              </a>
             </div>
             <div class="rst-postinfo">
               <h6><a href="/portal/newsup/item-detail?id={{ article['_id'] }}">{{ article['title'] }}</a></h6>
@@ -350,11 +343,6 @@
                   <div class="row">
                     <div class="rst-postpic col-sm-6">
                       <a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!370x278" alt="" /></a>
-                      <a href="#" class="rst-postpic-cat"><span>
-                        {% for category in article['categories'] %}
-                          {{ category['title'] }}&nbsp;
-                        {% end %}
-                      </span></a>
                     </div>
                     <div class="rst-postinfo col-sm-6">
                       <h6><a href="/portal/newsup/item-detail?id={{ article['_id'] }}">{{ article['title'] }}</a></h6>
@@ -377,11 +365,6 @@
                   {% for i in range(len(hots)) %}
                   {% if i < 6 %}
                   <li>
-                    <a href="#">
-                      {% for category in hots[i]['categories'] %}
-                        {{ category['title'] }}&nbsp;
-                      {% end %}
-                    </a>
                     <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
                   </li>
                   {% end %}
@@ -391,11 +374,6 @@
                   {% for i in range(len(hots)) %}
                   {% if i >= 6 %}
                   <li>
-                    <a href="#">
-                      {% for category in hots[i]['categories'] %}
-                        {{ category['title'] }}&nbsp;
-                      {% end %}
-                    </a>
                     <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
                   </li>
                   {% end %}

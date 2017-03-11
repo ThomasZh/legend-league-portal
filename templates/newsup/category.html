@@ -109,11 +109,6 @@
             <div class="rst-catbanner-post">
               <div class="rst-mainslide">
                 <div class="rst-boxinfo">
-                  <a href="#"><span>
-                    {% for category in sceneries[i]['categories'] %}
-                      {{ category['title'] }}&nbsp;
-                    {% end %}
-                  </span></a>
                   <p><a href="/portal/newsup/item-detail?id={{ sceneries[i]['_id'] }}">{{ sceneries[i]['title'] }}</a></p>
                   <time><i class="fa fa-clock-o"></i>{{ sceneries[i]['publish_time'] }}</time>
                 </div>
