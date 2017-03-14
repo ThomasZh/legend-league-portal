@@ -16,8 +16,9 @@
       ================================================== -->
   <link rel="shortcut icon" href="/static/newsup/img/favicon.ico" type="image/x-icon">
 
-  <!-- Bootstrap
-      ================================================== -->
+  <!-- Bootstrap================================================== -->
+  <link rel="stylesheet" href="{{ static_url('weui/lib/weui.min.css') }}">
+  <link rel="stylesheet" href="{{ static_url('weui/css/jquery-weui.css') }}">
   <link href="{{ static_url('newsup/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -193,11 +194,8 @@
   <!-- Owl Slider Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
   <script src="{{ static_url('js/vue-2.1.4.js') }}" type="text/javascript"></script>
-
-  <!-- Weather Js -->
-  <!--
-  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.simpleWeather.js') }}"></script>
-  -->
+  <!-- alert Scripts -->
+  <script src="{{ static_url('weui/lib/fastclick.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/json2.js') }}"></script>
   <!-- Custome Selectbox Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
@@ -226,7 +224,8 @@
         console.log(q);
         function query(pageNum) {
           $.get("/api/articles-search?q=" + q + "&page=1&limit="+limit+"",function(data,status){
-                console.log(data);
+                // console.log(data);
+                data = JSON.parse(data);
                 currentPage = 1;
             var pageData = data.data;
                 total_page = data.total_pgae;//总页
@@ -271,7 +270,8 @@
 
         function gotoPage(pageNum) {
           $.get("/api/articles-search?q=" + q + "&page=1&limit="+limit+"",function(data,status){
-                console.log(data);
+                // console.log(data);
+                data = JSON.parse(data);
                 currentPage = pageNum;
             var pageData = data.data;
                 total_page = data.total_pgae;//总页

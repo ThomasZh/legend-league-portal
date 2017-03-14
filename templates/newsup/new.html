@@ -19,8 +19,9 @@
   <link rel="apple-touch-icon" sizes="72x72" href="/static/newsup/img/apple-touch-icon-72x72.png">
   <link rel="apple-touch-icon" sizes="114x114" href="/static/newsup/img/apple-touch-icon-114x114.png">
 
-  <!-- Bootstrap
-        ================================================== -->
+  <!-- Bootstrap================================================== -->
+  <link rel="stylesheet" href="{{ static_url('weui/lib/weui.min.css') }}">
+  <link rel="stylesheet" href="{{ static_url('weui/css/jquery-weui.css') }}">
   <link href="{{ static_url('newsup/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -237,11 +238,8 @@
 
   <!-- Owl Slider Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
-
-  <!-- Weather Js -->
-  <!--
-  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.simpleWeather.js') }}"></script>
-  -->
+  <!-- alert Scripts -->
+  <script src="{{ static_url('weui/lib/fastclick.js') }}"></script>
 
   <!-- Custome Selectbox Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
