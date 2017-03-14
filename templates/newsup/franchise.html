@@ -179,7 +179,7 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
-                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="Add your club introduction" name="introduction" id="introduction" ></textarea>
+                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="加盟商简介" name="introduction" id="introduction" ></textarea>
                       <!-- required data-validation-required-message="Please enter your message." -->
                       <!-- <p class="help-block text-danger"></p> -->
                       <div id="success"></div>
@@ -501,7 +501,10 @@
       url:"{{ static_url('js/city.min.js') }}",
       nodata:"none",
       required:false,
+      {% if franchise %}
       prov:"{{ franchise['club']['province'] }}",
+      city:"{{ franchise['club']['city'] }}"
+      {% end %}
     });
 
   </script>

@@ -607,17 +607,17 @@ class NewsupFranchiseHandler(AuthorizationHandler):
         logging.info("got response %r", response.body)
         franchises = json_decode(response.body)
         franchise_in_this_league = None
-        for franchise in franchises:
-            if not franchise['club'].has_key("province"):
-                franchise['club']['province'] = ''
-                franchise['club']['city'] = ''
-            if not franchise['club'].has_key("city"):
-                franchise['club']['city'] = ''
-            franchise['create_time'] = timestamp_datetime(franchise['create_time'])
-            if franchise['league_id'] == LEAGUE_ID:
-                franchise_in_this_league = franchise
-
-                break
+        if len(franchises) > 0:
+            for franchise in franchises:
+                if not franchise['club'].has_key("province"):
+                    franchise['club']['province'] = ''
+                    franchise['club']['city'] = ''
+                if not franchise['club'].has_key("city"):
+                    franchise['club']['city'] = ''
+                franchise['create_time'] = timestamp_datetime(franchise['create_time'])
+                if franchise['league_id'] == LEAGUE_ID:
+                    franchise_in_this_league = franchise
+                    break
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
