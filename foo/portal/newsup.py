@@ -608,6 +608,11 @@ class NewsupFranchiseHandler(AuthorizationHandler):
         franchises = json_decode(response.body)
         franchise_in_this_league = None
         for franchise in franchises:
+            if not franchise['club'].has_key("province"):
+                franchise['club']['province'] = ''
+                franchise['club']['city'] = ''
+            if not franchise['club'].has_key("city"):
+                franchise['club']['city'] = ''
             franchise['create_time'] = timestamp_datetime(franchise['create_time'])
             if franchise['league_id'] == LEAGUE_ID:
                 franchise_in_this_league = franchise
