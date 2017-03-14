@@ -89,9 +89,9 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="rst-breadcrumb">
-            <a href="/portal/newsup/index"><span>Home</span></a>
+            <a href="/portal/newsup/index"><span>首页</span></a>
             <span>></span>
-            <a href="#"><span>Sport</span></a>
+            <a href="#"><span>{{ category['title'] }}</span></a>
           </div>
         </div>
       </div>
@@ -140,13 +140,13 @@
         <div class="row">
           <div class="col-sm-8">
             <div class="rst-section-title rst-section-title-box">
-              <h4>All</h4>
+              <h4>选择地区</h4>
               <div class="rst-shortmenu">
                 <form action="#">
                   <select name="rst-catshortselect" id="rst-catshortselect">
-										<option value="Popular">All</option>
-										<option value="Price">Football</option>
-										<option value="View">Boxing</option>
+										<option value="Popular">省</option>
+										<option value="Price">北京市</option>
+										<option value="View">上海市</option>
 									</select>
                 </form>
                 <div class="rst-viewstyle">
@@ -161,14 +161,14 @@
             <div class="row" id="page-bar">
               <div class="col-xs-12">
                 <nav class="wp-pagenavi" id="pagenavi">
-                  <a class="page-prev" style="cursor:pointer;" id="prev">Prev</a>
+                  <a class="page-prev" style="cursor:pointer;" id="prev">上一页</a>
                   <div class="pageBox"></div>
                   <!-- <a class="page-numbers current" href="#">1</a>
                   <a class="page-numbers" href="#">2</a>
                   <a class="page-numbers" href="#">3</a>
                   <a class="page-numbers" href="#">4</a>
                   <a class="page-numbers" href="#">5</a> -->
-                  <a class="page-next" style="cursor:pointer;" id="next">Next</a>
+                  <a class="page-next" style="cursor:pointer;" id="next">下一页</a>
                 </nav>
                 <div class="clear"></div>
               </div>
@@ -252,6 +252,7 @@
         function query(pageNum) {
           $.get("/api/articles-pagination?filter=league&league_id={{ league_id }}&status=publish&category={{ category_id }}&page=1&limit="+limit+"",function(data,status){
                 console.log(data);
+                data = JSON.parse(data);
                 currentPage = 1;
             var pageData = data.data;
                 total_page = data.total_pgae;//总页
@@ -297,6 +298,7 @@
         function gotoPage(pageNum) {
           $.get("/api/articles-pagination?filter=league&league_id={{ league_id }}&status=publish&category={{ category_id }}&page="+pageNum+"&limit="+limit+"",function(data,status){
                 console.log(data);
+                data = JSON.parse(data);
                 currentPage = pageNum;
             var pageData = data.data;
                 total_page = data.total_pgae;//总页

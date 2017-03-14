@@ -90,9 +90,9 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="rst-breadcrumb">
-            <a href="/portal/newsup/index"><span>Home</span></a>
+            <a href="/portal/newsup/index"><span>首页</span></a>
             <span>></span>
-            <a href="/portal/newsup/category"><span>Sport</span></a>
+            <a href="/portal/newsup/category"><span>精彩瞬间</span></a>
           </div>
         </div>
       </div>
@@ -139,11 +139,11 @@
         <div class="row">
           <div class="col-sm-8">
             <div class="rst-section-title rst-section-title-box">
-              <h4>All</h4>
+              <h4>全部</h4>
               <div class="rst-shortmenu rst-shortitem">
-                <a href="#"><i class="fa fa-bars"></i>ALL</a>
-                <a href="#"><i class="fa fa-play"></i>VIDEO</a>
-                <a href="#"><i class="fa fa-camera"></i>PHOTO</a>
+                <a href="#"><i class="fa fa-bars"></i>全部</a>
+                <a href="#"><i class="fa fa-play"></i>视频</a>
+                <a href="#"><i class="fa fa-camera"></i>图片</a>
               </div>
             </div>
             <div class="row rst-media-postlist" id="mediaBox">
@@ -153,9 +153,9 @@
             <div class="row">
               <div class="col-xs-12">
                 <nav class="wp-pagenavi">
-                  <a class="page-prev" style="cursor:pointer;" id="prev">Prev</a>
+                  <a class="page-prev" style="cursor:pointer;" id="prev">上一页</a>
                   <div class="pageBox"></div>
-                  <a class="page-next" style="cursor:pointer;" id="next">Next</a>
+                  <a class="page-next" style="cursor:pointer;" id="next">下一页</a>
                 </nav>
                 <div class="clear"></div>
               </div>
@@ -239,6 +239,7 @@
         function query(pageNum) {
           $.get("/api/multimedias-pagination?filter=league&league_id={{ league_id }}&page=1&limit="+limit+"",function(data,status){
                 console.log(data);
+                data = JSON.parse(data);
                 currentPage = 1;
             var multimedias = data.data;
                 total_page = data.total_pgae;//总页
@@ -279,6 +280,7 @@
         function gotoPage(pageNum) {
           $.get("/api/multimedias-pagination?filter=league&league_id={{ league_id }}&page="+pageNum+"&limit="+limit+"",function(data,status){
                 console.log(data);
+                data = JSON.parse(data);
                 currentPage = pageNum;
             var multimedias = data.data;
                 total_page = data.total_pgae;//总页

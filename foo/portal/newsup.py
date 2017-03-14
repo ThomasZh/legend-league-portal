@@ -509,6 +509,13 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         logging.info(self.request)
         category_id = self.get_argument("id", "")
 
+        # query category_name by category_id
+        url = "http://api.7x24hs.com/api/categories/" + category_id
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        category = json_decode(response.body)
+
         # query by category_id
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":6}
         url = url_concat("http://api.7x24hs.com/api/articles", params)
@@ -579,7 +586,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
                 lastest_comments=lastest_comments,
                 multimedias=multimedias,
                 league_id=LEAGUE_ID,
-                category_id=category_id)
+                category_id=category_id,
+                category=category)
 
 
 class NewsupFranchiseHandler(AuthorizationHandler):

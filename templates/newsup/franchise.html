@@ -80,9 +80,9 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="rst-breadcrumb">
-            <a href="/portal/newsup/index"><span>Home</span></a>
+            <a href="/portal/newsup/index"><span>首页</span></a>
             <span>></span>
-            <a href="/portal/newsup/franchise"><span>Franchise</span></a>
+            <a href="/portal/newsup/franchise"><span>加盟申请</span></a>
           </div>
         </div>
       </div>
@@ -96,7 +96,7 @@
           <div class="col-sm-8">
             <!-- Author zone -->
             <div class="rst-section-title rst-section-title-box">
-              <h4>Apply Franchise</h4> {% if franchise %} {% if franchise['_status'] == 0 %}
+              <h4>申请信息</h4> {% if franchise %} {% if franchise['_status'] == 0 %}
               <h6/>待审核</h6>
               {% elif franchise['_status'] == 10 %}
               <h6/>被拒绝（可以重新发起请求）</h6>
@@ -185,22 +185,22 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="Club Name" name="name" id="name" value="{{ franchise['club']['name'] }}" />
+                      <input class="rst-pageinput" type="text" placeholder="加盟商名称" name="name" id="name" value="{{ franchise['club']['name'] }}" />
                       <!-- required data-validation-required-message="Please enter your name." -->
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
-                      <input class="rst-pageinput" type="email" placeholder="Email" name="email" id="email" value="{{ franchise['club']['email'] }}" />
+                      <input class="rst-pageinput" type="email" placeholder="电子邮箱" name="email" id="email" value="{{ franchise['club']['email'] }}" />
                       <!-- required data-validation-required-message="Please enter your email." -->
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="Address" name="address" id="address" value="{{ franchise['club']['address'] }}" />
+                      <input class="rst-pageinput" type="text" placeholder="地址" name="address" id="address" value="{{ franchise['club']['address'] }}" />
                       <!-- required data-validation-required-message="Please enter your company." -->
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="Phone" name="phone" id="phone" value="{{ franchise['club']['phone'] }}" />
+                      <input class="rst-pageinput" type="text" placeholder="电话号码" name="phone" id="phone" value="{{ franchise['club']['phone'] }}" />
                       <!-- required data-validation-required-message="Please enter your phone." -->
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
@@ -218,7 +218,7 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
-                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="Add your club introduction" name="introduction" id="introduction" >
+                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="简介" name="introduction" id="introduction" >
                         {{ franchise['club']['introduction'] }}
                       </textarea>
                       <!-- required data-validation-required-message="Please enter your message." -->
@@ -226,7 +226,7 @@
 
                       <div class="appy-form-main-message" id="success"></div>
                     </div>
-                    <button class="rst-pagebutton" type="submit">Apply</button>
+                    <button class="rst-pagebutton" type="submit">发送申请</button>
                   </div>
                 </div>
               </form>
@@ -236,42 +236,42 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Value</th>
+                  <th>内容</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Status</td>
+                  <td>审核状态</td>
                   {% if franchise['_status'] == 0 %}
                   <td>待审核</td> {% elif franchise['_status'] == 20 %}
                   <td>已批准</td> {% end %}
                 </tr>
                 <tr>
-                  <td>Create Time</td>
+                  <td>申请日期</td>
                   <td>{{ franchise['create_time'] }}</td>
                 </tr>
                 <tr>
-                  <td>Name</td>
+                  <td>加盟商名称</td>
                   <td>{{ franchise['club']['name'] }}</td>
                 </tr>
                 <tr>
-                  <td>Phone</td>
+                  <td>电话号码</td>
                   <td>{{ franchise['club']['phone'] }}</td>
                 </tr>
                 <tr>
-                  <td>email</td>
+                  <td>电子邮箱</td>
                   <td>{{ franchise['club']['email'] }}</td>
                 </tr>
                 <tr>
-                  <td>Address</td>
+                  <td>地址</td>
                   <td>{{ franchise['club']['address'] }}</td>
                 </tr>
                 <tr>
-                  <td>Image</td>
+                  <td>背景图</td>
                   <td><img src="{{ franchise['club']['img'] }}" alt="背景图"></td>
                 </tr>
                 <tr>
-                  <td>Introduction</td>
+                  <td>简介</td>
                   <td>{{ franchise['club']['introduction'] }}</td>
                 </tr>
               </tbody>

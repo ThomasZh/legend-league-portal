@@ -5,11 +5,12 @@
       <div class="col-xs-12">
         <nav class="rst-socialbar-menu">
           <ul>
-            <li><a href="/portal/newsup/author">about</a></li>
-            <li><a href="/portal/newsup/media">multimedia</a></li>
+            <li><a href="/portal/newsup/contact">联系我们</a></li>
+            <li><a href="/portal/newsup/franchise">加盟申请</a></li>
+            <li><a href="/portal/newsup/media">精彩瞬间</a></li>
+            <li><a href="/portal/newsup/account">个人信息</a></li>
+            <!--
             <li><a href="/portal/newsup/shortcodes">shortcodes</a></li>
-            <li><a href="/portal/newsup/contact">contact</a></li>
-            <li><a href="/portal/newsup/franchise">franchise</a></li>
             <li>
               <a href="#">page template</a>
               <ul>
@@ -21,25 +22,28 @@
                 <li><a href="/portal/auth/register">register</a></li>
               </ul>
             </li>
+          -->
           </ul>
         </nav>
         <nav class="rst-socialbar-social">
           <ul>
             <li>
               <div class="rst-search">
-                <input type="text" value="Search Words" id="searchText" onblur="if (this.value == '') {this.value = 'Search Words';}" onclick=" if (this.value == 'Search Words') {this.value = '';} " name="s">
+                <input type="text" value="关键词" id="searchText" onblur="if (this.value == '') {this.value = 'Search Words';}" onclick=" if (this.value == 'Search Words') {this.value = '';} " name="s">
                 <button class="sb" id="searchBtn"><i class="fa fa-search"></i></button>
               </div>
             </li>
+            <!--
             <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
             <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
             <li><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
             <li><a href="#" target="_blank"><i class="fa fa-behance"></i></a></li>
+          -->
             <li>
               <div class="rst-loginform">
                 {% if is_login %}
-                <a href="/portal/auth/logout">Logout</a> {% else %}
-                <a href="/portal/auth/register">Login</a> {% end %}
+                <a href="/portal/auth/logout">登出</a> {% else %}
+                <a href="/portal/auth/register">登录</a> {% end %}
               </div>
             </li>
           </ul>

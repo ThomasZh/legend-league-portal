@@ -91,7 +91,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="rst-breadcrumb">
-            <a href="/portal/newsup/index"><span>Home</span></a>
+            <a href="/portal/newsup/index"><span>首页</span></a>
             <span>></span>
             <a href="/portal/newsup/category"><span>Sport</span></a>
             <span>></span>
@@ -171,6 +171,7 @@
               </div>
               <!-- / like button -->
 
+<!--
               <div class="col-xs-12">
                 <div class="rst-tagsandshare">
                   <div class="rst-catlist rst-catlisttags">
@@ -188,12 +189,13 @@
                   <div class="clear"></div>
                 </div>
               </div>
+            -->
               <!-- End Tags and Share -->
 
               <!-- Comment list -->
               <div id="comment-list" class="col-xs-12 rst-content-comment">
                 <div class="rst-section-title rst-section-title-box">
-                  <h4>{{! comment_num }} Comments</h4>
+                  <h4>{{! comment_num }} 条评论</h4>
                 </div>
                 <ol class="commentlist">
 
@@ -206,7 +208,7 @@
                         <div class="comment-header">
                           <a href="#" class="comment-author">{{! comment.nickname }}</a>
                           <time class="comment-date"><i class="fa fa-clock-o"></i>{{! comment.create_time }}</time>
-                          <a href="#" class="comment-reply-link">REPLY</a>
+                          <a href="#" class="comment-reply-link">回复</a>
                         </div>
                         <div class="comment-body">
                           <p>{{! comment.comment }}</p>
@@ -215,7 +217,7 @@
                     </div>
                   </li>
                 </ol>
-                <a id="loadMoreBtn" v-on:click="loadMore" class="rst-loadmore">more comments</a>
+                <a id="loadMoreBtn" v-on:click="loadMore" class="rst-loadmore">查看更多</a>
               </div>
               <!-- End comment list -->
 
@@ -223,14 +225,14 @@
             <div class="row rst-comments">
               <div class="col-xs-12">
                 <div class="rst-section-title rst-section-title-box">
-                  <h4>Add Comment</h4>
+                  <h4>添加评论</h4>
                 </div>
                 <div class="rst-getintouch-form">
 									<div class="row">
 										<div class="col-xs-12">
-											<textarea class="rst-pageinput" name="" id="comment" cols="30" rows="10" placeholder="Add your comment" ></textarea>
+											<textarea class="rst-pageinput" name="" id="comment" cols="30" rows="10" placeholder="添加评论内容" ></textarea>
                       <div class="send-ok-message"></div>
-											<input class="rst-pagebutton" type="button" v-on:click="sendComment" value="SEND"/>
+											<input class="rst-pagebutton" type="button" v-on:click="sendComment" value="发送"/>
 										</div>
 									</div>
 								</div>
