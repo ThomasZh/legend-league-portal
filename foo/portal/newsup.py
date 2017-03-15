@@ -51,6 +51,28 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
     def get(self):
         logging.info(self.request)
 
+        # franchises(景区)
+        params = {"filter":"league", "franchise_type":"景区", "page":1, "limit":5}
+        url = url_concat("http://api.7x24hs.com/api/leagues/"+LEAGUE_ID+"/clubs", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        rs = json_decode(response.body)
+        franchises = rs['data']
+        for franchise in franchises:
+            franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
+
+        # suppliers(供应商)
+        params = {"filter":"league", "franchise_type":"供应商", "page":1, "limit":5}
+        url = url_concat("http://api.7x24hs.com/api/leagues/"+LEAGUE_ID+"/clubs", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        rs = json_decode(response.body)
+        suppliers = rs['data']
+        for supplier in suppliers:
+            supplier['create_time'] = timestamp_friendly_date(supplier['create_time'])
+
         # sceneries(景点)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"41c057a6f73411e69a3c00163e023e51", "idx":0, "limit":5}
         url = url_concat("http://api.7x24hs.com/api/articles", params)
@@ -134,6 +156,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         self.render('newsup/index.html',
                 is_login=is_login,
+                franchises=franchises,
+                suppliers=suppliers,
                 sceneries=sceneries,
                 journeies=journeies,
                 news=news,

@@ -235,33 +235,33 @@ function main() {
 			$('html, body').animate({scrollTop:0}, 'slow');
 		});
 
-		// Load More
-		$('.rst-newsandhot-post .rst-loadmore').on('click',function(e){
-			e.preventDefault();
-			var load_more = $(this);
-			load_more.text('Loading...');
-			setTimeout(function(){
-				load_more.text('Load more ...');
-				var data = '\
-					<article>\
-						<div class="row">\
-							<div class="rst-postpic col-sm-6">\
-								<a href="#"><img src="images/slider/category/new02.jpg" alt="" /></a>\
-								<a href="#" class="rst-postpic-cat"><span>world</span></a>\
-							</div>\
-							<div class="rst-postinfo col-sm-6">\
-								<h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>\
-								<time><i class="fa fa-clock-o"></i>12 sep, 2015</time>\
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero vitae magna sollicitudin pulvinar vel et tellus. Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>\
-								<a href="#" class="rst-info-viewlink"><span>read more</span><i class="fa fa-comments"></i></a>\
-							</div>\
-						</div>\
-					</article>\
-				';
-				$('.rst-newsandhot-post-content').append(data);
-			}, 3000);
-
-		});
+		// // Load More
+		// $('.rst-newsandhot-post .rst-loadmore').on('click',function(e){
+		// 	e.preventDefault();
+		// 	var load_more = $(this);
+		// 	load_more.text('Loading...');
+		// 	setTimeout(function(){
+		// 		load_more.text('Load more ...');
+		// 		var data = '\
+		// 			<article>\
+		// 				<div class="row">\
+		// 					<div class="rst-postpic col-sm-6">\
+		// 						<a href="#"><img src="images/slider/category/new02.jpg" alt="" /></a>\
+		// 						<a href="#" class="rst-postpic-cat"><span>world</span></a>\
+		// 					</div>\
+		// 					<div class="rst-postinfo col-sm-6">\
+		// 						<h6><a href="#">Lorem ipsum dolor sit amet consectetur.</a></h6>\
+		// 						<time><i class="fa fa-clock-o"></i>12 sep, 2015</time>\
+		// 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id libero vitae magna sollicitudin pulvinar vel et tellus. Cras a tincidunt sapien, et efficitur turpis. Pellentesque efficitur in purus in feugiat.</p>\
+		// 						<a href="#" class="rst-info-viewlink"><span>read more</span><i class="fa fa-comments"></i></a>\
+		// 					</div>\
+		// 				</div>\
+		// 			</article>\
+		// 		';
+		// 		$('.rst-newsandhot-post-content').append(data);
+		// 	}, 3000);
+    //
+		// });
 
 
 

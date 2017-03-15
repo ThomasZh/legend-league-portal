@@ -192,7 +192,7 @@
                 <div class="col-xs-12">
                   <h4>景区展示</h4>
                   <div class="rst-section-title-short">
-                    <a href="/portal/newsup/category?id=9b876004e94711e69b1c00163e023e51"><span>查看全部</span></a>
+                    <a href="/portal/newsup/category?id=41c057a6f73411e69a3c00163e023e51"><span>查看全部</span></a>
                     <div class="rst-shortmenu">
                       <a href="#"><i class="fa fa-bars"></i></a>
                       <ul>
@@ -258,6 +258,81 @@
     <!-- end pageline -->
 
 
+    <!-- Section suppliers -->
+    <section id="rst-life">
+      <div class="container">
+        <div class="row">
+          <div class="rst-section-title rst-section-title-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12">
+                  <h4>供应商展示</h4>
+                  <div class="rst-section-title-short">
+                    <a href="/portal/newsup/category?id=41c057a6f73411e69a3c00163e023e51"><span>查看全部</span></a>
+                    <div class="rst-shortmenu">
+                      <a href="#"><i class="fa fa-bars"></i></a>
+                      <ul>
+                        <li><a href="#">Sugar</a></li>
+                        <li><a href="#">Chili</a></li>
+                        <li><a href="#">pepper</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% for i in range(len(suppliers)) %}
+          {% if i == 0 %}
+          <article class="col-sm-6 rst-leftpost">
+            <div class="rst-specpost owl-carousel">
+              <a href="/portal/newsup/item-detail?id={{ suppliers[i]['club_id'] }}"><img src="{{ suppliers[i]['img'] }}!570x334" alt="" /></a>
+            </div>
+            <div class="rst-postinfo">
+              <h6><a href="/portal/newsup/item-detail?id={{ suppliers[i]['club_id'] }}">{{ suppliers[i]['name'] }}</a></h6>
+              <time><i class="fa fa-clock-o"></i>{{ suppliers[i]['create_time'] }}</time>
+              <p>{{ suppliers[i]['introduction'] }}</p>
+            </div>
+          </article>
+          {% end %}
+          {% end %}
+          <div class="col-sm-6 rst-rightpost">
+            {% for i in range(len(suppliers)) %}
+            {% if i > 0 %}
+            <article>
+              <div class="rst-postpic">
+                <a href="/portal/newsup/item-detail?id={{ suppliers[i]['club_id'] }}"><img src="{{ suppliers[i]['img'] }}!140x106" alt="" /></a>
+              </div>
+              <div class="rst-postinfo">
+                <h6><a href="/portal/newsup/item-detail?id={{ suppliers[i]['club_id'] }}">{{ suppliers[i]['name'] }}</a></h6>
+                <time><i class="fa fa-clock-o"></i>{{ suppliers[i]['create_time'] }}</time>
+                <p>{{ suppliers[i]['introduction'] }}</p>
+              </div>
+            </article>
+            {% end %}
+            {% end %}
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Section Scenery -->
+
+    <!-- Pageline -->
+    <div class="rst-pageline container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="rst-pageline-content">
+            <span>优秀景区</span>
+            <div class="rst-pageline-slider owl-carousel">
+              <p>优化资源、独立经营、市场化运作、相互促进</p>
+              <p>诚邀景区加盟，精诚合作，互相促进，共创美好未来！</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end pageline -->
+
     <!-- Section journey -->
     <section id="rst-sport">
       <div class="rst-section-title rst-section-title-box">
@@ -266,7 +341,7 @@
             <div class="col-xs-12">
               <h4>需求发布</h4>
               <div class="rst-section-title-short">
-                <a href="/portal/newsup/category?id=0e9a3c68e94511e6b40600163e023e51"><span>查看全部</span></a>
+                <a href="/portal/newsup/category?id=01d6120cf73411e69a3c00163e023e51"><span>查看全部</span></a>
                 <div class="rst-shortmenu">
                   <a href="#"><i class="fa fa-bars"></i></a>
                   <ul>
@@ -348,13 +423,13 @@
                       <h6><a href="/portal/newsup/item-detail?id={{ article['_id'] }}">{{ article['title'] }}</a></h6>
                       <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
                       <p>{{ article['subtitle'] }}</p>
-                      <a href="#" class="rst-info-viewlink"><span>查看详情</span><i class="fa fa-comments"></i></a>
+                      <a href="/portal/newsup/item-detail?id={{ article['_id'] }}" class="rst-info-viewlink"><span>查看详情</span><i class="fa fa-comments"></i></a>
                     </div>
                   </div>
                 </article>
                 {% end %}
               </div>
-              <a href="#" class="rst-loadmore">查看更多</a>
+              <a href="/portal/newsup/category?id=30a56cb8f73411e69a3c00163e023e51" class="rst-loadmore">查看更多</a>
             </div>
           </div>
           <div class="col-sm-4">
