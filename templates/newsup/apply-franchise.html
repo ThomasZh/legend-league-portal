@@ -178,7 +178,7 @@
 
                     <div class="form-group">
                       <div class="rst-account-img" style="position:static;">
-                        <img id="user_img" src="{{ static_url('img/bg.jpg') }}" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #e2e6e5"/>
+                        <img id="user_img" src="http://tripc2c-club-title.b0.upaiyun.com/default/bg.jpg" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #e2e6e5"/>
                         <input class="rst-pagebutton" type="button" value="上传背景图" onclick="openBrowse()" />
                         <input type="file" id="file" name="file" style="display:none;">
                       </div>
@@ -522,8 +522,6 @@
     });
   </script>
   <script type="text/javascript">
-  var select = document.getElementByTagNames("select");
-    select[0].options[0].style.color = "red";
     $("#citySelect").citySelect({
       url:"{{ static_url('js/city.min.js') }}",
       nodata:"none",
@@ -533,7 +531,7 @@
       city:"{{ franchise['club']['city'] }}"
       {% end %}
     });
-    {% if franchise %}
+    {% if franchise['_status'] == 10 %}
     $("#franchise_type").val("{{ franchise['club']['franchise_type'] }}")
     {% end %}
   </script>
