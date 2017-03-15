@@ -144,6 +144,17 @@
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
+                      <div id="type" style="padding: 11px 0px;width: 100%;margin: 0 0 30px;">
+                            <select class="prov" id="franchise_type">
+                              <option value="类型" style="color:red;">加盟商类型</option>
+                              <option value="景区">景区</option>
+                              <option value="供应商">供应商</option>
+                            </select>
+                      </div>
+                      <!-- required data-validation-required-message="Please enter your phone." -->
+                      <!-- <p class="help-block text-danger"></p> -->
+                    </div>
+                    <div class="form-group">
                       <input class="rst-pageinput" type="email" placeholder="电子邮件" name="email" id="email"  />
                       <!-- required data-validation-required-message="Please enter your email." -->
                       <!-- <p class="help-block text-danger"></p> -->
@@ -167,7 +178,7 @@
 
                     <div class="form-group">
                       <div class="rst-account-img" style="position:static;">
-                        <img id="user_img" src="" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #79eec7"/>
+                        <img id="user_img" src="{{ static_url('img/bg.jpg') }}" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #e2e6e5"/>
                         <input class="rst-pagebutton" type="button" value="上传背景图" onclick="openBrowse()" />
                         <input type="file" id="file" name="file" style="display:none;">
                       </div>
@@ -200,12 +211,21 @@
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
+                      <div id="type" style="padding: 11px 0px;width: 100%;margin: 0 0 30px;">
+                            <select class="prov" id="franchise_type">
+                              <option value="类型">加盟商类型</option>
+                              <option value="景区">景区</option>
+                              <option value="供应商">供应商</option>
+                            </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
                       <input class="rst-pageinput" type="email" placeholder="电子邮箱" name="email" id="email" value="{{ franchise['club']['email'] }}" />
                       <!-- required data-validation-required-message="Please enter your email." -->
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
-                      <!-- <input class="rst-pageinput" type="text" placeholder="地址" name="address" id="address" value="{{ franchise['club']['address'] }}" /> -->
+
                       <div id="citySelect" style="padding: 11px 0px;width: 100%;margin: 0 0 30px;">
                            <select class="prov" id="prov"></select>
                            <select class="city" disabled="disabled" id="city"></select>
@@ -222,7 +242,7 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <div class="rst-account-img" style="position:static;">
-                        <img id="user_img" src="{{ franchise['club']['img'] }}" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #79eec7"/>
+                        <img id="user_img" src="{{ franchise['club']['img'] }}" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #e2e6e5"/>
                         <input class="rst-pagebutton" type="button" value="上传背景图" onclick="openBrowse()" />
                         <input type="file" id="file" name="file" style="display:none;">
                       </div>
@@ -267,6 +287,10 @@
                 <tr>
                   <td>加盟商名称</td>
                   <td>{{ franchise['club']['name'] }}</td>
+                </tr>
+                <tr>
+                  <td>加盟商类型</td>
+                  <td>{{ franchise['club']['franchise_type'] }}</td>
                 </tr>
                 <tr>
                   <td>电话号码</td>
@@ -459,6 +483,7 @@
             name: $('#name').val(),
             phone: $('#phone').val(),
             email: $('#email').val(),
+            franchise_type: $("#franchise_type option:selected").text(),
             province: $("#prov option:selected").text(),
             city: $("#city option:selected").text(),
             img: $("#user_img").attr('src'),
@@ -497,6 +522,8 @@
     });
   </script>
   <script type="text/javascript">
+  var select = document.getElementByTagNames("select");
+    select[0].options[0].style.color = "red";
     $("#citySelect").citySelect({
       url:"{{ static_url('js/city.min.js') }}",
       nodata:"none",
@@ -506,7 +533,9 @@
       city:"{{ franchise['club']['city'] }}"
       {% end %}
     });
-
+    {% if franchise %}
+    $("#franchise_type").val("{{ franchise['club']['franchise_type'] }}")
+    {% end %}
   </script>
 </body>
 
