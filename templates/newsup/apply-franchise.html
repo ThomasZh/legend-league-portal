@@ -193,7 +193,7 @@
                       <textarea class="rst-pageinput" cols="30" rows="10" placeholder="加盟商简介" name="introduction" id="introduction" ></textarea>
                       <!-- required data-validation-required-message="Please enter your message." -->
                       <!-- <p class="help-block text-danger"></p> -->
-                      <div id="success"></div>
+                      <div class="appy-form-main-message" id="success"></div>
                     </div>
                     <button class="rst-pagebutton" type="submit">发送申请</button>
                   </div>
@@ -499,14 +499,12 @@
             dataType: "json",
             contentType: 'application/json',
             success: function(data, status, xhr) {
-              console.log(data);
+              console.log(status);
               $('.appy-form-main-message').addClass('show').html('发送申请成功，请等待审核!');
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("XMLHttpRequest.status: " + XMLHttpRequest.status);
-              if (XMLHttpRequest.status == 200) {
-                $('.appy-form-main-message').addClass('show').html('发送申请成功，请等待审核!');
-              } else if (XMLHttpRequest.status == 409) {
+             if (XMLHttpRequest.status == 409) {
                 $('.appy-form-main-message').addClass('show error').html('已经申请完毕, 不必重新申请');
               } else {
                 $('.appy-form-main-message').addClass('show error').html('网络异常,刷新重试');
@@ -531,8 +529,8 @@
       city:"{{ franchise['club']['city'] }}"
       {% end %}
     });
-    {% if franchise['_status'] == 10 %}
-    $("#franchise_type").val("{{ franchise['club']['franchise_type'] }}")
+    {% if franchise and franchise['_status'] == 10 %}
+      $("#franchise_type").val("{{ franchise['club']['franchise_type'] }}")
     {% end %}
   </script>
 </body>

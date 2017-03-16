@@ -192,45 +192,45 @@
                 <div class="col-xs-12">
                   <h4>景区展示</h4>
                   <div class="rst-section-title-short">
-                    <a href="/portal/newsup/category?id=41c057a6f73411e69a3c00163e023e51"><span>查看全部</span></a>
+                    <a href="/portal/newsup/franchises?franchise_type=景区"><span>查看全部</span></a>
                     <div class="rst-shortmenu">
                       <a href="#"><i class="fa fa-bars"></i></a>
-                      <ul>
+                      <!-- <ul>
                         <li><a href="#">Sugar</a></li>
                         <li><a href="#">Chili</a></li>
                         <li><a href="#">pepper</a></li>
-                      </ul>
+                      </ul> -->
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {% for i in range(len(sceneries)) %}
+          {% for i in range(len(franchises)) %}
           {% if i == 0 %}
           <article class="col-sm-6 rst-leftpost">
             <div class="rst-specpost owl-carousel">
-              <a href="/portal/newsup/item-detail?id={{ sceneries[i]['_id'] }}"><img src="{{ sceneries[i]['img'] }}!570x334" alt="" /></a>
+              <a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}"><img src="{{ franchises[i]['img'] }}!570x334" alt="" /></a>
             </div>
             <div class="rst-postinfo">
-              <h6><a href="/portal/newsup/item-detail?id={{ sceneries[i]['_id'] }}">{{ sceneries[i]['title'] }}</a></h6>
-              <time><i class="fa fa-clock-o"></i>{{ sceneries[i]['publish_time'] }}</time>
-              <p>{{ sceneries[i]['subtitle'] }}</p>
+              <h6><a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}">{{ franchises[i]['name'] }}</a></h6>
+              <time><i class="fa fa-clock-o"></i>{{ franchises[i]['create_time'] }}</time>
+              <p>{{ franchises[i]['introduction'] }}</p>
             </div>
           </article>
           {% end %}
           {% end %}
           <div class="col-sm-6 rst-rightpost">
-            {% for i in range(len(sceneries)) %}
+            {% for i in range(len(franchises)) %}
             {% if i > 0 %}
             <article>
               <div class="rst-postpic">
-                <a href="/portal/newsup/item-detail?id={{ sceneries[i]['_id'] }}"><img src="{{ sceneries[i]['img'] }}!140x106" alt="" /></a>
+                <a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}"><img src="{{ franchises[i]['img'] }}!140x106" alt="" /></a>
               </div>
               <div class="rst-postinfo">
-                <h6><a href="/portal/newsup/item-detail?id={{ sceneries[i]['_id'] }}">{{ sceneries[i]['title'] }}</a></h6>
-                <time><i class="fa fa-clock-o"></i>{{ sceneries[i]['publish_time'] }}</time>
-                <p>{{ sceneries[i]['subtitle'] }}</p>
+                <h6><a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}">{{ franchises[i]['name'] }}</a></h6>
+                <time><i class="fa fa-clock-o"></i>{{ franchises[i]['create_time'] }}</time>
+                <p>{{ franchises[i]['introduction'] }}</p>
               </div>
             </article>
             {% end %}
@@ -271,11 +271,11 @@
                     <a href="/portal/newsup/franchises?franchise_type=供应商"><span>查看全部</span></a>
                     <div class="rst-shortmenu">
                       <a href="#"><i class="fa fa-bars"></i></a>
-                      <ul>
+                      <!-- <ul>
                         <li><a href="#">Sugar</a></li>
                         <li><a href="#">Chili</a></li>
                         <li><a href="#">pepper</a></li>
-                      </ul>
+                      </ul> -->
                     </div>
                   </div>
                 </div>
@@ -286,10 +286,10 @@
           {% if i == 0 %}
           <article class="col-sm-6 rst-leftpost">
             <div class="rst-specpost owl-carousel">
-              <a href="/portal/newsup/item-detail?id={{ suppliers[i]['club_id'] }}"><img src="{{ suppliers[i]['img'] }}!570x334" alt="" /></a>
+              <a href="/portal/newsup/franchise-detail?id={{ suppliers[i]['club_id'] }}"><img src="{{ suppliers[i]['img'] }}!570x334" alt="" /></a>
             </div>
             <div class="rst-postinfo">
-              <h6><a href="/portal/newsup/item-detail?id={{ suppliers[i]['club_id'] }}">{{ suppliers[i]['name'] }}</a></h6>
+              <h6><a href="/portal/newsup/franchise-detail?id={{ suppliers[i]['club_id'] }}">{{ suppliers[i]['name'] }}</a></h6>
               <time><i class="fa fa-clock-o"></i>{{ suppliers[i]['create_time'] }}</time>
               <p>{{ suppliers[i]['introduction'] }}</p>
             </div>
@@ -301,10 +301,10 @@
             {% if i > 0 %}
             <article>
               <div class="rst-postpic">
-                <a href="/portal/newsup/item-detail?id={{ suppliers[i]['club_id'] }}"><img src="{{ suppliers[i]['img'] }}!140x106" alt="" /></a>
+                <a href="/portal/newsup/franchise-detail?id={{ suppliers[i]['club_id'] }}"><img src="{{ suppliers[i]['img'] }}!140x106" alt="" /></a>
               </div>
               <div class="rst-postinfo">
-                <h6><a href="/portal/newsup/item-detail?id={{ suppliers[i]['club_id'] }}">{{ suppliers[i]['name'] }}</a></h6>
+                <h6><a href="/portal/newsup/franchise-detail?id={{ suppliers[i]['club_id'] }}">{{ suppliers[i]['name'] }}</a></h6>
                 <time><i class="fa fa-clock-o"></i>{{ suppliers[i]['create_time'] }}</time>
                 <p>{{ suppliers[i]['introduction'] }}</p>
               </div>
@@ -344,11 +344,11 @@
                 <a href="/portal/newsup/category?id=01d6120cf73411e69a3c00163e023e51"><span>查看全部</span></a>
                 <div class="rst-shortmenu">
                   <a href="#"><i class="fa fa-bars"></i></a>
-                  <ul>
+                  <!-- <ul>
                     <li><a href="#">Sugar</a></li>
                     <li><a href="#">Chili</a></li>
                     <li><a href="#">pepper</a></li>
-                  </ul>
+                  </ul> -->
                 </div>
               </div>
             </div>

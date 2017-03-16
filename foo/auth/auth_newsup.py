@@ -91,5 +91,6 @@ class AuthLeagueSignupXHR(BaseHandler):
         logging.info("got response %r", response.body)
 
         self.set_status(200) # OK
+        self.write(JSON.dumps({"err_code":200, "err_msg":"success"}))
         self.finish()
         return

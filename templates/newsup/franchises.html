@@ -108,7 +108,7 @@
             <div class="rst-catbanner-post">
               <div class="rst-mainslide">
                 <div class="rst-boxinfo">
-                  <p><a href="/portal/newsup/item-detail?id={{ franchises[i]['club_id'] }}">{{ franchises[i]['name'] }}</a></p>
+                  <p><a href="/portal/newsup/franchises-detail?id={{ franchises[i]['club_id'] }}">{{ franchises[i]['name'] }}</a></p>
                   <time><i class="fa fa-clock-o"></i>{{ franchises[i]['create_time'] }}</time>
                 </div>
                 <img src="{{ franchises[i]['img'] }}!800x370" alt="" />
@@ -234,7 +234,7 @@
         var currentPage = 0;//当前页
         var total_page = 0;//总页数
         function query(pageNum,prov,city) {
-          $.get("/api/leagues/{{ league_id }}/clubs?franchise_type=供应商&province="+prov+"&city="+city+"&page="+pageNum+"&limit="+limit+"",function(data,status){
+          $.get("/api/leagues/{{ league_id }}/clubs?franchise_type={{ franchise_type }}&province="+prov+"&city="+city+"&page="+pageNum+"&limit="+limit+"",function(data,status){
 
                 console.log(data);
                  data = JSON.parse(data);
@@ -245,14 +245,14 @@
             for (var i in pageData) {
               var inner_html = '<article class="col-sm-12 rst-catpost">';
               inner_html += '<div class="rst-postpic">';
-              inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i].club_id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
+              inner_html += '<a href="/portal/newsup/franchise-detail?id='+ pageData[i].club_id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
               inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
               inner_html += '</div>';
               inner_html += '<div class="rst-postinfo">';
               inner_html += '<a class="rst-postpic-cat" href="#"><span>';
 
               inner_html += '</span></a>';
-              inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i].club_id +'">'+ pageData[i].name +'</a></h6>'
+              inner_html += '<h6><a href="/portal/newsup/franchise-detail?id='+ pageData[i].club_id +'">'+ pageData[i].name +'</a></h6>'
               inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].create_time) +'</time>';
               inner_html += '<p>'+ pageData[i].introduction +'</p>';
               inner_html += '</div>';
@@ -279,7 +279,7 @@
         };
 
         function gotoPage(pageNum,prov,city) {
-          $.get("/api/leagues/{{ league_id }}/clubs?franchise_type=供应商&province="+prov+"&city="+city+"&page="+pageNum+"&limit="+limit+"",function(data,status){
+          $.get("/api/leagues/{{ league_id }}/clubs?franchise_type={{ franchise_type }}&province="+prov+"&city="+city+"&page="+pageNum+"&limit="+limit+"",function(data,status){
                 console.log(data);
                 data = JSON.parse(data);
                 currentPage = pageNum;
@@ -290,14 +290,14 @@
             for (var i in pageData) {
               var inner_html = '<article class="col-sm-12 rst-catpost">';
               inner_html += '<div class="rst-postpic">';
-              inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i].club_id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
+              inner_html += '<a href="/portal/newsup/franchise-detail?id='+ pageData[i].club_id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
               inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
               inner_html += '</div>';
               inner_html += '<div class="rst-postinfo">';
               inner_html += '<a class="rst-postpic-cat" href="#"><span>';
 
               inner_html += '</span></a>';
-              inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i].club_id +'">'+ pageData[i].name +'</a></h6>'
+              inner_html += '<h6><a href="/portal/newsup/franchise-detail?id='+ pageData[i].club_id +'">'+ pageData[i].name +'</a></h6>'
               inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].create_time) +'</time>';
               inner_html += '<p>'+ pageData[i].introduction +'</p>';
               inner_html += '</div>';
@@ -355,19 +355,23 @@
           })
 
           $("#prev").on("click",function(){
+            prov = $("#p1").val();
+            city = $("#c1").val();
               if(currentPage<=1){
 
               }else{
-                  gotoPage(--currentPage);
+                  gotoPage(--currentPage,prov,city);
                   // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
               }
           });
 
           $("#next").on("click",function(){
+            prov = $("#p1").val();
+            city = $("#c1").val();
               if(currentPage>=total_page){
 
               }else{
-                  gotoPage(++currentPage);
+                  gotoPage(++currentPage,prov,city);
                   // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
               }
           })
@@ -404,8 +408,11 @@
     console.log(prov);
     var city = $("#city option:selected").text();
     console.log(city);
+    if (city == "请选择"){
+      city = "";
+    }
     $("#c1").val(city);
-      gotoPage(1,prov,city);
+    gotoPage(1,prov,city);
   })
 
 </script>
