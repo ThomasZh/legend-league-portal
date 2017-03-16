@@ -705,15 +705,15 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
         if access_token:
             is_login = True
 
-        url = "http://api.7x24hs.com/api/myinfo/franchises"
-        http_client = HTTPClient()
-        headers={"Authorization":"Bearer "+access_token}
-        response = http_client.fetch(url, method="GET", headers=headers)
-        logging.info("got response %r", response.body)
-        franchises = json_decode(response.body)
-        franchise_in_this_league = None
-        if len(franchises) > 0:
-            for franchise in franchises:
+        franchise = None
+        try:
+            url = "http://api.7x24hs.com/api/myinfo/franchises"
+            http_client = HTTPClient()
+            headers={"Authorization":"Bearer "+access_token}
+            response = http_client.fetch(url, method="GET", headers=headers)
+            logging.info("got response %r", response.body)
+            franchise = json_decode(response.body)
+            if franchise:
                 if not franchise['club'].has_key("province"):
                     franchise['club']['province'] = ''
                     franchise['club']['city'] = ''
@@ -722,9 +722,8 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
                 if not franchise['club'].has_key("franchise_type"):
                     franchise['club']['franchise_type'] = ''
                 franchise['create_time'] = timestamp_datetime(franchise['create_time'])
-                if franchise['league_id'] == LEAGUE_ID:
-                    franchise_in_this_league = franchise
-                    break
+        except:
+            logging.info("got franchise=[None]")
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -739,7 +738,7 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
         self.render('newsup/apply-franchise.html',
                 is_login=is_login,
                 league_id=LEAGUE_ID,
-                franchise=franchise_in_this_league,
+                franchise=franchise,
                 lastest_comments=lastest_comments)
 
 
