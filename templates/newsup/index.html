@@ -141,7 +141,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="rst-pageline-content">
-            <span>诚邀加盟</span>
+            <span>公告</span>
             <div class="rst-pageline-slider owl-carousel">
               <p>诚邀供应商加盟，精诚合作，互相促进，共创美好未来！</p>
               <p>优化资源、独立经营、市场化运作、相互促进</p>
@@ -151,36 +151,6 @@
       </div>
     </div>
     <!-- end pageline -->
-
-    <!-- Section Popular -->
-    <section id="rst-popular">
-      <div class="container">
-        <div class="row">
-          <div class="rst-section-title">
-            <div class="container">
-              <div class="row">
-                <div class="col-xs-12">
-                  <h4>热门景区</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% for article in populars %}
-          <article class="col-sm-3 col-xs-6">
-            <div class="rst-postpic">
-              <a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!270x190" alt="" /></a>
-            </div>
-            <div class="rst-postinfo">
-              <h6><a href="/portal/newsup/item-detail?id={{ article['_id'] }}">{{ article['title'] }}</a></h6>
-              <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
-              <p>{{ article['subtitle'] }}</p>
-            </div>
-          </article>
-          {% end %}
-        </div>
-      </div>
-    </section>
-    <!-- End Section Popular -->
 
     <!-- Section Scenery -->
     <section id="rst-life">
@@ -317,87 +287,13 @@
     </section>
     <!-- End Section Scenery -->
 
-    <!-- Pageline -->
-    <div class="rst-pageline container">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="rst-pageline-content">
-            <span>优秀景区</span>
-            <div class="rst-pageline-slider owl-carousel">
-              <p>优化资源、独立经营、市场化运作、相互促进</p>
-              <p>诚邀景区加盟，精诚合作，互相促进，共创美好未来！</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- end pageline -->
-
-    <!-- Section journey -->
-    <section id="rst-sport">
-      <div class="rst-section-title rst-section-title-box">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <h4>需求发布</h4>
-              <div class="rst-section-title-short">
-                <a href="/portal/newsup/category?id=01d6120cf73411e69a3c00163e023e51"><span>查看全部</span></a>
-                <div class="rst-shortmenu">
-                  <a href="#"><i class="fa fa-bars"></i></a>
-                  <!-- <ul>
-                    <li><a href="#">Sugar</a></li>
-                    <li><a href="#">Chili</a></li>
-                    <li><a href="#">pepper</a></li>
-                  </ul> -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          {% for i in range(len(journeies)) %}
-          {% if i == 0 %}
-          <article class="col-sm-6 rst-leftpost">
-            <div class="rst-specpost owl-carousel">
-              <a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}"><img src="{{ journeies[i]['img'] }}!570x334" alt="" /></a>
-            </div>
-            <div class="rst-postinfo">
-              <h6><a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">{{ journeies[i]['title'] }}</a></h6>
-              <time><i class="fa fa-clock-o"></i>{{ journeies[i]['publish_time'] }}</time>
-              <p>{{ journeies[i]['subtitle'] }}</p>
-            </div>
-          </article>
-          {% end %}
-          {% end %}
-          <div class="col-sm-6 rst-rightpost">
-            {% for i in range(len(journeies)) %}
-            {% if i > 0 %}
-            <article>
-              <div class="rst-postpic">
-                <a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}"><img src="{{ journeies[i]['img'] }}!140x106" alt="" /></a>
-              </div>
-              <div class="rst-postinfo">
-                <h6><a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">{{ journeies[i]['title'] }}</a></h6>
-                <time><i class="fa fa-clock-o"></i>{{ journeies[i]['publish_time'] }}</time>
-                <p>{{ journeies[i]['subtitle'] }}</p>
-              </div>
-            </article>
-            {% end %}
-            {% end %}
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Section journey -->
 
     <!-- One minute for advertising -->
     <div class="rst-adv">
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
-            <a href="#"><img src="/static/newsup/images/ad02.png" alt="" /></a>
+            <a href="#"><img src="/static/img/123.jpg" alt="" /></a>
           </div>
         </div>
       </div>
@@ -433,6 +329,39 @@
             </div>
           </div>
           <div class="col-sm-4">
+
+            <aside class="widget widget_hot_news">
+              <h3>需求发布</h3>
+              <div class="rst-hotnews owl-carousel">
+                <ul>
+                  {% for i in range(len(journeies)) %}
+                  {% if i < 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">{{ journeies[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+                <ul>
+                  {% for i in range(len(journeies)) %}
+                  {% if i >= 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">{{ journeies[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+              </div>
+            </aside>
+
+            <!-- begin widget social -->
+            {% module Template("newsup/block-widget-social.html") %}
+            <!-- end widget social -->
+
+            <!-- begin widget popular -->
+            {% module Template("newsup/block-widget-popular.html", populars=populars, news=news) %}
+            <!-- end widget popular -->
+
             <aside class="widget widget_hot_news">
               <h3>经验交流</h3>
               <div class="rst-hotnews owl-carousel">
@@ -457,18 +386,6 @@
               </div>
             </aside>
             <!-- end widget hot and news -->
-
-            <!-- begin widget social -->
-            {% module Template("newsup/block-widget-social.html") %}
-            <!-- end widget social -->
-
-            <!-- begin widget popular -->
-            {% module Template("newsup/block-widget-popular.html", populars=populars, news=news) %}
-            <!-- end widget popular -->
-
-            <!-- begin widget adv -->
-            {% module Template("newsup/block-widget-adv.html", activities=activities) %}
-            <!-- end widget adv -->
 
           </div>
         </div>

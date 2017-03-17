@@ -93,7 +93,7 @@
           <div class="rst-breadcrumb">
             <a href="/portal/newsup/index"><span>首页</span></a>
             <span>></span>
-            <a href="/portal/newsup/category"><span>文章</span></a>
+            <a href="#"><span>文章</span></a>
           </div>
         </div>
       </div>
@@ -206,7 +206,7 @@
                         <div class="comment-header">
                           <a href="#" class="comment-author">{{! comment.nickname }}</a>
                           <time class="comment-date"><i class="fa fa-clock-o"></i>{{! comment.create_time }}</time>
-                          <a href="#" class="comment-reply-link">回复</a>
+                          <!-- <a href="#" class="comment-reply-link">回复</a> -->
                         </div>
                         <div class="comment-body">
                           <p>{{! comment.comment }}</p>
@@ -215,7 +215,7 @@
                     </div>
                   </li>
                 </ol>
-                <a id="loadMoreBtn" v-on:click="loadMore" class="rst-loadmore">查看更多</a>
+                <a id="loadMoreBtn" v-on:click="loadMore" class="rst-loadmore" style="cursor:pointer;">查看更多</a>
               </div>
               <!-- End comment list -->
 
@@ -246,10 +246,29 @@
             <!-- begin widget popular -->
             {% module Template("newsup/block-widget-popular.html", populars=populars, news=news) %}
             <!-- end widget popular -->
-
-            <!-- begin widget adv -->
-            {% module Template("newsup/block-widget-adv.html", activities=activities) %}
-            <!-- end widget adv -->
+            <aside class="widget widget_hot_news">
+              <h3>经验交流</h3>
+              <div class="rst-hotnews owl-carousel">
+                <ul>
+                  {% for i in range(len(hots)) %}
+                  {% if i < 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+                <ul>
+                  {% for i in range(len(hots)) %}
+                  {% if i >= 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+              </div>
+            </aside>
 
             <!-- begin widget video -->
             {% module Template("newsup/block-widget-video.html") %}
@@ -308,7 +327,7 @@
       data: {
         comments: [],
         comment_num: 0,
-        limlt: 20
+        limlt: 10
       },
       created: function() {
         this.queryComments(0, this.limlt);
@@ -357,17 +376,14 @@
             success: function(data, status, xhr) {
               console.log(data);
               $("#comment").val("");
+              $(".send-ok-message").html("留言成功！");
+              setTimeout(hide,3000);
+              $("#comment").val("");
               _self.queryNewComment();
 
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
-              if (XMLHttpRequest.status == 200) {
-                $(".send-ok-message").html("留言成功！");
-                setTimeout(hide,3000);
-                $("#comment").val("");
-                _self.queryNewComment();
-              }
             },
             complete: function(XMLHttpRequest, textStatus) {
               this; // 调用本次AJAX请求时传递的options参数

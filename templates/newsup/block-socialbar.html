@@ -29,7 +29,7 @@
           <ul>
             <li>
               <div class="rst-search">
-                <input type="text" value="关键词" id="searchText" onblur="if (this.value == '') {this.value = 'Search Words';}" onclick=" if (this.value == 'Search Words') {this.value = '';} " name="s">
+                <input type="text" id="searchText" onblur="if (this.value == '') {this.value = '关键词';}" onclick=" if (this.value == '关键词') {this.value = '';} " name="s">
                 <button class="sb" id="searchBtn"><i class="fa fa-search"></i></button>
               </div>
             </li>
@@ -53,4 +53,7 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+$("#searchText").val("关键词");
+</script>
 <!-- end social bar -->

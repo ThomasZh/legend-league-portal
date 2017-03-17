@@ -169,11 +169,29 @@
             <!-- begin widget popular -->
             {% module Template("newsup/block-widget-popular.html", populars=populars, news=news) %}
             <!-- end widget popular -->
-
-            <!-- begin widget adv -->
-            {% module Template("newsup/block-widget-adv.html", activities=activities) %}
-            <!-- end widget adv -->
-
+            <aside class="widget widget_hot_news">
+              <h3>经验交流</h3>
+              <div class="rst-hotnews owl-carousel">
+                <ul>
+                  {% for i in range(len(hots)) %}
+                  {% if i < 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+                <ul>
+                  {% for i in range(len(hots)) %}
+                  {% if i >= 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+              </div>
+            </aside>
             <!-- begin widget video -->
             {% module Template("newsup/block-widget-video.html") %}
             <!-- end widget video -->

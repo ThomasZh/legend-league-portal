@@ -152,7 +152,7 @@ function main() {
 		var oh = $('.widget.widget_popular').height();
 		$('.widget.widget_popular').css('height', $('.widget.widget_popular').height() + $('.widget.widget_popular > ul > li.active ul').height() + 'px');
 		$('.widget.widget_popular > ul > li').on('click',function(e){
-			e.preventDefault();
+			// e.preventDefault();
 			$('.widget.widget_popular > ul > li').removeClass('active');
 			$(this).addClass('active');
 			$('.widget.widget_popular').css('height', oh + $('.widget.widget_popular > ul > li.active ul').height() + 'px');
