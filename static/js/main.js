@@ -297,18 +297,18 @@ function main() {
 		}
 
 		// Style input type file
-		$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
-			var input = $(this).parents('.input-group').find(':text'),
-				log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-			if( input.length ) {
-				input.val(log);
-			} else {
-				if( log ) {
-					$(this).parents('.input-group-btn').find('.input-group-text').html(log);
-				};
-			}
-		});
+		// $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+		// 	var input = $(this).parents('.input-group').find(':text'),
+		// 		log = numFiles > 1 ? numFiles + ' files selected' : label;
+    //
+		// 	if( input.length ) {
+		// 		input.val(log);
+		// 	} else {
+		// 		if( log ) {
+		// 			$(this).parents('.input-group-btn').find('.input-group-text').html(log);
+		// 		};
+		// 	}
+		// });
 
 		// Page template mobile click
 		if ( $(window).width() < 769 ) {

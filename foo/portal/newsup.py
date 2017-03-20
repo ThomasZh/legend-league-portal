@@ -178,7 +178,7 @@ class NewsupAccountHandler(AuthorizationHandler):
             is_login = True
 
         headers = {"Authorization":"Bearer "+access_token}
-        url = "http://api.7x24hs.com/api/myinfo"
+        url = "http://api.7x24hs.com/api/myinfo?filter=login"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET", headers=headers)
         logging.info("got response %r", response.body)
