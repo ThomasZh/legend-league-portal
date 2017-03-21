@@ -864,7 +864,8 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
 
         franchise = None
         try:
-            url = "http://api.7x24hs.com/api/myinfo/franchises"
+            params = {"filter":"franchise"}
+            url = url_concat("http://api.7x24hs.com/api/myinfo", params)
             http_client = HTTPClient()
             headers={"Authorization":"Bearer "+access_token}
             response = http_client.fetch(url, method="GET", headers=headers)
