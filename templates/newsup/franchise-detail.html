@@ -321,7 +321,7 @@
           console.log('like');
           $.ajax({
             type: "POST",
-            url: "/api/symbols/{{ franchise['_id'] }}/like",
+            url: "/api/articles/{{ franchise['_id'] }}/like",
             dataType: "json",
             contentType: 'application/json',
             success: function(data, status, xhr) {
@@ -353,7 +353,7 @@
           }
           $.ajax({
             type: "POST",
-            url: "/api/symbols/{{ franchise['_id'] }}/comment",
+            url: "/api/articles/{{ franchise['_id'] }}/comment",
             dataType: "json",
             data: json,
             contentType: 'application/json',
@@ -396,7 +396,7 @@
           var _self = this;
           $.ajax({
             type: "GET",
-            url: "/api/symbols/{{ franchise['_id'] }}/comment?idx=" + idx + "&limit=" + limit,
+            url: "/api/articles/{{ franchise['_id'] }}/comment?idx=" + idx + "&limit=" + limit,
             async: false,
             dataType: "json",
             contentType: 'application/json',
@@ -421,7 +421,7 @@
           var _self = this;
           $.ajax({
             type: "GET",
-            url: "/api/symbols/{{ franchise['_id'] }}/comment?idx=0&limit=1",
+            url: "/api/articles/{{ franchise['_id'] }}/comment?idx=0&limit=1",
             async: false,
             dataType: "json",
             contentType: 'application/json',

@@ -450,14 +450,14 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
         for article in hots:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
-        # update view_num
-        view_num = article_info['view_num']
+        # update read_num
+        read_num = article_info['read_num']
         url = "http://api.7x24hs.com/api/articles/"+article_id+"/read"
         http_client = HTTPClient()
-        _body = {"view_num": view_num+1}
+        _body = {"read_num": read_num+1}
         _json = json_encode(_body)
         response = http_client.fetch(url, method="POST", body=_json)
-        logging.info("got update view_num response %r", response.body)
+        logging.info("got update read_num response %r", response.body)
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -811,7 +811,7 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
 
         # update read_num
         read_num = franchise['read_num']
-        url = "http://api.7x24hs.com/api/symbols/"+franchise_id+"/read"
+        url = "http://api.7x24hs.com/api/articles/"+franchise_id+"/read"
         http_client = HTTPClient()
         _body = {"read_num": read_num+1}
         _json = json_encode(_body)
