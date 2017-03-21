@@ -225,9 +225,10 @@
         errorClass: "error",
         submitHandler: function(form) {
           var data = {
-            app:"legend",
             phone: $('#phone').val(),
             message: $('#message').val(),
+            league_id: "{{ league_id }}",
+            club_id: "00000000000000000000000000000000"
           };
           var json = JSON.stringify(data);
           console.log(json);
@@ -239,7 +240,7 @@
           $.ajax({
             type: "POST",
             data: json,
-            url:"/api/kits",
+            url:"http://7x24hs.com/api/guest-book",
             dataType: "json",
             contentType: 'application/json',
             success: function(data, status, xhr) {
@@ -252,13 +253,7 @@
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("XMLHttpRequest.status: " + XMLHttpRequest.status);
-              if (XMLHttpRequest.status == 200) {
-                $(".send-ok-message").html("留言成功！");
-                setTimeout(hide,2500);
-
-              } else {
                 $('.appy-form-main-message').addClass('show error').html('网络异常,刷新重试');
-              }
             },
             complete: function(XMLHttpRequest, textStatus) {
               this; // 调用本次AJAX请求时传递的options参数

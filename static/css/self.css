@@ -32,3 +32,6 @@ textarea::-webkit-input-placeholder {
   top:0;
   right: 0;
 }
+.show{
+  color:#39e6ac;
+}

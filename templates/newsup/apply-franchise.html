@@ -44,14 +44,7 @@
   <link href="{{ static_url('newsup/css/responsive.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('css/self.css') }}" rel="stylesheet" type="text/css" />
 
-  <!-- Custom Fonts
-      ================================================== -->
   <link href="{{ static_url('newsup/fonts/stylesheet.css') }}" rel="stylesheet" type="text/css" />
-
-  <!-- Google Fonts
-      ================================================== -->
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.1.11.1.js') }}"></script>
 
 </head>
@@ -110,32 +103,31 @@
               <h6>已批准</h6> {% end %} {% end %}
             </div>
 
+            <!-- uploading toast -->
+            <div id="loadingToast" class="weui_loading_toast" style="display:none;">
+                <div class="weui_mask_transparent"></div>
+                <div class="weui_toast">
+                    <div class="weui_loading">
+                        <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+                        <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+                        <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+                        <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+                        <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+                        <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+                        <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+                        <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+                        <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+                        <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+                        <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+                        <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+                    </div>
+                    <p class="weui_toast_content">图片上传中...</p>
+                </div>
+            </div>
+
             {% if not franchise %}
             <div class="rst-getintouch-form">
               <form action="" method="" onsubmit="return false;" id="apply-form">
-
-                <!-- uploading toast -->
-                <div id="loadingToast" class="weui_loading_toast" style="display:none;">
-                    <div class="weui_mask_transparent"></div>
-                    <div class="weui_toast">
-                        <div class="weui_loading">
-                            <div class="weui_loading_leaf weui_loading_leaf_0"></div>
-                            <div class="weui_loading_leaf weui_loading_leaf_1"></div>
-                            <div class="weui_loading_leaf weui_loading_leaf_2"></div>
-                            <div class="weui_loading_leaf weui_loading_leaf_3"></div>
-                            <div class="weui_loading_leaf weui_loading_leaf_4"></div>
-                            <div class="weui_loading_leaf weui_loading_leaf_5"></div>
-                            <div class="weui_loading_leaf weui_loading_leaf_6"></div>
-                            <div class="weui_loading_leaf weui_loading_leaf_7"></div>
-                            <div class="weui_loading_leaf weui_loading_leaf_8"></div>
-                            <div class="weui_loading_leaf weui_loading_leaf_9"></div>
-                            <div class="weui_loading_leaf weui_loading_leaf_10"></div>
-                            <div class="weui_loading_leaf weui_loading_leaf_11"></div>
-                        </div>
-                        <p class="weui_toast_content">图片上传中...</p>
-                    </div>
-                </div>
-
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
@@ -416,9 +408,9 @@
         $('#loadingToast').show();
         document.addEventListener('uploaded',function(e){
           if(times == 0){
-            $("#user_img").attr('src',imgUrl);
-            $('#loadingToast').hide();
+            $("#user_img").attr('src',imgUrl);    
           }
+          $('#loadingToast').hide();
           times ++;
         });
 

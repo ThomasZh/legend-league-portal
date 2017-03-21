@@ -149,6 +149,14 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         logging.info("got response %r", response.body)
         multimedias = json_decode(response.body)
 
+        # notices
+        params = {"filter":"league", "league_id":LEAGUE_ID, "page":1, "limit":3}
+        url = url_concat("http://api.7x24hs.com/api/notice-board", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        notices = json_decode(response.body)
+
         is_login = False
         access_token = self.get_secure_cookie("access_token")
         if access_token:
@@ -163,9 +171,11 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
                 news=news,
                 populars=populars,
                 hots=hots,
+                league_id=LEAGUE_ID,
                 activities=activities,
                 lastest_comments=lastest_comments,
-                multimedias=multimedias)
+                multimedias=multimedias,
+                notices=notices['data'])
 
 
 class NewsupAccountHandler(AuthorizationHandler):
@@ -385,7 +395,8 @@ class NewsupContactHandler(tornado.web.RequestHandler):
 
         self.render('newsup/contact.html',
                 is_login=is_login,
-                lastest_comments=lastest_comments)
+                lastest_comments=lastest_comments,
+                league_id=LEAGUE_ID)
 
 
 class NewsupItemDetailHandler(tornado.web.RequestHandler):
@@ -782,6 +793,10 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
             franchise['paragraphs'] = ''
         if not franchise.has_key('franchise_type'):
             franchise['franchise_type'] = 'franchise'
+        if franchise.has_key('create_time'):
+            franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
+        else:
+            franchise['create_time'] = timestamp_friendly_date(0)
         # franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
 
         # hot(热点新闻)
