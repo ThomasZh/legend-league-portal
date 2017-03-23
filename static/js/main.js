@@ -313,7 +313,7 @@ function main() {
 		// Page template mobile click
 		if ( $(window).width() < 769 ) {
 			$('.rst-socialbar-menu li:last-child a').on('click',function(e){
-				e.preventDefault();
+				// e.preventDefault();
 				$(this).next().stop(true,true).slideToggle(700);
 
 			});
@@ -336,7 +336,7 @@ function main() {
 		// Page template mobile click
 		if ( $(window).width() < 769 ) {
 			$('.rst-socialbar-menu li:last-child a').click(function(e){
-				e.preventDefault();
+				// e.preventDefault();
 				$(this).next().stop(false,false).slideToggle(700);
 			});
 		}

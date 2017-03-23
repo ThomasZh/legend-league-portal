@@ -148,6 +148,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
         multimedias = json_decode(response.body)
+        for multimedia in multimedias:
+            multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
 
         # notices
         params = {"filter":"league", "league_id":LEAGUE_ID, "page":1, "limit":3}

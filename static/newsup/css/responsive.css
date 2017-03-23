@@ -244,9 +244,14 @@ Version: 1.0
 /* End Screen */
 }
 
-
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
 .rst-socialbar-menu li:last-child {
+  display: block;
+  margin: 0;
+  padding: 0 0 15px; 备份
+}*/
+@media (max-width: 768px) {
+.rst-socialbar-menu{
   display: block;
   margin: 0;
   padding: 0 0 15px;

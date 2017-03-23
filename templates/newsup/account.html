@@ -282,8 +282,7 @@
         dataType: "json",
         contentType: 'application/json',
         success: function(data, status, xhr) {
-          weui.alert("保存成功！","提示信息",function(){
-          });
+          weui.Loading.success();
         },
         error:function(){
         }
