@@ -51,7 +51,8 @@ class AuthRegisterHandler(tornado.web.RequestHandler):
             is_login = True
 
         self.render('newsup/register.html',
-                is_login=is_login)
+                is_login=is_login,
+                api_domain=API_DOMAIN)
 
 
 class AuthLogoutHandler(AuthorizationHandler):

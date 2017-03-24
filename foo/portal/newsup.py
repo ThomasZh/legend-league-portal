@@ -41,6 +41,7 @@ from global_const import *
 class NewsupLoginNextHandler(tornado.web.RequestHandler):
     def get(self):
         login_next = self.get_secure_cookie("login_next")
+        logging.info("got login_next %r",login_next)
         if login_next:
             self.redirect(login_next)
         else:
@@ -161,6 +162,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token>>>>> %r",access_token)
         if access_token:
             is_login = True
 
@@ -177,6 +179,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
                 activities=activities,
                 lastest_comments=lastest_comments,
                 multimedias=multimedias,
+                api_domain=API_DOMAIN,
                 notices=notices['data'])
 
 
@@ -198,7 +201,12 @@ class NewsupAccountHandler(AuthorizationHandler):
 
         self.render('newsup/account.html',
                 is_login=is_login,
-                user = user)
+                user = user,
+                api_domain=API_DOMAIN,
+                upyun_domain=UPYUN_DOMAIN,
+                upyun_notify_url=UPYUN_NOTIFY_URL,
+                upyun_form_api_secret=UPYUN_FORM_API_SECRET,
+                upyun_bucket=UPYUN_BUCKET)
 
 
 class NewsupAuthorHandler(tornado.web.RequestHandler):
@@ -253,6 +261,7 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
                 news=news,
                 populars=populars,
                 activities=activities,
+                api_domain=API_DOMAIN,
                 lastest_comments=lastest_comments)
 
 
@@ -329,6 +338,7 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
                 hots=hots,
                 lastest_comments=lastest_comments,
                 league_id=LEAGUE_ID,
+                api_domain=API_DOMAIN,
                 multimedias=multimedias)
 
 
@@ -373,6 +383,7 @@ class NewsupShortcodesHandler(tornado.web.RequestHandler):
                 is_login=is_login,
                 news=news,
                 activities=activities,
+                api_domain=API_DOMAIN,
                 populars=populars)
 
 
@@ -398,6 +409,7 @@ class NewsupContactHandler(tornado.web.RequestHandler):
         self.render('newsup/contact.html',
                 is_login=is_login,
                 lastest_comments=lastest_comments,
+                api_domain=API_DOMAIN,
                 league_id=LEAGUE_ID)
 
 
@@ -491,6 +503,7 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
                 populars=populars,
                 hots=hots,
                 activities=activities,
+                api_domain=API_DOMAIN,
                 multimedias=multimedias,
                 lastest_comments=lastest_comments)
 
@@ -505,6 +518,7 @@ class NewsupNewHandler(tornado.web.RequestHandler):
             is_login = True
 
         self.render('newsup/new.html',
+                api_domain=API_DOMAIN,
                 is_login=is_login)
 
 
@@ -560,6 +574,7 @@ class NewsupCategoryTileHandler(tornado.web.RequestHandler):
                 lastest_comments=lastest_comments,
                 news=news,
                 activities=activities,
+                api_domain=API_DOMAIN,
                 populars=populars)
 
 
@@ -657,6 +672,7 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
                 multimedias=multimedias,
                 league_id=LEAGUE_ID,
                 category_id=category_id,
+                api_domain=API_DOMAIN,
                 category=category)
 
 
@@ -749,6 +765,7 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
                 activities=activities,
                 lastest_comments=lastest_comments,
                 league_id=LEAGUE_ID,
+                api_domain=API_DOMAIN,
                 franchise_type=franchise_type)
 
 
@@ -851,6 +868,7 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
                 hots=hots,
                 activities=activities,
                 multimedias=multimedias,
+                api_domain=API_DOMAIN,
                 lastest_comments=lastest_comments)
 
 
@@ -899,6 +917,11 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
                 is_login=is_login,
                 league_id=LEAGUE_ID,
                 franchise=franchise,
+                api_domain=API_DOMAIN,
+                upyun_domain=UPYUN_DOMAIN,
+                upyun_notify_url=UPYUN_NOTIFY_URL,
+                upyun_form_api_secret=UPYUN_FORM_API_SECRET,
+                upyun_bucket=UPYUN_BUCKET,
                 lastest_comments=lastest_comments)
 
 
@@ -977,4 +1000,5 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
                 lastest_comments=lastest_comments,
                 multimedias=multimedias,
                 league_id=LEAGUE_ID,
+                api_domain=API_DOMAIN,
                 category_id=category_id)

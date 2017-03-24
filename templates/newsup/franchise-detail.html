@@ -294,11 +294,6 @@
   <!-- Owl Slider Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
 
-  <!-- Weather Js -->
-  <!--
-  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.simpleWeather.js') }}"></script>
-  -->
-
   <!-- Custome Selectbox Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
@@ -321,7 +316,7 @@
           console.log('like');
           $.ajax({
             type: "POST",
-            url: "/api/articles/{{ franchise['_id'] }}/like",
+            url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/like",
             dataType: "json",
             contentType: 'application/json',
             success: function(data, status, xhr) {
@@ -330,9 +325,8 @@
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
-              if (XMLHttpRequest.status == 200) {
                 $("#like-icons").removeClass("fa-heart-o").addClass("fa-heart");
-              }
+
             },
             complete: function(XMLHttpRequest, textStatus) {
               this; // 调用本次AJAX请求时传递的options参数
@@ -353,7 +347,7 @@
           }
           $.ajax({
             type: "POST",
-            url: "/api/articles/{{ franchise['_id'] }}/comment",
+            url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/comment",
             dataType: "json",
             data: json,
             contentType: 'application/json',
@@ -396,7 +390,7 @@
           var _self = this;
           $.ajax({
             type: "GET",
-            url: "/api/articles/{{ franchise['_id'] }}/comment?idx=" + idx + "&limit=" + limit,
+            url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/comment?idx=" + idx + "&limit=" + limit,
             async: false,
             dataType: "json",
             contentType: 'application/json',
@@ -421,7 +415,7 @@
           var _self = this;
           $.ajax({
             type: "GET",
-            url: "/api/articles/{{ franchise['_id'] }}/comment?idx=0&limit=1",
+            url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/comment?idx=0&limit=1",
             async: false,
             dataType: "json",
             contentType: 'application/json',

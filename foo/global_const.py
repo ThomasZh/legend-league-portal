@@ -20,3 +20,10 @@
 TOKEN_EXPIRES_IN = 7200 # 2hours
 LEAGUE_ID = "f24794c7e1d511e68c0aa45e60efbf2d"
 DEFAULT_ACCOUNT_ID = "00000000000000000000000000000000"
+
+UPYUN_DOMAIN = "https://tripc2c-club-title.b0.upaiyun.com"
+UPYUN_NOTIFY_URL = "http://upyun.com"
+UPYUN_FORM_API_SECRET = "CRKAOsKHGbbCnU+yztBxUT0bYR0="
+UPYUN_BUCKET = "tripc2c-club-title"
+
+API_DOMAIN = "http://7x24hs.com"
