@@ -135,12 +135,12 @@
           <div class="col-sm-8">
             <div class="rst-section-title rst-section-title-box">
               <h4>{{ category['title'] }}</h4>
-              <!-- <form action="#">
                   <div class="rst-shortmenu" id="sel_wrap">
-                      <select class="prov" id="prov"></select>
-                      <select class="city" disabled="disabled" id="city"></select>
+                    <div class="rst-search">
+                      <input type="text" id="categorySearchText" onblur="if (this.value == '') {this.value = '关键词';}" onclick=" if (this.value == '关键词') {this.value = '';} " name="s">
+                      <a type="button" id="categorySearchBtn"><i class="fa fa-search"></i></a>
+                    </div>
                   </div>
-              </form> -->
             </div>
             <div class="row rst-cat-postlist" id="articleBox">
 
@@ -248,7 +248,7 @@
         var total_page = 0;//总页数
         function query(pageNum) {
           $.get("{{api_domain}}/api/articles-pagination?filter=league&league_id={{ league_id }}&status=publish&category={{ category_id }}&page=1&limit="+limit+"",function(data,status){
-                console.log(data);
+                // console.log(data);
                 data = JSON.parse(data);
                 currentPage = 1;
             var pageData = data.data;
@@ -294,7 +294,7 @@
 
         function gotoPage(pageNum) {
           $.get("{{api_domain}}/api/articles-pagination?filter=league&league_id={{ league_id }}&status=publish&category={{ category_id }}&page="+pageNum+"&limit="+limit+"",function(data,status){
-                console.log(data);
+                // console.log(data);
                 data = JSON.parse(data);
                 currentPage = pageNum;
             var pageData = data.data;
@@ -373,13 +373,13 @@
         });
 </script>
 <script type="text/javascript">
-
-  $("#sel_wrap").citySelect({
-       url:"{{ static_url('js/city.min.js') }}",
-       nodata: "none",
-       required: false
-  })
-
+    $(function(){
+      $("#categorySearchText").val("关键词");
+      $("#categorySearchBtn").on('click',function(){
+        var q = $("#categorySearchText").val();
+        location.href="/portal/newsup/category-search?q="+q+"&id={{category_id}}";
+      });
+    });
 </script>
 
 </html>

@@ -326,7 +326,7 @@
               // 登录成功后，注册入联盟
               $.ajax({
                 type: "POST",
-                url: "{{api_domain}}/portal/auth/league-signup",
+                url: "/portal/auth/league-signup",
                 data: json,
                 dataType: "json",
                 contentType: 'application/json',
@@ -396,10 +396,22 @@
             headers: {
               "Authorization": "Bearer eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
             },
+            dataType: 'json',
             data: json,
-            dataType: "json",
             contentType: 'application/json',
             success: function(data, status, xhr) {
+              console.log("XMLHttpRequest.status++++++:"+ data.err_code);
+              // var rs_data = JSON.parse(data);
+              if (data.err_code == 409) {
+                $('.register-form-main-message').addClass('error').html('帐号已经存在, 请更换手机号码');
+                return
+              }else if(data.err_code == 200){
+
+              }
+               else {
+                $('.register-form-main-message').addClass('error').html('网络异常,刷新重试');
+                return
+              }
               var data = {
                 action: 'login',
                 login_type: 'phone',
@@ -453,12 +465,6 @@
               location.href = "/portal/newsup/login-next";
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-              console.log("XMLHttpRequest.status++++++:" + XMLHttpRequest.status);
-              if (XMLHttpRequest.status == 409) {
-                $('.register-form-main-message').addClass('error').html('帐号已经存在, 请更换手机号码');
-              } else {
-                $('.register-form-main-message').addClass('error').html('网络异常,刷新重试');
-              }
             },
             complete: function(XMLHttpRequest, textStatus) {
               this; // 调用本次AJAX请求时传递的options参数

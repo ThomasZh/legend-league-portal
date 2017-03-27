@@ -276,6 +276,7 @@
         type:'PUT',
         data:json,
         dataType: "json",
+        headers: {"Authorization":"Bearer {{access_token}}"},
         contentType: 'application/json',
         success: function(data, status, xhr) {
           weui.Loading.success();
