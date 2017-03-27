@@ -61,7 +61,7 @@ class AuthLogoutHandler(AuthorizationHandler):
         access_token = self.get_secure_cookie("access_token")
 
         # logout
-        url = "http://api.7x24hs.com/api/auth/tokens"
+        url = API_DOMAIN+"/api/auth/tokens"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="DELETE", headers={"Authorization":"Bearer "+access_token})
         logging.info("got response %r", response.body)
@@ -83,7 +83,7 @@ class AuthLeagueSignupXHR(BaseHandler):
         self.set_secure_cookie("expires_at", str(session_ticket['expires_at']))
 
         # signup into league
-        url = "http://api.7x24hs.com/api/leagues/"+LEAGUE_ID+"/signup"
+        url = API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/signup"
         http_client = HTTPClient()
         headers={"Authorization":"Bearer "+session_ticket['access_token']}
         body = {"role":"user"}

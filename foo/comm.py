@@ -33,6 +33,8 @@ from tornado.escape import json_encode, json_decode
 from tornado.httpclient import *
 from tornado.httputil import url_concat
 
+from global_const import *
+
 
 class singleton(object):
     _singleton = None;
@@ -205,9 +207,9 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header("Cache-Control","no-store")
         self.set_header("Cache-Control","no-cache")
         self.set_header("expires","0")
-        
+
     def get_code(self):
-        url = "http://api.7x24hs.com/auth/code"
+        url = API_DOMAIN+"/auth/code"
         http_client = HTTPClient()
         data = {"appid":"7x24hs:blog",
                 "app_secret":"2518e11b3bc89ebec594350d5739f29e"}
@@ -268,7 +270,7 @@ class AuthorizationHandler(BaseHandler):
                         return None
                     else:
                         try:
-                            url = "http://api.7x24hs.com/api/auth/tokens"
+                            url = API_DOMAIN+"/api/auth/tokens"
                             http_client = HTTPClient()
                             headers={"Authorization":"Bearer "+refresh_token}
                             data = {"action":"refresh"}

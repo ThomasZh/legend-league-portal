@@ -54,7 +54,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         # franchises(景区)
         params = {"filter":"league", "franchise_type":"景区", "page":1, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/leagues/"+LEAGUE_ID+"/clubs", params)
+        url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -65,7 +65,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         # suppliers(供应商)
         params = {"filter":"league", "franchise_type":"供应商", "page":1, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/leagues/"+LEAGUE_ID+"/clubs", params)
+        url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -76,7 +76,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         # sceneries(景点)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"41c057a6f73411e69a3c00163e023e51", "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -86,7 +86,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         # journey(游记)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"01d6120cf73411e69a3c00163e023e51", "idx":0, "limit":12}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -96,7 +96,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         # activity(活动)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -104,7 +104,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -114,7 +114,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         # popular(流行)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"3801d62cf73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -124,7 +124,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         # hot(热点新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":12}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -134,7 +134,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -144,7 +144,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         # multimedia
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":8}
-        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        url = url_concat(API_DOMAIN+"/api/multimedias", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -154,7 +154,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
 
         # notices
         params = {"filter":"league", "league_id":LEAGUE_ID, "page":1, "limit":3}
-        url = url_concat("http://api.7x24hs.com/api/notice-board", params)
+        url = url_concat(API_DOMAIN+"/api/notice-board", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -193,7 +193,7 @@ class NewsupAccountHandler(AuthorizationHandler):
             is_login = True
 
         headers = {"Authorization":"Bearer "+access_token}
-        url = "http://api.7x24hs.com/api/myinfo?filter=login"
+        url = API_DOMAIN+"/api/myinfo?filter=login"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET", headers=headers)
         logging.info("got response %r", response.body)
@@ -220,7 +220,7 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -230,7 +230,7 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
 
         # popular(流行)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"3801d62cf73411e69a3c00163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -240,7 +240,7 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
 
         # activity(活动)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -248,7 +248,7 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -271,7 +271,7 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
 
         # multimedia
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":14}
-        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        url = url_concat(API_DOMAIN+"/api/multimedias", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -279,7 +279,7 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -289,7 +289,7 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
 
         # hot(热点新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":12}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -299,7 +299,7 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
 
         # popular(流行)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"3801d62cf73411e69a3c00163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -309,7 +309,7 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
 
         # activity(活动)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -317,7 +317,7 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -348,7 +348,7 @@ class NewsupShortcodesHandler(tornado.web.RequestHandler):
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -358,7 +358,7 @@ class NewsupShortcodesHandler(tornado.web.RequestHandler):
 
         # popular(流行)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"3801d62cf73411e69a3c00163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -368,7 +368,7 @@ class NewsupShortcodesHandler(tornado.web.RequestHandler):
 
         # activity(活动)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -393,7 +393,7 @@ class NewsupContactHandler(tornado.web.RequestHandler):
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -420,7 +420,7 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -430,7 +430,7 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
 
         # popular(流行)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"3801d62cf73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -440,14 +440,14 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
 
         # activity(活动)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
         activities = json_decode(response.body)
 
         # article
-        url = "http://api.7x24hs.com/api/articles/"+article_id
+        url = API_DOMAIN+"/api/articles/"+article_id
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got article response %r", response.body)
@@ -456,7 +456,7 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
 
         # hot(热点新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":12}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -466,7 +466,7 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
 
         # update read_num
         read_num = article_info['read_num']
-        url = "http://api.7x24hs.com/api/articles/"+article_id+"/read"
+        url = API_DOMAIN+"/api/articles/"+article_id+"/read"
         http_client = HTTPClient()
         _body = {"read_num": read_num+1}
         _json = json_encode(_body)
@@ -475,7 +475,7 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -485,7 +485,7 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
 
         # multimedia
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        url = url_concat(API_DOMAIN+"/api/multimedias", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -528,7 +528,7 @@ class NewsupCategoryTileHandler(tornado.web.RequestHandler):
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -538,7 +538,7 @@ class NewsupCategoryTileHandler(tornado.web.RequestHandler):
 
         # popular(流行)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"3801d62cf73411e69a3c00163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -548,7 +548,7 @@ class NewsupCategoryTileHandler(tornado.web.RequestHandler):
 
         # activity(活动)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -556,7 +556,7 @@ class NewsupCategoryTileHandler(tornado.web.RequestHandler):
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -584,7 +584,7 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         category_id = self.get_argument("id", "")
 
         # query category_name by category_id
-        url = "http://api.7x24hs.com/api/categories/" + category_id
+        url = API_DOMAIN+"/api/categories/" + category_id
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -592,7 +592,7 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
 
         # query by category_id
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -602,7 +602,7 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
 
         # multimedia
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        url = url_concat(API_DOMAIN+"/api/multimedias", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -610,7 +610,7 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -620,7 +620,7 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
 
         # popular(流行)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"3801d62cf73411e69a3c00163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -630,7 +630,7 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
 
         # activity(活动)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -638,7 +638,7 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
 
         # hot(热点新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":12}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -648,7 +648,7 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -685,7 +685,7 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
 
         # franchises(景区)
         params = {"franchise_type":franchise_type, "page":1, "limit":1}
-        url = url_concat("http://api.7x24hs.com/api/leagues/"+LEAGUE_ID+"/clubs", params)
+        url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -696,7 +696,7 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
 
         # multimedia
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        url = url_concat(API_DOMAIN+"/api/multimedias", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -704,7 +704,7 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -714,7 +714,7 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
 
         # popular(流行)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"3801d62cf73411e69a3c00163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -724,7 +724,7 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
 
         # activity(活动)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -732,7 +732,7 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
 
         # hot(热点新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":12}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -742,7 +742,7 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -776,7 +776,7 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -786,7 +786,7 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
 
         # popular(流行)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"3801d62cf73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -796,14 +796,14 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
 
         # activity(活动)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
         activities = json_decode(response.body)
 
         # article
-        url = "http://api.7x24hs.com/api/clubs/"+franchise_id
+        url = API_DOMAIN+"/api/clubs/"+franchise_id
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got article response %r", response.body)
@@ -820,7 +820,7 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
 
         # hot(热点新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":12}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -830,7 +830,7 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
 
         # update read_num
         read_num = franchise['read_num']
-        url = "http://api.7x24hs.com/api/articles/"+franchise_id+"/read"
+        url = API_DOMAIN+"/api/articles/"+franchise_id+"/read"
         http_client = HTTPClient()
         _body = {"read_num": read_num+1}
         _json = json_encode(_body)
@@ -839,7 +839,7 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -849,7 +849,7 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
 
         # multimedia
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        url = url_concat(API_DOMAIN+"/api/multimedias", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -885,7 +885,7 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
         franchise = None
         try:
             params = {"filter":"franchise"}
-            url = url_concat("http://api.7x24hs.com/api/myinfo", params)
+            url = url_concat(API_DOMAIN+"/api/myinfo", params)
             http_client = HTTPClient()
             headers={"Authorization":"Bearer "+access_token}
             response = http_client.fetch(url, method="GET", headers=headers)
@@ -905,7 +905,7 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -932,7 +932,7 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
 
         # query by category_id
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -942,7 +942,7 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
 
         # multimedia
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/multimedias", params)
+        url = url_concat(API_DOMAIN+"/api/multimedias", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -950,7 +950,7 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -960,7 +960,7 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
 
         # popular(流行)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"3801d62cf73411e69a3c00163e023e51", "idx":0, "limit":6}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -970,7 +970,7 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
 
         # activity(活动)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":4}
-        url = url_concat("http://api.7x24hs.com/api/articles", params)
+        url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
@@ -978,7 +978,7 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat("http://api.7x24hs.com/api/last-comments", params)
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
