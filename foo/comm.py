@@ -209,7 +209,7 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header("expires","0")
 
     def get_code(self):
-        url = API_DOMAIN+"/auth/code"
+        url = API_DOMAIN+"/api/auth/codes"
         http_client = HTTPClient()
         data = {"appid":"7x24hs:blog",
                 "app_secret":"2518e11b3bc89ebec594350d5739f29e"}

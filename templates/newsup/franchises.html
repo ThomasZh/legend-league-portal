@@ -248,8 +248,9 @@
         function query(pageNum,prov,city) {
           $.get("{{api_domain}}/api/leagues/{{ league_id }}/clubs?franchise_type={{ franchise_type }}&province="+prov+"&city="+city+"&page="+pageNum+"&limit="+limit+"",function(data,status){
 
-                console.log(data);
-                 data = JSON.parse(data);
+                //  console.log(data.rs);
+                 data_obj = JSON.parse(data);
+                 data = data_obj.rs;
                 currentPage = 1;
             var pageData = data.data;
                 total_page = data.total_pgae;//总页
@@ -292,8 +293,9 @@
 
         function gotoPage(pageNum,prov,city) {
           $.get("{{api_domain}}/api/leagues/{{ league_id }}/clubs?franchise_type={{ franchise_type }}&province="+prov+"&city="+city+"&page="+pageNum+"&limit="+limit+"",function(data,status){
-                console.log(data);
-                data = JSON.parse(data);
+                // console.log(data);
+                data_obj = JSON.parse(data);
+                data = data_obj.rs;
                 currentPage = pageNum;
             var pageData = data.data;
                 total_page = data.total_pgae;//总页

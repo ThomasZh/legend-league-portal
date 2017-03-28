@@ -58,7 +58,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        rs = json_decode(response.body)
+        data = json_decode(response.body)
+        rs = data['rs']
         franchises = rs['data']
         for franchise in franchises:
             franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
@@ -69,7 +70,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        rs = json_decode(response.body)
+        data = json_decode(response.body)
+        rs = data['rs']
         suppliers = rs['data']
         for supplier in suppliers:
             supplier['create_time'] = timestamp_friendly_date(supplier['create_time'])
@@ -80,7 +82,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        sceneries = json_decode(response.body)
+        data = json_decode(response.body)
+        sceneries = data['rs']
         for article in sceneries:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -90,7 +93,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        journeies = json_decode(response.body)
+        data = json_decode(response.body)
+        journeies = data['rs']
         for article in journeies:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -100,7 +104,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        activities = json_decode(response.body)
+        data = json_decode(response.body)
+        activities = data['rs']
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":4}
@@ -108,7 +113,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        news = json_decode(response.body)
+        data = json_decode(response.body)
+        news = data['rs']
         for article in news:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -118,7 +124,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        populars = json_decode(response.body)
+        data = json_decode(response.body)
+        populars = data['rs']
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -128,7 +135,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        hots = json_decode(response.body)
+        data = json_decode(response.body)
+        hots = data['rs']
         for article in hots:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -138,7 +146,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
@@ -148,7 +157,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        multimedias = json_decode(response.body)
+        data = json_decode(response.body)
+        multimedias = data['rs']
         for multimedia in multimedias:
             multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
 
@@ -158,7 +168,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        notices = json_decode(response.body)
+        data = json_decode(response.body)
+        notices = data['rs']
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -197,7 +208,8 @@ class NewsupAccountHandler(AuthorizationHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET", headers=headers)
         logging.info("got response %r", response.body)
-        user = json_decode(response.body)
+        data = json_decode(response.body)
+        user = data['rs']
 
         self.render('newsup/account.html',
                 is_login=is_login,
@@ -225,7 +237,8 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        news = json_decode(response.body)
+        data = json_decode(response.body)
+        news = data['rs']
         for article in news:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -235,7 +248,8 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        populars = json_decode(response.body)
+        data = json_decode(response.body)
+        populars = data['rs']
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -245,7 +259,8 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        activities = json_decode(response.body)
+        data = json_decode(response.body)
+        activities = data['rs']
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -253,7 +268,8 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
@@ -276,7 +292,8 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        multimedias = json_decode(response.body)
+        data = json_decode(response.body)
+        multimedias = data['rs']
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
@@ -284,7 +301,8 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        news = json_decode(response.body)
+        data = json_decode(response.body)
+        news = data['rs']
         for article in news:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -294,7 +312,8 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        hots = json_decode(response.body)
+        data = json_decode(response.body)
+        hots = data['rs']
         for article in hots:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -304,7 +323,8 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        populars = json_decode(response.body)
+        data = json_decode(response.body)
+        populars = data['rs']
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -314,7 +334,8 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        activities = json_decode(response.body)
+        data = json_decode(response.body)
+        activities = data['rs']
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -322,7 +343,8 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
@@ -353,7 +375,8 @@ class NewsupShortcodesHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        news = json_decode(response.body)
+        data = json_decode(response.body)
+        news = data['rs']
         for article in news:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -363,7 +386,8 @@ class NewsupShortcodesHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        populars = json_decode(response.body)
+        data = json_decode(response.body)
+        populars = data['rs']
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -373,7 +397,8 @@ class NewsupShortcodesHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        activities = json_decode(response.body)
+        data = json_decode(response.body)
+        activities = data['rs']
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -398,7 +423,8 @@ class NewsupContactHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
@@ -425,7 +451,8 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        news = json_decode(response.body)
+        data = json_decode(response.body)
+        news = data['rs']
         for article in news:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -435,7 +462,8 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        populars = json_decode(response.body)
+        data = json_decode(response.body)
+        populars = data['rs']
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -445,14 +473,16 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        activities = json_decode(response.body)
+        data = json_decode(response.body)
+        activities = data['rs']
 
         # article
         url = API_DOMAIN+"/api/articles/"+article_id
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got article response %r", response.body)
-        article_info = json_decode(response.body)
+        data = json_decode(response.body)
+        article_info = data['rs']
         article_info['publish_time'] = timestamp_friendly_date(article_info['publish_time'])
 
         # hot(热点新闻)
@@ -461,7 +491,8 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        hots = json_decode(response.body)
+        data = json_decode(response.body)
+        hots = data['rs']
         for article in hots:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -480,7 +511,8 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
@@ -490,7 +522,8 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        multimedias = json_decode(response.body)
+        data = json_decode(response.body)
+        multimedias = data['rs']
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -533,7 +566,8 @@ class NewsupCategoryTileHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        news = json_decode(response.body)
+        data = json_decode(response.body)
+        news = data['rs']
         for article in news:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -543,7 +577,8 @@ class NewsupCategoryTileHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        populars = json_decode(response.body)
+        data = json_decode(response.body)
+        populars = data['rs']
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -553,7 +588,8 @@ class NewsupCategoryTileHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        activities = json_decode(response.body)
+        data = json_decode(response.body)
+        activities = data['rs']
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -561,7 +597,8 @@ class NewsupCategoryTileHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
@@ -589,7 +626,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        category = json_decode(response.body)
+        data = json_decode(response.body)
+        category = data['rs']
 
         # query by category_id
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":6}
@@ -597,7 +635,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        sceneries = json_decode(response.body)
+        data = json_decode(response.body)
+        sceneries = data['rs']
         for article in sceneries:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -607,7 +646,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        multimedias = json_decode(response.body)
+        data = json_decode(response.body)
+        multimedias = data['rs']
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
@@ -615,7 +655,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        news = json_decode(response.body)
+        data = json_decode(response.body)
+        news = data['rs']
         for article in news:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -625,7 +666,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        populars = json_decode(response.body)
+        data = json_decode(response.body)
+        populars = data['rs']
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -635,7 +677,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        activities = json_decode(response.body)
+        data = json_decode(response.body)
+        activities = data['rs']
 
         # hot(热点新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":12}
@@ -643,7 +686,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        hots = json_decode(response.body)
+        data = json_decode(response.body)
+        hots = data['rs']
         for article in hots:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -653,7 +697,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
@@ -687,7 +732,8 @@ class NewsupCategorySearchHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        category = json_decode(response.body)
+        data = json_decode(response.body)
+        category = data['rs']
 
         # query by category_id
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":6}
@@ -695,7 +741,8 @@ class NewsupCategorySearchHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        sceneries = json_decode(response.body)
+        data = json_decode(response.body)
+        sceneries = data['rs']
         for article in sceneries:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -705,7 +752,8 @@ class NewsupCategorySearchHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        multimedias = json_decode(response.body)
+        data = json_decode(response.body)
+        multimedias = data['rs']
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
@@ -713,7 +761,8 @@ class NewsupCategorySearchHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        news = json_decode(response.body)
+        data = json_decode(response.body)
+        news = data['rs']
         for article in news:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -723,7 +772,8 @@ class NewsupCategorySearchHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        populars = json_decode(response.body)
+        data = json_decode(response.body)
+        populars = data['rs']
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -733,7 +783,8 @@ class NewsupCategorySearchHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        activities = json_decode(response.body)
+        data = json_decode(response.body)
+        activities = data['rs']
 
         # hot(热点新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":12}
@@ -741,7 +792,8 @@ class NewsupCategorySearchHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        hots = json_decode(response.body)
+        data = json_decode(response.body)
+        hots = data['rs']
         for article in hots:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -751,7 +803,8 @@ class NewsupCategorySearchHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
@@ -788,8 +841,8 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        rs = json_decode(response.body)
-        franchises = rs['data']
+        data = json_decode(response.body)
+        franchises = data['rs']['data']
         for franchise in franchises:
             franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
 
@@ -799,7 +852,8 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        multimedias = json_decode(response.body)
+        data = json_decode(response.body)
+        multimedias = data['rs']
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
@@ -807,7 +861,8 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        news = json_decode(response.body)
+        data = json_decode(response.body)
+        news = data['rs']
         for article in news:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -817,7 +872,8 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        populars = json_decode(response.body)
+        data = json_decode(response.body)
+        populars = data['rs']
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -827,7 +883,8 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        activities = json_decode(response.body)
+        data = json_decode(response.body)
+        activities = data['rs']
 
         # hot(热点新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":12}
@@ -835,7 +892,8 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        hots = json_decode(response.body)
+        data = json_decode(response.body)
+        hots = data['rs']
         for article in hots:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -845,7 +903,8 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
@@ -879,7 +938,8 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        news = json_decode(response.body)
+        data = json_decode(response.body)
+        news = data['rs']
         for article in news:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -889,7 +949,8 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        populars = json_decode(response.body)
+        data = json_decode(response.body)
+        populars = data['rs']
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -899,14 +960,16 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        activities = json_decode(response.body)
+        data = json_decode(response.body)
+        activities = data['rs']
 
         # article
         url = API_DOMAIN+"/api/clubs/"+franchise_id
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got article response %r", response.body)
-        franchise = json_decode(response.body)
+        data = json_decode(response.body)
+        franchise = data['rs']
         if not franchise.has_key('paragraphs'):
             franchise['paragraphs'] = ''
         if not franchise.has_key('franchise_type'):
@@ -923,7 +986,8 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        hots = json_decode(response.body)
+        data = json_decode(response.body)
+        hots = data['rs']
         for article in hots:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -942,7 +1006,8 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
@@ -952,7 +1017,8 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        multimedias = json_decode(response.body)
+        data = json_decode(response.body)
+        multimedias = data['rs']
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -989,7 +1055,8 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
             headers={"Authorization":"Bearer "+access_token}
             response = http_client.fetch(url, method="GET", headers=headers)
             logging.info("got response %r", response.body)
-            franchise = json_decode(response.body)
+            data = json_decode(response.body)
+            franchise = data['rs']
             if franchise:
                 if not franchise['club'].has_key("province"):
                     franchise['club']['province'] = ''
@@ -1008,7 +1075,8 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
@@ -1035,7 +1103,8 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        sceneries = json_decode(response.body)
+        data = json_decode(response.body)
+        sceneries = data['rs']
         for article in sceneries:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -1045,7 +1114,8 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        multimedias = json_decode(response.body)
+        data = json_decode(response.body)
+        multimedias = data['rs']
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
@@ -1053,7 +1123,8 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        news = json_decode(response.body)
+        data = json_decode(response.body)
+        news = data['rs']
         for article in news:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -1063,7 +1134,8 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        populars = json_decode(response.body)
+        data = json_decode(response.body)
+        populars = data['rs']
         for article in populars:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
@@ -1073,7 +1145,8 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        activities = json_decode(response.body)
+        data = json_decode(response.body)
+        activities = data['rs']
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -1081,7 +1154,8 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
-        lastest_comments = json_decode(response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 

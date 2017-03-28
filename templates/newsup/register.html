@@ -320,7 +320,17 @@
             dataType: "json",
             contentType: 'application/json',
             success: function(data, status, xhr) {
-              var json = JSON.stringify(data);
+              // var rs_data = JSON.parse(data);
+              console.log(data.err_code);
+              if(data.err_code == 200){
+
+              }
+               else {
+                $('.register-form-main-message').addClass('error').html('网络异常,刷新重试');
+                return
+              }
+              // console.log("XMLHttpRequest.status++++++:"+ data.rs);
+              var json = JSON.stringify(data.rs);
               console.log(json);
 
               // 登录成功后，注册入联盟
@@ -330,7 +340,9 @@
                 data: json,
                 dataType: "json",
                 contentType: 'application/json',
-                success: function(data, status, xhr) {},
+                success: function(data, status, xhr) {
+
+                },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                   console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
                 },
@@ -422,9 +434,11 @@
               console.log(json);
 
               // 注册帐号成功后，登录
+              var randomWord = Math.random().toString(36).substr(2);
+              // alert(randomWord)
               $.ajax({
                 type: "POST",
-                url: "{{api_domain}}/api/auth/tokens",
+                url: "{{api_domain}}/api/auth/tokens?v="+randomWord,
                 headers: {
                   "Authorization": "Bearer eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
                 },
@@ -432,8 +446,8 @@
                 dataType: "json",
                 contentType: 'application/json',
                 success: function(data, status, xhr) {
-                  var json = JSON.stringify(data);
-                  console.log(json);
+                  var json = JSON.stringify(data.rs);
+                  console.log(">>>>>",json);
 
                   // 登录成功后，加入联盟
                   $.ajax({

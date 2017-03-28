@@ -135,6 +135,12 @@
           <div class="col-sm-8">
             <div class="rst-section-title rst-section-title-box">
               <h4>{{ category['title'] }}</h4>
+              <div class="rst-shortmenu" id="sel_wrap">
+                <div class="rst-search">
+                  <input type="text" id="categorySearchText" onblur="if (this.value == '') {this.value = '关键词';}" onclick=" if (this.value == '关键词') {this.value = '';} " name="s">
+                  <a type="button" id="categorySearchBtn"><i class="fa fa-search"></i></a>
+                </div>
+              </div>
             </div>
             <div class="row rst-cat-postlist" id="articleBox">
 
@@ -213,14 +219,11 @@
   <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap.min.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap-tagsinput.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('newsup/js/jqBootstrapValidation.js') }}"></script>
-
   <!-- WoW Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/wow.min.js') }}"></script>
-
   <!-- Add Fancybox -->
   <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/jquery.fancybox.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/helpers/jquery.fancybox-media.js') }}"></script>
-
   <!-- Owl Slider Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/jquery.cityselect.js') }}"></script>
@@ -243,16 +246,17 @@
         function getLocalTime(nS) { //时间戳转换
            return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
         };
-        var preAllow = true;   // when ajax not completed, cannot do the next request
         var limit = 6;//每页显示数
         var currentPage = 0;//当前页
         var total_page = 0;//总页数
         var q = GetQueryString("q");
         console.log(q);
+        $("#categorySearchText").val(q);
         function query(pageNum) {
           $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=category&category_id={{category_id}}&page=1&limit="+limit+"",function(data,status){
-                // console.log(data);
-                data = JSON.parse(data);
+                console.log(data);
+                data_obj = JSON.parse(data);
+                data = data_obj.rs;
                 currentPage = 1;
             var pageData = data.data;
                 total_page = data.total_pgae;//总页
@@ -291,14 +295,14 @@
               };
             }
             $("#num1").addClass("current");
-            preAllow = true;
           });
         };
 
         function gotoPage(pageNum) {
-          $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=category&category_id={{category_id}}&page=1&limit="+limit+"",function(data,status){
-                // console.log(data);
-                data = JSON.parse(data);
+          $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=category&category_id={{category_id}}&page="+pageNum+"&limit="+limit+"",function(data,status){
+                console.log(data);
+                data_obj = JSON.parse(data);
+                data = data_obj.rs;
                 currentPage = pageNum;
             var pageData = data.data;
                 total_page = data.total_pgae;//总页
@@ -374,6 +378,15 @@
               }
           })
         });
+</script>
+<script type="text/javascript">
+    $(function(){
+      // $("#categorySearchText").val("关键词");
+      $("#categorySearchBtn").on('click',function(){
+        var q = $("#categorySearchText").val();
+        location.href="/portal/newsup/category-search?q="+q+"&id={{category_id}}";
+      });
+    });
 </script>
 
 </html>

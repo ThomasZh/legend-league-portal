@@ -230,8 +230,8 @@
         var total_page = 0;//总页数
         function query(pageNum) {
           $.get("{{api_domain}}/api/multimedias-pagination?filter=league&league_id={{ league_id }}&page=1&limit="+limit+"",function(data,status){
-                console.log(data);
-                data = JSON.parse(data);
+                data_obj = JSON.parse(data);
+                data = data_obj.rs;
                 currentPage = 1;
             var multimedias = data.data;
                 total_page = data.total_pgae;//总页
@@ -269,8 +269,8 @@
 
         function gotoPage(pageNum) {
           $.get("{{api_domain}}/api/multimedias-pagination?filter=league&league_id={{ league_id }}&page="+pageNum+"&limit="+limit+"",function(data,status){
-                console.log(data);
-                data = JSON.parse(data);
+                data_obj = JSON.parse(data);
+                data = data_obj.rs;
                 currentPage = pageNum;
             var multimedias = data.data;
                 total_page = data.total_pgae;//总页

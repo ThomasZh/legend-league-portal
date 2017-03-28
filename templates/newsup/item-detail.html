@@ -399,11 +399,11 @@
             dataType: "json",
             contentType: 'application/json',
             success: function(datas, status, xhr) {
-              console.log(datas);
-              for(var i = 0, l = datas.length; i < l; i++) {
-                datas[i].create_time = _self.getLocalTime(datas[i].create_time);
+              console.log(datas.rs);
+              for(var i = 0, l = datas.rs.length; i < l; i++) {
+                datas.rs[i].create_time = _self.getLocalTime(datas.rs[i].create_time);
                 // console.log(datas[i].create_time);
-                _self.comments.push(datas[i]);
+                _self.comments.push(datas.rs[i]);
                 _self.comment_num += 1;
               }
             },
@@ -424,10 +424,10 @@
             dataType: "json",
             contentType: 'application/json',
             success: function(datas, status, xhr) {
-              console.log(datas);
-              for(var i = 0, l = datas.length; i < l; i++) {
-                datas[i].create_time = _self.getLocalTime(datas[i].create_time);
-                _self.comments.splice(0, 0, datas[i]);
+              console.log(datas.rs);
+              for(var i = 0, l = datas.rs.length; i < l; i++) {
+                datas.rs[i].create_time = _self.getLocalTime(datas.rs[i].create_time);
+                _self.comments.splice(0, 0, datas.rs[i]);
                 _self.comment_num += 1;
               }
             },
