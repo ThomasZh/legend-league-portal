@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NewsUp - News, Magazine and Article Directory Theme</title>
+  <title>{{ league_info['name'] }}</title>
   <meta name="description" content="NewsUp is a multi-page oriented template perfect for NewsUp - News, Magazine, Blogging and Article Directory.">
   <meta name="keywords" content="news theme, magazine, blog, article directory, article submission, writer, author, publication, html, bootstrap">
   <meta name="author" content="Sempy Themes">
@@ -68,7 +68,7 @@
       <!-- /socialbar -->
 
       <!-- menubar -->
-      {% module Template("newsup/block-menubar.html") %}
+      {% module Template("newsup/block-menubar.html", league_info=league_info) %}
       <!-- /menubar -->
 
     </header>
@@ -486,7 +486,7 @@
 
           $.ajax({
             type: "POST",
-            url: "{{api_domain}}/api/leagues/{{ league_id }}/franchises",
+            url: "{{api_domain}}/api/leagues/{{ league_info['_id'] }}/franchises",
             data: json,
             dataType: "json",
             contentType: 'application/json',

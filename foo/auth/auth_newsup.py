@@ -41,7 +41,7 @@ from comm import *
 from global_const import *
 
 
-class AuthRegisterHandler(tornado.web.RequestHandler):
+class AuthRegisterHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
 
@@ -50,8 +50,12 @@ class AuthRegisterHandler(tornado.web.RequestHandler):
         if access_token:
             is_login = True
 
+        # league(联盟信息)
+        league_info = self.get_league_info()
+
         self.render('newsup/register.html',
                 is_login=is_login,
+                league_info=league_info,
                 api_domain=API_DOMAIN)
 
 

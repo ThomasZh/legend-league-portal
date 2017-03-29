@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NewsUp - Serch-Result</title>
+  <title>{{ league_info['name'] }}</title>
   <meta name="description" content="NewsUp is a multi-page oriented template perfect for NewsUp - News, Magazine, Blogging and Article Directory.">
   <meta name="keywords" content="news theme, magazine, blog, article directory, article submission, writer, author, publication, html, bootstrap">
   <meta name="author" content="Sempy Themes">
@@ -65,7 +65,7 @@
       <!-- /socialbar -->
 
       <!-- menubar -->
-      {% module Template("newsup/block-menubar.html") %}
+      {% module Template("newsup/block-menubar.html", league_info=league_info) %}
       <!-- /menubar -->
 
     </header>
@@ -198,7 +198,7 @@
         var q = GetQueryString("q");
         console.log(q);
         function query(pageNum) {
-          $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{league_id}}&page=1&limit="+limit+"",function(data,status){
+          $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{ league_info['_id'] }}&page=1&limit="+limit+"",function(data,status){
                 // console.log(data);
                 data_obj = JSON.parse(data);
                 data = data_obj.rs;
@@ -245,7 +245,7 @@
         };
 
         function gotoPage(pageNum) {
-          $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{league_id}}&page=1&limit="+limit+"",function(data,status){
+          $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{ league_info['_id'] }}&page=1&limit="+limit+"",function(data,status){
                 // console.log(data);
                 data_obj = JSON.parse(data);
                 data = data_obj.rs;

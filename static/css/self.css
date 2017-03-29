@@ -59,3 +59,12 @@ textarea::-webkit-input-placeholder {
 #categorySearchBtn:hover{
   background-color: #39e6ac;
 }
+.like_icon{
+  cursor:pointer;
+  border:1px solid #ebebea;
+  border-radius:50%;
+  width: 50px;
+  height: 50px;
+  line-height: 70px;
+  padding-left: 4px;
+}

@@ -48,9 +48,12 @@ class NewsupLoginNextHandler(tornado.web.RequestHandler):
             self.redirect("/portal/newsup/index")
 
 
-class NewsupIndexHandler(tornado.web.RequestHandler):
+class NewsupIndexHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
         # franchises(景区)
         params = {"filter":"league", "franchise_type":"景区", "page":1, "limit":5}
@@ -107,8 +110,8 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
         data = json_decode(response.body)
         activities = data['rs']
 
-        # news(新闻)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":4}
+        # recently articles(最新文章news)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "idx":0, "limit":6}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -186,7 +189,7 @@ class NewsupIndexHandler(tornado.web.RequestHandler):
                 news=news,
                 populars=populars,
                 hots=hots,
-                league_id=LEAGUE_ID,
+                league_info=league_info,
                 activities=activities,
                 lastest_comments=lastest_comments,
                 multimedias=multimedias,
@@ -198,10 +201,14 @@ class NewsupAccountHandler(AuthorizationHandler):
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
+
         is_login = False
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
         headers = {"Authorization":"Bearer "+access_token}
         url = API_DOMAIN+"/api/myinfo?filter=login"
@@ -213,6 +220,7 @@ class NewsupAccountHandler(AuthorizationHandler):
 
         self.render('newsup/account.html',
                 is_login=is_login,
+                league_info=league_info,
                 user = user,
                 access_token=access_token,
                 api_domain=API_DOMAIN,
@@ -222,14 +230,16 @@ class NewsupAccountHandler(AuthorizationHandler):
                 upyun_bucket=UPYUN_BUCKET)
 
 
-class NewsupAuthorHandler(tornado.web.RequestHandler):
+class NewsupAuthorHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
-
         is_login = False
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
@@ -275,6 +285,7 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
 
         self.render('newsup/author.html',
                 is_login=is_login,
+                league_info=league_info,
                 news=news,
                 populars=populars,
                 activities=activities,
@@ -282,9 +293,12 @@ class NewsupAuthorHandler(tornado.web.RequestHandler):
                 lastest_comments=lastest_comments)
 
 
-class NewsupMediaHandler(tornado.web.RequestHandler):
+class NewsupMediaHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
         # multimedia
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":14}
@@ -355,6 +369,7 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
 
         self.render('newsup/media.html',
                 is_login=is_login,
+                league_info=league_info,
                 news=news,
                 populars=populars,
                 activities=activities,
@@ -365,9 +380,12 @@ class NewsupMediaHandler(tornado.web.RequestHandler):
                 multimedias=multimedias)
 
 
-class NewsupShortcodesHandler(tornado.web.RequestHandler):
+class NewsupShortcodesHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
         # news(新闻)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
@@ -407,15 +425,19 @@ class NewsupShortcodesHandler(tornado.web.RequestHandler):
 
         self.render('newsup/shortcodes.html',
                 is_login=is_login,
+                league_info=league_info,
                 news=news,
                 activities=activities,
                 api_domain=API_DOMAIN,
                 populars=populars)
 
 
-class NewsupContactHandler(tornado.web.RequestHandler):
+class NewsupContactHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -435,18 +457,22 @@ class NewsupContactHandler(tornado.web.RequestHandler):
 
         self.render('newsup/contact.html',
                 is_login=is_login,
+                league_info=league_info,
                 lastest_comments=lastest_comments,
                 api_domain=API_DOMAIN,
                 league_id=LEAGUE_ID)
 
 
-class NewsupItemDetailHandler(tornado.web.RequestHandler):
+class NewsupItemDetailHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
         article_id = self.get_argument("id", "")
 
-        # news(新闻)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":4}
+        # league(联盟信息)
+        league_info = self.get_league_info()
+
+        # recently articles(最新文章news)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "idx":0, "limit":6}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -532,6 +558,8 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
 
         self.render('newsup/item-detail.html',
                 is_login=is_login,
+                access_token=access_token,
+                league_info=league_info,
                 article_info=article_info,
                 news=news,
                 populars=populars,
@@ -542,9 +570,12 @@ class NewsupItemDetailHandler(tornado.web.RequestHandler):
                 lastest_comments=lastest_comments)
 
 
-class NewsupNewHandler(tornado.web.RequestHandler):
+class NewsupNewHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -552,16 +583,20 @@ class NewsupNewHandler(tornado.web.RequestHandler):
             is_login = True
 
         self.render('newsup/new.html',
+                league_info=league_info,
                 api_domain=API_DOMAIN,
                 is_login=is_login)
 
 
-class NewsupCategoryTileHandler(tornado.web.RequestHandler):
+class NewsupCategoryTileHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
 
-        # news(新闻)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
+        # league(联盟信息)
+        league_info = self.get_league_info()
+
+        # recently articles(最新文章news)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "idx":0, "limit":6}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -609,6 +644,7 @@ class NewsupCategoryTileHandler(tornado.web.RequestHandler):
 
         self.render('newsup/category-tile.html',
                 is_login=is_login,
+                league_info=league_info,
                 lastest_comments=lastest_comments,
                 news=news,
                 activities=activities,
@@ -616,10 +652,13 @@ class NewsupCategoryTileHandler(tornado.web.RequestHandler):
                 populars=populars)
 
 
-class NewsupCategoryHandler(tornado.web.RequestHandler):
+class NewsupCategoryHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
         category_id = self.get_argument("id", "")
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
         # query category_name by category_id
         url = API_DOMAIN+"/api/categories/" + category_id
@@ -649,8 +688,8 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         data = json_decode(response.body)
         multimedias = data['rs']
 
-        # news(新闻)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
+        # recently articles(最新文章news)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "idx":0, "limit":6}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -709,6 +748,7 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
 
         self.render('newsup/category.html',
                 is_login=is_login,
+                league_info=league_info,
                 sceneries=sceneries,
                 news=news,
                 hots=hots,
@@ -722,10 +762,13 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
                 category=category)
 
 
-class NewsupCategorySearchHandler(tornado.web.RequestHandler):
+class NewsupCategorySearchHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
         category_id = self.get_argument("id", "")
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
         # query category_name by category_id
         url = API_DOMAIN+"/api/categories/" + category_id
@@ -755,8 +798,8 @@ class NewsupCategorySearchHandler(tornado.web.RequestHandler):
         data = json_decode(response.body)
         multimedias = data['rs']
 
-        # news(新闻)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
+        # recently articles(最新文章news)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "idx":0, "limit":6}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -815,6 +858,7 @@ class NewsupCategorySearchHandler(tornado.web.RequestHandler):
 
         self.render('newsup/category-search.html',
                 is_login=is_login,
+                league_info=league_info,
                 sceneries=sceneries,
                 news=news,
                 hots=hots,
@@ -828,12 +872,15 @@ class NewsupCategorySearchHandler(tornado.web.RequestHandler):
                 category=category)
 
 
-class NewsupFranchisesHandler(tornado.web.RequestHandler):
+class NewsupFranchisesHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
         franchise_type = self.get_argument("franchise_type", "")
         franchise_type = franchise_type.encode('utf-8')
         logging.info("got franchise_type %r from argument", franchise_type)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
         # franchises(景区)
         params = {"franchise_type":franchise_type, "page":1, "limit":1}
@@ -855,8 +902,8 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
         data = json_decode(response.body)
         multimedias = data['rs']
 
-        # news(新闻)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
+        # recently articles(最新文章news)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "idx":0, "limit":6}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -915,6 +962,7 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
 
         self.render('newsup/franchises.html',
                 is_login=is_login,
+                league_info=league_info,
                 franchises=franchises,
                 multimedias=multimedias,
                 news=news,
@@ -927,13 +975,16 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
                 franchise_type=franchise_type)
 
 
-class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
+class NewsupFranchiseDetailHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
         franchise_id = self.get_argument("id", "")
+        access_token = self.get_secure_cookie("access_token")
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
-        # news(新闻)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":4}
+        # recently articles(最新文章news)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "idx":0, "limit":4}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -1027,6 +1078,8 @@ class NewsupFranchiseDetailHandler(tornado.web.RequestHandler):
 
         self.render('newsup/franchise-detail.html',
                 is_login=is_login,
+                access_token=access_token,
+                league_info=league_info,
                 franchise=franchise,
                 news=news,
                 populars=populars,
@@ -1041,6 +1094,10 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
+
         is_login = False
         access_token = self.get_secure_cookie("access_token")
         if access_token:
@@ -1081,6 +1138,7 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
 
         self.render('newsup/apply-franchise.html',
                 is_login=is_login,
+                league_info=league_info,
                 access_token=access_token,
                 league_id=LEAGUE_ID,
                 franchise=franchise,
@@ -1092,10 +1150,13 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
                 lastest_comments=lastest_comments)
 
 
-class NewsupSearchResultHandler(tornado.web.RequestHandler):
+class NewsupSearchResultHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
         category_id = self.get_argument("id", "")
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
 
         # query by category_id
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":6}
@@ -1166,6 +1227,7 @@ class NewsupSearchResultHandler(tornado.web.RequestHandler):
 
         self.render('newsup/search-result.html',
                 is_login=is_login,
+                league_info=league_info,
                 sceneries=sceneries,
                 news=news,
                 populars=populars,

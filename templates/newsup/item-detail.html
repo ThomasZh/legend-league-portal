@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NewsUp - News, Magazine and Article Directory Theme</title>
+  <title>{{ league_info['name'] }}</title>
   <meta name="description" content="NewsUp is a multi-page oriented template perfect for NewsUp - News, Magazine, Blogging and Article Directory.">
   <meta name="keywords" content="news theme, magazine, blog, article directory, article submission, writer, author, publication, html, bootstrap">
   <meta name="author" content="Sempy Themes">
@@ -68,7 +68,7 @@
       <!-- /socialbar -->
 
       <!-- menubar -->
-      {% module Template("newsup/block-menubar.html") %}
+      {% module Template("newsup/block-menubar.html", league_info=league_info) %}
       <!-- /menubar -->
 
     </header>
@@ -151,7 +151,7 @@
               <div class="row">
                 <div class="col-xs-12">
                   <nav class="wp-pagenavi">
-                    <a v-on:click="sendLike" class="rst-item-likes" style="cursor:pointer"><i id="like-icons" class="fa fa-3x fa-heart-o"></i></a>
+                    <a v-on:click="sendLike" class="rst-item-likes like_icon"><i id="like-icons" class="fa fa-3x fa-heart-o"></i></a>
                   </nav>
                 </div>
               </div>
@@ -355,10 +355,11 @@
             dataType: "json",
             data: json,
             contentType: 'application/json',
+            headers: {"Authorization":"Bearer {{access_token}}"},
             success: function(data, status, xhr) {
               console.log(data);
               $("#comment").val("");
-              $(".send-ok-message").html("留言成功！");
+              $(".send-ok-message").html("评论成功！");
               setTimeout(hide,3000);
               $("#comment").val("");
               _self.queryNewComment();

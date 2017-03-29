@@ -208,6 +208,17 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header("Cache-Control","no-cache")
         self.set_header("expires","0")
 
+    def get_league_info(self):
+        # league(联盟信息)
+        url = API_DOMAIN+"/api/leagues/"+LEAGUE_ID
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        league_info = data['rs']
+        return league_info
+
+
     def get_code(self):
         url = API_DOMAIN+"/api/auth/codes"
         http_client = HTTPClient()
