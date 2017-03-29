@@ -650,7 +650,7 @@ class NewsupCategoryHandler(tornado.web.RequestHandler):
         multimedias = data['rs']
 
         # news(新闻)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -856,7 +856,7 @@ class NewsupFranchisesHandler(tornado.web.RequestHandler):
         multimedias = data['rs']
 
         # news(新闻)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0e9a3c68e94511e6b40600163e023e51", "idx":0, "limit":6}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"30a56cb8f73411e69a3c00163e023e51", "idx":0, "limit":6}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -1041,7 +1041,6 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
-
         is_login = False
         access_token = self.get_secure_cookie("access_token")
         if access_token:
@@ -1082,6 +1081,7 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
 
         self.render('newsup/apply-franchise.html',
                 is_login=is_login,
+                access_token=access_token,
                 league_id=LEAGUE_ID,
                 franchise=franchise,
                 api_domain=API_DOMAIN,

@@ -374,11 +374,11 @@
         },
         loadMore: function() {
           var _self = this;
-          $("#loadMoreBtn").text('Loading...');
+          $("#loadMoreBtn").text('加载中...');
           _self.queryComments(_self.comment_num, _self.limlt);
           setTimeout(function(){
             if (_self.comment_num % _self.limlt == 0){
-              $("#loadMoreBtn").text('More comments');
+              $("#loadMoreBtn").text('更多评论...');
             } else {
               $("#loadMoreBtn").css('display','none');
             }

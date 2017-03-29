@@ -490,6 +490,7 @@
             data: json,
             dataType: "json",
             contentType: 'application/json',
+            headers: {"Authorization":"Bearer {{access_token}}"},
             success: function(data, status, xhr) {
               console.log(status);
               $('.appy-form-main-message').addClass('show').html('发送申请成功，请等待审核!');
