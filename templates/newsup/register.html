@@ -291,9 +291,9 @@
             required: true,
           },
         },
-        messages:{
-          lg_phone:"请输入正确的手机号码！",
-          lg_pwd:{
+        messages: {
+          lg_phone: "请输入正确的手机号码！",
+          lg_pwd: {
             required: "请输入密码",
           }
         },
@@ -322,10 +322,9 @@
             success: function(data, status, xhr) {
               // var rs_data = JSON.parse(data);
               console.log(data.err_code);
-              if(data.err_code == 200){
+              if (data.err_code == 200) {
 
-              }
-               else {
+              } else {
                 $('.register-form-main-message').addClass('error').html('网络异常,刷新重试');
                 return
               }
@@ -336,7 +335,7 @@
               // 登录成功后，注册入联盟
               $.ajax({
                 type: "POST",
-                url: "/portal/auth/club-signup",
+                url: "/portal/auth/league-signup",
                 data: json,
                 dataType: "json",
                 contentType: 'application/json',
@@ -384,11 +383,11 @@
           },
         },
         messages: {
-         rg_phone: "请输入正确的手机号",
-         rg_pwd: {
-          required: "请输入密码",
-          minlength:"输入至少6位密码"
-         }
+          rg_phone: "请输入正确的手机号",
+          rg_pwd: {
+            required: "请输入密码",
+            minlength: "输入至少6位密码"
+          }
         },
         errorClass: "error",
         submitHandler: function(form) {
@@ -412,15 +411,14 @@
             data: json,
             contentType: 'application/json',
             success: function(data, status, xhr) {
-              console.log("XMLHttpRequest.status++++++:"+ data.err_code);
+              console.log("XMLHttpRequest.status++++++:" + data.err_code);
               // var rs_data = JSON.parse(data);
               if (data.err_code == 409) {
                 $('.register-form-main-message').addClass('error').html('帐号已经存在, 请更换手机号码');
                 return
-              }else if(data.err_code == 200){
+              } else if (data.err_code == 200) {
 
-              }
-               else {
+              } else {
                 $('.register-form-main-message').addClass('error').html('网络异常,刷新重试');
                 return
               }
@@ -438,7 +436,7 @@
               // alert(randomWord)
               $.ajax({
                 type: "POST",
-                url: "{{api_domain}}/api/auth/tokens?v="+randomWord,
+                url: "{{api_domain}}/api/auth/tokens?v=" + randomWord,
                 headers: {
                   "Authorization": "Bearer eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
                 },
@@ -447,7 +445,7 @@
                 contentType: 'application/json',
                 success: function(data, status, xhr) {
                   var json = JSON.stringify(data.rs);
-                  console.log(">>>>>",json);
+                  console.log(">>>>>", json);
 
                   // 登录成功后，加入联盟
                   $.ajax({
@@ -456,8 +454,7 @@
                     data: json,
                     dataType: "json",
                     contentType: 'application/json',
-                    success: function(data, status, xhr) {
-                    },
+                    success: function(data, status, xhr) {},
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                       console.log("XMLHttpRequest.status>>>>:" + XMLHttpRequest.status);
                     },
@@ -478,8 +475,7 @@
 
               location.href = "/portal/newsup/login-next";
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {},
             complete: function(XMLHttpRequest, textStatus) {
               this; // 调用本次AJAX请求时传递的options参数
             }
@@ -510,13 +506,13 @@
             minlength: 6
           },
         },
-        messages:{
-          lp_phone:"请输入正确的手机号码！",
+        messages: {
+          lp_phone: "请输入正确的手机号码！",
           lp_verify_code: {
             required: "请输入验证码！",
             minlength: "验证码至少4位",
           },
-          lp_pwd:{
+          lp_pwd: {
             required: "请输入密码！",
             minlength: "密码长度至少6位"
           },
