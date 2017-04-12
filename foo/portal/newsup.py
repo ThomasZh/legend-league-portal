@@ -1163,7 +1163,7 @@ class NewsupSearchResultHandler(BaseHandler):
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.info("got sceneries response %r", response.body)
         data = json_decode(response.body)
         sceneries = data['rs']
         for article in sceneries:

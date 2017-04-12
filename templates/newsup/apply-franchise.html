@@ -49,7 +49,7 @@
 
 </head>
 <style>
-  select{
+  select {
     width: 120px;
     height: 30px;
   }
@@ -81,7 +81,7 @@
           <div class="rst-breadcrumb">
             <a href="/portal/newsup/index"><span>首页</span></a>
             <span>></span>
-            <a href="/portal/newsup/franchise"><span>加盟申请</span></a>
+            <a href="/portal/newsup/franchise"><span>平台申请</span></a>
           </div>
         </div>
       </div>
@@ -105,24 +105,24 @@
 
             <!-- uploading toast -->
             <div id="loadingToast" class="weui_loading_toast" style="display:none;">
-                <div class="weui_mask_transparent"></div>
-                <div class="weui_toast">
-                    <div class="weui_loading">
-                        <div class="weui_loading_leaf weui_loading_leaf_0"></div>
-                        <div class="weui_loading_leaf weui_loading_leaf_1"></div>
-                        <div class="weui_loading_leaf weui_loading_leaf_2"></div>
-                        <div class="weui_loading_leaf weui_loading_leaf_3"></div>
-                        <div class="weui_loading_leaf weui_loading_leaf_4"></div>
-                        <div class="weui_loading_leaf weui_loading_leaf_5"></div>
-                        <div class="weui_loading_leaf weui_loading_leaf_6"></div>
-                        <div class="weui_loading_leaf weui_loading_leaf_7"></div>
-                        <div class="weui_loading_leaf weui_loading_leaf_8"></div>
-                        <div class="weui_loading_leaf weui_loading_leaf_9"></div>
-                        <div class="weui_loading_leaf weui_loading_leaf_10"></div>
-                        <div class="weui_loading_leaf weui_loading_leaf_11"></div>
-                    </div>
-                    <p class="weui_toast_content">图片上传中...</p>
+              <div class="weui_mask_transparent"></div>
+              <div class="weui_toast">
+                <div class="weui_loading">
+                  <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+                  <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+                  <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+                  <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+                  <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+                  <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+                  <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+                  <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+                  <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+                  <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+                  <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+                  <div class="weui_loading_leaf weui_loading_leaf_11"></div>
                 </div>
+                <p class="weui_toast_content">图片上传中...</p>
+              </div>
             </div>
 
             {% if not franchise %}
@@ -131,14 +131,14 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <input class="rst-pageinput" type="text" placeholder="加盟商名称" name="name" id="name"  />
+                      <input class="rst-pageinput" type="text" placeholder="加盟商名称" name="name" id="name" />
                       <!-- required data-validation-required-message="Please enter your name." -->
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
                       <div id="type" style="padding: 11px 0px;width: 100%;margin: 0 0 30px;">
-                            <select class="prov" id="franchise_type">
-                              <option value="类型" style="color:red;">加盟商类型</option>
+                        <select class="prov" id="franchise_type">
+                              <option value="类型" style="color:red;">平台类型</option>
                               <option value="景区">景区</option>
                               <option value="供应商">供应商</option>
                             </select>
@@ -147,15 +147,15 @@
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
-                      <input class="rst-pageinput" type="email" placeholder="电子邮件" name="email" id="email"  />
+                      <input class="rst-pageinput" type="email" placeholder="电子邮件" name="email" id="email" />
                       <!-- required data-validation-required-message="Please enter your email." -->
                       <!-- <p class="help-block text-danger"></p> -->
                     </div>
                     <div class="form-group">
                       <!-- <input class="rst-pageinput" type="text" placeholder="地址" name="address" id="address"  /> -->
                       <div id="citySelect" style="padding: 11px 0px;width: 100%;margin: 0 0 30px;">
-                           <select class="prov" id="prov"></select>
-                           <select class="city" disabled="disabled" id="city"></select>
+                        <select class="prov" id="prov"></select>
+                        <select class="city" disabled="disabled" id="city"></select>
                       </div>
                       <!-- required data-validation-required-message="Please enter your company." -->
                       <!-- <p class="help-block text-danger"></p> -->
@@ -170,7 +170,7 @@
 
                     <div class="form-group">
                       <div class="rst-account-img" style="position:static;">
-                        <img id="user_img" src="http://tripc2c-club-title.b0.upaiyun.com/default/bg.jpg" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #e2e6e5"/>
+                        <img id="user_img" src="http://tripc2c-club-title.b0.upaiyun.com/default/bg.jpg" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #e2e6e5" />
                         <input class="rst-pagebutton" type="button" value="上传背景图" onclick="openBrowse()" />
                         <input type="file" id="file" name="file" style="display:none;">
                       </div>
@@ -182,7 +182,7 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
-                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="加盟商简介" name="introduction" id="introduction" ></textarea>
+                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="加盟商简介" name="introduction" id="introduction"></textarea>
                       <!-- required data-validation-required-message="Please enter your message." -->
                       <!-- <p class="help-block text-danger"></p> -->
                       <div class="appy-form-main-message" id="success"></div>
@@ -204,8 +204,8 @@
                     </div>
                     <div class="form-group">
                       <div id="type" style="padding: 11px 0px;width: 100%;margin: 0 0 30px;">
-                            <select class="prov" id="franchise_type">
-                              <option value="类型">加盟商类型</option>
+                        <select class="prov" id="franchise_type">
+                              <option value="类型">平台类型</option>
                               <option value="景区">景区</option>
                               <option value="供应商">供应商</option>
                             </select>
@@ -219,8 +219,8 @@
                     <div class="form-group">
 
                       <div id="citySelect" style="padding: 11px 0px;width: 100%;margin: 0 0 30px;">
-                           <select class="prov" id="prov"></select>
-                           <select class="city" disabled="disabled" id="city"></select>
+                        <select class="prov" id="prov"></select>
+                        <select class="city" disabled="disabled" id="city"></select>
                       </div>
                       <!-- required data-validation-required-message="Please enter your company." -->
                       <!-- <p class="help-block text-danger"></p> -->
@@ -234,7 +234,7 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <div class="rst-account-img" style="position:static;">
-                        <img id="user_img" src="{{ franchise['club']['img'] }}" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #e2e6e5"/>
+                        <img id="user_img" src="{{ franchise['club']['img'] }}" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #e2e6e5" />
                         <input class="rst-pagebutton" type="button" value="上传背景图" onclick="openBrowse()" />
                         <input type="file" id="file" name="file" style="display:none;">
                       </div>
@@ -244,7 +244,7 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
-                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="简介" name="introduction" id="introduction" >
+                      <textarea class="rst-pageinput" cols="30" rows="10" placeholder="简介" name="introduction" id="introduction">
                         {{ franchise['club']['introduction'] }}
                       </textarea>
                       <!-- required data-validation-required-message="Please enter your message." -->
@@ -277,11 +277,11 @@
                   <td>{{ franchise['create_time'] }}</td>
                 </tr>
                 <tr>
-                  <td>加盟商名称</td>
+                  <td>平台名称</td>
                   <td>{{ franchise['club']['name'] }}</td>
                 </tr>
                 <tr>
-                  <td>加盟商类型</td>
+                  <td>平台类型</td>
                   <td>{{ franchise['club']['franchise_type'] }}</td>
                 </tr>
                 <tr>
@@ -359,7 +359,6 @@
   <script src="{{ static_url('upyun/js/upyun-mu.js') }}"></script>
 
   <script>
-
     function uuid() {
       var s = [];
       var hexDigits = "0123456789abcdef";
@@ -402,35 +401,34 @@
       return '{{upyun_domain}}' + filename;
     };
 
-    $("#file").on("change",function(){
-        var times = 0;
-        var imgUrl = uploadUpyun(this.files[0],"file");
-        $('#loadingToast').show();
-        document.addEventListener('uploaded',function(e){
-          if(times == 0){
-            $("#user_img").attr('src',imgUrl);
-          }
-          $('#loadingToast').hide();
-          times ++;
-        });
+    $("#file").on("change", function() {
+      var times = 0;
+      var imgUrl = uploadUpyun(this.files[0], "file");
+      $('#loadingToast').show();
+      document.addEventListener('uploaded', function(e) {
+        if (times == 0) {
+          $("#user_img").attr('src', imgUrl);
+        }
+        $('#loadingToast').hide();
+        times++;
+      });
 
     });
   </script>
 
 
   <script type="text/javascript">
-
-      function openBrowse(){
-          var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false;
-          if(ie){
-              document.getElementById("file").click();
-              document.getElementById("filename").value=document.getElementById("file").value;
-          }else{
-              var a=document.createEvent("MouseEvents");//FF的处理
-              a.initEvent("click", true, true);
-              document.getElementById("file").dispatchEvent(a);
-          }
+    function openBrowse() {
+      var ie = navigator.appName == "Microsoft Internet Explorer" ? true : false;
+      if (ie) {
+        document.getElementById("file").click();
+        document.getElementById("filename").value = document.getElementById("file").value;
+      } else {
+        var a = document.createEvent("MouseEvents"); //FF的处理
+        a.initEvent("click", true, true);
+        document.getElementById("file").dispatchEvent(a);
       }
+    }
   </script>
 
   <script>
@@ -448,7 +446,7 @@
           },
           phone: {
             minlength: 11,
-            maxlength:11,
+            maxlength: 11,
             required: true,
           },
           email: {
@@ -459,10 +457,10 @@
             minlength: 10,
           },
         },
-        messages:{
+        messages: {
           name: "请为您的俱乐部取个名吧！",
           address: "请填写您俱乐部的所在地址!",
-          phone:  "请填写正确的手机号码！",
+          phone: "请填写正确的手机号码！",
           email: "请输入正确的邮箱地址",
           introduction: {
             required: "请输入俱乐部简介！",
@@ -490,14 +488,16 @@
             data: json,
             dataType: "json",
             contentType: 'application/json',
-            headers: {"Authorization":"Bearer {{access_token}}"},
+            headers: {
+              "Authorization": "Bearer {{access_token}}"
+            },
             success: function(data, status, xhr) {
               console.log(status);
               $('.appy-form-main-message').addClass('show').html('发送申请成功，请等待审核!');
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("XMLHttpRequest.status: " + XMLHttpRequest.status);
-             if (XMLHttpRequest.status == 409) {
+              if (XMLHttpRequest.status == 409) {
                 $('.appy-form-main-message').addClass('show error').html('已经申请完毕, 不必重新申请');
               } else {
                 $('.appy-form-main-message').addClass('show error').html('网络异常,刷新重试');
@@ -514,13 +514,13 @@
   </script>
   <script type="text/javascript">
     $("#citySelect").citySelect({
-      url:"{{ static_url('js/city.min.js') }}",
-      nodata:"none",
-      required:false,
-      {% if franchise %}
-      prov:"{{ franchise['club']['province'] }}",
-      city:"{{ franchise['club']['city'] }}"
-      {% end %}
+      url: "{{ static_url('js/city.min.js') }}",
+      nodata: "none",
+      required: false,
+    {% if franchise %}
+      prov: "{{ franchise['club']['province'] }}",
+      city: "{{ franchise['club']['city'] }}"
+    {% end %}
     });
     {% if franchise and franchise['_status'] == 10 %}
       $("#franchise_type").val("{{ franchise['club']['franchise_type'] }}")

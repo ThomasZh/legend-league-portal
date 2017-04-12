@@ -93,14 +93,14 @@
                 <img src="http://tripc2c-club-title.b0.upaiyun.com/default/franchise.jpg!370x320" alt="" />
                 <div class="rst-boxinfo">
                   <a href="/portal/newsup/franchise"><span>供应商</span></a>
-                  <p><a href="/portal/newsup/franchise">加盟成为供应商</a></p>
+                  <p><a href="/portal/newsup/franchise">申请成为供应商</a></p>
                 </div>
               </div>
               <div class="rst-posttype">
-                <img src="http://tripc2c-club-title.b0.upaiyun.com/default/distributor.jpg!370x320" alt="" />
+                <img src="https://tripc2c-club-title.b0.upaiyun.com/avatar/2017/3/21/0ef6214c-6e83-4ec9-930e-1cce6fd49817.jpg!370x320" alt="" />
                 <div class="rst-boxinfo">
                   <a href="/portal/newsup/franchise"><span>景区</span></a>
-                  <p><a href="/portal/newsup/franchise">加盟成为最佳水利风景区</a></p>
+                  <p><a href="/portal/newsup/franchise">申请成为水利风景区</a></p>
                 </div>
               </div>
               <div class="clear"></div>
@@ -154,8 +154,7 @@
               </div>
             </div>
           </div>
-          {% for i in range(len(franchises)) %}
-          {% if i == 0 %}
+          {% for i in range(len(franchises)) %} {% if i == 0 %}
           <article class="col-sm-6 rst-leftpost">
             <div class="rst-specpost owl-carousel">
               <a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}"><img src="{{ franchises[i]['img'] }}!570x334" alt="" /></a>
@@ -166,11 +165,9 @@
               <p>{{ franchises[i]['introduction'] }}</p>
             </div>
           </article>
-          {% end %}
-          {% end %}
+          {% end %} {% end %}
           <div class="col-sm-6 rst-rightpost">
-            {% for i in range(len(franchises)) %}
-            {% if i > 0 %}
+            {% for i in range(len(franchises)) %} {% if i > 0 %}
             <article>
               <div class="rst-postpic">
                 <a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}"><img src="{{ franchises[i]['img'] }}!140x106" alt="" /></a>
@@ -181,8 +178,7 @@
                 <p>{{ franchises[i]['introduction'] }}</p>
               </div>
             </article>
-            {% end %}
-            {% end %}
+            {% end %} {% end %}
           </div>
         </div>
       </div>
@@ -230,8 +226,7 @@
               </div>
             </div>
           </div>
-          {% for i in range(len(suppliers)) %}
-          {% if i == 0 %}
+          {% for i in range(len(suppliers)) %} {% if i == 0 %}
           <article class="col-sm-6 rst-leftpost">
             <div class="rst-specpost owl-carousel">
               <a href="/portal/newsup/franchise-detail?id={{ suppliers[i]['club_id'] }}"><img src="{{ suppliers[i]['img'] }}!570x334" alt="" /></a>
@@ -242,11 +237,9 @@
               <p>{{ suppliers[i]['introduction'] }}</p>
             </div>
           </article>
-          {% end %}
-          {% end %}
+          {% end %} {% end %}
           <div class="col-sm-6 rst-rightpost">
-            {% for i in range(len(suppliers)) %}
-            {% if i > 0 %}
+            {% for i in range(len(suppliers)) %} {% if i > 0 %}
             <article>
               <div class="rst-postpic">
                 <a href="/portal/newsup/franchise-detail?id={{ suppliers[i]['club_id'] }}"><img src="{{ suppliers[i]['img'] }}!140x106" alt="" /></a>
@@ -257,8 +250,7 @@
                 <p>{{ suppliers[i]['introduction'] }}</p>
               </div>
             </article>
-            {% end %}
-            {% end %}
+            {% end %} {% end %}
           </div>
         </div>
       </div>
@@ -276,6 +268,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- Section News and Hot -->
     <section id="rst-newsandhot">
@@ -312,22 +305,17 @@
               <h3>需求发布</h3>
               <div class="rst-hotnews owl-carousel">
                 <ul>
-                  {% for i in range(len(journeies)) %}
-                  {% if i < 6 %}
-                  <li>
+                  {% for i in range(len(journeies)) %} {% if i < 6 %} <li>
                     <p><a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">{{ journeies[i]['title'] }}</a></p>
-                  </li>
-                  {% end %}
-                  {% end %}
+                    </li>
+                    {% end %} {% end %}
                 </ul>
                 <ul>
-                  {% for i in range(len(journeies)) %}
-                  {% if i >= 6 %}
+                  {% for i in range(len(journeies)) %} {% if i >= 6 %}
                   <li>
                     <p><a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">{{ journeies[i]['title'] }}</a></p>
                   </li>
-                  {% end %}
-                  {% end %}
+                  {% end %} {% end %}
                 </ul>
               </div>
             </aside>
@@ -344,22 +332,17 @@
               <h3>经验交流</h3>
               <div class="rst-hotnews owl-carousel">
                 <ul>
-                  {% for i in range(len(hots)) %}
-                  {% if i < 6 %}
-                  <li>
+                  {% for i in range(len(hots)) %} {% if i < 6 %} <li>
                     <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
-                  </li>
-                  {% end %}
-                  {% end %}
+                    </li>
+                    {% end %} {% end %}
                 </ul>
                 <ul>
-                  {% for i in range(len(hots)) %}
-                  {% if i >= 6 %}
+                  {% for i in range(len(hots)) %} {% if i >= 6 %}
                   <li>
                     <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
                   </li>
-                  {% end %}
-                  {% end %}
+                  {% end %} {% end %}
                 </ul>
               </div>
             </aside>
@@ -370,6 +353,7 @@
       </div>
     </section>
     <!-- End Section News and Hot -->
+
 
     <!-- Pageline -->
     <div class="rst-pageline container">
