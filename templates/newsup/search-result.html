@@ -245,7 +245,7 @@
         };
 
         function gotoPage(pageNum) {
-          $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{ league_info['_id'] }}&page=1&limit="+limit+"",function(data,status){
+          $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{ league_info['_id'] }}&page="+pageNum+"&limit="+limit+"",function(data,status){
                 // console.log(data);
                 data_obj = JSON.parse(data);
                 data = data_obj.rs;

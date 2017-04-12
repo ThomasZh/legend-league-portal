@@ -1153,21 +1153,21 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
 class NewsupSearchResultHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
-        category_id = self.get_argument("id", "")
+        # category_id = self.get_argument("id", "")
 
         # league(联盟信息)
         league_info = self.get_league_info()
 
         # query by category_id
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":6}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got sceneries response %r", response.body)
-        data = json_decode(response.body)
-        sceneries = data['rs']
-        for article in sceneries:
-            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":6}
+        # url = url_concat(API_DOMAIN+"/api/articles", params)
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+        # logging.info("got sceneries response %r", response.body)
+        # data = json_decode(response.body)
+        # sceneries = data['rs']
+        # for article in sceneries:
+        #     article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # multimedia
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":4}
@@ -1228,12 +1228,10 @@ class NewsupSearchResultHandler(BaseHandler):
         self.render('newsup/search-result.html',
                 is_login=is_login,
                 league_info=league_info,
-                sceneries=sceneries,
                 news=news,
                 populars=populars,
                 activities=activities,
                 lastest_comments=lastest_comments,
                 multimedias=multimedias,
                 league_id=LEAGUE_ID,
-                api_domain=API_DOMAIN,
-                category_id=category_id)
+                api_domain=API_DOMAIN)
