@@ -81,7 +81,7 @@
           <div class="rst-breadcrumb">
             <a href="/portal/newsup/index"><span>首页</span></a>
             <span>></span>
-            <a href="/portal/newsup/franchise"><span>平台申请</span></a>
+            <a href="/portal/newsup/franchise"><span>加盟商申请</span></a>
           </div>
         </div>
       </div>
@@ -138,8 +138,8 @@
                     <div class="form-group">
                       <div id="type" style="padding: 11px 0px;width: 100%;margin: 0 0 30px;">
                         <select class="prov" id="franchise_type">
-                              <option value="类型" style="color:red;">平台类型</option>
-                              <option value="景区">景区</option>
+                              <option value="类型" style="color:red;">加盟商类型</option>
+                              <option value="分销商">分销商</option>
                               <option value="供应商">供应商</option>
                             </select>
                       </div>
@@ -205,8 +205,8 @@
                     <div class="form-group">
                       <div id="type" style="padding: 11px 0px;width: 100%;margin: 0 0 30px;">
                         <select class="prov" id="franchise_type">
-                              <option value="类型">平台类型</option>
-                              <option value="景区">景区</option>
+                              <option value="类型">加盟商类型</option>
+                              <option value="分销商">分销商</option>
                               <option value="供应商">供应商</option>
                             </select>
                       </div>
@@ -234,7 +234,7 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <div class="rst-account-img" style="position:static;">
-                        <img id="user_img" src="{{ franchise['club']['img'] }}" alt="俱乐部背景图" style="width:100%;height:225px;border:1px solid #e2e6e5" />
+                        <img id="user_img" src="{{ franchise['club']['img'] }}" alt="加盟商背景图" style="width:100%;height:225px;border:1px solid #e2e6e5" />
                         <input class="rst-pagebutton" type="button" value="上传背景图" onclick="openBrowse()" />
                         <input type="file" id="file" name="file" style="display:none;">
                       </div>
@@ -277,11 +277,11 @@
                   <td>{{ franchise['create_time'] }}</td>
                 </tr>
                 <tr>
-                  <td>平台名称</td>
+                  <td>加盟商名称</td>
                   <td>{{ franchise['club']['name'] }}</td>
                 </tr>
                 <tr>
-                  <td>平台类型</td>
+                  <td>加盟商类型</td>
                   <td>{{ franchise['club']['franchise_type'] }}</td>
                 </tr>
                 <tr>
