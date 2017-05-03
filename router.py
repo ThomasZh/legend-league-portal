@@ -19,6 +19,8 @@ def map():
         # homepage
         (r'/', getattr(newsup, 'NewsupIndexHandler')),
 
+        (r'/MP_verify_qdkkOWgyqqLTrijx.txt', getattr(newsup, 'WxMpVerifyHandler')),
+
         # login_next redirect to index
         # 页面重定向后，可以将cookie加载
         (r'/portal/newsup/login-next', getattr(newsup, 'NewsupLoginNextHandler')),

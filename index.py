@@ -32,8 +32,8 @@ def main():
         debug=options.debug,
         login_url="/portal/auth/login",
         ssl_options={
-           "certfile": os.path.join(os.path.abspath("."), "7x24hs.com.crt"),
-           "keyfile": os.path.join(os.path.abspath("."), "7x24hs.com.key"),
+           "certfile": os.path.join(os.path.abspath("."), "bike-forever.com.crt"),
+           "keyfile": os.path.join(os.path.abspath("."), "bike-forever.com.key"),
         }
     )
     # tornado.locale.load_gettext_translations(os.path.join(os.path.dirname(__file__), "locale"), "aplan")

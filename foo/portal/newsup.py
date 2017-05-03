@@ -38,6 +38,12 @@ from comm import *
 from global_const import *
 
 
+class WxMpVerifyHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.finish('qdkkOWgyqqLTrijx')
+        return
+
+
 class NewsupLoginNextHandler(tornado.web.RequestHandler):
     def get(self):
         login_next = self.get_secure_cookie("login_next")
