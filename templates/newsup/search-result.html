@@ -65,7 +65,7 @@
       <!-- /socialbar -->
 
       <!-- menubar -->
-      {% module Template("newsup/block-menubar.html", league_info=league_info) %}
+      {% module Template("newsup/block-menubar.html", is_login=is_login, league_info=league_info) %}
       <!-- /menubar -->
 
     </header>
@@ -119,14 +119,62 @@
             {% module Template("newsup/block-widget-social.html") %}
             <!-- end widget social -->
 
+            {% if is_login %}
+            <aside class="widget widget_hot_news">
+              <h3>景区需求</h3>
+              <div class="rst-hotnews owl-carousel">
+                <ul>
+                  {% for i in range(len(requires)) %}
+                  {% if i < 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ requires[i]['_id'] }}">{{ requires[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+                <ul>
+                  {% for i in range(len(requires)) %}
+                  {% if i >= 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ requires[i]['_id'] }}">{{ requires[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+              </div>
+            </aside>
+            {% end %}
+
             <!-- begin widget popular -->
-            {% module Template("newsup/block-widget-popular.html", populars=populars, news=news) %}
+            {% module Template("newsup/block-widget-popular.html", populars=products, news=journeies) %}
             <!-- end widget popular -->
 
-            <!-- begin widget adv -->
-            {% module Template("newsup/block-widget-adv.html", activities=activities) %}
-            <!-- end widget adv -->
-
+            {% if is_login %}
+            <aside class="widget widget_hot_news">
+              <h3>经验交流</h3>
+              <div class="rst-hotnews owl-carousel">
+                <ul>
+                  {% for i in range(len(communities)) %}
+                  {% if i < 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ communities[i]['_id'] }}">{{ communities[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+                <ul>
+                  {% for i in range(len(communities)) %}
+                  {% if i >= 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ communities[i]['_id'] }}">{{ communities[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+              </div>
+            </aside>
+            {% end %}
+            
             <!-- begin widget video -->
             {% module Template("newsup/block-widget-video.html") %}
             <!-- end widget video -->
@@ -148,7 +196,7 @@
 
 
     <!-- Footer -->
-    {% module Template("newsup/block-footer.html") %}
+    {% module Template("newsup/block-footer.html", is_login=is_login) %}
     <!-- End Footer -->
 
   </section>

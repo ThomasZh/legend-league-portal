@@ -61,7 +61,7 @@
       <!-- /socialbar -->
 
       <!-- menubar -->
-      {% module Template("newsup/block-menubar.html", league_info=league_info) %}
+      {% module Template("newsup/block-menubar.html", is_login=is_login, league_info=league_info) %}
       <!-- /menubar -->
 
     </header>
@@ -146,32 +146,62 @@
             {% module Template("newsup/block-widget-social.html") %}
             <!-- end widget social -->
 
-            <!-- begin widget popular -->
-            {% module Template("newsup/block-widget-popular.html", populars=populars, news=news) %}
-            <!-- end widget popular -->
+            {% if is_login %}
             <aside class="widget widget_hot_news">
-              <h3>经验交流</h3>
+              <h3>景区需求</h3>
               <div class="rst-hotnews owl-carousel">
                 <ul>
-                  {% for i in range(len(hots)) %}
+                  {% for i in range(len(requires)) %}
                   {% if i < 6 %}
                   <li>
-                    <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
+                    <p><a href="/portal/newsup/item-detail?id={{ requires[i]['_id'] }}">{{ requires[i]['title'] }}</a></p>
                   </li>
                   {% end %}
                   {% end %}
                 </ul>
                 <ul>
-                  {% for i in range(len(hots)) %}
+                  {% for i in range(len(requires)) %}
                   {% if i >= 6 %}
                   <li>
-                    <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
+                    <p><a href="/portal/newsup/item-detail?id={{ requires[i]['_id'] }}">{{ requires[i]['title'] }}</a></p>
                   </li>
                   {% end %}
                   {% end %}
                 </ul>
               </div>
             </aside>
+            {% end %}
+
+            <!-- begin widget popular -->
+            {% module Template("newsup/block-widget-popular.html", populars=products, news=journeies) %}
+            <!-- end widget popular -->
+
+            {% if is_login %}
+            <aside class="widget widget_hot_news">
+              <h3>经验交流</h3>
+              <div class="rst-hotnews owl-carousel">
+                <ul>
+                  {% for i in range(len(communities)) %}
+                  {% if i < 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ communities[i]['_id'] }}">{{ communities[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+                <ul>
+                  {% for i in range(len(communities)) %}
+                  {% if i >= 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ communities[i]['_id'] }}">{{ communities[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+              </div>
+            </aside>
+            {% end %}
+            
             <!-- begin widget video -->
             {% module Template("newsup/block-widget-video.html") %}
             <!-- end widget video -->
@@ -191,7 +221,7 @@
     <!-- End Section Latest Comments -->
 
     <!-- Footer -->
-    {% module Template("newsup/block-footer.html") %}
+    {% module Template("newsup/block-footer.html", is_login=is_login) %}
     <!-- End Footer -->
 
   </section>
@@ -229,12 +259,12 @@
         var currentPage = 0;//当前页
         var total_page = 0;//总页数
         function query(pageNum) {
-          $.get("{{api_domain}}/api/multimedias-pagination?filter=league&league_id={{ league_info['_id'] }}&page=1&limit="+limit+"",function(data,status){
+          $.get("{{api_domain}}/api/multimedias-pagination?status=publish&filter=league&league_id={{ league_info['_id'] }}&page=1&limit="+limit+"",function(data,status){
                 data_obj = JSON.parse(data);
-                data = data_obj.rs;
+                rs = data_obj.rs;
+                var multimedias = rs.data;
+                total_page = rs.total_page;//总页
                 currentPage = 1;
-            var multimedias = data.data;
-                total_page = data.total_page;//总页
             // num = ajaxobj.length;
             for (var i in multimedias) {
               var inner_html = '<article class="col-sm-6">';
@@ -243,7 +273,8 @@
               inner_html += '<a href="#"><img src="'+ multimedias[i].url +'!370x370" alt="" /></a>';
               inner_html += '</div>';
               inner_html += '<div class="rst-boxinfo">';
-              inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(multimedias[i].publish_time) +'</time>';
+              inner_html += '<time>'+multimedias[i].club_name+'</time>';
+              // inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(multimedias[i].publish_time) +'</time>';
               inner_html += '</div>';
               inner_html += '</div>';
               inner_html += '</article>';
@@ -268,12 +299,12 @@
         };
 
         function gotoPage(pageNum) {
-          $.get("{{api_domain}}/api/multimedias-pagination?filter=league&league_id={{ league_info['_id'] }}&page="+pageNum+"&limit="+limit+"",function(data,status){
+          $.get("{{api_domain}}/api/multimedias-pagination?status=publish&filter=league&league_id={{ league_info['_id'] }}&page="+pageNum+"&limit="+limit+"",function(data,status){
                 data_obj = JSON.parse(data);
-                data = data_obj.rs;
+                rs = data_obj.rs;
+                var multimedias = rs.data;
+                total_page = rs.total_page;//总页
                 currentPage = pageNum;
-            var multimedias = data.data;
-                total_page = data.total_page;//总页
             $('#mediaBox').html("");
 
             for (var i in multimedias) {
@@ -283,7 +314,8 @@
               inner_html += '<a href="#"><img src="'+ multimedias[i].url +'!370x370" alt="" /></a>';
               inner_html += '</div>';
               inner_html += '<div class="rst-boxinfo">';
-              inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(multimedias[i].publish_time) +'</time>';
+              inner_html += '<time>'+multimedias[i].club_name+'</time>';
+              // inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(multimedias[i].publish_time) +'</time>';
               inner_html += '</div>';
               inner_html += '</div>';
               inner_html += '</article>';

@@ -7,45 +7,42 @@
         <span class="rst-menu-title">菜单</span>
         <ul>
           <li><a href="/portal/newsup/contact">联系我们</a></li>
-          <li><a href="/portal/newsup/franchise">加盟申请</a></li>
-          <li><a href="/portal/newsup/media">精彩瞬间</a></li>
+          <li><a href="/portal/newsup/franchise">加入我们</a></li>
           <li><a href="/portal/newsup/account">个人信息</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2">
+        <span class="rst-menu-title">加盟商</span>
+        <ul>
+          <li><a href="/portal/newsup/franchises?franchise_type=景区">景区导览</a></li>
+          <li><a href="/portal/newsup/franchises?franchise_type=供应商">供应商</a></li>
         </ul>
       </div>
       <div class="col-sm-2">
         <span class="rst-menu-title">文章分类</span>
         <ul>
-          <li><a href="/portal/newsup/franchises?franchise_type=分销商">分销商展示</a></li>
-          <li><a href="/portal/newsup/franchises?franchise_type=供应商">供应商展示</a></li>
-          <li><a href="/portal/newsup/category?id=b0569f58144f11e78d3400163e023e51">最佳线路</a></li>
           <li><a href="/portal/newsup/category?id=0bbf89e2f73411e69a3c00163e023e51">近期活动</a></li>
+          <li><a href="/portal/newsup/category?id=b0569f58144f11e78d3400163e023e51">旅游产品</a></li>
           <li><a href="/portal/newsup/category?id=30a56cb8f73411e69a3c00163e023e51">旅游资讯</a></li>
+          {% if is_login %}
+          <li><a href="/portal/newsup/category?id=01d6120cf73411e69a3c00163e023e51">景区需求</a></li>
           <li><a href="/portal/newsup/category?id=8853422e03a911e7998c00163e023e51">经验交流</a></li>
+          <li><a href="/portal/newsup/category?id=2a28cb78f73411e69a3c00163e023e51">供应商产品</a></li>
+          <li><a href="/portal/newsup/category?id=404228663a1711e7b21000163e023e51">供应商需求</a></li>
+          {% end %}
+          <li><a href="/portal/newsup/media">精彩瞬间</a></li>
         </ul>
       </div>
-      <!--
-      <div class="col-sm-2">
-        <span class="rst-menu-title">Page Template</span>
-        <ul>
-          <li><a href="/portal/newsup/account">Account</a></li>
-          <li><a href="/portal/newsup/author">Author</a></li>
-          <li><a href="/portal/newsup/item-detail?id=e6f8e4b8ea0511e6ac6800163e023e51">Detail</a></li>
-          <li><a href="/portal/newsup/category-tile">Category Tile</a></li>
-          <li><a href="/portal/newsup/new">New</a></li>
-          <li><a href="/portal/auth/register">Register</a></li>
-        </ul>
-      </div>
-    -->
     </div>
   </div>
   <div class="rst-footer-copyright">
     <div class="container">
       <div class="row">
         <div class="col-xs-6 rst-copyright">
-          <p>© 2017 bike-forever.com 保留所有权利.</p>
+          <p>© 2017 water.com 保留所有权利.</p>
         </div>
         <div class="col-xs-6 rst-design">
-          <p>骑无止境 <a href="#"><i class="fa fa-angle-up"></i></a></p>
+          <p>山水游 <a href="#"><i class="fa fa-angle-up"></i></a></p>
         </div>
       </div>
     </div>

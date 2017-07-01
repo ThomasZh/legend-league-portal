@@ -63,7 +63,7 @@
       <!-- /socialbar -->
 
       <!-- menubar -->
-      {% module Template("newsup/block-menubar.html", league_info=league_info) %}
+      {% module Template("newsup/block-menubar.html", is_login=is_login, league_info=league_info) %}
       <!-- /menubar -->
 
     </header>
@@ -150,7 +150,7 @@
 
 
     <!-- Footer -->
-    {% module Template("newsup/block-footer.html") %}
+    {% module Template("newsup/block-footer.html", is_login=is_login) %}
     <!-- End Footer -->
 
   </section>

@@ -68,7 +68,7 @@
       <!-- /socialbar -->
 
       <!-- menubar -->
-      {% module Template("newsup/block-menubar.html", league_info=league_info) %}
+      {% module Template("newsup/block-menubar.html", is_login=is_login, league_info=league_info) %}
       <!-- /menubar -->
 
     </header>
@@ -157,27 +157,6 @@
               </div>
               <!-- / like button -->
 
-<!--
-              <div class="col-xs-12">
-                <div class="rst-tagsandshare">
-                  <div class="rst-catlist rst-catlisttags">
-                    <a href="#">sport</a>
-                    <a href="#">hockey</a>
-                  </div>
-                  <div class="rst-catlist rst-catlistshare">
-                    <ul>
-                      <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                      <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                      <li><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
-                      <li><a href="#" target="_blank"><i class="fa fa-behance"></i></a></li>
-                    </ul>
-                  </div>
-                  <div class="clear"></div>
-                </div>
-              </div>
-            -->
-              <!-- End Tags and Share -->
-
               <!-- Comment list -->
               <div id="comment-list" class="col-xs-12 rst-content-comment">
                 <div class="rst-section-title rst-section-title-box">
@@ -218,7 +197,11 @@
 										<div class="col-xs-12">
 											<textarea class="rst-pageinput" name="" id="comment" cols="30" rows="10" placeholder="添加评论内容" ></textarea>
                       <div class="send-ok-message"></div>
+                      {% if is_login %}
 											<input class="rst-pagebutton" type="button" v-on:click="sendComment" value="发送"/>
+                      {% else %}
+                      <input class="rst-pagebutton" type="button" v-on:click="register" value="发送"/>
+                      {% end %}
 										</div>
 									</div>
 								</div>
@@ -231,32 +214,61 @@
             {% module Template("newsup/block-widget-social.html") %}
             <!-- end widget social -->
 
-            <!-- begin widget popular -->
-            {% module Template("newsup/block-widget-popular.html", populars=populars, news=news) %}
-            <!-- end widget popular -->
+            {% if is_login %}
             <aside class="widget widget_hot_news">
-              <h3>经验交流</h3>
+              <h3>景区需求</h3>
               <div class="rst-hotnews owl-carousel">
                 <ul>
-                  {% for i in range(len(hots)) %}
+                  {% for i in range(len(requires)) %}
                   {% if i < 6 %}
                   <li>
-                    <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
+                    <p><a href="/portal/newsup/item-detail?id={{ requires[i]['_id'] }}">{{ requires[i]['title'] }}</a></p>
                   </li>
                   {% end %}
                   {% end %}
                 </ul>
                 <ul>
-                  {% for i in range(len(hots)) %}
+                  {% for i in range(len(requires)) %}
                   {% if i >= 6 %}
                   <li>
-                    <p><a href="/portal/newsup/item-detail?id={{ hots[i]['_id'] }}">{{ hots[i]['title'] }}</a></p>
+                    <p><a href="/portal/newsup/item-detail?id={{ requires[i]['_id'] }}">{{ requires[i]['title'] }}</a></p>
                   </li>
                   {% end %}
                   {% end %}
                 </ul>
               </div>
             </aside>
+            {% end %}
+
+            <!-- begin widget popular -->
+            {% module Template("newsup/block-widget-popular.html", populars=products, news=journeies) %}
+            <!-- end widget popular -->
+
+            {% if is_login %}
+            <aside class="widget widget_hot_news">
+              <h3>经验交流</h3>
+              <div class="rst-hotnews owl-carousel">
+                <ul>
+                  {% for i in range(len(communities)) %}
+                  {% if i < 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ communities[i]['_id'] }}">{{ communities[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+                <ul>
+                  {% for i in range(len(communities)) %}
+                  {% if i >= 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ communities[i]['_id'] }}">{{ communities[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+              </div>
+            </aside>
+            {% end %}
 
             <!-- begin widget video -->
             {% module Template("newsup/block-widget-video.html") %}
@@ -277,7 +289,7 @@
     <!-- End Section Latest Comments -->
 
     <!-- Footer -->
-    {% module Template("newsup/block-footer.html") %}
+    {% module Template("newsup/block-footer.html", is_login=is_login) %}
     <!-- End Footer -->
 
   </section>
@@ -336,6 +348,9 @@
               this; // 调用本次AJAX请求时传递的options参数
             }
           });
+        },
+        register: function() {
+          location.href = "/portal/auth/register";
         },
         sendComment: function() {
           var _self = this;

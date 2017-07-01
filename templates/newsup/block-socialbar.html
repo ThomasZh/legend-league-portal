@@ -6,23 +6,8 @@
         <nav class="rst-socialbar-menu">
           <ul>
             <li><a href="/portal/newsup/contact">联系我们</a></li>
-            <li><a href="/portal/newsup/franchise">加盟商申请</a></li>
-            <li><a href="/portal/newsup/media">精彩瞬间</a></li>
+            <li><a href="/portal/newsup/franchise">加入我们</a></li>
             <li><a href="/portal/newsup/account">个人信息</a></li>
-            <!--
-            <li><a href="/portal/newsup/shortcodes">shortcodes</a></li>
-            <li>
-              <a href="#">page template</a>
-              <ul>
-                <li><a href="/portal/newsup/account">account</a></li>
-                <li><a href="/portal/newsup/author">author</a></li>
-                <li><a href="/portal/newsup/item-detail?id=986ad9def8b311e69a3c00163e023e51">detail</a></li>
-                <li><a href="/portal/newsup/category-tile">category tile</a></li>
-                <li><a href="/portal/newsup/new">new</a></li>
-                <li><a href="/portal/auth/register">register</a></li>
-              </ul>
-            </li>
-          -->
           </ul>
         </nav>
         <nav class="rst-socialbar-social">
@@ -33,17 +18,16 @@
                 <button class="sb" id="searchBtn"><i class="fa fa-search"></i></button>
               </div>
             </li>
-            <!--
-            <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
-            <li><a href="#" target="_blank"><i class="fa fa-behance"></i></a></li>
-          -->
+            {% if is_login %}
+            <li><a href="#"><i class="fa fa-user"></i></a></li>
+            {% end %}
             <li>
               <div class="rst-loginform">
                 {% if is_login %}
-                <a href="/portal/auth/logout">登出</a> {% else %}
-                <a href="/portal/auth/register">登录</a> {% end %}
+                <a href="/portal/auth/logout">登出</a>
+                {% else %}
+                <a href="/portal/auth/register">登录</a>
+                {% end %}
               </div>
             </li>
           </ul>
