@@ -49,12 +49,14 @@ class AuthRegisterHandler(BaseHandler):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+        is_ops = False
 
         # league(联盟信息)
         league_info = self.get_league_info()
 
         self.render('newsup/register.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 league_info=league_info,
                 api_domain=API_DOMAIN)
 

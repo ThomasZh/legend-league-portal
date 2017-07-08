@@ -67,6 +67,10 @@ class NewsupIndexHandler(BaseHandler):
         if access_token:
             is_login = True
 
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
         # notices
         params = {"filter":"league", "league_id":LEAGUE_ID, "page":1, "limit":3}
         url = url_concat(API_DOMAIN+"/api/notice-board", params)
@@ -166,6 +170,7 @@ class NewsupIndexHandler(BaseHandler):
                 api_domain=API_DOMAIN,
                 league_info=league_info,
                 is_login=is_login,
+                is_ops=is_ops,
                 notices=notices['data'],
                 franchises=franchises,
                 activities=activities,
@@ -188,6 +193,10 @@ class NewsupAccountHandler(AuthorizationHandler):
         if access_token:
             is_login = True
 
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
         # league(联盟信息)
         league_info = self.get_league_info()
 
@@ -201,6 +210,7 @@ class NewsupAccountHandler(AuthorizationHandler):
 
         self.render('newsup/account.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 league_info=league_info,
                 user = user,
                 access_token=access_token,
@@ -219,6 +229,10 @@ class NewsupAuthorHandler(BaseHandler):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
         league_info = self.get_league_info()
@@ -267,6 +281,7 @@ class NewsupAuthorHandler(BaseHandler):
 
         self.render('newsup/author.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 league_info=league_info,
                 news=news,
                 populars=populars,
@@ -283,6 +298,10 @@ class NewsupMediaHandler(BaseHandler):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
         league_info = self.get_league_info()
@@ -352,6 +371,7 @@ class NewsupMediaHandler(BaseHandler):
 
         self.render('newsup/media.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 league_info=league_info,
                 products=products,
                 journeies=journeies,
@@ -371,6 +391,10 @@ class NewsupShortcodesHandler(BaseHandler):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
         league_info = self.get_league_info()
@@ -408,6 +432,7 @@ class NewsupShortcodesHandler(BaseHandler):
 
         self.render('newsup/shortcodes.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 league_info=league_info,
                 news=news,
                 activities=activities,
@@ -423,6 +448,10 @@ class NewsupContactHandler(BaseHandler):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
         league_info = self.get_league_info()
@@ -440,6 +469,7 @@ class NewsupContactHandler(BaseHandler):
 
         self.render('newsup/contact.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 league_info=league_info,
                 lastest_comments=lastest_comments,
                 api_domain=API_DOMAIN,
@@ -456,6 +486,10 @@ class NewsupItemDetailHandler(BaseHandler):
         if access_token:
             is_login = True
 
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
         # league(联盟信息)
         league_info = self.get_league_info()
 
@@ -467,6 +501,14 @@ class NewsupItemDetailHandler(BaseHandler):
         data = json_decode(response.body)
         article_info = data['rs']
         article_info['publish_time'] = timestamp_friendly_date(article_info['publish_time'])
+
+        # club
+        url = API_DOMAIN+"/api/clubs/"+article_info['club_id']
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got article response %r", response.body)
+        data = json_decode(response.body)
+        franchise = data['rs']
 
         # product(旅游产品)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":4}
@@ -542,9 +584,11 @@ class NewsupItemDetailHandler(BaseHandler):
 
         self.render('newsup/item-detail.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 access_token=access_token,
                 league_info=league_info,
                 article_info=article_info,
+                franchise=franchise,
                 products=products,
                 journeies=journeies,
                 communities=communities,
@@ -563,13 +607,18 @@ class NewsupNewHandler(BaseHandler):
         if access_token:
             is_login = True
 
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
         # league(联盟信息)
         league_info = self.get_league_info()
 
         self.render('newsup/new.html',
                 league_info=league_info,
                 api_domain=API_DOMAIN,
-                is_login=is_login)
+                is_login=is_login,
+                is_ops=is_ops)
 
 
 class NewsupCategoryTileHandler(BaseHandler):
@@ -580,6 +629,10 @@ class NewsupCategoryTileHandler(BaseHandler):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
         league_info = self.get_league_info()
@@ -628,6 +681,7 @@ class NewsupCategoryTileHandler(BaseHandler):
 
         self.render('newsup/category-tile.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 league_info=league_info,
                 lastest_comments=lastest_comments,
                 news=news,
@@ -645,6 +699,10 @@ class NewsupCategoryHandler(BaseHandler):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
         league_info = self.get_league_info()
@@ -733,6 +791,7 @@ class NewsupCategoryHandler(BaseHandler):
 
         self.render('newsup/category.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 league_info=league_info,
                 sceneries=sceneries,
                 products=products,
@@ -756,6 +815,10 @@ class NewsupCategorySearchHandler(BaseHandler):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
         league_info = self.get_league_info()
@@ -844,6 +907,7 @@ class NewsupCategorySearchHandler(BaseHandler):
 
         self.render('newsup/category-search.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 league_info=league_info,
                 sceneries=sceneries,
                 products=products,
@@ -869,6 +933,10 @@ class NewsupFranchisesHandler(BaseHandler):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
         league_info = self.get_league_info()
@@ -953,6 +1021,7 @@ class NewsupFranchisesHandler(BaseHandler):
         self.render('newsup/franchises.html',
                 league_info=league_info,
                 is_login=is_login,
+                is_ops=is_ops,
                 franchises=franchises,
                 requires=requires,
                 products=products,
@@ -975,10 +1044,14 @@ class NewsupFranchiseDetailHandler(BaseHandler):
         if access_token:
             is_login = True
 
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
         # league(联盟信息)
         league_info = self.get_league_info()
 
-        # article
+        # franchise
         url = API_DOMAIN+"/api/clubs/"+franchise_id
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -993,7 +1066,6 @@ class NewsupFranchiseDetailHandler(BaseHandler):
             franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
         else:
             franchise['create_time'] = timestamp_friendly_date(0)
-        # franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
 
         # update read_num
         read_num = franchise['read_num']
@@ -1005,7 +1077,7 @@ class NewsupFranchiseDetailHandler(BaseHandler):
         logging.info("got update read_num response %r", response.body)
 
         # product(旅游产品)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":4}
+        params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":4}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -1014,7 +1086,7 @@ class NewsupFranchiseDetailHandler(BaseHandler):
         products = data['rs']
 
         # journey(旅游资讯)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"01d6120cf73411e69a3c00163e023e51", "idx":0, "limit":4}
+        params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"01d6120cf73411e69a3c00163e023e51", "idx":0, "limit":4}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -1072,6 +1144,7 @@ class NewsupFranchiseDetailHandler(BaseHandler):
 
         self.render('newsup/franchise-detail.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 access_token=access_token,
                 league_info=league_info,
                 franchise=franchise,
@@ -1093,6 +1166,10 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
         league_info = self.get_league_info()
@@ -1132,6 +1209,7 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
 
         self.render('newsup/apply-franchise.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 league_info=league_info,
                 access_token=access_token,
                 league_id=LEAGUE_ID,
@@ -1153,6 +1231,10 @@ class NewsupSearchResultHandler(BaseHandler):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
         league_info = self.get_league_info()
@@ -1222,6 +1304,7 @@ class NewsupSearchResultHandler(BaseHandler):
 
         self.render('newsup/search-result.html',
                 is_login=is_login,
+                is_ops=is_ops,
                 league_info=league_info,
                 products=products,
                 journeies=journeies,

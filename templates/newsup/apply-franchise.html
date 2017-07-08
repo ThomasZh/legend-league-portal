@@ -64,11 +64,11 @@
     <header>
 
       <!-- socialbar -->
-      {% module Template("newsup/block-socialbar.html", is_login=is_login) %}
+      {% module Template("newsup/block-socialbar.html", is_login=is_login, is_ops=is_ops) %}
       <!-- /socialbar -->
 
       <!-- menubar -->
-      {% module Template("newsup/block-menubar.html", is_login=is_login, league_info=league_info) %}
+      {% module Template("newsup/block-menubar.html", is_login=is_login, is_ops=is_ops, league_info=league_info) %}
       <!-- /menubar -->
 
     </header>
@@ -329,7 +329,7 @@
     <!-- End Section Latest Comments -->
 
     <!-- Footer -->
-    {% module Template("newsup/block-footer.html", is_login=is_login) %}
+    {% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
     <!-- End Footer -->
 
   </section>

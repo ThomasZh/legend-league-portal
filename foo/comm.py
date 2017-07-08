@@ -257,6 +257,25 @@ class BaseHandler(tornado.web.RequestHandler):
                 status_code=status_code)
 
 
+    def is_ops(self, access_token):
+        try:
+            params = {"filter":"ops"}
+            url = url_concat(API_DOMAIN+"/api/myinfo", params)
+            http_client = HTTPClient()
+            headers={"Authorization":"Bearer "+access_token}
+            response = http_client.fetch(url, method="GET", headers=headers)
+            logging.info("got response %r", response.body)
+            # account_id,nickname,avatar,club_id,club_name,league_id,_rank
+            data = json_decode(response.body)
+            ops = data['rs']
+            return True
+        except:
+            err_title = str( sys.exc_info()[0] );
+            err_detail = str( sys.exc_info()[1] );
+            logging.error("error: %r info: %r", err_title, err_detail)
+            return False
+
+
 class AuthorizationHandler(BaseHandler):
     def get_current_user(self):
         self.set_secure_cookie("login_next", self.request.uri)
