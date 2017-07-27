@@ -160,8 +160,9 @@
               </div>
             </div>
           </div>
-          {% for i in range(len(franchises)) %} {% if i == 0 %}
           <article class="col-sm-6 rst-leftpost">
+            {% for i in range(len(franchises)) %}
+              {% if i < 3 %}
             <div class="rst-specpost owl-carousel">
               <a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}"><img src="{{ franchises[i]['img'] }}!570x334" alt="" /></a>
             </div>
@@ -170,10 +171,11 @@
               <time><i class="fa fa-clock-o"></i>{{ franchises[i]['create_time'] }}</time>
               <p>{{ franchises[i]['introduction'] }}</p>
             </div>
+              {% end %}
+            {% end %}
           </article>
-          {% end %} {% end %}
           <div class="col-sm-6 rst-rightpost">
-            {% for i in range(len(franchises)) %} {% if i > 0 %}
+            {% for i in range(len(franchises)) %} {% if i >= 3 %}
             <article>
               <div class="rst-postpic">
                 <a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}"><img src="{{ franchises[i]['img'] }}!140x106" alt="" /></a>

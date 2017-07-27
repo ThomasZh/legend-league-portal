@@ -81,7 +81,7 @@ class NewsupIndexHandler(BaseHandler):
         notices = data['rs']
 
         # franchises(景区)
-        params = {"filter":"league", "franchise_type":"景区", "page":1, "limit":5}
+        params = {"filter":"league", "franchise_type":"景区", "page":1, "limit":9}
         url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -111,8 +111,7 @@ class NewsupIndexHandler(BaseHandler):
         products = data['rs']
 
         # requires(景区需求)
-        category_id = '01d6120cf73411e69a3c00163e023e51'
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":12}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":'065f565e6bd711e7b46300163e023e51', "idx":0, "limit":12}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -123,7 +122,7 @@ class NewsupIndexHandler(BaseHandler):
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # journey(旅游资讯)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"01d6120cf73411e69a3c00163e023e51", "idx":0, "limit":4}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -179,8 +178,7 @@ class NewsupIndexHandler(BaseHandler):
                 journeies=journeies,
                 communities=communities,
                 lastest_comments=lastest_comments,
-                multimedias=multimedias
-                )
+                multimedias=multimedias)
 
 
 class NewsupAccountHandler(AuthorizationHandler):
@@ -316,7 +314,7 @@ class NewsupMediaHandler(BaseHandler):
         products = data['rs']
 
         # journey(旅游资讯)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"01d6120cf73411e69a3c00163e023e51", "idx":0, "limit":4}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -338,7 +336,7 @@ class NewsupMediaHandler(BaseHandler):
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # requires(景区需求)
-        category_id = '01d6120cf73411e69a3c00163e023e51'
+        category_id = '065f565e6bd711e7b46300163e023e51'
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":12}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
@@ -520,7 +518,7 @@ class NewsupItemDetailHandler(BaseHandler):
         products = data['rs']
 
         # journey(旅游资讯)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"01d6120cf73411e69a3c00163e023e51", "idx":0, "limit":4}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -542,7 +540,7 @@ class NewsupItemDetailHandler(BaseHandler):
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # requires(景区需求)
-        category_id = '01d6120cf73411e69a3c00163e023e51'
+        category_id = '065f565e6bd711e7b46300163e023e51'
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":12}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
@@ -736,7 +734,7 @@ class NewsupCategoryHandler(BaseHandler):
         products = data['rs']
 
         # journey(旅游资讯)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"01d6120cf73411e69a3c00163e023e51", "idx":0, "limit":4}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -758,8 +756,7 @@ class NewsupCategoryHandler(BaseHandler):
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # requires(景区需求)
-        category_id = '01d6120cf73411e69a3c00163e023e51'
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":12}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":'065f565e6bd711e7b46300163e023e51', "idx":0, "limit":12}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -852,7 +849,7 @@ class NewsupCategorySearchHandler(BaseHandler):
         products = data['rs']
 
         # journey(旅游资讯)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"01d6120cf73411e69a3c00163e023e51", "idx":0, "limit":4}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -874,8 +871,7 @@ class NewsupCategorySearchHandler(BaseHandler):
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # requires(景区需求)
-        category_id = '01d6120cf73411e69a3c00163e023e51'
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":12}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":'065f565e6bd711e7b46300163e023e51', "idx":0, "limit":12}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -962,7 +958,7 @@ class NewsupFranchisesHandler(BaseHandler):
         products = data['rs']
 
         # journey(旅游资讯)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"01d6120cf73411e69a3c00163e023e51", "idx":0, "limit":4}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -985,7 +981,7 @@ class NewsupFranchisesHandler(BaseHandler):
 
         # requires(景区需求/供应商需求)
         if franchise_type == '景区':
-            category_id = '01d6120cf73411e69a3c00163e023e51'
+            category_id = '065f565e6bd711e7b46300163e023e51'
         else:
             category_id = '404228663a1711e7b21000163e023e51'
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":12}
@@ -1086,7 +1082,7 @@ class NewsupFranchiseDetailHandler(BaseHandler):
         products = data['rs']
 
         # journey(旅游资讯)
-        params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"01d6120cf73411e69a3c00163e023e51", "idx":0, "limit":4}
+        params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -1109,7 +1105,7 @@ class NewsupFranchiseDetailHandler(BaseHandler):
 
         # requires(景区需求)
         if franchise['franchise_type'] == '景区':
-            category_id = '01d6120cf73411e69a3c00163e023e51'
+            category_id = '065f565e6bd711e7b46300163e023e51'
         else:
             category_id = '404228663a1711e7b21000163e023e51'
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":12}
@@ -1249,7 +1245,7 @@ class NewsupSearchResultHandler(BaseHandler):
         products = data['rs']
 
         # journey(旅游资讯)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"01d6120cf73411e69a3c00163e023e51", "idx":0, "limit":4}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -1271,8 +1267,7 @@ class NewsupSearchResultHandler(BaseHandler):
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # requires(景区需求)
-        category_id = '01d6120cf73411e69a3c00163e023e51'
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":12}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":'065f565e6bd711e7b46300163e023e51', "idx":0, "limit":12}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
