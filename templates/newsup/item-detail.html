@@ -99,7 +99,9 @@
                 <div class="rst-boxinfo">
                   <a href="#"><span>
                     {% for category in article_info['categories'] %}
+                    {% if category.has_key('title') %}
                       {{ category['title'] }}&nbsp;
+                      {% end %}
                     {% end %}
                   </span></a>
                   <p><a href="#">{{ article_info['title'] }}</a></p>
