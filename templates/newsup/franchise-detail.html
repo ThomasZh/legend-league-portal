@@ -193,7 +193,11 @@
 										<div class="col-xs-12">
 											<textarea class="rst-pageinput" name="" id="comment" cols="30" rows="10" placeholder="添加评论内容" ></textarea>
                       <div class="send-ok-message"></div>
+                      {% if is_login %}
 											<input class="rst-pagebutton" type="button" v-on:click="sendComment" value="发送"/>
+                      {% else %}
+                      <input class="rst-pagebutton" type="button" v-on:click="register" value="登录发布评论"/>
+                      {% end %}
 										</div>
 									</div>
 								</div>
@@ -345,6 +349,9 @@
             }
           });
         },
+        register: function() {
+          location.href = "/portal/auth/register";
+        },        
         sendComment: function() {
           var _self = this;
           var comment = $("#comment").val();
