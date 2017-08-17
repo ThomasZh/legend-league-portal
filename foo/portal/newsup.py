@@ -112,6 +112,8 @@ class NewsupIndexHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         activities = data['rs']
+        for activitie in activities:
+            activitie['create_time'] = timestamp_friendly_date(activitie['create_time'])
 
         # product(旅游产品)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":4}
@@ -121,6 +123,8 @@ class NewsupIndexHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         products = data['rs']
+        for product in products:
+            product['create_time'] = timestamp_friendly_date(product['create_time'])
 
         # requires(景区需求)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":'065f565e6bd711e7b46300163e023e51', "idx":0, "limit":12}
