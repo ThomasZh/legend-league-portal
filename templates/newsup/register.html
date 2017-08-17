@@ -214,14 +214,14 @@
       var validator = $("#lostpwd-form").validate();
       if (validator.element("#lp_phone")) {
         var phone = $("#lp_phone").val();
-        console.log(phone);
+        // console.log(phone);
         var data = {
           "action": "lost-pwd",
           "login_type": "phone",
           "phone": phone,
         };
         var json = JSON.stringify(data);
-        console.log(json);
+        // console.log(json);
 
         $.ajax({
           type: "POST",
@@ -233,21 +233,25 @@
           dataType: "json",
           contentType: 'application/json',
           success: function(data, status, xhr) {
-            var btn = document.getElementById("code-button");
-            time(btn);
-            $('.lostpwd-verify-code-message').addClass('show').html("验证码已通过短信发出, 注意查收! 5分钟内有效。");
+            console.log(data);
+            if (data.err_code == 200){
+              var btn = document.getElementById("code-button");
+              time(btn);
+              $('.lostpwd-verify-code-message').addClass('show').html("验证码已通过短信发出, 注意查收! 5分钟内有效。");
+            }
+            else if (data.err_code == 401) {
+              $('.lostpwd-verify-code-message').addClass('error').html("验证码不正确!");
+            } else if (data.err_code == 404) {
+              $('.lostpwd-verify-code-message').addClass('error').html("此手机号码未注册!");
+            } else if (data.err_code == 202) {
+              $('.lostpwd-verify-code-message').addClass('error').html("短信验证码5分钟内有效, 不必重新获取!");
+            } else {
+              $('.lostpwd-verify-code-message').addClass('error').html(data.err_code + ": 服务器异常,请稍后重试!");
+            }
+
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
-            if (XMLHttpRequest.status == 401) {
-              $('.lostpwd-verify-code-message').addClass('error').html("验证码不正确!");
-            } else if (XMLHttpRequest.status == 404) {
-              $('.lostpwd-verify-code-message').addClass('error').html("此手机号码未注册!");
-            } else if (XMLHttpRequest.status == 202) {
-              $('.lostpwd-verify-code-message').addClass('error').html("短信验证码5分钟内有效, 不必获取新的!");
-            } else {
-              $('.lostpwd-verify-code-message').addClass('error').html(XMLHttpRequest.status + ": 服务器异常,请稍后重试!");
-            }
           },
           complete: function(XMLHttpRequest, textStatus) {
             this; // 调用本次AJAX请求时传递的options参数
@@ -547,17 +551,21 @@
             contentType: 'application/json',
             success: function(data, status, xhr) {
               console.log(data);
-              $('.lostpwd-form-main-message').addClass('show error').html('密码已经重置，请重新登录!');
+              if (data.err_code == 200) {
+                $('.lostpwd-form-main-message').addClass('show error').html('密码已经重置，请重新登录!');
+              } else if (data.err_code == 408) {
+                $('.lostpwd-form-main-message').addClass('error').html('验证码已经超时, 请重新申请');
+              } else if (data.err_code == 409) {
+                $('.lostpwd-form-main-message').addClass('error').html('验证码错误, 请重新输入');
+              } else if (data.err_code == 404) {
+                $('.lostpwd-form-main-message').addClass('error').html('手机号错误, 请确认手机号码');
+              } else {
+                $('.lostpwd-form-main-message').addClass('error').html('网络异常,刷新重试');
+              }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("XMLHttpRequest.status: " + XMLHttpRequest.status);
-              if (XMLHttpRequest.status == 200) {
-                $('.lostpwd-form-main-message').addClass('show error').html('密码已经重置，请重新登录!');
-              } else if (XMLHttpRequest.status == 408) {
-                $('.lostpwd-form-main-message').addClass('show error').html('验证码已经超时, 请重新申请');
-              } else {
-                $('.lostpwd-form-main-message').addClass('show error').html('网络异常,刷新重试');
-              }
+
             },
             complete: function(XMLHttpRequest, textStatus) {
               this; // 调用本次AJAX请求时传递的options参数
