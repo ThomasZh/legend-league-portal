@@ -64,13 +64,18 @@ class AuthRegisterHandler(BaseHandler):
 class AuthLogoutHandler(AuthorizationHandler):
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
+        logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
+        logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
+        logging.info("GET %r", self.request.uri)
+
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
 
         # logout
         url = API_DOMAIN+"/api/auth/tokens"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="DELETE", headers={"Authorization":"Bearer "+access_token})
-        logging.info("got response %r", response.body)
+        logging.info("got logout response %r", response.body)
         # self.clear_cookie("access_token")
         # self.clear_cookie("expires_at")
         # self.clear_cookie("login_next")
@@ -79,16 +84,23 @@ class AuthLogoutHandler(AuthorizationHandler):
         self.set_secure_cookie("expires_at", "")
         self.set_secure_cookie("login_next", "")
         self.set_secure_cookie("refresh_token", "")
+        logging.info("clear cookie [access_token,expires_at,login_next,refresh_token]")
+
+        logging.info("OK(200): logout success")
+        logging.info("~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~")
+        logging.info("~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~")
 
         self.redirect("/");
 
 
 class AuthLeagueSignupXHR(BaseHandler):
     def post(self):
-        logging.info(self.request)
+        logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
+        logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
+        logging.info("POST %r", self.request.uri)
         logging.info(self.request.body)
-        session_ticket = json_decode(self.request.body)
 
+        session_ticket = json_decode(self.request.body)
         self.set_secure_cookie("access_token", session_ticket['access_token'])
         self.set_secure_cookie("expires_at", str(session_ticket['expires_at']))
 
@@ -100,6 +112,10 @@ class AuthLeagueSignupXHR(BaseHandler):
         _json = json_encode(body)
         response = http_client.fetch(url, method="POST", headers=headers, body=_json)
         logging.info("got response %r", response.body)
+
+        logging.info("OK(200): league-signup success session_ticket=[%r]", session_ticket)
+        logging.info("~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~")
+        logging.info("~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~")
 
         self.set_status(200) # OK
         self.write(JSON.dumps({"err_code":200, "err_msg":"success"}))

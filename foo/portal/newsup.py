@@ -46,12 +46,24 @@ class WxMpVerifyHandler(tornado.web.RequestHandler):
 
 class NewsupLoginNextHandler(tornado.web.RequestHandler):
     def get(self):
+        logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
+        logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
+        logging.info("GET %r", self.request.uri)
+
+        access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]",access_token)
+
         login_next = self.get_secure_cookie("login_next")
-        logging.info("got login_next %r",login_next)
+        logging.info("got login_next=[%r]",login_next)
         if login_next:
-            self.redirect(login_next)
+            url = login_next
         else:
-            self.redirect("/portal/newsup/index")
+            url = "/portal/newsup/index"
+
+        logging.info("OK(302): redirect to=[%r]", url)
+        logging.info("~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~")
+        logging.info("~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~ ~~~~~")
+        self.redirect(url)
 
 
 class NewsupIndexHandler(BaseHandler):

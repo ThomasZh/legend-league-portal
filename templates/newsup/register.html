@@ -351,7 +351,7 @@
                 dataType: "json",
                 contentType: 'application/json',
                 success: function(data, status, xhr) {
-
+                  location.href = "/portal/newsup/login-next";
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                   console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
@@ -360,8 +360,6 @@
                   this; // 调用本次AJAX请求时传递的options参数
                 }
               });
-
-              location.href = "/portal/newsup/login-next";
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
@@ -465,7 +463,9 @@
                     data: json,
                     dataType: "json",
                     contentType: 'application/json',
-                    success: function(data, status, xhr) {},
+                    success: function(data, status, xhr) {
+                      location.href = "/portal/newsup/login-next";
+                    },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                       console.log("XMLHttpRequest.status>>>>:" + XMLHttpRequest.status);
                     },
@@ -473,8 +473,6 @@
                       this; // 调用本次AJAX请求时传递的options参数
                     }
                   });
-
-                  location.href = "/portal/newsup/login-next";
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                   console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
@@ -483,8 +481,6 @@
                   this; // 调用本次AJAX请求时传递的options参数
                 }
               });
-
-              location.href = "/portal/newsup/login-next";
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {},
             complete: function(XMLHttpRequest, textStatus) {
