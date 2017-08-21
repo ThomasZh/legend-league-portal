@@ -260,9 +260,8 @@
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
   <script src="{{ static_url('js/vue-2.1.4.js') }}" type="text/javascript"></script>
-
-</body>
-<script>
+  <script>
+    $(function(){
 
         function GetQueryString(name){        //获取URL参数
           var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -279,8 +278,10 @@
         var currentPage = 0;//当前页
         var total_page = 0;//总页数
         var q = GetQueryString("q");
-        console.log(q);
+        // console.log(q);
+
         $("#categorySearchText").val(q);
+          q  = encodeURI(encodeURI(q));
         function query(pageNum) {
           $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=category&category_id={{category_id}}&page=1&limit="+limit+"",function(data,status){
                 console.log(data);
@@ -381,7 +382,6 @@
 
         };
 
-        $(function(){
           query();
           $(document).on('click','.pageBox > a',function(){
             var num = $(this).text();
@@ -405,17 +405,13 @@
                   gotoPage(++currentPage);
                   // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
               }
-          })
+          });
+        // $("#categorySearchText").val("关键词");
+        $("#categorySearchBtn").on('click',function(){
+          var q = $("#categorySearchText").val();
+          location.href="/portal/newsup/category-search?q="+q+"&id={{category_id}}";
         });
-</script>
-<script type="text/javascript">
-    $(function(){
-      // $("#categorySearchText").val("关键词");
-      $("#categorySearchBtn").on('click',function(){
-        var q = $("#categorySearchText").val();
-        location.href="/portal/newsup/category-search?q="+q+"&id={{category_id}}";
-      });
     });
-</script>
-
+  </script>
+</body>
 </html>

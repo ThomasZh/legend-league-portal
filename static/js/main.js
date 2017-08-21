@@ -5,7 +5,7 @@
 function main() {
 
 (function () {
-   'use strict'
+  //  'use strict'
 	//Script
 	//-----------------------------------
     jQuery(document).ready(function($){

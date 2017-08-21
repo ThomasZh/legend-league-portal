@@ -23,6 +23,8 @@ import sys
 import os
 import uuid
 import smtplib
+from urllib import urlencode
+from urllib import unquote
 import json as JSON # 启用别名，不会跟方法里的局部变量混淆
 from bson import json_util
 
@@ -942,8 +944,18 @@ class NewsupFranchisesHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
         franchise_type = self.get_argument("franchise_type", "")
-        franchise_type = franchise_type.encode('utf-8')
         logging.info("got franchise_type %r from argument", franchise_type)
+
+        # if isinstance(franchise_type, unicode):
+        #     print franchise_type.encode('utf-8')
+        # else:
+        #     print franchise_type.decode('utf-8').encode('utf-8')
+
+        franchise_type = franchise_type.encode('utf-8')
+        logging.info("got franchise_type %r encode utf-8", franchise_type)
+
+        franchise_type = unquote(franchise_type)
+        logging.info("got franchise_type %r unquote", franchise_type)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -1000,7 +1012,7 @@ class NewsupFranchisesHandler(BaseHandler):
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # requires(景区需求/供应商需求)
-        if franchise_type == '景区':
+        if franchise_type == u'景区':
             category_id = '065f565e6bd711e7b46300163e023e51'
         else:
             category_id = '404228663a1711e7b21000163e023e51'

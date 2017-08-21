@@ -78,7 +78,7 @@
           <div class="rst-breadcrumb">
             <a href="/portal/newsup/index"><span>首页</span></a>
             <span>></span>
-            <a href="#"><span>搜索</span></a>
+            <a href="javascript:;"><span>搜索</span></a>
           </div>
         </div>
       </div>
@@ -224,154 +224,151 @@
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
 
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
+  <script>
+  $(function(){
+      function GetQueryString(name){        //获取URL参数
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)
+           return  decodeURI(r[2]);
+           return null;
+        }
 
-</body>
-<script>
+      function getLocalTime(nS) { //时间戳转换
+         return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+      };
+      var preAllow = true;   // when ajax not completed, cannot do the next request
+      var limit = 6;//每页显示数
+      var currentPage = 0;//当前页
+      var total_page = 0;//总页数
+      var q = GetQueryString("q");
+      // console.log(q);
+      function query(pageNum) {
+        $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{ league_info['_id'] }}&page=1&limit="+limit+"",function(data,status){
+              // console.log(data);
+              data_obj = JSON.parse(data);
+              data = data_obj.rs;
+              currentPage = 1;
+          var pageData = data.data;
+              total_page = data.total_page;//总页
+          // num = ajaxobj.length;
+          for (var i in pageData) {
+            var inner_html = '<article class="col-sm-12 rst-catpost">';
+            inner_html += '<div class="rst-postpic">';
+            inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i]._id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
+            inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
+            inner_html += '</div>';
+            inner_html += '<div class="rst-postinfo">';
+            inner_html += '<a class="rst-postpic-cat" href="#"><span>';
+              for (var j in pageData[i].categories){
+                inner_html += pageData[i].categories[j].title + '&nbsp;';
+              }
+            inner_html += '</span></a>';
+            inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i]._id +'">'+ pageData[i].title +'</a></h6>'
+            inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].publish_time) +'</time>';
+            inner_html += '<p>'+ pageData[i].subtitle +'</p>';
+            inner_html += '</div>';
+            inner_html += '<div class="clear"></div>';
+            inner_html += '</article>';
 
-        function GetQueryString(name){        //获取URL参数
-          var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-          var r = window.location.search.substr(1).match(reg);
-          if(r!=null)
-             return  decodeURI(r[2]);
-             return null;
+            $('#articleBox').append(inner_html);
+            // member_num += 1;
+          };
+        if(total_page>5){
+            for (var k=1;k<=5;k++){
+              var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+              $(".pageBox").append(inner_html);
+            };
+          }else if(total_page<=5){
+            for (var k=1;k<=total_page;k++){
+              var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+              $(".pageBox").append(inner_html);
+            };
           }
-
-        function getLocalTime(nS) { //时间戳转换
-           return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
-        };
-        var preAllow = true;   // when ajax not completed, cannot do the next request
-        var limit = 6;//每页显示数
-        var currentPage = 0;//当前页
-        var total_page = 0;//总页数
-        var q = GetQueryString("q");
-        console.log(q);
-        function query(pageNum) {
-          $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{ league_info['_id'] }}&page=1&limit="+limit+"",function(data,status){
-                // console.log(data);
-                data_obj = JSON.parse(data);
-                data = data_obj.rs;
-                currentPage = 1;
-            var pageData = data.data;
-                total_page = data.total_page;//总页
-            // num = ajaxobj.length;
-            for (var i in pageData) {
-              var inner_html = '<article class="col-sm-12 rst-catpost">';
-              inner_html += '<div class="rst-postpic">';
-              inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i]._id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
-              inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
-              inner_html += '</div>';
-              inner_html += '<div class="rst-postinfo">';
-              inner_html += '<a class="rst-postpic-cat" href="#"><span>';
-                for (var j in pageData[i].categories){
-                  inner_html += pageData[i].categories[j].title + '&nbsp;';
-                }
-              inner_html += '</span></a>';
-              inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i]._id +'">'+ pageData[i].title +'</a></h6>'
-              inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].publish_time) +'</time>';
-              inner_html += '<p>'+ pageData[i].subtitle +'</p>';
-              inner_html += '</div>';
-              inner_html += '<div class="clear"></div>';
-              inner_html += '</article>';
-
-              $('#articleBox').append(inner_html);
-              // member_num += 1;
-            };
-          if(total_page>5){
-              for (var k=1;k<=5;k++){
-                var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
-                $(".pageBox").append(inner_html);
-              };
-            }else if(total_page<=5){
-              for (var k=1;k<=total_page;k++){
-                var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
-                $(".pageBox").append(inner_html);
-              };
-            }
-            $("#num1").addClass("current");
-            preAllow = true;
-          });
-        };
-
-        function gotoPage(pageNum) {
-          $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{ league_info['_id'] }}&page="+pageNum+"&limit="+limit+"",function(data,status){
-                // console.log(data);
-                data_obj = JSON.parse(data);
-                data = data_obj.rs;
-                currentPage = pageNum;
-            var pageData = data.data;
-                total_page = data.total_page;//总页
-            $('#articleBox').html("");
-
-            for (var i in pageData) {
-              var inner_html = '<article class="col-sm-12 rst-catpost">';
-              inner_html += '<div class="rst-postpic">';
-              inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i]._id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
-              inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
-              inner_html += '</div>';
-              inner_html += '<div class="rst-postinfo">';
-              inner_html += '<a class="rst-postpic-cat" href="#"><span>';
-                for (var j in pageData[i].categories){
-                  inner_html += pageData[i].categories[j].title + '&nbsp;';
-                }
-              inner_html += '</span></a>';
-              inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i]._id +'">'+ pageData[i].title +'</a></h6>'
-              inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].publish_time) +'</time>';
-              inner_html += '<p>'+ pageData[i].subtitle +'</p>';
-              inner_html += '</div>';
-              inner_html += '<div class="clear"></div>';
-              inner_html += '</article>';
-
-              $('#articleBox').append(inner_html);
-              // member_num += 1;
-            };
-
-            pageNext = parseInt((currentPage-1)/5) + 1;
-
-              start = (pageNext-1)*5+1;
-              end = pageNext*5;
-              if(end > total_page){
-                end = total_page;
-              }
-
-              $(".pageBox").html("");
-              for (var k=start;k<=end;k++){
-                var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
-
-                $(".pageBox").append(inner_html);
-              };
-               $("#num"+currentPage).addClass("current").siblings().removeClass("current");
-
-
-          });
-
-        };
-
-        $(function(){
-          query();
-          $(document).on('click','.pageBox > a',function(){
-            var num = $(this).text();
-            gotoPage(num);
-            //  $(this).addClass("current").siblings().removeClass("current");
-          })
-
-          $("#prev").on("click",function(){
-              if(currentPage<=1){
-
-              }else{
-                  gotoPage(--currentPage);
-                  // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
-              }
-          });
-
-          $("#next").on("click",function(){
-              if(currentPage>=total_page){
-
-              }else{
-                  gotoPage(++currentPage);
-                  // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
-              }
-          })
+          $("#num1").addClass("current");
+          preAllow = true;
         });
-</script>
+      };
 
+      function gotoPage(pageNum) {
+        $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{ league_info['_id'] }}&page="+pageNum+"&limit="+limit+"",function(data,status){
+              // console.log(data);
+              data_obj = JSON.parse(data);
+              data = data_obj.rs;
+              currentPage = pageNum;
+          var pageData = data.data;
+              total_page = data.total_page;//总页
+          $('#articleBox').html("");
+
+          for (var i in pageData) {
+            var inner_html = '<article class="col-sm-12 rst-catpost">';
+            inner_html += '<div class="rst-postpic">';
+            inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i]._id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
+            inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
+            inner_html += '</div>';
+            inner_html += '<div class="rst-postinfo">';
+            inner_html += '<a class="rst-postpic-cat" href="#"><span>';
+              for (var j in pageData[i].categories){
+                inner_html += pageData[i].categories[j].title + '&nbsp;';
+              }
+            inner_html += '</span></a>';
+            inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i]._id +'">'+ pageData[i].title +'</a></h6>'
+            inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].publish_time) +'</time>';
+            inner_html += '<p>'+ pageData[i].subtitle +'</p>';
+            inner_html += '</div>';
+            inner_html += '<div class="clear"></div>';
+            inner_html += '</article>';
+
+            $('#articleBox').append(inner_html);
+            // member_num += 1;
+          };
+
+          pageNext = parseInt((currentPage-1)/5) + 1;
+
+            start = (pageNext-1)*5+1;
+            end = pageNext*5;
+            if(end > total_page){
+              end = total_page;
+            }
+
+            $(".pageBox").html("");
+            for (var k=start;k<=end;k++){
+              var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+
+              $(".pageBox").append(inner_html);
+            };
+             $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+
+
+        });
+
+    };
+
+        query();
+        $(document).on('click','.pageBox > a',function(){
+          var num = $(this).text();
+          gotoPage(num);
+          //  $(this).addClass("current").siblings().removeClass("current");
+        })
+
+        $("#prev").on("click",function(){
+            if(currentPage<=1){
+
+            }else{
+                gotoPage(--currentPage);
+                // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+            }
+        });
+
+        $("#next").on("click",function(){
+            if(currentPage>=total_page){
+
+            }else{
+                gotoPage(++currentPage);
+                // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+            }
+        })
+    });
+  </script>
+</body>
 </html>

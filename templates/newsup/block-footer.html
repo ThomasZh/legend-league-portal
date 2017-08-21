@@ -55,7 +55,7 @@
 
     $(function(){
       $("#searchBtn").on('click',function(){
-        var q = $("#searchText").val();
+        var q = encodeURI(encodeURI($("#searchText").val()));
         location.href="/portal/newsup/search?q="+q;
       });
     })
