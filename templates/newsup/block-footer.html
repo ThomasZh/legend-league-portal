@@ -14,9 +14,9 @@
       <div class="col-sm-2">
         <span class="rst-menu-title">加盟商</span>
         <ul>
-          <li><a href="/portal/newsup/franchises?franchise_type=景区">景区导览</a></li>
+          <li id="sencey-type"><a href="javascript:;">景区导览</a></li>
           {% if is_login and is_ops %}
-          <li><a href="/portal/newsup/franchises?franchise_type=供应商">供应商</a></li>
+          <li id="distributed-type"><a href="javascript:;">供应商</a></li>
           {% end %}
         </ul>
       </div>
@@ -41,7 +41,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-6 rst-copyright">
-          <p>© 2017 water.com 保留所有权利.</p>
+          <p>© 2017 leshuiyou.cn 保留所有权利.</p>
         </div>
         <div class="col-xs-6 rst-design">
           <p>山水游 <a href="#"><i class="fa fa-angle-up"></i></a></p>
@@ -54,6 +54,12 @@
 <script type="text/javascript">
 
     $(function(){
+      $("#sencey-type").on('click',function(){
+        location.href= encodeURI(encodeURI("/portal/newsup/franchises?franchise_type=景区"));
+      });
+      $("#distributed-type").on('click',function(){
+        location.href= encodeURI(encodeURI("/portal/newsup/franchises?franchise_type=供应商"));
+      });
       $("#searchBtn").on('click',function(){
         var q = encodeURI(encodeURI($("#searchText").val()));
         location.href="/portal/newsup/search?q="+q;

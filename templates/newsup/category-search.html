@@ -284,7 +284,7 @@
           q  = encodeURI(encodeURI(q));
         function query(pageNum) {
           $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=category&category_id={{category_id}}&page=1&limit="+limit+"",function(data,status){
-                console.log(data);
+                // console.log(data);
                 data_obj = JSON.parse(data);
                 data = data_obj.rs;
                 currentPage = 1;
@@ -330,7 +330,7 @@
 
         function gotoPage(pageNum) {
           $.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=category&category_id={{category_id}}&page="+pageNum+"&limit="+limit+"",function(data,status){
-                console.log(data);
+                // console.log(data);
                 data_obj = JSON.parse(data);
                 data = data_obj.rs;
                 currentPage = pageNum;

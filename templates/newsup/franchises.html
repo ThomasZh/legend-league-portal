@@ -276,7 +276,7 @@
         var type = encodeURI(encodeURI("{{ franchise_type }}"));
         function query(pageNum,prov,city) {
           $.get("{{api_domain}}/api/leagues/{{ league_info['_id'] }}/clubs?franchise_type="+type+"&province="+encodeURI(encodeURI(prov))+"&city="+encodeURI(encodeURI(city))+"&page="+pageNum+"&limit="+limit+"",function(data,status){
-                 console.log(data);
+                //  console.log(data);
                  data_obj = JSON.parse(data);
                  data = data_obj.rs;
                 currentPage = 1;
