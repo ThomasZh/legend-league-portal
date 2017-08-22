@@ -61,8 +61,9 @@ class AuthRegisterHandler(BaseHandler):
                 api_domain=API_DOMAIN)
 
 
-class AuthLogoutHandler(AuthorizationHandler):
-    @tornado.web.authenticated  # if no session, redirect to login page
+# class AuthLogoutHandler(AuthorizationHandler):
+    # @tornado.web.authenticated  # if no session, redirect to login page
+class AuthLogoutHandler(BaseHandler):
     def get(self):
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
@@ -76,14 +77,14 @@ class AuthLogoutHandler(AuthorizationHandler):
         http_client = HTTPClient()
         response = http_client.fetch(url, method="DELETE", headers={"Authorization":"Bearer "+access_token})
         logging.info("got logout response %r", response.body)
-        # self.clear_cookie("access_token")
-        # self.clear_cookie("expires_at")
-        # self.clear_cookie("login_next")
-        # self.clear_cookie("refresh_token")
         self.set_secure_cookie("access_token", "")
         self.set_secure_cookie("expires_at", "")
         self.set_secure_cookie("login_next", "")
         self.set_secure_cookie("refresh_token", "")
+        self.clear_cookie("access_token")
+        self.clear_cookie("expires_at")
+        self.clear_cookie("login_next")
+        self.clear_cookie("refresh_token")
         logging.info("clear cookie [access_token,expires_at,login_next,refresh_token]")
 
         logging.info("OK(200): logout success")

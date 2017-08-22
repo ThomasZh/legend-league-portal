@@ -755,7 +755,7 @@ class NewsupCategoryHandler(BaseHandler):
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.info("got products response %r", response.body)
         data = json_decode(response.body)
         products = data['rs']
         for product in products:
@@ -766,7 +766,7 @@ class NewsupCategoryHandler(BaseHandler):
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.info("got journeies response %r", response.body)
         data = json_decode(response.body)
         journeies = data['rs']
         for article in journeies:
@@ -985,7 +985,7 @@ class NewsupFranchisesHandler(BaseHandler):
         url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.info("got franchises response %r", response.body)
         data = json_decode(response.body)
         franchises = data['rs']['data']
         for franchise in franchises:
@@ -996,7 +996,7 @@ class NewsupFranchisesHandler(BaseHandler):
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.info("got products response %r", response.body)
         data = json_decode(response.body)
         products = data['rs']
         for product in products:
@@ -1007,7 +1007,7 @@ class NewsupFranchisesHandler(BaseHandler):
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.info("got journeies response %r", response.body)
         data = json_decode(response.body)
         journeies = data['rs']
         for article in journeies:
@@ -1025,7 +1025,7 @@ class NewsupFranchisesHandler(BaseHandler):
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # requires(景区需求/供应商需求)
-        if franchise_type == u'景区':
+        if franchise_type == '\xe6\x99\xaf\xe5\x8c\xba': #景区
             category_id = '065f565e6bd711e7b46300163e023e51'
         else:
             category_id = '404228663a1711e7b21000163e023e51'
@@ -1033,7 +1033,7 @@ class NewsupFranchisesHandler(BaseHandler):
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.info("got requires response %r", response.body)
         data = json_decode(response.body)
         requires = data['rs']
         for article in requires:
