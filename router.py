@@ -39,6 +39,7 @@ def map():
         (r'/portal/newsup/franchise-detail', getattr(newsup, 'NewsupFranchiseDetailHandler')),
         (r'/portal/newsup/franchise', getattr(newsup, 'NewsupApplyFranchiseHandler')),
         (r'/portal/newsup/search', getattr(newsup, 'NewsupSearchResultHandler')),
+        (r'/api/portal/newsup/articles', getattr(newsup, 'ApiArticlesXHR')), #获取文章数据api
 
 
         (r'/portal/auth/register', getattr(auth_newsup, 'AuthRegisterHandler')),

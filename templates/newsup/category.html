@@ -8,23 +8,15 @@
   <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ league_info['name'] }}</title>
-  <meta name="description" content="NewsUp is a multi-page oriented template perfect for NewsUp - News, Magazine, Blogging and Article Directory.">
-  <meta name="keywords" content="news theme, magazine, blog, article directory, article submission, writer, author, publication, html, bootstrap">
-  <meta name="author" content="Sempy Themes">
-
-  <!-- Favicons
-      ================================================== -->
-  <link rel="shortcut icon" href="/static/newsup/img/favicon.ico" type="image/x-icon">
-
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="Thomas">
   <!-- Bootstrap
       ================================================== -->
   <link href="{{ static_url('newsup/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-
-  <!-- Animate
-      ================================================== -->
   <link href="{{ static_url('newsup/css/effect2.css') }}" rel='stylesheet' type='text/css' />
   <link href="{{ static_url('newsup/css/animate.css') }}" rel='stylesheet' type='text/css' />
 
@@ -35,46 +27,33 @@
   <link href="{{ static_url('newsup/css/owl.carousel.css') }}" media="screen" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/owl.theme.css') }}" media="screen" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/owl.transitions.css') }}" media="screen" rel="stylesheet" type="text/css" />
-
-  <!-- Custom Css
-      ================================================== -->
   <link href="{{ static_url('newsup/css/rs-wp-v1.2.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/jquery.rs.selectbox.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('css/style.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/responsive.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('css/self.css') }}" rel="stylesheet" type="text/css" />
 
-  <!-- Custom Fonts
-      ================================================== -->
   <link href="{{ static_url('newsup/fonts/stylesheet.css') }}" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.1.11.1.js') }}"></script>
-
+  <script type="text/javascript" src="{{ static_url('js/jquery-3.1.0.min.js') }}"></script>
+  <style>
+    select{
+      width: 95px;
+      height: 40px;
+      background-color: #f6fafd;
+    }
+  </style>
 </head>
-<style media="screen">
-  select{
-    width: 95px;
-    height: 40px;
-    background-color: #f6fafd;
-
-  }
-</style>
-
 <body>
-
   <!--- Wrapper -->
   <section id="wrapper" class="clearfix">
-
     <!--- Header -->
     <header>
-
       <!-- socialbar -->
       {% module Template("newsup/block-socialbar.html", is_login=is_login, is_ops=is_ops) %}
       <!-- /socialbar -->
-
       <!-- menubar -->
       {% module Template("newsup/block-menubar.html", is_login=is_login, is_ops=is_ops, league_info=league_info) %}
       <!-- /menubar -->
-
     </header>
     <!--- End Header -->
 
@@ -248,21 +227,12 @@
   <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap.min.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap-tagsinput.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('newsup/js/jqBootstrapValidation.js') }}"></script>
-
-  <!-- WoW Js -->
-  <script type="text/javascript" src="{{ static_url('newsup/js/wow.min.js') }}"></script>
-
-  <!-- Add Fancybox -->
-  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/jquery.fancybox.js') }}"></script>
-  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/helpers/jquery.fancybox-media.js') }}"></script>
-
   <!-- Owl Slider Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/jquery.cityselect.js') }}"></script>
   <!-- Custome Selectbox Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
-  <script src="{{ static_url('js/vue-2.1.4.js') }}" type="text/javascript"></script>
   <script>
     $(function(){
 
@@ -270,141 +240,174 @@
              return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
           };
 
-          var preAllow = true;   // when ajax not completed, cannot do the next request
           var limit = 6;//每页显示数
           var currentPage = 0;//当前页
           var total_page = 0;//总页数
-          function query(pageNum) {
-            $.get("{{api_domain}}/api/articles-pagination?filter=league&league_id={{ league_info['_id'] }}&status=publish&category={{ category_id }}&page=1&limit="+limit+"",function(data,status){
-                  // console.log(data);
-                  data_obj = JSON.parse(data);
-                  data = data_obj.rs;
-                  currentPage = 1;
-              var pageData = data.data;
-                  total_page = data.total_page;//总页
-              // num = ajaxobj.length;
-              for (var i in pageData) {
-                var inner_html = '<article class="col-sm-12 rst-catpost">';
-                inner_html += '<div class="rst-postpic">';
-                inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i]._id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
-                inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
-                inner_html += '</div>';
-                inner_html += '<div class="rst-postinfo">';
-                inner_html += '<a class="rst-postpic-cat" href="#"><span>';
-                  for (var j in pageData[i].categories){
-                    inner_html += pageData[i].categories[j].title + '&nbsp;';
-                  }
-                inner_html += '</span></a>';
-                inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i]._id +'">'+ pageData[i].title +'</a></h6>'
-                inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].publish_time) +'</time>';
-                inner_html += '<p>'+ pageData[i].subtitle +'</p>';
-                inner_html += '</div>';
-                inner_html += '<div class="clear"></div>';
-                inner_html += '</article>';
-
-                $('#articleBox').append(inner_html);
-                // member_num += 1;
-              };
-            if(total_page>5){
-                for (var k=1;k<=5;k++){
-                  var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
-                  $(".pageBox").append(inner_html);
-                };
-              }else if(total_page<=5){
-                for (var k=1;k<=total_page;k++){
-                  var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
-                  $(".pageBox").append(inner_html);
-                };
-              }
-              $("#num1").addClass("current");
-              preAllow = true;
-            });
-          };
 
           function gotoPage(pageNum) {
-            $.get("{{api_domain}}/api/articles-pagination?filter=league&league_id={{ league_info['_id'] }}&status=publish&category={{ category_id }}&page="+pageNum+"&limit="+limit+"",function(data,status){
-                  //  console.log(data);
-                  data_obj = JSON.parse(data);
-                  data = data_obj.rs;
-                  currentPage = pageNum;
-              var pageData = data.data;
-                  total_page = data.total_page;//总页
-              $('#articleBox').html("");
+            // console.log("123");
+             if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE9.0"){
+                save();
+                function getXMLHttpRequest() {
+                   var xhr;
+                   if(window.ActiveXObject) {
+                            xhr= new ActiveXObject("Microsoft.XMLHTTP");
+                   }else if (window.XMLHttpRequest) {
+                            xhr= new XMLHttpRequest();
+                   }else {
+                            xhr= null;
+                   }
+                   return xhr;
+                 }
 
-              for (var i in pageData) {
-                var inner_html = '<article class="col-sm-12 rst-catpost">';
-                inner_html += '<div class="rst-postpic">';
-                inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i]._id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
-                inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
-                inner_html += '</div>';
-                inner_html += '<div class="rst-postinfo">';
-                inner_html += '<a class="rst-postpic-cat" href="#"><span>';
-                  for (var j in pageData[i].categories){
-                    inner_html += pageData[i].categories[j].title + '&nbsp;';
-                  }
-                inner_html += '</span></a>';
-                inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i]._id +'">'+ pageData[i].title +'</a></h6>'
-                inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].publish_time) +'</time>';
-                inner_html += '<p>'+ pageData[i].subtitle +'</p>';
-                inner_html += '</div>';
-                inner_html += '<div class="clear"></div>';
-                inner_html += '</article>';
+                function save() {
+                   var xhr = getXMLHttpRequest();
+                   console.log(xhr)
+                   xhr.open("get","{{api_domain}}/api/articles-pagination?filter=league&league_id={{ league_info['_id'] }}&status=publish&category={{ category_id }}&page="+pageNum+"&limit="+limit,true);
+                   xhr.send(null);
+                   console.log(xhr);
+                   xhr.onreadystatechange= function() {
+                        if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+                              // console.log(xhr.responseText);
+                              var data = JSON.parse(xhr.responseText);
+                              var data = data.rs;
+                                  currentPage = pageNum;
+                              var pageData = data.data;
+                                  total_page = data.total_page;//总页
+                            $('#articleBox').html("");
 
-                $('#articleBox').append(inner_html);
-                // member_num += 1;
-              };
+                            for (var i in pageData) {
+                              var inner_html = '<article class="col-sm-12 rst-catpost">';
+                              inner_html += '<div class="rst-postpic">';
+                              inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i]._id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
+                              inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
+                              inner_html += '</div>';
+                              inner_html += '<div class="rst-postinfo">';
+                              inner_html += '<a class="rst-postpic-cat" href="#"><span>';
+                                for (var j in pageData[i].categories){
+                                  inner_html += pageData[i].categories[j].title + '&nbsp;';
+                                }
+                              inner_html += '</span></a>';
+                              inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i]._id +'">'+ pageData[i].title +'</a></h6>'
+                              inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].publish_time) +'</time>';
+                              inner_html += '<p>'+ pageData[i].subtitle +'</p>';
+                              inner_html += '</div>';
+                              inner_html += '<div class="clear"></div>';
+                              inner_html += '</article>';
 
-              pageNext = parseInt((currentPage-1)/5) + 1;
+                              $('#articleBox').append(inner_html);
+                              // member_num += 1;
+                            };
 
-                start = (pageNext-1)*5+1;
-                end = pageNext*5;
-                if(end > total_page){
-                  end = total_page;
-                }
+                              pageNext = parseInt((currentPage-1)/5) + 1;
 
-                $(".pageBox").html("");
-                for (var k=start;k<=end;k++){
-                  var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+                              start = (pageNext-1)*5+1;
+                              end = pageNext*5;
+                              if(end > total_page){
+                                end = total_page;
+                              }
 
-                  $(".pageBox").append(inner_html);
-                };
-                 $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+                              $(".pageBox").html("");
+                              for (var k=start;k<=end;k++){
+                                var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+
+                                $(".pageBox").append(inner_html);
+                              };
+                               $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+                        }
+                   };
+                 };
+             };
+            $.ajax({
+              type: "GET",
+              url: "{{api_domain}}/api/articles-pagination?filter=league&league_id={{ league_info['_id'] }}&status=publish&category={{ category_id }}&page="+pageNum+"&limit="+limit,
+              contentType: 'application/json',
+              cache:false,
+              dataType:'json',
+              success: function(data, status, xhr) {
+                        // console.log(data_obj);
+                    var data = data.rs;
+                        currentPage = pageNum;
+                    var pageData = data.data;
+                        total_page = data.total_page;//总页
+                  $('#articleBox').html("");
+
+                  for (var i in pageData) {
+                    var inner_html = '<article class="col-sm-12 rst-catpost">';
+                    inner_html += '<div class="rst-postpic">';
+                    inner_html += '<a href="/portal/newsup/item-detail?id='+ pageData[i]._id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
+                    inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
+                    inner_html += '</div>';
+                    inner_html += '<div class="rst-postinfo">';
+                    inner_html += '<a class="rst-postpic-cat" href="#"><span>';
+                      for (var j in pageData[i].categories){
+                        inner_html += pageData[i].categories[j].title + '&nbsp;';
+                      }
+                    inner_html += '</span></a>';
+                    inner_html += '<h6><a href="/portal/newsup/item-detail?id='+ pageData[i]._id +'">'+ pageData[i].title +'</a></h6>'
+                    inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].publish_time) +'</time>';
+                    inner_html += '<p>'+ pageData[i].subtitle +'</p>';
+                    inner_html += '</div>';
+                    inner_html += '<div class="clear"></div>';
+                    inner_html += '</article>';
+
+                    $('#articleBox').append(inner_html);
+                    // member_num += 1;
+                  };
+
+                    pageNext = parseInt((currentPage-1)/5) + 1;
+
+                    start = (pageNext-1)*5+1;
+                    end = pageNext*5;
+                    if(end > total_page){
+                      end = total_page;
+                    }
+
+                    $(".pageBox").html("");
+                    for (var k=start;k<=end;k++){
+                      var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+
+                      $(".pageBox").append(inner_html);
+                    };
+                     $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+
+                  },
+
+              });
+            }
 
 
-            });
 
-          };
+          gotoPage("1");
+          $(document).on('click','.pageBox > a',function(){
+            var num = $(this).text();
+            gotoPage(num);
+            //  $(this).addClass("current").siblings().removeClass("current");
+          })
 
-            query();
-            $(document).on('click','.pageBox > a',function(){
-              var num = $(this).text();
-              gotoPage(num);
-              //  $(this).addClass("current").siblings().removeClass("current");
-            })
+          $("#prev").on("click",function(){
+              if(currentPage<=1){
 
-            $("#prev").on("click",function(){
-                if(currentPage<=1){
+              }else{
+                  gotoPage(--currentPage);
+                  // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+              }
+          });
 
-                }else{
-                    gotoPage(--currentPage);
-                    // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
-                }
-            });
+          $("#next").on("click",function(){
+              if(currentPage>=total_page){
 
-            $("#next").on("click",function(){
-                if(currentPage>=total_page){
+              }else{
+                  gotoPage(++currentPage);
+                  // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+              }
+          });
 
-                }else{
-                    gotoPage(++currentPage);
-                    // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
-                }
-            });
-
-        $("#categorySearchText").val("关键词");
-        $("#categorySearchBtn").on('click',function(){
-          var q = $("#categorySearchText").val();
-          location.href="/portal/newsup/category-search?q="+q+"&id={{category_id}}";
-        });
+          $("#categorySearchText").val("关键词");
+          $("#categorySearchBtn").on('click',function(){
+            var q = $("#categorySearchText").val();
+            location.href="/portal/newsup/category-search?q="+q+"&id={{category_id}}";
+          });
 
       });
   </script>

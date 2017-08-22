@@ -330,6 +330,8 @@ class NewsupMediaHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         products = data['rs']
+        for product in products:
+            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
 
         # journey(旅游资讯)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
@@ -373,6 +375,8 @@ class NewsupMediaHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         multimedias = data['rs']
+        for multimedia in multimedias:
+            multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -754,6 +758,8 @@ class NewsupCategoryHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         products = data['rs']
+        for product in products:
+            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
 
         # journey(旅游资讯)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
@@ -796,6 +802,8 @@ class NewsupCategoryHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         multimedias = data['rs']
+        for multimedia in multimedias:
+            multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -812,6 +820,7 @@ class NewsupCategoryHandler(BaseHandler):
                 is_login=is_login,
                 is_ops=is_ops,
                 league_info=league_info,
+                LEAGUE_ID = LEAGUE_ID,
                 sceneries=sceneries,
                 products=products,
                 journeies=journeies,
@@ -911,6 +920,8 @@ class NewsupCategorySearchHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         multimedias = data['rs']
+        for multimedia in multimedias:
+            multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -988,6 +999,8 @@ class NewsupFranchisesHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         products = data['rs']
+        for product in products:
+            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
 
         # journey(旅游资讯)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
@@ -1034,6 +1047,8 @@ class NewsupFranchisesHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         multimedias = data['rs']
+        for multimedia in multimedias:
+            multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -1169,6 +1184,8 @@ class NewsupFranchiseDetailHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         multimedias = data['rs']
+        for multimedia in multimedias:
+            multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
 
         self.render('newsup/franchise-detail.html',
                 is_login=is_login,
@@ -1317,6 +1334,8 @@ class NewsupSearchResultHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         multimedias = data['rs']
+        for multimedia in multimedias:
+            multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -1341,3 +1360,35 @@ class NewsupSearchResultHandler(BaseHandler):
                 multimedias=multimedias,
                 league_id=LEAGUE_ID,
                 api_domain=API_DOMAIN)
+
+
+# ajax 访问数据API
+class ApiArticlesXHR(AuthorizationHandler):
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def get(self, vendor_id):
+        logging.info("got vendor_id %r in uri", vendor_id)
+        category_id = self.get_argument("category", "")
+        logging.debug("get category_id=[%r]", category_id)
+        page = self.get_argument("page", 1)
+        logging.debug("get page=[%r] from argument", page)
+        limit = self.get_argument("limit", 20)
+        logging.debug("get limit=[%r] from argument", limit)
+
+        access_token = self.get_access_token()
+
+        params = {"filter":league, "league_id":LEAGUE_ID, "status":"publish","category":category_id, "page":page, "limit":limit}
+        url = url_concat(API_DOMAIN + "/api/articles-pagination", params)
+        http_client = HTTPClient()
+        headers = {"Authorization":"Bearer " + access_token}
+        response = http_client.fetch(url, method="GET", headers=headers)
+        logging.info("got response.body %r", response.body)
+        data = json_decode(response.body)
+        rs = data['rs']
+        articles = rs['data']
+
+        for article in articles:
+            # 下单时间，timestamp -> %m月%d 星期%w
+            article['create_time'] = timestamp_datetime(float(article['create_time']))
+
+        self.write(JSON.dumps(rs, default=json_util.default))
+        self.finish()

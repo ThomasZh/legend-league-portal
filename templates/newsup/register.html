@@ -194,6 +194,9 @@
   <script type="text/javascript" src="{{ static_url('js/jquery.validate.min.js') }}"></script>
 
   <script type="text/javascript">
+  $(function(){
+      $.support.cors = true;
+
     function SmsVerifyCode() {
       var wait = 300; // 5分钟
       function time(t) {
@@ -536,41 +539,42 @@
           var json = JSON.stringify(data);
           console.log(json);
 
-          $.ajax({
-            type: "PUT",
-            url: "{{api_domain}}/api/auth/pwds",
-            headers: {
-              "Authorization": "Bearer eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
-            },
-            data: json,
-            dataType: "json",
-            contentType: 'application/json',
-            success: function(data, status, xhr) {
-              console.log(data);
-              if (data.err_code == 200) {
-                $('.lostpwd-form-main-message').addClass('show error').html('密码已经重置，请重新登录!');
-              } else if (data.err_code == 408) {
-                $('.lostpwd-form-main-message').addClass('error').html('验证码已经超时, 请重新申请');
-              } else if (data.err_code == 409) {
-                $('.lostpwd-form-main-message').addClass('error').html('验证码错误, 请重新输入');
-              } else if (data.err_code == 404) {
-                $('.lostpwd-form-main-message').addClass('error').html('手机号错误, 请确认手机号码');
-              } else {
-                $('.lostpwd-form-main-message').addClass('error').html('网络异常,刷新重试');
+            $.ajax({
+              type: "PUT",
+              url: "{{api_domain}}/api/auth/pwds",
+              headers: {
+                "Authorization": "Bearer eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
+              },
+              data: json,
+              dataType: "json",
+              contentType: 'application/json',
+              success: function(data, status, xhr) {
+                console.log(data);
+                if (data.err_code == 200) {
+                  $('.lostpwd-form-main-message').addClass('show error').html('密码已经重置，请重新登录!');
+                } else if (data.err_code == 408) {
+                  $('.lostpwd-form-main-message').addClass('error').html('验证码已经超时, 请重新申请');
+                } else if (data.err_code == 409) {
+                  $('.lostpwd-form-main-message').addClass('error').html('验证码错误, 请重新输入');
+                } else if (data.err_code == 404) {
+                  $('.lostpwd-form-main-message').addClass('error').html('手机号错误, 请确认手机号码');
+                } else {
+                  $('.lostpwd-form-main-message').addClass('error').html('网络异常,刷新重试');
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("XMLHttpRequest.status: " + XMLHttpRequest.status);
+
+              },
+              complete: function(XMLHttpRequest, textStatus) {
+                this; // 调用本次AJAX请求时传递的options参数
               }
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-              console.log("XMLHttpRequest.status: " + XMLHttpRequest.status);
+            });
+          }
+        });
 
-            },
-            complete: function(XMLHttpRequest, textStatus) {
-              this; // 调用本次AJAX请求时传递的options参数
-            }
-          });
-        }
       });
-
-    });
+    })
   </script>
 
 </body>

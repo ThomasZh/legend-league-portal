@@ -274,53 +274,78 @@
         var currentPage = 0;//当前页
         var total_page = 0;//总页数
         var type = encodeURI(encodeURI("{{ franchise_type }}"));
-        function query(pageNum,prov,city) {
-          $.get("{{api_domain}}/api/leagues/{{ league_info['_id'] }}/clubs?franchise_type="+type+"&province="+encodeURI(encodeURI(prov))+"&city="+encodeURI(encodeURI(city))+"&page="+pageNum+"&limit="+limit+"",function(data,status){
-                //  console.log(data);
-                 data_obj = JSON.parse(data);
-                 data = data_obj.rs;
-                currentPage = 1;
-            var pageData = data.data;
-                total_page = data.total_page;//总页
-            // num = ajaxobj.length;
-            for (var i in pageData) {
-              var inner_html = '<article class="col-sm-12 rst-catpost">';
-              inner_html += '<div class="rst-postpic">';
-              inner_html += '<a href="/portal/newsup/franchise-detail?id='+ pageData[i].club_id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
-              inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
-              inner_html += '</div>';
-              inner_html += '<div class="rst-postinfo">';
-              inner_html += '<a class="rst-postpic-cat" href="#"><span>';
-
-              inner_html += '</span></a>';
-              inner_html += '<h6><a href="/portal/newsup/franchise-detail?id='+ pageData[i].club_id +'">'+ pageData[i].name +'</a></h6>'
-              inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].create_time) +'</time>';
-              inner_html += '<p>'+ pageData[i].introduction +'</p>';
-              inner_html += '</div>';
-              inner_html += '<div class="clear"></div>';
-              inner_html += '</article>';
-
-              $('#articleBox').append(inner_html);
-              // member_num += 1;
-            };
-          if(total_page>5){
-              for (var k=1;k<=5;k++){
-                var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
-                $(".pageBox").append(inner_html);
-              };
-            }else if(total_page<=5){
-              for (var k=1;k<=total_page;k++){
-                var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
-                $(".pageBox").append(inner_html);
-              };
-            }
-            $("#num1").addClass("current");
-            preAllow = true;
-          });
-        };
 
         function gotoPage(pageNum,prov,city) {
-          $.get("{{api_domain}}/api/leagues/{{ league_info['_id'] }}/clubs?franchise_type="+type+"&province="+encodeURI(encodeURI(prov))+"&city="+encodeURI(encodeURI(city))+"&page="+pageNum+"&limit="+limit+"",function(data,status){
+          if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE9.0"){
+             save();
+             function getXMLHttpRequest() {
+                var xhr;
+                if(window.ActiveXObject) {
+                         xhr= new ActiveXObject("Microsoft.XMLHTTP");
+                }else if (window.XMLHttpRequest) {
+                         xhr= new XMLHttpRequest();
+                }else {
+                         xhr= null;
+                }
+                return xhr;
+              }
+
+             function save() {
+                var xhr = getXMLHttpRequest();
+                xhr.open("get","{{api_domain}}/api/leagues/{{ league_info['_id'] }}/clubs?franchise_type="+type+"&province="+encodeURI(encodeURI(prov))+"&city="+encodeURI(encodeURI(city))+"&page="+pageNum+"&limit="+limit,true);
+                xhr.send(null);
+                xhr.onreadystatechange= function() {
+                     if(xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+                           // console.log(data);
+                           data_obj = JSON.parse(xhr.responseText);
+                           data = data_obj.rs;
+                           currentPage = pageNum;
+                       var pageData = data.data;
+                           total_page = data.total_page;//总页
+                       $('#articleBox').html("");
+
+                       for (var i in pageData) {
+                         var inner_html = '<article class="col-sm-12 rst-catpost">';
+                         inner_html += '<div class="rst-postpic">';
+                         inner_html += '<a href="/portal/newsup/franchise-detail?id='+ pageData[i].club_id + '"><img src="'+ pageData[i].img +'!370x370" alt="" /></a>';
+                         inner_html += '<a class="rst-postpic-cat" href="#"><span>fitness</span></a>';
+                         inner_html += '</div>';
+                         inner_html += '<div class="rst-postinfo">';
+                         inner_html += '<a class="rst-postpic-cat" href="#"><span>';
+
+                         inner_html += '</span></a>';
+                         inner_html += '<h6><a href="/portal/newsup/franchise-detail?id='+ pageData[i].club_id +'">'+ pageData[i].name +'</a></h6>'
+                         inner_html += '<time><i class="fa fa-clock-o"></i>'+ getLocalTime(pageData[i].create_time) +'</time>';
+                         inner_html += '<p>'+ pageData[i].introduction +'</p>';
+                         inner_html += '</div>';
+                         inner_html += '<div class="clear"></div>';
+                         inner_html += '</article>';
+
+                         $('#articleBox').append(inner_html);
+                         // member_num += 1;
+                       };
+
+                       pageNext = parseInt((currentPage-1)/5) + 1;
+
+                         start = (pageNext-1)*5+1;
+                         end = pageNext*5;
+                         if(end > total_page){
+                           end = total_page;
+                         }
+
+                         $(".pageBox").html("");
+                         for (var k=start;k<=end;k++){
+                           var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+
+                           $(".pageBox").append(inner_html);
+                         };
+                          $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+
+                     }
+                };
+              };
+          };
+          $.get("{{api_domain}}/api/leagues/{{ league_info['_id'] }}/clubs?franchise_type="+type+"&province="+encodeURI(encodeURI(prov))+"&city="+encodeURI(encodeURI(city))+"&page="+pageNum+"&limit="+limit,function(data,status){
                 // console.log(data);
                 data_obj = JSON.parse(data);
                 data = data_obj.rs;
@@ -371,7 +396,7 @@
 
         };
 
-          query(1,"","");
+          gotoPage(1,"","");
           $(document).on('click','.pageBox > a',function(){
             var num = $(this).text();
             var prov = $("#prov option:selected").text();
