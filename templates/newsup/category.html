@@ -77,6 +77,13 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
+            {% if len(sceneries) == 0 %}
+            <div class="rst-catbanner-post">
+              <div class="rst-mainslide">
+                <img src="http://tripc2c-club-title.b0.upaiyun.com/default/water-001.jpg!800x370" alt="" />
+              </div>
+            </div>
+            {% end %}
             {% for i in range(len(sceneries)) %}
             {% if i == 0 %}
             <div class="rst-catbanner-post">
