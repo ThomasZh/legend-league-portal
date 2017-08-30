@@ -138,7 +138,7 @@
                     <div class="form-group">
                       <div id="type" style="padding: 11px 0px;width: 100%;margin: 0 0 30px;">
                         <select class="prov" id="franchise_type">
-                              <option value="类型" style="color:red;">加盟类型</option>
+                              <!-- <option value="类型" style="color:red;">加盟类型</option> -->
                               <option value="分销商">景区</option>
                               <option value="供应商">供应商</option>
                             </select>
@@ -205,7 +205,7 @@
                     <div class="form-group">
                       <div id="type" style="padding: 11px 0px;width: 100%;margin: 0 0 30px;">
                         <select class="prov" id="franchise_type">
-                              <option value="类型">加盟类型</option>
+                              <!-- <option value="类型">加盟类型</option> -->
                               <option value="分销商">景区</option>
                               <option value="供应商">供应商</option>
                             </select>
@@ -517,10 +517,10 @@
       url: "{{ static_url('js/city.min.js') }}",
       nodata: "none",
       required: false,
-    {% if franchise %}
+      {% if franchise %}
       prov: "{{ franchise['club']['province'] }}",
       city: "{{ franchise['club']['city'] }}"
-    {% end %}
+      {% end %}
     });
     {% if franchise and franchise['_status'] == 10 %}
       $("#franchise_type").val("{{ franchise['club']['franchise_type'] }}")
