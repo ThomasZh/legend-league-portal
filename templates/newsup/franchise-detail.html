@@ -209,10 +209,12 @@
             {% module Template("newsup/block-widget-social.html") %}
             <!-- end widget social -->
 
-            <aside class="widget widget_hot_news">
-              <div id="container" style="width:100%; height:300px">
-
-              </div>
+            <aside class="widget widget_hot_news" style="position:relative;">
+              <div id="container" style="width:100%; height:300px"></div>
+              <div class ='panel' style="position:absolute; top:0;right:0;">
+                 <input id = 'input' value = '点击地图显示地址/输入地址显示位置' onfocus = 'this.value=""' style="width:20rem;"></input>
+                 <div id = 'message'></div>
+               </div>
             </aside>
 
 
@@ -344,7 +346,47 @@
               offset:new AMap.Pixel(0,-28),  //窗体坐标
               size:new AMap.Size(200,50)   //窗体大小
           })
-          info.open(map,marker.getPosition())
+              info.open(map,marker.getPosition())
+
+          //地址与经纬度的获取转换
+          AMap.service('AMap.Geocoder',function(){//回调函数
+              //实例化Geocoder
+              geocoder = new AMap.Geocoder({
+                  city: "010"//城市，默认：“全国”
+              });
+              var marker = new AMap.Marker({
+                   map:map,
+                   bubble:true
+              })
+              //TODO: 使用geocoder 对象完成相关功能
+              //逆地理编码
+              var input = document.getElementById('input');
+              var message = document.getElementById('message');
+              map.on('click',function(e){
+                  marker.setPosition(e.lnglat);
+                  geocoder.getAddress(e.lnglat,function(status,result){
+                    if(status=='complete'){
+                       input.value = result.regeocode.formattedAddress
+                       message.innerHTML = ''
+                    }else{
+                       message.innerHTML = '无法获取地址'
+                    }
+                  })
+              })
+
+              input.onchange = function(e){
+                  var address = input.value;
+                  geocoder.getLocation(address,function(status,result){
+                    if(status=='complete'&&result.geocodes.length){
+                      marker.setPosition(result.geocodes[0].location);
+                      map.setCenter(marker.getPosition())
+                      message.innerHTML = ''
+                    }else{
+                      message.innerHTML = '无法获取位置'
+                    }
+                  })
+              }
+          })
       }
   </script>
 
