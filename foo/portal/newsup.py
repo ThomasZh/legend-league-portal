@@ -1095,12 +1095,15 @@ class NewsupFranchiseDetailHandler(BaseHandler):
         league_info = self.get_league_info()
 
         # franchise
-        url = API_DOMAIN+"/api/clubs/"+franchise_id
+        params = {"filter":"detail"}
+        url = url_concat(API_DOMAIN+"/api/clubs/"+franchise_id,params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got article response %r", response.body)
         data = json_decode(response.body)
         franchise = data['rs']
+        geo_x = franchise['gcj02']['x']
+        geo_y = franchise['gcj02']['y']
         if not franchise.has_key('paragraphs'):
             franchise['paragraphs'] = ''
         if not franchise.has_key('franchise_type'):
@@ -1199,7 +1202,9 @@ class NewsupFranchiseDetailHandler(BaseHandler):
                 requires=requires,
                 multimedias=multimedias,
                 api_domain=API_DOMAIN,
-                lastest_comments=lastest_comments)
+                lastest_comments=lastest_comments,
+                geo_x = geo_x,
+                geo_y = geo_y)
 
 
 class NewsupApplyFranchiseHandler(AuthorizationHandler):

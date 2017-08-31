@@ -209,15 +209,6 @@
             {% module Template("newsup/block-widget-social.html") %}
             <!-- end widget social -->
 
-            <aside class="widget widget_hot_news" style="position:relative;">
-              <div id="container" style="width:100%; height:300px"></div>
-              <div class ='panel' style="position:absolute; top:0;right:0;">
-                 <input id = 'input' value = '点击地图显示地址/输入地址显示位置' onfocus = 'this.value=""' style="width:20rem;"></input>
-                 <div id = 'message'></div>
-               </div>
-            </aside>
-
-
             {% if is_login %}
             <aside class="widget widget_hot_news">
               {% if franchise['franchise_type'] == '景区' %}
@@ -247,6 +238,11 @@
               </div>
             </aside>
             {% end %}
+
+            <aside class="widget widget_contactus" style="padding-top:20px;">
+              <div id="main" style="width:100%; height:300px">
+              </div>
+            </aside>
 
             <!-- begin widget popular -->
             {% module Template("newsup/block-widget-popular.html", populars=products, news=journeies) %}
@@ -282,9 +278,16 @@
             {% module Template("newsup/block-widget-video.html") %}
             <!-- end widget video -->
 
-            {% module Template("newsup/block-widget-contactclub.html", club=franchise) %}
-
-
+            <aside class="widget widget_contactus">
+              <h3>联系我们</h3>
+              <div id="container" style="width:100%; height:300px"></div>
+              <ul style="margin-top: 20px;">
+                <li><a href="#"><span><i class="fa fa-user-o"></i> {{ franchise['name'] }} </span></a></li>
+                <li><a href="#"><span><i class="fa fa-location-arrow"></i> {{ franchise['province'] }}{{ franchise['city'] }} </span></a></li>
+                <li><a href="tel:{{ franchise['phone'] }}"><span><i class="fa fa-mobile"></i> {{ franchise['phone'] }}</span></a></li>
+                <li><a href="mailto:{{ franchise['email'] }}"><span><i class="fa fa-paper-plane"></i> {{ franchise['email'] }}</span></a></li>
+              </ul>
+            </aside>
           </div>
           <!-- End Content Sidebar -->
         </div>
@@ -321,32 +324,33 @@
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/json2.js') }}"></script>
   <script src="{{ static_url('js/vue-2.1.4.js') }}" type="text/javascript"></script>
+  <script src="{{ static_url('js/echarts.min.js') }}" type="text/javascript"></script>
   <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=f72ae6a1b42b43ed29f1c7981f57bc53&callback=init"></script>
 
   <script>
       function init(){
 
           var map = new AMap.Map('container', {
-              center: [116.48865,40.00286],
-              zoom: 14,
+              center: [{{ geo_x }},{{ geo_y }}],
+              zoom: 11,
               // mapStyle:'macaron'
           });
               // map.setMapStyle('amap://styles/macaron');  //设置地图显示样式
               map.plugin(["AMap.ToolBar"], function() {
-                  map.addControl(new AMap.ToolBar());  //设置标尺(添加各种类)
+                  // map.addControl(new AMap.ToolBar());  //设置标尺(添加各种类)
               });
 
-          var marker = new AMap.Marker({
-              position: [116.48865,40.00286]
-          });
-              marker.setMap(map);   //设置位置标记
-
-          var info = new AMap.InfoWindow({
-              content:"这里是金辉大厦11层",
-              offset:new AMap.Pixel(0,-28),  //窗体坐标
-              size:new AMap.Size(200,50)   //窗体大小
-          })
-              info.open(map,marker.getPosition())
+          // var marker = new AMap.Marker({
+          //     position: [116.48865,40.00286]
+          // });
+          //     marker.setMap(map);   //设置位置标记
+          //
+          // var info = new AMap.InfoWindow({
+          //     content:"这里是金辉大厦11层",
+          //     offset:new AMap.Pixel(0,-28),  //窗体坐标
+          //     size:new AMap.Size(200,50)   //窗体大小
+          // })
+          //     info.open(map,marker.getPosition())
 
           //地址与经纬度的获取转换
           AMap.service('AMap.Geocoder',function(){//回调函数
@@ -374,20 +378,99 @@
                   })
               })
 
-              input.onchange = function(e){
-                  var address = input.value;
-                  geocoder.getLocation(address,function(status,result){
-                    if(status=='complete'&&result.geocodes.length){
-                      marker.setPosition(result.geocodes[0].location);
-                      map.setCenter(marker.getPosition())
-                      message.innerHTML = ''
-                    }else{
-                      message.innerHTML = '无法获取位置'
-                    }
-                  })
+              // input.onchange = function(e){
+              //     var address = input.value;
+              //     geocoder.getLocation(address,function(status,result){
+              //       if(status=='complete'&&result.geocodes.length){
+              //         marker.setPosition(result.geocodes[0].location);
+              //         map.setCenter(marker.getPosition())
+              //         message.innerHTML = ''
+              //       }else{
+              //         message.innerHTML = '无法获取位置'
+              //       }
+              //     })
+              // }
+          });
+      };
+
+  $(function(){
+      // 图表
+      option = {
+          title : {
+              text: '景区客流量',
+              subtext: '一周内'
+          },
+          tooltip : {
+              trigger: 'axis'
+          },
+          legend: {
+              data:['客流量']
+          },
+          toolbox: {
+              show : true,
+              feature : {
+                  dataView : {show: false, readOnly: false},
+                  magicType : {show: true, type: ['line', 'bar']},
+                  restore : {show: true},
+                  saveAsImage : {show: false}
               }
-          })
-      }
+          },
+          calculable : true,
+          xAxis : [
+              {
+                  type : 'category',
+                  data : ['周一','周二','周三','周四','周五','周六','周日']
+              }
+          ],
+          yAxis : [
+              {
+                  type : 'value'
+              }
+          ],
+          series : [
+              {
+                  name:'客流量',
+                  type:'bar',
+                  itemStyle: {
+                      normal: {
+                          color:'#39e6ac',
+                          // function(params) {
+                          //     var colorList = ['#9BCA63',
+                          //      '#FAD860','#F3A43B','#60C0DD','#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                          //     ];
+                          //     return colorList[params.dataIndex]
+                          // },
+                        }
+                  },
+                  lineStyle:{
+                    normal: {
+                        color:'#F3A43B',
+                      }
+                  },
+                  data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6],
+                  markPoint : {
+                      data : [
+                          {type : 'max', name: '最大值'},
+                          {type : 'min', name: '最小值'}
+                      ]
+                  },
+                  markLine : {
+                    lineStyle:{
+                      normal: {
+                          color:'#F3A43B',
+                        }
+                    },
+                      data : [
+                          {type : 'average', name: '平均值'}
+                      ]
+                  }
+              },
+          ]
+      };
+      // 使用刚指定的配置项和数据显示图表。
+      var myChart = echarts.init(document.getElementById('main'));
+          myChart.setOption(option);
+    });
   </script>
 
   <script>
