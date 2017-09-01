@@ -542,6 +542,8 @@ class NewsupItemDetailHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         products = data['rs']
+        for product in products:
+            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
 
         # journey(旅游资讯)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
@@ -878,6 +880,8 @@ class NewsupCategorySearchHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         products = data['rs']
+        for product in products:
+            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
 
         # journey(旅游资讯)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
@@ -1130,6 +1134,8 @@ class NewsupFranchiseDetailHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         products = data['rs']
+        for product in products:
+            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
 
         # journey(旅游资讯)
         params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
@@ -1297,6 +1303,8 @@ class NewsupSearchResultHandler(BaseHandler):
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         products = data['rs']
+        for product in products:
+            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
 
         # journey(旅游资讯)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
