@@ -278,7 +278,26 @@
             {% module Template("newsup/block-widget-video.html") %}
             <!-- end widget video -->
             <aside class="widget widget_contactus" style="padding-top:20px;">
-              <div id="parking-main" style="width:100%; height:300px">
+              <h3>停车场情况</h3>
+              <div class="x_content">
+                {% for parking in parkings %}
+                  <div class="widget_summary">
+                      <div class="w_left w_25">
+                          <span>{{ parking['name'] }}</span>
+                      </div>
+                      <div class="w_center w_55">
+                          <div class="progress">
+                              <div class="progress-bar bg-green" role="progressbar" style="width: {{ parking['percent'] }}%;">
+                                  <span class="sr-only">20% Complete</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="w_right w_20">
+                          <span>{{ parking['max_space'] }}个</span>
+                      </div>
+                      <div class="clearfix"></div>
+                  </div>
+              {% end %}
               </div>
             </aside>
             <aside class="widget widget_contactus">
@@ -499,73 +518,6 @@
               this; // 调用本次AJAX请求时传递的options参数
             }
           });
-
-          $.ajax({
-            type: "GET",
-            url: "{{ api_domain }}/api/clubs/{{ franchise['_id'] }}/car-parks",
-            dataType: "json",
-            headers: {"Authorization":"Bearer {{access_token}}"},
-            contentType: 'application/json',
-            success: function(data, status, xhr) {
-              console.log(data);
-              if(data.err_code == 200){
-                dataObj = data.rs;
-                var xArr = [];
-                var yArr = [];
-                // var data_time = [];
-                for (var i = 0;i < dataObj.length;i++ ){
-                    xArr.push(dataObj[i]['remain_space']);
-                    yArr.push(dataObj[i]['name']);
-                    // data_time.push(switchTime(dataObj[i]['timestamp']));
-                }
-                // 停车场图表
-              parking_option = {
-                    title: {
-                      text: '停车位情况',
-                      subtext: ''
-                    },
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    // legend: {
-                    //   data: ['剩余车位']
-                    // },
-                    toolbox: {
-                      show: true,
-                        feature: {
-                        saveAsImage: {
-                          show: false
-                        }
-                      }
-                    },
-                    calculable: true,
-                    xAxis: [{
-                        type: 'value',
-                        boundaryGap: [0, 0.01],
-                        name:"车位数"
-                      }],
-                    yAxis: [{
-                        type: 'category',
-                        data: yArr,
-                        name:"停车场"
-                    }],
-                    series: [{
-                        name: '剩余车位',
-                        type: 'bar',
-                        data: xArr
-                    }]
-                }
-                var parking_myChart = echarts.init(document.getElementById('parking-main'), theme);
-                    parking_myChart.setOption(parking_option);
-              }
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-            },
-            complete: function(XMLHttpRequest, textStatus) {
-              this; // 调用本次AJAX请求时传递的options参数
-            }
-          });
-
         };
       getJson();
     });
@@ -610,38 +562,42 @@
         sendComment: function() {
           var _self = this;
           var comment = $("#comment").val();
-          console.log(comment);
           var data = {
             "comment": comment,
           };
           var json = JSON.stringify(data);
           console.log(json);
           function hide(){
-            $(".send-ok-message").hide(1000);
+            $(".send-ok-message").hide();
           }
-          $.ajax({
-            type: "POST",
-            url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/comment",
-            dataType: "json",
-            data: json,
-            contentType: 'application/json',
-            headers: {"Authorization":"Bearer {{access_token}}"},
-            success: function(data, status, xhr) {
-              // console.log(data);
-              $("#comment").val("");
-              $(".send-ok-message").html("评论成功！");
-              setTimeout(hide,3000);
-              $("#comment").val("");
-              _self.queryNewComment();
+          if(comment == ""){
+            $(".send-ok-message").css({"color":"red"}).html("留言不能为空");
+            setTimeout(hide,2000);
+            return;
+          }else{
+            $.ajax({
+              type: "POST",
+              url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/comment",
+              dataType: "json",
+              data: json,
+              contentType: 'application/json',
+              headers: {"Authorization":"Bearer {{access_token}}"},
+              success: function(data, status, xhr) {
+                // console.log(data);
+                $("#comment").val("");
+                $(".send-ok-message").html("评论成功！");
+                setTimeout(hide,3000);
+                _self.queryNewComment();
 
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-              console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
-            },
-            complete: function(XMLHttpRequest, textStatus) {
-              this; // 调用本次AJAX请求时传递的options参数
-            }
-          });
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+              },
+              complete: function(XMLHttpRequest, textStatus) {
+                this; // 调用本次AJAX请求时传递的options参数
+              }
+            });
+          }
         },
         loadMore: function() {
           var _self = this;

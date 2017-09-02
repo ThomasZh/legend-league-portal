@@ -1117,6 +1117,16 @@ class NewsupFranchiseDetailHandler(BaseHandler):
         else:
             franchise['create_time'] = timestamp_friendly_date(0)
 
+        url = API_DOMAIN+"/api/clubs/"+franchise_id+"/car-parks"
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        parkings = data['rs']
+        for parking in parkings:
+            parking['percent'] = int(float(parking['remain_space']) / float(parking['max_space'])*100)
+            logging.info("got parking %r", parking['percent'])
+
         # update read_num
         read_num = franchise['read_num']
         url = API_DOMAIN+"/api/articles/"+franchise_id+"/read"
@@ -1209,6 +1219,7 @@ class NewsupFranchiseDetailHandler(BaseHandler):
                 multimedias=multimedias,
                 api_domain=API_DOMAIN,
                 lastest_comments=lastest_comments,
+                parkings=parkings,
                 geo_x = geo_x,
                 geo_y = geo_y)
 
