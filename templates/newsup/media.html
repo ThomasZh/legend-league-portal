@@ -89,13 +89,21 @@
           <div class="col-xs-12">
             <div class="rst-catbanner-post">
               <div class="rst-mainslide">
-                <img src="http://tripc2c-club-title.b0.upaiyun.com/default/multimedia.jpg!800x370" alt="" />
+                {% for i in range(len(multimedias)) %}
+                {% if i==0 %}
+                <div class="rst-postpic">
+                  <a href="#"><img src="{{ multimedias[i]['url'] }}!800x370" alt="" /></a>
+                </div>
+                {% end %}
+                {% end %}
+<!--
+                <img src="http://tripc2c-club-title.b0.upaiyun.com/default/multimedia.jpg!800x370" alt="" /> -->
               </div>
             </div>
 
             <div class="rst-catbanner-listpost">
               {% for i in range(len(multimedias)) %}
-              {% if i < 4 %}
+              {% if i<5 and i>0 %}
               <div class="rst-postpic">
                 <a href="#"><img src="{{ multimedias[i]['url'] }}!370x370" alt="" /></a>
               </div>
