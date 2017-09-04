@@ -1005,7 +1005,7 @@ h2 {
   display: inline-block;
   margin-right: 4.25%;
   text-align: center;
-  width: 30%;
+  width: 20%;
 }
 .widget.widget_social > a i,
 .widget.widget_social > a b,
@@ -1014,21 +1014,22 @@ h2 {
   display: block;
 }
 .widget.widget_social > a i {
-  font-size: 32px;
-  padding: 37px 0;
+  font-size: 20px;
+  padding: 4px 0;
 }
 .widget.widget_social > a b {
-  border-top: 1px solid #e8ecf0;
+  /*border-top: 1px solid #e8ecf0;*/
   color: #1b1b1b;
   font-family: "HelveticaNeueCyrRoman";
   font-size: 18px;
   padding: 6px 0 0;
 }
 .widget.widget_social > a span {
+	border-bottom: 1px solid #e8ecf0;
   color: #b9b9b9;
   font-family: "HelveticaNeueCyrRoman";
   font-size: 13px;
-  padding: 0 0 9px;
+  padding: 9px 0 9px;
 }
 .widget.widget_social > a i {
   font-size: 32px;

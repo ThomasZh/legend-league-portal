@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Basic Page Needs
+    ================================================== -->
+  <meta charset="utf-8">
+  <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ league_info['name'] }}</title>
+  <meta name="author" content="Thomas">
+
+
+  <!-- Bootstrap
+        ================================================== -->
+  <link rel="stylesheet" href="{{ static_url('weui/lib/weui.css') }}">
+  <link href="{{ static_url('newsup/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+
+  <!-- Animate
+        ================================================== -->
+  <link href="{{ static_url('newsup/css/effect2.css') }}" rel='stylesheet' type='text/css' />
+  <link href="{{ static_url('newsup/css/animate.css') }}" rel='stylesheet' type='text/css' />
+
+  <!-- Add fancyBox CSS files -->
+  <link href="{{ static_url('newsup/js/fancybox/jquery.fancybox.css') }}" media="screen" rel="stylesheet" type="text/css" />
+
+  <!-- Owl Slider CSS -->
+  <link href="{{ static_url('newsup/css/owl.carousel.css') }}" media="screen" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/owl.theme.css') }}" media="screen" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/owl.transitions.css') }}" media="screen" rel="stylesheet" type="text/css" />
+  <!-- Custom Css
+        ================================================== -->
+  <link href="{{ static_url('newsup/css/rs-wp-v1.2.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/jquery.rs.selectbox.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('css/style.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/responsive.css') }}" rel="stylesheet" type="text/css" />
+
+  <!-- Custom Fonts
+        ================================================== -->
+  <link href="{{ static_url('newsup/fonts/stylesheet.css') }}" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.1.11.1.js') }}"></script>
+
+</head>
+
+<body>
+
+  <!--- Wrapper -->
+  <section id="wrapper" class="clearfix">
+
+    <!--- Header -->
+    <header>
+
+      <!-- socialbar -->
+      {% module Template("newsup/block-socialbar.html", is_login=is_login, is_ops=is_ops) %}
+      <!-- /socialbar -->
+
+      <!-- menubar -->
+      {% module Template("newsup/block-menubar.html", is_login=is_login, is_ops=is_ops, league_info=league_info) %}
+      <!-- /menubar -->
+
+    </header>
+    <!--- End Header -->
+
+    <!-- Page Breadcrumb -->
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="rst-breadcrumb">
+            <a href="/portal/newsup/index"><span>首页</span></a>
+            <span>></span>
+            <a href="/portal/newsup/ticket-cart"><span>门票购物车</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Page Breadcrumb -->
+
+    <!-- Section Register -->
+    <section id="rst-account-page">
+      <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+              <div class="rst-section-title rst-section-title-box">
+                <h4>景区门票购物车</h4>
+              </div>
+              <!-- end section title -->
+              <div class="rst-accsetting">
+                <!-- 购物车 -->
+                <table class="table table-bordered">
+    							<thead>
+    								<tr>
+                      <th>选择</th>
+    									<th>门票类型</th>
+    									<th>门票价格(元)</th>
+    								</tr>
+    							</thead>
+    							<tbody>
+    								<tr>
+                      <td><input type="checkbox" name="ticket-name"></td>
+    									<td>通票</td>
+    									<td>220</td>
+    								</tr>
+                    <tr>
+                      <td><input type="checkbox" name="ticket-name"></td>
+    									<td>桂园票</td>
+    									<td>50</td>
+    								</tr>
+                    <tr>
+                      <td><input type="checkbox" name="ticket-name"></td>
+    									<td>过山车票</td>
+    									<td>100</td>
+    								</tr>
+    							</tbody>
+    						</table>
+              </div>
+              <div class="rst-accsetting widget widget_social">
+                <a href="#">
+  								<span>总计:366元</span>
+                  <button class="rst-pagebutton rst-pagebutton2" type="button" style="width: 100%;background-color: #39e6ac;color: white;">下单</button>
+  							</a>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Section Register -->
+
+    <!-- Footer -->
+    {% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
+    <!-- End Footer -->
+
+  </section>
+  <!--- End Wrapper -->
+  <!-- Bootstrap Js Compiled Plugins -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap.min.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap-tagsinput.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('newsup/js/jqBootstrapValidation.js') }}"></script>
+  <!-- WoW Js -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/wow.min.js') }}"></script>
+  <!-- Add Fancybox -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/jquery.fancybox.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/helpers/jquery.fancybox-media.js') }}"></script>
+  <!-- Owl Slider Js -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
+  <!-- Custome Selectbox Js -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
+
+  <script type="text/javascript">
+
+  </script>
+</body>
+</html>

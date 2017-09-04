@@ -1223,6 +1223,82 @@ class NewsupFranchiseDetailHandler(BaseHandler):
                 geo_x = geo_x,
                 geo_y = geo_y)
 
+# 票列表 
+class NewsupTicketListHandler(AuthorizationHandler):
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def get(self):
+        logging.info(self.request)
+
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
+
+        headers = {"Authorization":"Bearer "+access_token}
+        url = API_DOMAIN+"/api/myinfo?filter=login"
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET", headers=headers)
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        user = data['rs']
+
+        self.render('newsup/ticket-list.html',
+                is_login=is_login,
+                is_ops=is_ops,
+                league_info=league_info,
+                user = user,
+                access_token=access_token,
+                api_domain=API_DOMAIN,
+                upyun_domain=UPYUN_DOMAIN,
+                upyun_notify_url=UPYUN_NOTIFY_URL,
+                upyun_form_api_secret=UPYUN_FORM_API_SECRET,
+                upyun_bucket=UPYUN_BUCKET)
+
+# 订票购物车
+class NewsupTicketCartHandler(AuthorizationHandler):
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def get(self):
+        logging.info(self.request)
+
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
+
+        headers = {"Authorization":"Bearer "+access_token}
+        url = API_DOMAIN+"/api/myinfo?filter=login"
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET", headers=headers)
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        user = data['rs']
+
+        self.render('newsup/ticket-cart.html',
+                is_login=is_login,
+                is_ops=is_ops,
+                league_info=league_info,
+                user = user,
+                access_token=access_token,
+                api_domain=API_DOMAIN,
+                upyun_domain=UPYUN_DOMAIN,
+                upyun_notify_url=UPYUN_NOTIFY_URL,
+                upyun_form_api_secret=UPYUN_FORM_API_SECRET,
+                upyun_bucket=UPYUN_BUCKET)
+
 
 class NewsupApplyFranchiseHandler(AuthorizationHandler):
     @tornado.web.authenticated  # if no session, redirect to login page

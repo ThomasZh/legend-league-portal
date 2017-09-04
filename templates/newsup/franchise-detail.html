@@ -8,16 +8,7 @@
   <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ league_info['name'] }}</title>
-  <meta name="description" content="NewsUp is a multi-page oriented template perfect for NewsUp - News, Magazine, Blogging and Article Directory.">
-  <meta name="keywords" content="news theme, magazine, blog, article directory, article submission, writer, author, publication, html, bootstrap">
-  <meta name="author" content="Sempy Themes">
-
-  <!-- Favicons
-        ================================================== -->
-  <link rel="shortcut icon" href="/static/newsup/img/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="/static/newsup/img/apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/static/newsup/img/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/static/newsup/img/apple-touch-icon-114x114.png">
+  <meta name="author" content="Thomas">
 
   <!-- Bootstrap
         ================================================== -->
@@ -144,6 +135,11 @@
 
               <!-- like button -->
               <div class="row">
+                <div class="col-xs-12">
+                  <nav class="wp-pagenavi">
+                    <a id="loadMoreBtn" href="/portal/newsup/ticket-list" class="rst-loadmore" style="cursor:pointer;">购买门票</a>
+                  </nav>
+                </div>
                 <div class="col-xs-12">
                   <nav class="wp-pagenavi">
                     <a v-on:click="sendLike" class="rst-item-likes like_icon"><i id="like-icons" class="fa fa-3x fa-heart-o"></i></a>
