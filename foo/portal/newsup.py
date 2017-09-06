@@ -1223,7 +1223,7 @@ class NewsupFranchiseDetailHandler(BaseHandler):
                 geo_x = geo_x,
                 geo_y = geo_y)
 
-# 票列表 
+# 票列表
 class NewsupTicketListHandler(AuthorizationHandler):
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
@@ -1240,26 +1240,25 @@ class NewsupTicketListHandler(AuthorizationHandler):
 
         # league(联盟信息)
         league_info = self.get_league_info()
+        club_id = self.get_argument('club_id','')
+        logging.info('got club_id',club_id)
 
-        headers = {"Authorization":"Bearer "+access_token}
-        url = API_DOMAIN+"/api/myinfo?filter=login"
+        params = {"filter":"club", "club_id":club_id, "page":1, "limit":5}
+        url = url_concat(API_DOMAIN+"/api/items", params)
         http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET", headers=headers)
+        response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
-        user = data['rs']
+        tickets = data['rs']['data']
 
         self.render('newsup/ticket-list.html',
                 is_login=is_login,
                 is_ops=is_ops,
+                club_id=club_id,
                 league_info=league_info,
-                user = user,
                 access_token=access_token,
                 api_domain=API_DOMAIN,
-                upyun_domain=UPYUN_DOMAIN,
-                upyun_notify_url=UPYUN_NOTIFY_URL,
-                upyun_form_api_secret=UPYUN_FORM_API_SECRET,
-                upyun_bucket=UPYUN_BUCKET)
+                tickets=tickets)
 
 # 订票购物车
 class NewsupTicketCartHandler(AuthorizationHandler):
@@ -1278,26 +1277,151 @@ class NewsupTicketCartHandler(AuthorizationHandler):
 
         # league(联盟信息)
         league_info = self.get_league_info()
-
-        headers = {"Authorization":"Bearer "+access_token}
-        url = API_DOMAIN+"/api/myinfo?filter=login"
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET", headers=headers)
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        user = data['rs']
+        club_id = self.get_argument('club_id','')
+        logging.info('got club_id',club_id)
 
         self.render('newsup/ticket-cart.html',
                 is_login=is_login,
                 is_ops=is_ops,
+                club_id=club_id,
                 league_info=league_info,
-                user = user,
+                access_token=access_token,
+                api_domain=API_DOMAIN)
+
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def post(self):
+        club_id = self.get_argument('club_id','')
+        logging.info('got club_id',club_id)
+
+        access_token = self.get_secure_cookie("access_token")
+        #购物车商品json
+        items = self.get_body_argument("items", [])
+        logging.info("got items %r", items)
+        items = JSON.loads(items)
+        logging.info("got items %r", items)
+
+        item_id = "00000000000000000000000000000000"
+        _timestamp = int(time.time())
+
+        order_id = str(uuid.uuid1()).replace('-', '')
+        # 创建订单索引
+        order_index = {
+            "_id": order_id,
+            "order_type": "buy_item",
+            "club_id": club_id,
+            "item_type": "items",
+            "item_id": item_id,
+            "item_name": "", # 由服务器端填写第一个商品名称
+            "distributor_type": "item",
+            "items":items,
+            "shipping_cost":0, # 由服务器端计算运费
+            "billing_required":0,
+            "distributor_id": "00000000000000000000000000000000",
+            "create_time": _timestamp,
+            "pay_type": "wxpay",
+            "pay_status": 10,
+            "quantity": 0, # 由服务器端计算商品数量
+            "amount": 0, # 由服务器端计算商品合计
+            "actual_payment": 0, # 由服务器端计算实际支付金额
+            "base_fees": [], #基本服务
+            "ext_fees": [], # 附加服务项编号数组
+            "insurances": [], # 保险选项,数组
+            "vouchers": [], #代金券选项,数组
+            "points_used": 0, # 使用积分数量
+            "bonus_points": 0, # 购买商品获得奖励积分
+            "booking_time": _timestamp,
+        }
+        pay_id = self.create_order(order_index)
+
+        # 清空购物车
+        headers = {"Authorization":"Bearer "+access_token}
+        url = API_DOMAIN + "/api/clubs/"+ club_id +"/cart/items"
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="DELETE", headers=headers)
+        logging.info("update item response.body=[%r]", response.body)
+
+        self.redirect("/portal/newsup/ticket-balance?club_id="+club_id+"&order_id="+order_id)
+
+
+# 订票结算页
+class NewsupTicketBalanceHandler(AuthorizationHandler):
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def get(self):
+        logging.info(self.request)
+
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
+        club_id = self.get_argument('club_id','')
+        logging.info('got club_id',club_id)
+        order_id = self.get_argument('order_id','')
+        logging.info('got order_id',order_id)
+
+        order = self.get_symbol_object(order_id)
+        logging.info("GET order %r", order)
+        order['create_time'] = timestamp_datetime(float(order['create_time']))
+
+        items = order['items']
+        _product_description = items[0]['title']
+        logging.info("GET items %r", items)
+
+        self.render('newsup/ticket-balance.html',
+                is_login=is_login,
+                is_ops=is_ops,
+                club_id=club_id,
+                league_info=league_info,
                 access_token=access_token,
                 api_domain=API_DOMAIN,
-                upyun_domain=UPYUN_DOMAIN,
-                upyun_notify_url=UPYUN_NOTIFY_URL,
-                upyun_form_api_secret=UPYUN_FORM_API_SECRET,
-                upyun_bucket=UPYUN_BUCKET)
+                order = order,
+                items=items)
+
+
+# 订单列表页
+class NewsupOrderListHandler(AuthorizationHandler):
+    @tornado.web.authenticated  # if no session, redirect to login page
+    def get(self):
+        logging.info(self.request)
+
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
+        club_id = self.get_argument('club_id','')
+        logging.info('got club_id',club_id)
+        order_id = self.get_argument('order_id','')
+        logging.info('got order_id',order_id)
+
+        order = self.get_order_index(order_id)
+        logging.info("GET order %r", order)
+        order['create_time'] = timestamp_datetime(float(order['create_time']))
+
+        items = order['items']
+        _product_description = items[0]['title']
+        logging.info("GET items %r", items)
+
+        self.render('newsup/order-list.html',
+                is_login=is_login,
+                is_ops=is_ops,
+                club_id=club_id,
+                league_info=league_info,
+                access_token=access_token,
+                api_domain=API_DOMAIN,
+                order = order)
 
 
 class NewsupApplyFranchiseHandler(AuthorizationHandler):

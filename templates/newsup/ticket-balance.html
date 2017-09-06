@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ league_info['name'] }}</title>
+  <title>{{ league_info['name'] }} | 结算</title>
   <meta name="author" content="Thomas">
 
 
@@ -49,36 +49,6 @@
     #rst-account-page table td{
         text-align: center;
     }
-    #t-banner{
-      position: absolute;
-     top: 40px;
-     right: 30%;
-     border-radius: 50%;
-     width: 20px;
-     height: 20px;
-     background-color: #7edc9d;
-     color: white;
-    }
-    .add{
-      margin-left: -4px;
-      width: 24px;
-      height: 26px;
-      display: inline-block;
-      border: 1px solid #bfb8b8;
-      border-left: none;
-      line-height: 23px;
-      cursor: pointer;
-    }
-    .reduce{
-      margin-right: -4px;
-      width: 24px;
-      height: 26px;
-      display: inline-block;
-      border: 1px solid #bfb8b8;
-      border-right: none;
-      line-height: 23px;
-      cursor: pointer;
-    }
   </style>
 </head>
 
@@ -108,7 +78,7 @@
           <div class="rst-breadcrumb">
             <a href="/portal/newsup/index"><span>首页</span></a>
             <span>></span>
-            <a href="/portal/newsup/ticket-list"><span>景区门票</span></a>
+            <a href="#"><span>门票结算</span></a>
           </div>
         </div>
       </div>
@@ -121,7 +91,7 @@
         <div class="row">
             <div class="col-sm-8">
               <div class="rst-section-title rst-section-title-box">
-                <h4>景区门票价格</h4>
+                <h4>票务清单</h4>
               </div>
               <!-- end section title -->
               <div class="rst-accsetting">
@@ -132,33 +102,40 @@
     									<th>门票类型</th>
     									<th>门票价格(元)</th>
                       <th>数量</th>
-    									<th>操作</th>
     								</tr>
     							</thead>
     							<tbody id="t-tbody">
-                    {% for ticket in tickets %}
+                    {% for item in items %}
     								<tr>
-    									<td>{{ ticket['title'] }}</td>
-    									<td>{{ float(ticket['amount'])/100 }}</td>
-                      <td>
-                        <span class="reduce">-</span>
-                        <input style="width:50px;text-align:center;" class="count-input" type="text" value="1"/>
-                        <span class="add">+</span>
-                      </td>
-    									<td><a href="javascript:;" class="add-ticket" data-id="{{ ticket['_id'] }}">订购</a></td>
+    									<td>{{ item['title'] }}</td>
+    									<td>{{ float(item['amount'])/100 }}</td>
+                      <td><span>{{ item['quantity'] }}</span></td>
     								</tr>
                     {% end %}
     							</tbody>
     						</table>
     						<!-- End Tables -->
               </div>
-              <div class="rst-accsetting widget widget_social">
-                <a href="/portal/newsup/ticket-cart?club_id={{ club_id }}" target="_blank" style="position:relative;">
-  								<span>票数</span>
-                  <i class="fa fa-shopping-cart"></i>
-                  <p id="t-banner" style="display:none;"></p>
+
+              <div class="rst-section-title rst-section-title-box">
+                <h4>支付方式</h4>
+              </div>
+              <div class="col-xs-12">
+                <input type="radio" id="wechat" name="paybtn" checked="">&nbsp&nbsp<label for="wechat">微信</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="radio" id="alipay" name="paybtn">&nbsp&nbsp<label for="alipay">支付宝</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="radio" id="unionpay" name="paybtn">&nbsp&nbsp<label for="unionpay">银联</label>
+							</div>
+
+              <div class="rst-section-title rst-section-title-box" style="top:30px;">
+                <h4>结算</h4>
+              </div>
+              <div class="rst-accsetting widget widget_social" style="top:30px;">
+                <a href="/portal/newsup/order-list?club_id={{ club_id }}&order_id={{ order['_id'] }}">
+  								<span id="priceTotal">总计:&nbsp{{ float(order['amount'])/100 }}&nbsp元</span>
+                  <button class="rst-pagebutton rst-pagebutton2" type="button" style="width: 100%;background-color: #39e6ac;color: white;">立即支付</button>
   							</a>
               </div>
+
             </div>
         </div>
       </div>

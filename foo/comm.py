@@ -317,3 +317,60 @@ class AuthorizationHandler(BaseHandler):
                         except:
                             return None
                     return None
+
+
+    def create_order(self, order_index):
+        access_token = self.get_access_token()
+        headers = {"Authorization":"Bearer "+access_token}
+
+        url = API_DOMAIN + "/api/orders"
+        http_client = HTTPClient()
+        _json = json_encode(order_index)
+        response = http_client.fetch(url, method="POST", headers=headers, body=_json)
+        logging.info("create order=[%r] response=[%r]", order_index, response.body)
+        data = json_decode(response.body)
+        rs = data['rs']
+        return rs['pay_id']
+
+
+    def get_access_token(self):
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            logging.info("got access_token=[%r] from cookie", access_token)
+        else:
+            try:
+                access_token = self.request.headers['Authorization']
+                access_token = access_token.replace('Bearer ','')
+            except:
+                logging.warn("got access_token=[null] from headers")
+                self.set_status(401) # Unauthorized
+                self.write('Unauthorized')
+                self.finish()
+                return
+            logging.info("got access_token=[%r] from headers", access_token)
+        return access_token
+
+
+    def get_symbol_object(self, _id):
+        url = API_DOMAIN + "/api/symbols/" + _id
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got symbol_object=[%r]", response.body)
+        data = json_decode(response.body)
+        if data['err_code'] == 404:
+            return None
+        symbol_object = data['rs']
+        return symbol_object
+
+
+    def get_order_index(self, order_id):
+        headers = {"Authorization":"Bearer "+"00000000000000000000000000000000"}
+
+        url = API_DOMAIN + "/api/orders/" + order_id
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET", headers=headers)
+        logging.info("got order_index response.body=[%r]", response.body)
+        data = json_decode(response.body)
+        if data['err_code'] == 404:
+            return None
+        return data['rs']

@@ -7,20 +7,15 @@
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ league_info['name'] }}</title>
+  <title>{{ league_info['name'] }} | 订单列表</title>
   <meta name="author" content="Thomas">
 
-
-  <!-- Bootstrap
-        ================================================== -->
   <link rel="stylesheet" href="{{ static_url('weui/lib/weui.css') }}">
   <link href="{{ static_url('newsup/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
 
-  <!-- Animate
-        ================================================== -->
   <link href="{{ static_url('newsup/css/effect2.css') }}" rel='stylesheet' type='text/css' />
   <link href="{{ static_url('newsup/css/animate.css') }}" rel='stylesheet' type='text/css' />
 
@@ -31,15 +26,11 @@
   <link href="{{ static_url('newsup/css/owl.carousel.css') }}" media="screen" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/owl.theme.css') }}" media="screen" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/owl.transitions.css') }}" media="screen" rel="stylesheet" type="text/css" />
-  <!-- Custom Css
-        ================================================== -->
   <link href="{{ static_url('newsup/css/rs-wp-v1.2.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/jquery.rs.selectbox.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('css/style.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/responsive.css') }}" rel="stylesheet" type="text/css" />
 
-  <!-- Custom Fonts
-        ================================================== -->
   <link href="{{ static_url('newsup/fonts/stylesheet.css') }}" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.1.11.1.js') }}"></script>
   <style media="screen">
@@ -48,36 +39,6 @@
     }
     #rst-account-page table td{
         text-align: center;
-    }
-    #t-banner{
-      position: absolute;
-     top: 40px;
-     right: 30%;
-     border-radius: 50%;
-     width: 20px;
-     height: 20px;
-     background-color: #7edc9d;
-     color: white;
-    }
-    .add{
-      margin-left: -4px;
-      width: 24px;
-      height: 26px;
-      display: inline-block;
-      border: 1px solid #bfb8b8;
-      border-left: none;
-      line-height: 23px;
-      cursor: pointer;
-    }
-    .reduce{
-      margin-right: -4px;
-      width: 24px;
-      height: 26px;
-      display: inline-block;
-      border: 1px solid #bfb8b8;
-      border-right: none;
-      line-height: 23px;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -108,7 +69,7 @@
           <div class="rst-breadcrumb">
             <a href="/portal/newsup/index"><span>首页</span></a>
             <span>></span>
-            <a href="/portal/newsup/ticket-list"><span>景区门票</span></a>
+            <a href="#"><span>订单列表</span></a>
           </div>
         </div>
       </div>
@@ -121,44 +82,46 @@
         <div class="row">
             <div class="col-sm-8">
               <div class="rst-section-title rst-section-title-box">
-                <h4>景区门票价格</h4>
+                <h4>订单列表</h4>
               </div>
               <!-- end section title -->
               <div class="rst-accsetting">
                     <!-- Tables -->
+                <div class="order-title" style="height: 40px;">
+                  <span style="padding-right: 40px;">时间:{{ order['create_time'] }}</span>
+                  <span>订单号:{{ order['pay_id'] }}</span>
+                </div>
     						<table class="table table-bordered" id="t-table">
-    							<thead>
-    								<tr>
-    									<th>门票类型</th>
-    									<th>门票价格(元)</th>
-                      <th>数量</th>
-    									<th>操作</th>
-    								</tr>
-    							</thead>
-    							<tbody id="t-tbody">
-                    {% for ticket in tickets %}
-    								<tr>
-    									<td>{{ ticket['title'] }}</td>
-    									<td>{{ float(ticket['amount'])/100 }}</td>
-                      <td>
-                        <span class="reduce">-</span>
-                        <input style="width:50px;text-align:center;" class="count-input" type="text" value="1"/>
-                        <span class="add">+</span>
-                      </td>
-    									<td><a href="javascript:;" class="add-ticket" data-id="{{ ticket['_id'] }}">订购</a></td>
-    								</tr>
-                    {% end %}
-    							</tbody>
+      							<thead>
+      								<tr>
+                        <th>门票类型</th>
+      									<th>门票价格(元)</th>
+                        <th>数量(张)</th>
+                        <th>支付方式</th>
+                        <th>状态</th>
+      								</tr>
+      							</thead>
+      							<tbody id="t-tbody">
+                      {% for item in order['items'] %}
+      								<tr>
+      									<td>{{ item['title'] }}</td>
+      									<td>{{ float(item['amount'])/100 }}</td>
+                        <td><span>{{ item['quantity'] }}</span></td>
+                        <td>微信支付</td>
+                        <td style="color:#39e6ac;">支付成功</td>
+      								</tr>
+                      {% end %}
+      							</tbody>
     						</table>
     						<!-- End Tables -->
               </div>
-              <div class="rst-accsetting widget widget_social">
-                <a href="/portal/newsup/ticket-cart?club_id={{ club_id }}" target="_blank" style="position:relative;">
-  								<span>票数</span>
-                  <i class="fa fa-shopping-cart"></i>
-                  <p id="t-banner" style="display:none;"></p>
+              <div class="rst-accsetting widget widget_social" style="top:30px;">
+                <a href="javascript:;">
+  								<span id="priceTotal">{{ float(order['amount'])/100 }}&nbsp元</span>
+                  <button class="rst-pagebutton rst-pagebutton2" type="button" style="width: 100%;background-color: #39e6ac;color: white;">总计</button>
   							</a>
               </div>
+
             </div>
         </div>
       </div>

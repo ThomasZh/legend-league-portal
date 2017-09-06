@@ -2146,7 +2146,7 @@ h3 {
   margin: 10px 0 20px;
 }
 span.checkbox, span.radio {
-  background: url("images/icon/checkbox.png") no-repeat scroll 0 0;
+  background: url("../img/checkbox.png") no-repeat scroll 0 0;
   clear: left;
   display: block;
   float: left;

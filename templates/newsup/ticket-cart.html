@@ -7,13 +7,11 @@
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ league_info['name'] }}</title>
+  <title>{{ league_info['name'] }} | 购物车</title>
   <meta name="author" content="Thomas">
 
-
-  <!-- Bootstrap
-        ================================================== -->
-  <link rel="stylesheet" href="{{ static_url('weui/lib/weui.css') }}">
+  <link rel="stylesheet" href="{{ static_url('weui/css/weui.min.css') }}">
+  <link rel="stylesheet" href="{{ static_url('weui/css/jquery-weui.min.css') }}">
   <link href="{{ static_url('newsup/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ static_url('newsup/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -42,7 +40,36 @@
         ================================================== -->
   <link href="{{ static_url('newsup/fonts/stylesheet.css') }}" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.1.11.1.js') }}"></script>
-
+  <style media="screen">
+    #rst-account-page table th{
+        text-align: center;
+    }
+    #rst-account-page table td{
+        text-align: center;
+    }
+    .add{
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      border: 1px solid #bfb8b8;
+      border-left: none;
+      line-height: 22px;
+      cursor: pointer;
+    }
+    .reduce{
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      border: 1px solid #bfb8b8;
+      border-right: none;
+      line-height: 22px;
+      cursor: pointer;
+    }
+    .delete{
+      cursor: pointer;
+      color: red;
+    }
+  </style>
 </head>
 
 <body>
@@ -87,41 +114,34 @@
                 <h4>景区门票购物车</h4>
               </div>
               <!-- end section title -->
-              <div class="rst-accsetting">
-                <!-- 购物车 -->
-                <table class="table table-bordered">
-    							<thead>
-    								<tr>
-                      <th>选择</th>
-    									<th>门票类型</th>
-    									<th>门票价格(元)</th>
-    								</tr>
-    							</thead>
-    							<tbody>
-    								<tr>
-                      <td><input type="checkbox" name="ticket-name"></td>
-    									<td>通票</td>
-    									<td>220</td>
-    								</tr>
-                    <tr>
-                      <td><input type="checkbox" name="ticket-name"></td>
-    									<td>桂园票</td>
-    									<td>50</td>
-    								</tr>
-                    <tr>
-                      <td><input type="checkbox" name="ticket-name"></td>
-    									<td>过山车票</td>
-    									<td>100</td>
-    								</tr>
-    							</tbody>
-    						</table>
-              </div>
-              <div class="rst-accsetting widget widget_social">
-                <a href="#">
-  								<span>总计:366元</span>
-                  <button class="rst-pagebutton rst-pagebutton2" type="button" style="width: 100%;background-color: #39e6ac;color: white;">下单</button>
-  							</a>
-              </div>
+              <form id="t-form" action="/portal/newsup/ticket-cart?club_id={{ club_id }}" method="post">
+                <div class="rst-accsetting">
+                  <!-- 购物车 -->
+                  <table class="table table-bordered" id="cartTable">
+      							<thead>
+      								<tr>
+                        <th><label>
+                              <input class="check-all check" type="checkbox"/>&nbsp;&nbsp;全选</label>
+                        </th>
+      									<th>门票类型</th>
+      									<th>门票价格(元)</th>
+                        <th>数量(张)</th>
+                        <th>小计(元)</th>
+                        <th>操作</th>
+      								</tr>
+      							</thead>
+      							<tbody id="t-tbody">
+      							</tbody>
+      						</table>
+                </div>
+                <div class="rst-accsetting widget widget_social">
+                  <a href="javascript:;" id="sub-btn">
+    								<span id="priceTotal">¥&nbsp0.00元</span>
+                    <button class="rst-pagebutton rst-pagebutton2" type="button" style="width: 100%;background-color: #39e6ac;color: white;">去结算</button>
+    							</a>
+                </div>
+                <input type="hidden" name="items" id="items">
+              </form>
             </div>
         </div>
       </div>
@@ -148,9 +168,220 @@
   <!-- Custome Selectbox Js -->
   <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
   <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
-
+  <script src="{{ static_url('weui/js/jquery-weui.min.js') }}"></script>
   <script type="text/javascript">
+    $(function(){
+      // 获取购物车数据
+      var limit = 10;
+      function getTicketCart(pageNum){
+        $.ajax({
+            type:"GET",
+            url:"{{ api_domain }}/api/clubs/{{club_id}}/cart/items",
+            dataType:"json",
+            headers: {"Authorization":"Bearer {{access_token}}"},
+            contentType: 'application/json',
+            success:function(data,textStatus,jqXHR){
+                console.log(data);
+                var dataObj = data.rs.data;
+                var _html;
+                for(var i = 0;i<dataObj.length;i++){
+                  _html += '<tr>';
+                  _html +=  '<td><input class="check-one check" type="checkbox" data-pro-id = '+ dataObj[i]['item_id'] +' /></td>';
+                  _html +=  '<td class="goods"><span>'+dataObj[i]['title']+'</span></td>';
+                  _html +=  '<td class="price">'+parseFloat(dataObj[i]['amount'])/100+'</td>';
+                  _html +=  '<td class="count"><span class="reduce">-</span>';
+                  _html +=  '<input style="width:50px;text-align:center;" class="count-input" type="text" value="'+ dataObj[i]['quantity'] +'"/>';
+                  _html +=  '<span class="add">+</span></td>';
+                  _html +=  '<td class="subtotal">'+ dataObj[i]['quantity']*(parseFloat(dataObj[i]['amount'])/100) +'</td>';
+                  _html +=  '<td class="operation"><span class="delete" data-itemid="'+ dataObj[i]['_id'] +'">删除</span></td>';
+                  _html +=  '</tr>';
+                }
+                $("#t-tbody").append(_html);
+                // 选择操作
+                var table = document.getElementById('cartTable'); // 购物车表格
+                var checkAllInputs = document.getElementsByClassName('check-all') // 全选框
+                var selectInputs = $('.check');
+                var priceTotal = document.getElementById('priceTotal'); //总计
+                var tr = table.children[1].rows; //行
 
+                // 更新总数和总价格，已选浮层
+                  function getTotal() {
+                  		var seleted = 0;
+                  		var price = 0;
+                  		var HTMLstr = '';
+                  		for (var i = 0, len = tr.length; i < len; i++) {
+                  			if (tr[i].getElementsByTagName('input')[0].checked) {
+                  				tr[i].className = 'on';
+                  				seleted += parseInt(tr[i].getElementsByTagName('input')[1].value);
+                  				price += parseFloat(tr[i].cells[4].innerHTML);
+                  			}
+                  			else {
+                  				tr[i].className = '';
+                  			}
+                  		}
+                  		// selectedTotal.innerHTML = seleted;
+                  		priceTotal.innerHTML = '¥&nbsp'+price.toFixed(2)+'元';
+              	}
+                // 计算单行价格
+                  function getSubtotal(tr) {
+                      var cells = tr.cells;
+                      var price = cells[2]; //单价
+                      var subtotal = cells[4]; //小计td
+                      var countInput = tr.getElementsByTagName('input')[1]; //数目input
+                      var span = tr.getElementsByTagName('span')[1]; //-号
+                      //写入HTML
+                      subtotal.innerHTML = (parseInt(countInput.value) * parseFloat(price.innerHTML)).toFixed(2);
+                      //如果数目只有一个，把-号去掉
+                      if (countInput.value == 1) {
+                          span.innerHTML = '-';
+                      }else{
+                          span.innerHTML = '-';
+                      }
+                  };
+
+                  // 点击选择框
+
+                for(var i = 0; i < selectInputs.length; i++ ){
+                    selectInputs[i].onclick = function () {
+                        if (this.className.indexOf('check-all') >= 0) { //如果是全选，则吧所有的选择框选中
+                            for (var j = 0; j < selectInputs.length; j++) {
+                                selectInputs[j].checked = this.checked;
+                            }
+                        }
+                        if (!this.checked) { //只要有一个未勾选，则取消全选框的选中状态
+                            for (var i = 0; i < checkAllInputs.length; i++) {
+                                checkAllInputs[i].checked = false;
+                            }
+                        }
+                        getTotal();//选完更新总计
+                    }
+                }
+
+                //为每行元素添加事件
+                for (var i = 0; i < tr.length; i++) {
+                    //将点击事件绑定到tr元素
+                    tr[i].onclick = function (e) {
+                        var e = e || window.event;
+                        var el = e.target || e.srcElement; //通过事件对象的target属性获取触发元素
+                        var cls = el.className; //触发元素的class
+                        var countInout = this.getElementsByTagName('input')[1]; // 数目input
+                        var value = parseInt(countInout.value); //数目
+                        //通过判断触发元素的class确定用户点击了哪个元素
+                        switch (cls) {
+                            case 'add': //点击了加号
+                                var _this = this;
+                                var obj = _this.getElementsByTagName("td")[5].childNodes[0];
+                                var _id = obj.getAttribute('data-itemid');
+                                countInout.value = value + 1;
+                                var _json = JSON.stringify({"quantity":countInout.value});
+                                console.log(_json);
+                                $.ajax({
+                                  type: "PUT",
+                                  url: "{{ api_domain }}/api/clubs/{{ club_id }}/cart/items/"+_id,
+                                  data:_json,
+                                  headers: {"Authorization":"Bearer {{access_token}}"},
+                                  contentType: 'application/json',
+                                  success: function(data, status, xhr) {
+                                    console.log(data);
+                                  }
+                                });
+                                getSubtotal(this);
+                                break;
+                            case 'reduce': //点击了减号
+                                var _this = this;
+                                var obj = _this.getElementsByTagName("td")[5].childNodes[0];
+                                var _id = obj.getAttribute('data-itemid');
+                                if (value > 1) {
+                                    countInout.value = value - 1;
+                                    var _json = JSON.stringify({"quantity":countInout.value});
+                                    $.ajax({
+                                      type: "PUT",
+                                      url: "{{ api_domain }}/api/clubs/{{ club_id }}/cart/items/"+_id,
+                                      data:_json,
+                                      headers: {"Authorization":"Bearer {{access_token}}"},
+                                      contentType: 'application/json',
+                                      success: function(data, status, xhr) {
+                                        console.log(data);
+                                      }
+                                    });
+                                    getSubtotal(this);
+                                }
+                                break;
+                            case 'delete': //点击了删除
+                                var _this = this;
+                                var obj = _this.getElementsByTagName("td")[5].childNodes[0];
+                                var _id = obj.getAttribute('data-itemid');
+                                $.confirm("确定删除此票吗?", function() {
+                                    $.ajax({
+                                      type: "DELETE",
+                                      url: "{{ api_domain }}/api/clubs/{{ club_id }}/cart/items/"+_id,
+                                      headers: {"Authorization":"Bearer {{access_token}}"},
+                                      contentType: 'application/json',
+                                      success: function(data, status, xhr) {
+                                        console.log(data);
+                                        _this.parentNode.removeChild(_this);
+                                        getTotal();
+                                      }
+                                    });
+                                  }, function() {
+                                  //点击取消后的回调函数
+                                  });
+                                // var conf = confirm('确定删除此票吗？');
+                                // if (conf) {
+                                //
+                                // }
+                                break;
+                        }
+                        getTotal();
+                    }
+                    // 给数目输入框绑定keyup事件
+                    tr[i].getElementsByTagName('input')[1].onkeyup = function () {
+                        var val = parseInt(this.value);
+                        if (isNaN(val) || val <= 0) {
+                            val = 1;
+                        }
+                        if (this.value != val) {
+                            this.value = val;
+                        }
+                        getSubtotal(this.parentNode.parentNode); //更新小计
+                        getTotal(); //更新总数
+                    }
+                };
+
+                // 默认全选
+                checkAllInputs[0].checked = true;
+                checkAllInputs[0].onclick();
+
+
+                $("#sub-btn").on('click',function(){
+                  var items = [];
+                  // 组织json数据
+                  for(var i = 1;i<selectInputs.length;i++){
+                    // console.log(selectInputs[i].prop('checked'))
+                    if(selectInputs[i].checked){
+                      var item_id = selectInputs[i].getAttribute("data-pro-id");
+                      var spec_id =  "00000000000000000000000000000000";
+                      var _this = selectInputs[i];
+                      var quantity = $(_this).parent().next().next().next().children('.count-input').val();
+                      obj =  {"item_id":item_id,"spec_id":spec_id,"quantity":quantity};
+                      items.push(obj);
+                      $("#items").val(JSON.stringify(items))
+                    }
+                  }
+                  // console.log(items);
+                  if(items.length == 0){
+                    return;
+                  }else{
+                    $('#t-form').submit();
+                  }
+
+                })
+
+            }
+        })
+      };
+      getTicketCart(1);
+    })
   </script>
 </body>
 </html>
