@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Basic Page Needs
+    ================================================== -->
+  <meta charset="utf-8">
+  <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ league_info['name'] }}</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="Thomas">
+
+  <!-- Bootstrap
+    ================================================== -->
+  <link href="{{ static_url('newsup/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/bootstrap-tagsinput.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+
+  <!-- Animate
+    ================================================== -->
+  <link href="{{ static_url('newsup/css/effect2.css') }}" rel='stylesheet' type='text/css' />
+  <link href="{{ static_url('newsup/css/animate.css') }}" rel='stylesheet' type='text/css' />
+
+  <!-- Add fancyBox CSS files -->
+  <link href="{{ static_url('newsup/js/fancybox/jquery.fancybox.css') }}" media="screen" rel="stylesheet" type="text/css" />
+
+  <!-- Owl Slider CSS -->
+  <link href="{{ static_url('newsup/css/owl.carousel.css') }}" media="screen" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/owl.theme.css') }}" media="screen" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/owl.transitions.css') }}" media="screen" rel="stylesheet" type="text/css" />
+
+  <!-- Custom Css
+    ================================================== -->
+  <link href="{{ static_url('newsup/css/rs-wp-v1.2.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/jquery.rs.selectbox.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('css/style.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static_url('newsup/css/responsive.css') }}" rel="stylesheet" type="text/css" />
+
+  <!-- Custom Fonts
+    ================================================== -->
+  <!-- <link href="{{ static_url('newsup/fonts/stylesheet.css') }}" rel="stylesheet" type="text/css" /> -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.1.11.1.js') }}"></script>
+
+</head>
+
+<body>
+
+  <!--- Wrapper -->
+  <section id="wrapper" class="clearfix">
+
+    <!--- Header -->
+    <header>
+
+      <!-- socialbar -->
+      {% module Template("newsup/block-socialbar.html", is_login=is_login, is_ops=is_ops) %}
+      <!-- /socialbar -->
+
+      <!-- menubar -->
+      {% module Template("newsup/block-menubar.html", is_login=is_login, is_ops=is_ops, league_info=league_info) %}
+      <!-- /menubar -->
+
+    </header>
+    <!--- End Header -->
+
+    <!-- Home page Main Slider -->
+    <section id="rst-home-mainslider">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="rst-mainslider owl-carousel">
+              <div class="rst-mainslide">
+                <img src="http://tripc2c-club-title.b0.upaiyun.com/default/water-001.jpg!800x640" alt="" />
+                <div class="rst-boxinfo">
+                  <a href="/portal/newsup/franchise"><span>乐水游</span></a>
+                  <p><a href="#">2017最佳水上旅游景点</a></p>
+                </div>
+              </div>
+              <div class="rst-mainslide">
+                <img src="http://tripc2c-club-title.b0.upaiyun.com/default/water-002.jpg!800x640" alt="" />
+                <div class="rst-boxinfo">
+                  <a href="/portal/newsup/franchise"><span>乐水游</span></a>
+                  <p><a href="#">2017最佳水上旅游景点</a></p>
+                </div>
+              </div>
+              <div class="rst-mainslide">
+                <img src="http://tripc2c-club-title.b0.upaiyun.com/default/water-003.jpg!800x640" alt="" />
+                <div class="rst-boxinfo">
+                  <a href="/portal/newsup/franchise"><span>乐水游</span></a>
+                  <p><a href="#">2017最佳水上旅游景点</a></p>
+                </div>
+              </div>
+            </div>
+            <!-- end slider -->
+            <div class="rst-mainslider-posts">
+              <div class="rst-posttype">
+                <img src="http://tripc2c-club-title.b0.upaiyun.com/default/water-015.jpg!370x320" alt="" />
+                <div class="rst-boxinfo">
+                  <a href="/portal/newsup/franchise"><span>加入我们</span></a>
+                  <p><a href="/portal/newsup/franchise">申请成为景区</a></p>
+                </div>
+              </div>
+              <div class="rst-posttype">
+                <img src="http://tripc2c-club-title.b0.upaiyun.com/default/water-014.jpg!370x320" alt="" />
+                <div class="rst-boxinfo">
+                  <a href="/portal/newsup/franchise"><span>加入我们</span></a>
+                  <p><a href="/portal/newsup/franchise">申请成为供应商</a></p>
+                </div>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <!-- end posts -->
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Main Slider -->
+
+    <!-- Pageline -->
+    <div class="rst-pageline container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="rst-pageline-content">
+            <span>公告</span>
+            <div class="rst-pageline-slider owl-carousel" id="notice-board">
+              {% for notice in notices %}
+              <p>{{ notice['message'] }}</p>
+              {% end %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end pageline -->
+
+    <!-- Section Scenery -->
+    <section id="rst-life">
+      <div class="container">
+        <div class="row">
+          <div class="rst-section-title rst-section-title-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12">
+                  <h4>景区导览</h4>
+                  <div class="rst-section-title-short">
+                    <a id="sence-btn" style="cursor:pointer;"><span>查看全部</span></a>
+                    <div class="rst-shortmenu">
+                      <a href="#"><i class="fa fa-bars"></i></a>
+                      <!-- <ul>
+                        <li><a href="#">Sugar</a></li>
+                        <li><a href="#">Chili</a></li>
+                        <li><a href="#">pepper</a></li>
+                      </ul> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <article class="col-sm-6 rst-leftpost">
+            {% for i in range(len(franchises)) %}
+              {% if i < 3 %}
+            <div class="rst-specpost owl-carousel">
+              <a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}"><img src="{{ franchises[i]['img'] }}!570x334" alt="" /></a>
+            </div>
+            <div class="rst-postinfo">
+              <h6><a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}">{{ franchises[i]['name'] }}</a></h6>
+              <time><i class="fa fa-clock-o"></i>{{ franchises[i]['create_time'] }}</time>
+              <p>{{ franchises[i]['introduction'] }}</p>
+            </div>
+              {% end %}
+            {% end %}
+          </article>
+          <div class="col-sm-6 rst-rightpost">
+            {% for i in range(len(franchises)) %}
+              {% if i >= 3 %}
+              <article>
+                <div class="rst-postpic">
+                  <a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}"><img src="{{ franchises[i]['img'] }}!140x106" alt="" /></a>
+                </div>
+                <div class="rst-postinfo">
+                  <h6><a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}">{{ franchises[i]['name'] }}</a></h6>
+                  <time><i class="fa fa-clock-o"></i>{{ franchises[i]['create_time'] }}</time>
+                  <p>{{ franchises[i]['introduction'] }}</p>
+                </div>
+              </article>
+              {% end %}
+            {% end %}
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Section Scenery -->
+
+
+    <!-- One minute for advertising -->
+    <div class="rst-adv">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <a href="#"><img src="/static/img/123.jpg" height="50px" alt="" /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Section News and Hot -->
+    <section id="rst-newsandhot">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="rst-section-title">
+              <h4>近期活动</h4>
+            </div>
+            <div class="rst-newsandhot-post">
+              <div class="rst-newsandhot-post-content">
+                {% for article in activities %}
+                <article>
+                  <div class="row">
+                    <div class="rst-postpic col-sm-6">
+                      <a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!370x278" alt="" /></a>
+                    </div>
+                    <div class="rst-postinfo col-sm-6">
+                      <h6><a href="/portal/newsup/item-detail?id={{ article['_id'] }}">{{ article['title'] }}</a></h6>
+                      <time><i class="fa fa-clock-o"></i>{{ article['publish_time'] }}</time>
+                      <p>{{ article['subtitle'] }}</p>
+                      <a href="/portal/newsup/item-detail?id={{ article['_id'] }}" class="rst-info-viewlink"><span>查看详情</span><i class="fa fa-comments"></i></a>
+                    </div>
+                  </div>
+                </article>
+                {% end %}
+              </div>
+              <a href="/portal/newsup/category?id=0bbf89e2f73411e69a3c00163e023e51" class="rst-loadmore">查看更多</a>
+            </div>
+          </div>
+
+
+          <div class="col-sm-4">
+            {% if is_login %}
+            <aside class="widget widget_hot_news">
+              <h3>景区需求</h3>
+              <div class="rst-hotnews owl-carousel">
+                <ul>
+                  {% for i in range(len(requires)) %}
+                  {% if i < 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ requires[i]['_id'] }}">{{ requires[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+                <ul>
+                  {% for i in range(len(requires)) %}
+                  {% if i >= 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ requires[i]['_id'] }}">{{ requires[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+              </div>
+            </aside>
+            {% end %}
+
+            <!-- begin widget social -->
+            {% module Template("newsup/block-widget-social.html") %}
+            <!-- end widget social -->
+
+            <!-- begin widget popular -->
+            {% module Template("newsup/block-widget-popular.html", populars=products, news=journeies) %}
+            <!-- end widget popular -->
+
+            {% if is_login %}
+            <aside class="widget widget_hot_news">
+              <h3>经验交流</h3>
+              <div class="rst-hotnews owl-carousel">
+                <ul>
+                  {% for i in range(len(communities)) %} {% if i < 6 %}
+                    <li>
+                      <p><a href="/portal/newsup/item-detail?id={{ communities[i]['_id'] }}">{{ communities[i]['title'] }}</a></p>
+                    </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+                <ul>
+                  {% for i in range(len(communities)) %}
+                  {% if i >= 6 %}
+                  <li>
+                    <p><a href="/portal/newsup/item-detail?id={{ communities[i]['_id'] }}">{{ communities[i]['title'] }}</a></p>
+                  </li>
+                  {% end %}
+                  {% end %}
+                </ul>
+              </div>
+            </aside>
+            <!-- end widget hot and news -->
+            {% end %}
+          </div>
+
+          <!-- Pageline -->
+          <div class="rst-pageline container">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="rst-pageline-content">
+                  <span>旅游资讯</span>
+                  <div class="rst-pageline-slider owl-carousel">
+                    <p>全面的旅游吃、住、行、游、购、娱六要素的各方面信息。</p>
+                    <p>不仅包括景区的信息，也包括旅游产品供应商的信息。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end pageline -->
+        </div>
+      </div>
+    </section>
+    <!-- End Section News and Hot -->
+
+
+    <!-- Section Multimedia -->
+    <section id="rst-multimedia">
+      <div class="rst-section-title rst-section-title-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <h4>精彩瞬间</h4>
+              <div class="rst-section-title-short">
+                <a href="/portal/newsup/media"><span>查看全部</span></a>
+                <div class="rst-shortmenu">
+                  <a href="#"><i class="fa fa-bars"></i></a>
+                  <ul>
+                    <li><a href="#">Sugar</a></li>
+                    <li><a href="#">Chili</a></li>
+                    <li><a href="#">pepper</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="rst-mediagrid">
+              <div class="div">
+                {% for multimedia in multimedias %}
+                <div class="rst-col rst-col-25">
+                  <div class="rst-postpic">
+                    <a href="#"><img src="{{ multimedia['url'] }}!293x293" alt="" /></a>
+                  </div>
+                  <div class="rst-postinfo">
+                    <h6><a href="#">{{ multimedia['club_name'] }}</a></h6>
+                    <!-- <time><i class="fa fa-clock-o"></i>{{ multimedia['publish_time'] }}</time> -->
+                  </div>
+                </div>
+                {% end %}
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Section Multimedia -->
+
+    <!-- Section Latest Comments -->
+    {% module Template("newsup/block-lastest-comments.html", lastest_comments=lastest_comments) %}
+    <!-- End Section Latest Comments -->
+
+    <!-- Footer -->
+    {% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
+    <!-- End Footer -->
+
+  </section>
+  <!--- End Wrapper -->
+
+
+  <!-- Bootstrap Js Compiled Plugins -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap.min.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('newsup/js/bootstrap-tagsinput.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('newsup/js/jqBootstrapValidation.js') }}"></script>
+  <!-- WoW Js -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/wow.min.js') }}"></script>
+  <!-- Add Fancybox -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/jquery.fancybox.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('newsup/js/fancybox/helpers/jquery.fancybox-media.js') }}"></script>
+
+  <!-- Owl Slider Js -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/owl.carousel.js') }}"></script>
+  <!-- Custome Selectbox Js -->
+  <script type="text/javascript" src="{{ static_url('newsup/js/jquery.rs.selectbox.js') }}"></script>
+  <script type="text/javascript" src="{{ static_url('js/main.js') }}"></script>
+  <script type="text/javascript">
+    $(function(){
+       $('#sence-btn').on('click',function(){
+         location.href= encodeURI(encodeURI("/portal/newsup/franchises?franchise_type=景区"));
+       });
+    });
+
+  </script>
+</body>
+
+</html>
