@@ -1061,6 +1061,17 @@ class NewsupFranchisesHandler(BaseHandler):
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
+        # tag
+        hot_category_id="757ee072a02511e7b7f600163e023e51"  #热门景区
+
+        params = {"page":1, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/def/categories/"+ hot_category_id +"/level2", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        hot_tags = data['rs']
+
         self.render('newsup/new-franchises.html',
                 league_info=league_info,
                 is_login=is_login,
@@ -1074,7 +1085,8 @@ class NewsupFranchisesHandler(BaseHandler):
                 lastest_comments=lastest_comments,
                 league_id=LEAGUE_ID,
                 api_domain=API_DOMAIN,
-                franchise_type=franchise_type)
+                franchise_type=franchise_type,
+                hot_tags=hot_tags)
 
 
 class NewsupFranchiseDetailHandler(BaseHandler):

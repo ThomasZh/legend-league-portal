@@ -89,14 +89,9 @@
 		<p id="pc_chose">
 			<span>景点主题：</span>
 			<i class="er_hover2">不限</i>
-			<i>温泉</i>
-			<i>山水</i>
-			<i>乐园</i>
-			<i>采摘</i>
-			<i>古镇</i>
-			<i>湿地</i>
-			<i>漂流</i>
-			<i>赏花</i>
+			{% for hot_tag in hot_tags %}
+			<i data-id="{{ hot_tag['_id'] }}">{{ hot_tag['title'] }}</i>
+			{% end %}
 		</p>
 		<p id="ph_chose">
 			<select>
@@ -1119,6 +1114,10 @@
 						$('#mudi').text(_city);
 						city = encodeURI(encodeURI(_city));
 						$('#in_mdd').hide();
+						gotoPage(1);
+					}).on('click','#pc_chose i',function(){
+						category = $(this).attr('data-id');
+						$(this).addClass('er_hover2').siblings().removeClass('er_hover2');
 						gotoPage(1);
 					});
 
