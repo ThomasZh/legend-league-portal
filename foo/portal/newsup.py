@@ -95,16 +95,14 @@ class NewsupIndexHandler(BaseHandler):
         notices = data['rs']
 
         # franchises(景区)
-        params = {"filter":"league", "franchise_type":"景区", "page":1, "limit":9}
-        url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs", params)
+        params = {"filter":"league", "franchise_type":"scenery", "page":1, "limit":8}
+        url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs-filter", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
         rs = data['rs']
         franchises = rs['data']
-        for franchise in franchises:
-            franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
 
         # activity(近期活动)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":6}
@@ -966,11 +964,11 @@ class NewsupFranchisesHandler(BaseHandler):
         # else:
         #     print franchise_type.decode('utf-8').encode('utf-8')
 
-        franchise_type = franchise_type.encode('utf-8')
-        logging.info("got franchise_type %r encode utf-8", franchise_type)
-
-        franchise_type = unquote(franchise_type)
-        logging.info("got franchise_type %r unquote", franchise_type)
+        # franchise_type = franchise_type.encode('utf-8')
+        # logging.info("got franchise_type %r encode utf-8", franchise_type)
+        #
+        # franchise_type = unquote(franchise_type)
+        # logging.info("got franchise_type %r unquote", franchise_type)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -985,15 +983,13 @@ class NewsupFranchisesHandler(BaseHandler):
         league_info = self.get_league_info()
 
         # franchises(景区)
-        params = {"franchise_type":franchise_type, "page":1, "limit":1}
-        url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs", params)
+        params = {"franchise_type":franchise_type, "page":1, "limit":8}
+        url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs-filter", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got franchises response %r", response.body)
         data = json_decode(response.body)
         franchises = data['rs']['data']
-        for franchise in franchises:
-            franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
 
         # product(旅游产品)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":4}
@@ -1065,7 +1061,7 @@ class NewsupFranchisesHandler(BaseHandler):
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
-        self.render('newsup/franchises.html',
+        self.render('newsup/new-franchises.html',
                 league_info=league_info,
                 is_login=is_login,
                 is_ops=is_ops,

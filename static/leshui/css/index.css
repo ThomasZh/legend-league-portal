@@ -17,6 +17,7 @@ input,select{outline: none;font-family: "微软雅黑"}
 .top_main i{color: #666;font-size: 12px;width: auto;float: right;font-style: normal;}
 .top_main i#dw{display: none;}
 
+.active{background-color: #00a0e9;}
 /*搜索*/
 .search_all{width: 100%;overflow: hidden;height: 138px;background:url(../images/bg.jpg) no-repeat;}
 .search{width: 1200px;margin: auto;overflow: hidden;padding-top:2%;}
@@ -130,7 +131,7 @@ font-style: normal;color: #00a0e9;font-size: 14px;line-height: 40px;}
 .ph_hot{display: none;}
 
 .in_two_hot_left_bot{width: 80%;float: left;padding:90% 10% 0 10%;}
-.in_two_hot_left_bot a{float: left;width:46%;text-align: center;-webkit-border-radius: 20px;-moz-border-radius: 20px; 
+.in_two_hot_left_bot a{float: left;width:46%;text-align: center;-webkit-border-radius: 20px;-moz-border-radius: 20px;
 border-radius: 20px;background:#fff;color: #00a0e9;height: 30px;line-height: 30px;margin-bottom: 10px;font-size: 14px;}
 .in_two_hot_left_bot a:hover{background: rgba(255,255,255,.7);}
 
@@ -150,7 +151,7 @@ font-style: normal;color: #ff5622;font-size: 14px;line-height: 40px;}
 .in_two_tj_left_top h3{float: left;padding:8px 0 0 5px;font-size: 14px;color: #fff;width: 90%;font-weight: normal;}
 
 .in_two_tj_left_bot{width: 80%;float: left;padding:90% 10% 0 10%;}
-.in_two_tj_left_bot a{float: left;width:46%;text-align: center;-webkit-border-radius: 20px;-moz-border-radius: 20px; 
+.in_two_tj_left_bot a{float: left;width:46%;text-align: center;-webkit-border-radius: 20px;-moz-border-radius: 20px;
 border-radius: 20px;background:#fff;color: #ff5622;
 height: 30px;line-height: 30px;margin-bottom: 10px;font-size: 14px;}
 .in_two_tj_left_bot a:hover{background: rgba(255,255,255,.7);}
@@ -175,7 +176,7 @@ font-style: normal;color:#00ad53;font-size: 14px;line-height: 40px;}
 .ph_hot{display: none;}
 
 .in_ts_hot_left_bot{width: 80%;float: left;padding:90% 10% 0 10%;}
-.in_ts_hot_left_bot a{float: left;width:46%;text-align: center;-webkit-border-radius: 20px;-moz-border-radius: 20px; 
+.in_ts_hot_left_bot a{float: left;width:46%;text-align: center;-webkit-border-radius: 20px;-moz-border-radius: 20px;
 border-radius: 20px; background:#fff;color: #00ad53;
 height: 30px;line-height: 30px;margin-bottom: 10px;font-size: 14px;}
 .in_ts_hot_left_bot a:hover{background: rgba(255,255,255,.7);}
@@ -443,4 +444,3 @@ height: 30px;line-height: 30px;margin-bottom: 10px;font-size: 14px;border:1px #e
 .in_helper ul li img{width: 50px;}
 .in_helper ul li b{font-size: 14px}
 }
-
