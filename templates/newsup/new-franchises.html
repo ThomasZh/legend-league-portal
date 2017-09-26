@@ -95,14 +95,9 @@
 		</p>
 		<p id="ph_chose">
 			<select>
-				<option value="">温泉</option>
-				<option value="">山水</option>
-				<option value="">乐园</option>
-				<option value="">采摘</option>
-				<option value="">古镇</option>
-				<option value="">湿地</option>
-				<option value="">漂流</option>
-				<option value="">赏花</option>
+				{% for hot_tag in hot_tags %}
+				<option value="{{ hot_tag['_id'] }}">{{ hot_tag['title'] }}</option>
+				{% end %}
 			</select>
 		</p>
 
@@ -809,25 +804,15 @@
 	<div class="in_right">
 		<div class="in_left_two">
 			<b><img src="{{ static_url('leshui/images/in_icon4.png') }}">特色产品:</b>
-			<a>攀岩</a>
-			<a>溜索</a>
-			<a>拓展</a>
-			<a>CS</a>
-			<a>木屋别墅</a>
-			<a>露营基地</a>
-			<a>玻璃观景</a>
-			<a>水上乐园</a>
+			{% for specialty_tag in specialty_tags %}
+			<a data-id="{{ specialty_tag['_id'] }}">{{ specialty_tag['title'] }}</a>
+			{% end %}
 		</div>
 		<div class="in_left_three">
 			<b><img src="{{ static_url('leshui/images/in_icon5.png') }}">推荐路线:</b>
-			<a>亲子</a>
-			<a>研学</a>
-			<a>情侣</a>
-			<a>蜜月</a>
-			<a>夕阳红</a>
-			<a>自驾游</a>
-			<a>周边游</a>
-			<a>海滨度假</a>
+			{% for recommend_tag in recommend_tags %}
+			<a data-id="{{ recommend_tag['_id'] }}">{{ recommend_tag['title'] }}</a>
+			{% end %}
 		</div>
 	</div>
 
@@ -905,48 +890,19 @@
 	<script type="text/javascript" src="{{ static_url('leshui/js/erji.js') }}"></script>
 	<script type="text/javascript">
 		$(function(){
-				$('.menu_scenery').click(function(){
-					 location.href = "/portal/newsup/franchises?franchise_type=scenery";
-				})
-				$('.menu_supplier').click(function(){
-					 location.href = "/portal/newsup/franchises?franchise_type=supplier";
-				})
-				$('.menu_activity').click(function(){
-					 location.href = "/portal/newsup/category?id=0bbf89e2f73411e69a3c00163e023e51";
-				})
-				$('.menu_product').click(function(){
-					 location.href = "/portal/newsup/category?id=b0569f58144f11e78d3400163e023e51";
-				})
-				$('.menu_news').click(function(){
-					 location.href = "/portal/newsup/category?id=065f565e6bd711e7b46300163e023e51";
-				})
-				$('.menu_community').click(function(){
-					 location.href = "/portal/newsup/category?id=8853422e03a911e7998c00163e023e51";
-				})
-				$('.menu_require').click(function(){
-					 location.href = "/portal/newsup/category?id=01d6120cf73411e69a3c00163e023e51";
-				})
-				$('.menu_supplier_product').click(function(){
-					 location.href = "/portal/newsup/category?id=2a28cb78f73411e69a3c00163e023e51";
-				})
-				$('.menu_supplier_require').click(function(){
-					 location.href = "/portal/newsup/category?id=404228663a1711e7b21000163e023e51";
-				})
-				$('.menu_media').click(function(){
-					 location.href = "/portal/newsup/media";
-				});
 
 				// 景区分页显示
 		    var limit = 10;//每页显示数
 		    var currentPage = 0;//当前页
 		    var total_page = 0;//总页数
-				var order = 'none',sort = 'desc',franchise_type = 'scenery',category = 'all',city = 'all';
+				// order = none, popular, display_amount
+				// sort = desc, asc
+				// franchise_type = scenery, supplier
+				// category = all, id
+				// city = all, 北京
+				var order = 'none',sort = 'desc',franchise_type = '{{franchise_type}}',category = 'all',city = 'all';//默认参数定义
 		    function gotoPage(pageNum) {
-					// order = none, popular, display_amount
-					// sort = desc, asc
-					// franchise_type = scenery, supplier
-					// category = all, id
-					// city = all, 北京
+
 		      $.get("{{ api_domain }}/api/leagues/{{ league_id }}/clubs-filter?order="+order+"&sort="+ sort +"&category="+ category +"&city="+ city +"&franchise_type="+ franchise_type +"&page="+pageNum+"&limit="+limit,function(data,status){
 		            data_obj = JSON.parse(data);
 		            data = data_obj.rs;
@@ -959,10 +915,10 @@
 		        for (var i in pageData) {
 								var inner_html =	'<dl>';
 								inner_html += '<dt>';
-								inner_html += 	'<a href="#"><img src="'+ pageData[i]['img'] +'" alt=""></a>';
+								inner_html += 	'<a href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><img src="'+ pageData[i]['img'] +'" alt=""></a>';
 								inner_html += '</dt>';
 								inner_html += '<dd>';
-								inner_html += 	'<a href="#"><h4>'+ pageData[i]['club_name'] +'</h4></a>';
+								inner_html += 	'<a href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><h4>'+ pageData[i]['club_name'] +'</h4></a>';
 								inner_html += 	'<div class="er_xq">';
 								inner_html += 		'<b>'+ pageData[i]['scenery'] +'A景区</b>';
 								inner_html += 		'<span>' + pageData[i]['province'] +'·'+ pageData[i]['city'] +'</span>';
@@ -1047,7 +1003,7 @@
 								inner_html += 	'<p>'+ pageData[i]['_addr'] +'</p>';
 								inner_html += 	'<p>'+ pageData[i]['introduction'] +'</p>';
 								inner_html += 	'<em><i>￥</i><b>'+ parseFloat(pageData[i]['display_amount'])/100 +'</b><span>起</span></em>';
-								inner_html += 	'<h5><a href="#"><span>详细介绍</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a></h5>';
+								inner_html += 	'<h5><a href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><span>详细介绍</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a></h5>';
 								inner_html += '</dd>';
 								inner_html += '</dl>';
 		          $('#franchise-wrap').append(inner_html);
@@ -1074,6 +1030,7 @@
 		    };
 		      gotoPage(1);//页面初始化
 
+					// 各种查询操作
 					$(document).on('click','#default-btn',function(){
 						$(this).addClass('er_hover').siblings().removeClass('er_hover');
 							$('#mudi').text("全部");
@@ -1119,12 +1076,20 @@
 						category = $(this).attr('data-id');
 						$(this).addClass('er_hover2').siblings().removeClass('er_hover2');
 						gotoPage(1);
+					}).on('click','.in_left_two a',function(){
+						category = $(this).attr('data-id');
+						$(this).addClass('er_hover2').siblings().removeClass('er_hover2');
+						gotoPage(1);
+					}).on('click','.in_left_three a',function(){
+						category = $(this).attr('data-id');
+						$(this).addClass('er_hover2').siblings().removeClass('er_hover2');
+						gotoPage(1);
 					});
 
+					// 点击页码操作
 		      $(document).on('click','.pageBox > a',function(){
 		        var num = $(this).text();
 		        gotoPage(num);
-		        //  $(this).addClass("current").siblings().removeClass("current");
 		      })
 
 		      $("#prev").on("click",function(){
@@ -1132,7 +1097,6 @@
 
 		          }else{
 		              gotoPage(--currentPage);
-		              // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
 		          }
 		      });
 
@@ -1141,7 +1105,6 @@
 
 		          }else{
 		              gotoPage(++currentPage);
-		              // $("#num"+currentPage).addClass("current").siblings().removeClass("current");
 		          }
 		      });
 		})

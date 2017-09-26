@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文章列表</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link href="{{ static_url('leshui/css/list.css') }}" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
+</head>
+<html>
+<body>
+	<!-- 顶部 -->
+		<div class="top">
+			<div class="top_main">
+				<span>
+					<a href="#">登录</a>|<a href="#">注册</a>
+				</span>
+				<i id="pc_dw"><a href="#">会员中心</a>|<a href="#">查看订单</a>|<a href="#">联系我们 </a></i>
+				<i id="dw"><span>石家庄</span><img src="{{ static_url('leshui/images/up.png') }}"></i>
+			</div>
+		</div>
+	<div class="search_all">
+		<div class="search">
+			<div class="nav_logo">
+				<img src="{{ static_url('leshui/images/logo.png') }}">
+				<h1>乐水游-中国水利风景区综合服务平台</h1>
+			</div>
+			<div class="search_main">
+				<input type="text" name="" class="search_sr" placeholder="输入关键词"  />
+				<input type="submit" value="搜索" class="search_sub" />
+			</div>
+
+		</div>
+	</div>
+	<!-- 顶部 -->
+	<!-- 导航 -->
+	<div class="nav_all">
+		<div class="nav">
+	    <a href="/">首页</a>
+			<a class="menu_scenery" href="javascript:;">景区导览</a>
+			{% if category_id == '0bbf89e2f73411e69a3c00163e023e51' %}
+			<a class="menu_activity active" href="javascript:;">近期活动</a>
+			{% else %}
+			<a class="menu_activity" href="javascript:;">近期活动</a>
+			{% end %}
+
+			{% if category_id == 'b0569f58144f11e78d3400163e023e51' %}
+			<a class="menu_product active" href="javascript:;">旅游产品</a>
+			{% else %}
+			<a class="menu_product" href="javascript:;">旅游产品</a>
+			{% end %}
+
+			{% if category_id == '065f565e6bd711e7b46300163e023e51' %}
+			<a class="menu_news active" href="javascript:;">旅游资讯</a>
+			{% else %}
+			<a class="menu_news" href="javascript:;">旅游资讯</a>
+			{% end %}
+
+			<a class="menu_media" href="javascript:;">精彩瞬间</a>
+
+			{% if is_login  and is_ops %}
+					<a class="menu_supplier" href="javascript:;">供应商</a>
+
+					{% if category_id == '01d6120cf73411e69a3c00163e023e51' %}
+					<a class="menu_require active" href="javascript:;">景区需求</a>
+					{% else %}
+					<a class="menu_require" href="javascript:;">景区需求</a>
+					{% end %}
+
+					{% if category_id == '8853422e03a911e7998c00163e023e51' %}
+					<a class="menu_community active" href="javascript:;">经验交流</a>
+					{% else %}
+					<a class="menu_community" href="javascript:;">经验交流</a>
+					{% end %}
+
+					{% if category_id == '2a28cb78f73411e69a3c00163e023e51' %}
+					<a class="menu_supplier_product active" href="javascript:;">供应商产品</a>
+					{% else %}
+					<a class="menu_supplier_product" href="javascript:;">供应商产品</a>
+					{% end %}
+
+					{% if category_id == '404228663a1711e7b21000163e023e51' %}
+					<a class="menu_supplier_require active" href="javascript:;">供应商需求</a>
+					{% else %}
+					<a class="menu_supplier_require" href="javascript:;">供应商需求</a>
+					{% end %}
+
+			{% end %}
+		</div>
+	</div>
+	<!-- 手机版头部 -->
+		<div class="ph_nav">
+			<h1><img src="{{ static_url('leshui/images/nav.png') }}"></h1>
+			<h2><img src="{{ static_url('leshui/images/cha.png') }}"></h2>
+			<ul>
+				<li><a href="/">首页</a></li>
+				<li class="menu_scenery"><a href="javascript:;">景区导览</a></li>
+				<li class="menu_activity"><a href="javascript:;">近期活动</a></li>
+				<li class="menu_product"><a href="javascript:;">旅游产品</a></li>
+				<li class="menu_news"><a href="javascript:;">旅游资讯</a></li>
+				<li class="menu_media"><a href="javascript:;">精彩瞬间</a></li>
+				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
+				<li class="menu_require"><a href="javascript:;">景区需求</a></li>
+				<li class="menu_community"><a href="javascript:;">经验交流</a></li>
+				<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
+				<li class="menu_supplier_require"><a href="javascript:;">供应商需求</a></li>
+			</ul>
+		</div>
+	<!-- 导航 -->
+<!-- 主题内容 -->
+<div class="in_active">
+	<!-- 一共10个li -->
+	<div class="franchise-wrap" id="category-wrap" style="overflow:auto;"></div>
+	<div class="page">
+		<a href="javascript:;" id="prev">上一页</a>
+		<span class="pageBox"></span>
+		<a href="javascript:;" id="next">下一页</a>
+		<!-- 共<span id="total_page" style="padding:0 5px;"></span>页 -->
+	</div>
+
+	<div id="ph_page">
+		<a href="#">加载更多</a>
+	</div>
+
+</div>
+
+<!-- 主题内容 -->
+
+<!-- 保障 -->
+<div class="in_helper">
+	<ul>
+		<li>
+			<img src="{{ static_url('leshui/images/icon_01.png') }}" alt="">
+			<b>超值低价</b>
+		</li>
+		<li>
+			<img src="{{ static_url('leshui/images/icon_02.png') }}" alt="">
+			<b>全网覆盖</b>
+		</li>
+		<li>
+			<img src="{{ static_url('leshui/images/icon_03.png') }}" alt="">
+			<b>购票便捷</b>
+		</li>
+		<li>
+			<img src="{{ static_url('leshui/images/icon_04.png') }}" alt="">
+			<b>保障计划</b>
+		</li>
+	</ul>
+	<div class="in_sao">
+		<img src="{{ static_url('leshui/images/see.jpg') }}" alt="">
+		<span>扫一扫关注我们</span>
+		<b>--旅行触手可及</b>
+	</div>
+</div>
+<!-- 保障 -->
+<!-- 底部 -->
+<div class="footer">
+	<div class="footer_main">
+		<p>
+			<a href="#">关于乐水游</a>|
+			<a href="#">供应商加盟</a>|
+			<a href="#">景区加盟</a>|
+			<a href="#">业务合作</a>|
+			<a href="#">加入我们</a>|
+			<a href="#">投资者关系</a>|
+			<a href="#">业务分销</a>|
+			<a href="#">"严重违规失信"专项整治举报</a>|
+			<a href="#">山水公益</a>
+		</p>
+		<p>Copyright@2017 leshuiyou.cn  京ICP备05021087号 </p>
+	</div>
+</div>
+	<!-- 底部 -->
+<script src="{{ static_url('leshui/js/index.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ static_url('leshui/js/list.js') }}"></script>
+<script type="text/javascript">
+	$(function(){
+
+			function getLocalTime(nS) { //时间戳转换
+				 return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+			};
+			// 景区分页显示
+			var limit = 8;//每页显示数
+			var currentPage = 0;//当前页
+			var total_page = 0;//总页数
+			function gotoPage(pageNum) {
+				$.get("{{api_domain}}/api/articles-pagination?filter=league&league_id={{ league_info['_id'] }}&status=publish&category={{ category_id }}&page="+pageNum+"&limit="+limit,function(data,status){
+							data_obj = JSON.parse(data);
+							data = data_obj.rs;
+							currentPage = pageNum;
+					var pageData = data.data;
+							total_page = data.total_page;//总页
+							// $("#total_page").html(total_page);
+							$('#category-wrap').html("");
+
+					for (var i in pageData) {
+
+							var inner_html =	'<dl>';
+									inner_html += '<dt>';
+									inner_html += 	'<a href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><img src="'+ pageData[i]['img'] +'!370x370" alt=""></a>';
+									inner_html += '</dt>';
+									inner_html += '<dd>';
+									inner_html += 	'<a href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><h4>'+ pageData[i]['title'] +'</h4></a>';
+									inner_html += 	'<p>'+ pageData[i]['subtitle'] +'</p>';
+									inner_html += 	'<p>发布时间:'+ getLocalTime(pageData[i]['publish_time']) +'</p>';
+									inner_html += 	'<h5><a href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><span>详细介绍</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a></h5>';
+									inner_html += '</dd>';
+									inner_html += '</dl>';
+						$('#category-wrap').append(inner_html);
+						// member_num += 1;
+					};
+
+					pageNext = parseInt((currentPage-1)/5) + 1;
+
+						start = (pageNext-1)*5+1;
+						end = pageNext*5;
+						if(end > total_page){
+							end = total_page;
+						}
+
+						$(".pageBox").html("");
+						for (var k=start;k<=end;k++){
+							var inner_html = '<a class="" id="num'+k+'">'+k+'</a>';
+							$(".pageBox").append(inner_html);
+						};
+						 $("#num"+currentPage).addClass("page_hover").siblings().removeClass("page_hover");
+
+				});
+
+			};
+				gotoPage(1);//页面初始化
+
+				// 点击页码操作
+				$(document).on('click','.pageBox > a',function(){
+					var num = $(this).text();
+					gotoPage(num);
+				})
+
+				$("#prev").on("click",function(){
+						if(currentPage<=1){
+
+						}else{
+								gotoPage(--currentPage);
+						}
+				});
+
+				$("#next").on("click",function(){
+						if(currentPage>=total_page){
+
+						}else{
+								gotoPage(++currentPage);
+						}
+				});
+	})
+</script>
+</body>
+</html>
