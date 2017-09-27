@@ -1,0 +1,77 @@
+html,body,div,span,h1,h2,h3,h4,h5,h6,p,a,em,img,strong,dl,dd,dt{margin:0;padding:0;font-weight: normal}
+ol,ul{list-style:none; margin:0px; padding:0px;}
+img{border:0;}
+body{ font-family: "黑体",Arial,"FangSong";background: #fafafa;}
+a:link,a:visited,.main .artbox .lbox_1 .step13 li span a,.main .artbox .picbox li span a{text-decoration:none;}
+a:hover{cursor:pointer;}
+.clear{ clear:both;}
+h1,h2,h3,h4,i,em{ font-style: normal; font-weight: normal }
+input,select,textarea{outline: none;font-family: "微软雅黑"}
+iframe{border: none;}
+/*头部*/
+.top{width: 100%;float: left;background: #f5f5f5;height: 31px;line-height: 31px;}
+.top_main{width: 1200px;margin: auto;overflow: hidden;}
+.top_main span{color: #666;font-size: 12px;width: auto;float: left;}
+.top_main a{padding: 0 10px;color: #666;}
+.top_main a:hover{color: #00a0e9}
+.top_main i{color: #666;font-size: 12px;width: auto;float: right;font-style: normal;}
+.top_main i#dw{display: none;}
+
+/*搜索*/
+.search_all{width: 100%;overflow: hidden;height: 138px;background:url(../images/bg.jpg) no-repeat;}
+.search{width: 1200px;margin: auto;overflow: hidden;padding-top:2%;}
+.nav_logo{width: auto;float: left;}
+.nav_logo img{width: 80px;float: left;}
+.nav_logo h1{width: auto;font-size: 21px;color: #333;padding-left: 20px;line-height: 80px;float: left;font-weight: bold;}
+.search_main{width:55%;float: right;padding: 2% 0 0 0; }
+.search_sr{width: 52%;height: 38px;line-height: 38px;float: left;border:1px #ff9913 solid;text-indent:3em;
+	background:url(../images/serch.png) no-repeat;	background-size: 28px 38px;background-position:left center ;}
+.search_sub{width: 14%;height: 42px;line-height: 42px;float: left;border: none;cursor: pointer;background: #ff9913;
+color: #fff;font-size: 18px;font-family: "微软雅黑"}
+
+/*导航*/
+.nav_all{width: 100%;float: left;height: 45px;line-height: 45px;background: #41bbf3;}
+.nav{width:1200px;margin: auto;overflow: hidden;}
+.nav a{float: left;width:auto;padding:0 1.9%;color: #fff;font-size: 16px;font-family: "微软雅黑"}
+.nav a:hover{background: #00a0e9;}
+
+.ph_nav{width:92%;float: left;display: none;padding:2% 4% 0 4%;}
+.ph_nav h1{width: 100%;float: left;text-align: center;}
+.ph_nav h2{width: 100%;float: left;text-align: center;display: none;}
+.ph_nav ul{width: 100%;float: left;display: none;padding-bottom: 20px;}
+.ph_nav ul li{float: left;width: 100%;border-bottom: 1px #eee solid;padding:10px 0;text-align: center; }
+.ph_nav ul li a{color: #2f3e42;font-size: 14px;}
+
+
+/*主题内容*/
+.yd{width:1200px;margin: auto;overflow: hidden;background: #fff;padding-bottom: 50px}
+.yd_main{width: 980px;margin: 20px auto 0 auto;border: 1px #eee solid;overflow: hidden;}
+.yd_main h1{width: 100%;float: left;background: #f7f7f7;height: 45px;line-height: 45px;}
+.yd_main h1 img{float: left;padding-left: 20px;padding-top: 11px;}
+.yd_main h1 span{float: left;padding-left: 5px;font-size: 16px;color: #000}
+.yd_main ul li{float: left;border-bottom: 1px #f7f7f7 dotted;height: 45px;line-height: 45px;text-align: center;color: #666;font-size: 14px;}
+.yd_title{width: 40%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.yd_yj,.yd_hyj,.yd_order{width: 20%}
+.yd_butt{width: 80px;height: 25px;line-height: 25px;font-size: 12px;color: #fff;background: #ff9913;float: left;margin:10px 0 0 60px;cursor: pointer;}
+
+
+/*保障*/
+.in_helper{width:1200px;margin: auto;overflow: hidden;margin-top:2%;border: 1px solid #e1e1e1;height: 170px;}
+.in_helper ul {width:70%;float: left;margin:2% 0;border-right:1px solid #e1e1e1; height: 120px; }
+.in_helper ul li{float: left;width: 25%;text-align: center;padding-top: 2%;}
+.in_helper ul li img{width: 66px;}
+.in_helper ul li b{width: 100%;float: left;font-size: 18px;color: #333;padding-top: 10px;}
+
+.in_sao{width: 27.5%;float: left;background: #eee;margin:2% 1%;height: 105px;padding-top: 15px;}
+.in_sao img{width:90px;float: left;padding-left: 15px }
+.in_sao span{width: 60%;float:left;color: #333;font-size: 14px;line-height: 25px;padding: 5% 0 0 15px;}
+.in_sao b{width: 60%;float:left;color: #333;font-size: 14px;line-height: 25px;padding-left: 15px;}
+
+/*底部*/
+.footer{width: 100%;background: #fff;overflow: hidden;padding: 2% 0; }
+.footer_main{width:1200px;margin: auto;overflow: hidden;}
+.footer_main p{width: 100%;float: left;text-align: center;font-size:12px;color: #999;height: 30px;line-height: 30px;}
+.footer_main p a{padding: 0 5px;color: #999;}
+.footer_main p a:hover{color: #00a0e9}
+
+

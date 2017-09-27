@@ -14,67 +14,49 @@
 </head>
 <html>
 <body>
-<!-- 顶部 -->
-	<div class="top">
-		<div class="top_main">
-			<span>
-				<a href="#">登录</a>|<a href="#">注册</a>
-			</span>
-			<i id="pc_dw"><a href="#">会员中心</a>|<a href="#">查看订单</a>|<a href="#">联系我们 </a></i>
-			<i id="dw"><span>石家庄</span><img src="images/up.png"></i>
+	<!-- socialbar -->
+	{% module Template("newsup/block-socialbar.html", is_login=is_login, is_ops=is_ops) %}
+	<!-- /socialbar -->
+	<!-- 导航 -->
+	<div class="nav_all">
+		<div class="nav">
+			<a class="active" href="/">首页</a>
+			<a class="menu_scenery" href="javascript:;">景区导览</a>
+			<a class="menu_activity" href="javascript:;">近期活动</a>
+			<a class="menu_product" href="javascript:;">旅游产品</a>
+			<a class="menu_news" href="javascript:;">旅游资讯</a>
+			<a class="menu_media" href="javascript:;">精彩瞬间</a>
+			{% if is_login  and is_ops %}
+			<a class="menu_supplier" href="javascript:;">供应商</a>
+			<a class="menu_require" href="javascript:;">景区需求</a>
+			<a class="menu_community" href="javascript:;">经验交流</a>
+			<a class="menu_supplier_product" href="javascript:;">供应商产品</a>
+			<a class="menu_supplier_require" href="javascript:;">供应商需求</a>
+			{% end %}
 		</div>
 	</div>
-<div class="search_all">
-	<div class="search">
-		<div class="nav_logo">
-			<img src="{{ static_url('leshui/images/logo.png') }}">
-			<h1>乐水游-中国水利风景区综合服务平台</h1>
+	<!-- 手机版头部 -->
+		<div class="ph_nav">
+			<h1><img src="{{ static_url('leshui/images/nav.png') }}"></h1>
+			<h2><img src="{{ static_url('leshui/images/cha.png') }}"></h2>
+			<ul>
+				<li><a href="/">首页</a></li>
+				<li class="menu_scenery"><a href="javascript:;">景区导览</a></li>
+				<li class="menu_activity"><a href="javascript:;">近期活动</a></li>
+				<li class="menu_product"><a href="javascript:;">旅游产品</a></li>
+				<li class="menu_news"><a href="javascript:;">旅游资讯</a></li>
+				<li class="menu_media"><a href="javascript:;">精彩瞬间</a></li>
+				{% if is_login  and is_ops %}
+				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
+				<li class="menu_require"><a href="javascript:;">景区需求</a></li>
+				<li class="menu_community"><a href="javascript:;">经验交流</a></li>
+				<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
+				<li class="menu_supplier_require"><a href="javascript:;">供应商需求</a></li>
+				{% end %}
+			</ul>
 		</div>
-		<div class="search_main">
-			<input type="text" name="" class="search_sr" placeholder="输入关键词"  />
-			<input type="submit" value="搜索" class="search_sub" />
-		</div>
+	<!-- 导航 -->
 
-	</div>
-</div>
-<!-- 顶部 -->
-<!-- 导航 -->
-<div class="nav_all">
-	<div class="nav">
-    <a class="active" href="/">首页</a>
-		<a class="menu_scenery" href="javascript:;">景区导览</a>
-		<a class="menu_activity" href="javascript:;">近期活动</a>
-		<a class="menu_product" href="javascript:;">旅游产品</a>
-		<a class="menu_news" href="javascript:;">旅游资讯</a>
-		<a class="menu_media" href="javascript:;">精彩瞬间</a>
-		{% if is_login  and is_ops %}
-		<a class="menu_supplier" href="javascript:;">供应商</a>
-		<a class="menu_require" href="javascript:;">景区需求</a>
-		<a class="menu_community" href="javascript:;">经验交流</a>
-		<a class="menu_supplier_product" href="javascript:;">供应商产品</a>
-		<a class="menu_supplier_require" href="javascript:;">供应商需求</a>
-		{% end %}
-	</div>
-</div>
-<!-- 手机版头部 -->
-	<div class="ph_nav">
-		<h1><img src="{{ static_url('leshui/images/nav.png') }}"></h1>
-		<h2><img src="{{ static_url('leshui/images/cha.png') }}"></h2>
-		<ul>
-			<li><a href="/">首页</a></li>
-			<li class="menu_scenery"><a href="javascript:;">景区导览</a></li>
-			<li class="menu_activity"><a href="javascript:;">近期活动</a></li>
-			<li class="menu_product"><a href="javascript:;">旅游产品</a></li>
-			<li class="menu_news"><a href="javascript:;">旅游资讯</a></li>
-			<li class="menu_media"><a href="javascript:;">精彩瞬间</a></li>
-			<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
-			<li class="menu_require"><a href="javascript:;">景区需求</a></li>
-			<li class="menu_community"><a href="javascript:;">经验交流</a></li>
-			<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
-			<li class="menu_supplier_require"><a href="javascript:;">供应商需求</a></li>
-		</ul>
-	</div>
-<!-- 导航 -->
 <!-- 导航下面第一部分 -->
 <div class="in_one">
 	<div class="in_one_all">
@@ -1019,51 +1001,9 @@
 	</ul>
 </div>
 <!-- 旅游资讯 -->
-<!-- 保障 -->
-<div class="in_helper">
-	<ul>
-		<li>
-			<img src="{{ static_url('leshui/images/icon_01.png') }}" alt="">
-			<b>超值低价</b>
-		</li>
-		<li>
-			<img src="{{ static_url('leshui/images/icon_02.png') }}" alt="">
-			<b>全网覆盖</b>
-		</li>
-		<li>
-			<img src="{{ static_url('leshui/images/icon_03.png') }}" alt="">
-			<b>购票便捷</b>
-		</li>
-		<li>
-			<img src="{{ static_url('leshui/images/icon_04.png') }}" alt="">
-			<b>保障计划</b>
-		</li>
-	</ul>
-	<div class="in_sao">
-		<img src="{{ static_url('leshui/images/see.jpg') }}" alt="">
-		<span>扫一扫关注我们</span>
-		<b>--旅行触手可及</b>
-	</div>
-</div>
-<!-- 保障 -->
-<!-- 底部 -->
-<div class="footer">
-	<div class="footer_main">
-		<p>
-			<a href="#">关于乐水游</a>|
-			<a href="#">供应商加盟</a>|
-			<a href="#">景区加盟</a>|
-			<a href="#">业务合作</a>|
-			<a href="#">加入我们</a>|
-			<a href="#">投资者关系</a>|
-			<a href="#">业务分销</a>|
-			<a href="#">"严重违规失信"专项整治举报</a>|
-			<a href="#">山水公益</a>
-		</p>
-		<p>Copyright@2017 leshuiyou.cn  京ICP备05021087号 </p>
-	</div>
-</div>
-<!-- 底部 -->
+<!-- Footer -->
+{% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
+<!-- End Footer -->
 <script type="text/javascript">
 	$(function(){
 

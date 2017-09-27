@@ -11,30 +11,9 @@
 </head>
 <html>
 <body>
-<!-- 顶部 -->
-	<div class="top">
-		<div class="top_main">
-			<span>
-				<a href="#">登录</a>|<a href="#">注册</a>
-			</span>
-			<i id="pc_dw"><a href="#">会员中心</a>|<a href="#">查看订单</a>|<a href="#">联系我们 </a></i>
-			<i id="dw"><span>石家庄</span><img src="{{ static_url('leshui/images/up.png') }}"></i>
-		</div>
-	</div>
-<div class="search_all">
-	<div class="search">
-		<div class="nav_logo">
-			<img src="{{ static_url('leshui/images/logo.png') }}">
-			<h1>乐水游-中国水利风景区综合服务平台</h1>
-		</div>
-		<div class="search_main">
-			<input type="text" name="" class="search_sr" placeholder="输入关键词"  />
-			<input type="submit" value="搜索" class="search_sub" />
-		</div>
-
-	</div>
-</div>
-<!-- 顶部 -->
+	<!-- socialbar -->
+	{% module Template("newsup/block-socialbar.html", is_login=is_login, is_ops=is_ops) %}
+	<!-- /socialbar -->
 <!-- 导航 -->
 <div class="nav_all">
 	<div class="nav">
@@ -72,11 +51,13 @@
 			<li class="menu_product"><a href="javascript:;">旅游产品</a></li>
 			<li class="menu_news"><a href="javascript:;">旅游资讯</a></li>
 			<li class="menu_media"><a href="javascript:;">精彩瞬间</a></li>
+			{% if is_login  and is_ops %}
 			<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
 			<li class="menu_require"><a href="javascript:;">景区需求</a></li>
 			<li class="menu_community"><a href="javascript:;">经验交流</a></li>
 			<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
 			<li class="menu_supplier_require"><a href="javascript:;">供应商需求</a></li>
+			{% end %}
 		</ul>
 	</div>
 <!-- 导航 -->

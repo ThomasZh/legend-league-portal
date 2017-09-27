@@ -1,0 +1,28 @@
+<!-- 顶部 -->
+  <div class="top">
+    <div class="top_main">
+      <span>
+        {% if is_login %}
+        <a href="/portal/auth/logout">登出</a>
+        {% else %}
+        <a href="/portal/auth/login">登录</a>|<a href="/portal/auth/register">注册</a>
+        {% end %}
+      </span>
+      <i id="pc_dw"><a href="/portal/newsup/account">会员中心</a>|<a href="/portal/newsup/account">查看订单</a>|<a href="/portal/newsup/contact">联系我们 </a></i>
+      <i id="dw"><span>北京</span><img src="{{ static_url('leshui/images/up.png') }}"></i>
+    </div>
+  </div>
+<div class="search_all">
+  <div class="search">
+    <div class="nav_logo">
+      <img src="{{ static_url('leshui/images/logo.png') }}">
+      <h1>乐水游-中国水利风景区综合服务平台</h1>
+    </div>
+    <div class="search_main">
+      <input type="text" name="" class="search_sr" placeholder="输入关键词"  />
+      <input type="submit" value="搜索" class="search_sub" />
+    </div>
+
+  </div>
+</div>
+<!-- 顶部 -->

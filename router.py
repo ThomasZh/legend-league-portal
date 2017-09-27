@@ -49,8 +49,8 @@ def map():
 
 
         (r'/portal/auth/register', getattr(auth_newsup, 'AuthRegisterHandler')),
-        (r'/portal/auth/login', getattr(auth_newsup, 'AuthRegisterHandler')),
-        (r'/portal/auth/lost-pwd', getattr(auth_newsup, 'AuthRegisterHandler')),
+        (r'/portal/auth/login', getattr(auth_newsup, 'AuthLoginHandler')),
+        (r'/portal/auth/lost-pwd', getattr(auth_newsup, 'AuthLostpwdHandler')),
         (r'/portal/auth/logout', getattr(auth_newsup, 'AuthLogoutHandler')),
         (r'/portal/auth/league-signup', getattr(auth_newsup, 'AuthLeagueSignupXHR')),
 
