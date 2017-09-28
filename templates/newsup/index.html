@@ -62,7 +62,7 @@
 	<div class="in_one_all">
 	<div class="in_left" id="choose">
 		<div class="in_left_one">
-			<i><img src="{{ static_url('leshui/images/mdd.png') }}"><a id="mudi">全部</a></i>
+			<i><img src="{{ static_url('leshui/images/mdd.png') }}"><a id="mudi" style="display: inherit;width: 85px;">全部</a></i>
 			<span><b>选择目的地</b><img src="{{ static_url('leshui/images/bot.png') }}"></span>
 		</div>
 
@@ -1006,7 +1006,18 @@
 <!-- End Footer -->
 <script type="text/javascript">
 	$(function(){
-
+			$("#mudi").text();
+			$(document).on('click','.mdd_min ul a',function(){
+				// var province = $(this).text();
+				_city = $(this).text();
+				$('#mudi').text(_city);
+				// city = encodeURI(encodeURI(_city));
+			}).on('click','.in_mddo a',function(){
+				_city = $(this).text();
+				$('#mudi').text(_city);
+				// city = encodeURI(encodeURI(_city));
+				$('#in_mdd').hide();
+			});
 			var myVar = isIE();
 			if (myVar == false){
 						// 手机版轮播图

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link href="css/yd.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+	<script src="js/order.js" type="text/javascript"></script>
+
+</head>
+<html>
+<body>
+	<!-- socialbar -->
+	{% module Template("newsup/block-socialbar.html", is_login=is_login, is_ops=is_ops) %}
+	<!-- /socialbar -->
+	<!-- 导航 -->
+	<div class="nav_all">
+		<div class="nav">
+			<a href="/">首页</a>
+			<a class="menu_scenery" href="javascript:;">景区导览</a>
+			<a class="menu_activity" href="javascript:;">近期活动</a>
+			<a class="menu_product" href="javascript:;">旅游产品</a>
+			<a class="menu_news" href="javascript:;">旅游资讯</a>
+			<a class="menu_media" href="javascript:;">精彩瞬间</a>
+			{% if is_login  and is_ops %}
+			<a class="menu_supplier" href="javascript:;">供应商</a>
+			<a class="menu_require" href="javascript:;">景区需求</a>
+			<a class="menu_community" href="javascript:;">经验交流</a>
+			<a class="menu_supplier_product" href="javascript:;">供应商产品</a>
+			<a class="menu_supplier_require" href="javascript:;">供应商需求</a>
+			{% end %}
+		</div>
+	</div>
+	<!-- 手机版头部 -->
+		<div class="ph_nav">
+			<h1><img src="{{ static_url('leshui/images/nav.png') }}"></h1>
+			<h2><img src="{{ static_url('leshui/images/cha.png') }}"></h2>
+			<ul>
+				<li><a href="/">首页</a></li>
+				<li class="menu_scenery"><a href="javascript:;">景区导览</a></li>
+				<li class="menu_activity"><a href="javascript:;">近期活动</a></li>
+				<li class="menu_product"><a href="javascript:;">旅游产品</a></li>
+				<li class="menu_news"><a href="javascript:;">旅游资讯</a></li>
+				<li class="menu_media"><a href="javascript:;">精彩瞬间</a></li>
+				{% if is_login  and is_ops %}
+				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
+				<li class="menu_require"><a href="javascript:;">景区需求</a></li>
+				<li class="menu_community"><a href="javascript:;">经验交流</a></li>
+				<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
+				<li class="menu_supplier_require"><a href="javascript:;">供应商需求</a></li>
+				{% end %}
+			</ul>
+		</div>
+	<!-- 导航 -->
+
+<!-- 主题内容 -->
+<div class="next">
+	<div class="next_main">
+		<h1>2017京城水系皇家御河游单程船票+颐和园门票 <span>￥65<small>/张</small></span></h1>
+		<div class="next_ydxx">
+			<h2>填写预订信息<span>请在游玩当天的16:00前完成预订</span></h2>
+			<div class="next_day">
+				<i>游玩日期</i>
+				<div class="next_true">
+					<p>今天(09月27日)</p>
+					<p>不可用</p>
+				</div>
+				<div class="next_true">
+					<p>明天(09月28日)</p>
+					<p class="next_price">￥65</p>
+				</div>
+				<div class="next_true">
+					<p>后天(09月29日)</p>
+					<p class="next_price">￥65</p>
+				</div>
+				<div class="next_true2">
+					<p>其他日<br/>期</p>
+				</div>
+				<em class="next_em">
+				<input type="text" placeholder="请输入游玩日期" class="ture_day">
+				<input name="" type="submit" value="确定" class="ture_sub" />
+				</em>
+			</div>
+			<div class="next_nowday">
+				<p>游玩日期:2017年09月29日</p>
+			</div>
+			<div class="next_page">
+				<i>购买张数</i>
+				<div class="count">
+	                <span class="reduce">-</span>
+	                <input class="count_input" type="text" value="1">
+	                <span class="add">+</span>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="next_ykxx">
+			<h2>填写出行人信息<span>需最少添加1位出行人</span></h2>
+			<ul>
+				<li>
+					<i>姓名：</i>
+					<input type="text" placeholder="请输入姓名">
+				</li>
+				<li>
+					<i>手机号码：</i>
+					<input type="text" placeholder="请输入手机号码">
+					<p>用于接收取票信息和入园</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="next_push">
+		<div class="next_push_left">
+			<p>门票：2017京城水系皇家御河游单程船票+颐和园门票</p>
+			<p>张数：1</p>
+		</div>
+		<div class="next_push_money">
+			<b>￥65</b>
+		</div>
+		<input name="" type="submit" value="去支付" />
+	</div>
+</div>
+
+<!-- 主题内容 -->
+
+<!-- Footer -->
+{% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
+<!-- End Footer -->
+
+</body>
+</html>

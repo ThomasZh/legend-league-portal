@@ -95,7 +95,7 @@ class NewsupIndexHandler(BaseHandler):
         notices = data['rs']
 
         # franchises(景区)
-        params = {"filter":"league", "franchise_type":"scenery", "page":1, "limit":8}
+        params = {"filter":"level1", "franchise_type":"scenery", "page":1, "limit":8, "category":"757ee072a02511e7b7f600163e023e51"}
         url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs-filter", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")

@@ -78,7 +78,7 @@
 				<i class="zc_ji">激活码：</i>
 				<input type="text" placeholder="请输入激活码" id="register-code" class="zc_jhm" />
 				<em class="zc_ma" id="code-button">获取激活码</em>
-				<div class="register-form-main-message"></div>
+				<div class="register-form-main-message" style="float: left;text-align: center;width: 100%;margin-top: 20px;font-size: 14px;"></div>
 			</li>
 			<li>
 				<i class="zc_greed">&nbsp;</i>
@@ -242,7 +242,7 @@ $(function(){
 						console.log("XMLHttpRequest.status++++++:" + data.err_code);
 						// var rs_data = JSON.parse(data);
 						if (data.err_code == 409) {
-							$('.register-form-main-message').addClass('error').html('帐号已经存在, 请更换手机号码');
+							$('.register-form-main-message').addClass('error').html('该手机号已经注册, 请直接登录或更换手机号码!');
 							return
 						} else if (data.err_code == 200) {
 								var data = {

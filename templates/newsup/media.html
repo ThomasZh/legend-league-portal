@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link href="{{ static_url('leshui/css/jc.css') }}" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
+
+</head>
+<html>
+<body>
+	<!-- socialbar -->
+	{% module Template("newsup/block-socialbar.html", is_login=is_login, is_ops=is_ops) %}
+	<!-- /socialbar -->
+	<!-- 导航 -->
+	<div class="nav_all">
+		<div class="nav">
+			<a href="/">首页</a>
+			<a class="menu_scenery" href="javascript:;">景区导览</a>
+			<a class="menu_activity" href="javascript:;">近期活动</a>
+			<a class="menu_product" href="javascript:;">旅游产品</a>
+			<a class="menu_news" href="javascript:;">旅游资讯</a>
+			<a class="menu_media active" href="javascript:;">精彩瞬间</a>
+			{% if is_login  and is_ops %}
+			<a class="menu_supplier" href="javascript:;">供应商</a>
+			<a class="menu_require" href="javascript:;">景区需求</a>
+			<a class="menu_community" href="javascript:;">经验交流</a>
+			<a class="menu_supplier_product" href="javascript:;">供应商产品</a>
+			<a class="menu_supplier_require" href="javascript:;">供应商需求</a>
+			{% end %}
+		</div>
+	</div>
+	<!-- 手机版头部 -->
+		<div class="ph_nav">
+			<h1><img src="{{ static_url('leshui/images/nav.png') }}"></h1>
+			<h2><img src="{{ static_url('leshui/images/cha.png') }}"></h2>
+			<ul>
+				<li><a href="/">首页</a></li>
+				<li class="menu_scenery"><a href="javascript:;">景区导览</a></li>
+				<li class="menu_activity"><a href="javascript:;">近期活动</a></li>
+				<li class="menu_product"><a href="javascript:;">旅游产品</a></li>
+				<li class="menu_news"><a href="javascript:;">旅游资讯</a></li>
+				<li class="menu_media"><a href="javascript:;">精彩瞬间</a></li>
+				{% if is_login  and is_ops %}
+				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
+				<li class="menu_require"><a href="javascript:;">景区需求</a></li>
+				<li class="menu_community"><a href="javascript:;">经验交流</a></li>
+				<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
+				<li class="menu_supplier_require"><a href="javascript:;">供应商需求</a></li>
+				{% end %}
+			</ul>
+		</div>
+	<!-- 导航 -->
+
+<!-- 主题内容 -->
+<div class="jc_active">
+	<!-- 一共10个li -->
+	<ul>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+		<li>
+			<a href="#"><img src="images/img.jpg" alt=""></a>
+		</li>
+	</ul>
+
+	<div class="page">
+		<a href="#">上一页</a>
+		<a class="page_hover" href="#">1</a>
+		<a href="#">2</a>
+		<a href="#">下一页</a>
+	</div>
+	<div id="ph_page">
+		<a href="#">加载更多</a>
+	</div>
+</div>
+
+<!-- 主题内容 -->
+<!-- Footer -->
+{% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
+<!-- End Footer -->
+<script src="{{ static_url('leshui/js/index.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ static_url('leshui/js/jc.js') }}"></script>
+</body>
+</html>
