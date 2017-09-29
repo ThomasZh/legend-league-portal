@@ -108,7 +108,13 @@
 	<div class="in_one_all">
 	<div class="in_left" id="choose">
 		<div class="in_left_one">
-			<i><img src="{{ static_url('leshui/images/mdd.png') }}"><a id="mudi" style="display:inherit;width:85px;">全部</a></i>
+			<i><img src="{{ static_url('leshui/images/mdd.png') }}"><a id="mudi" style="display:inherit;width:85px;">
+				{% if city == 'all' %}
+					全部
+				{% else %}
+					{{ city }}
+				{% end %}
+				</a></i>
 			<span><b>选择目的地</b><img src="{{ static_url('leshui/images/bot.png') }}"></span>
 		</div>
 
@@ -828,7 +834,7 @@
 				// franchise_type = scenery, supplier
 				// category = all, id
 				// city = all, 北京
-				var order = 'none',sort = 'desc',franchise_type = '{{franchise_type}}',category = 'all',city = 'all';//默认参数定义
+				var order = 'none',sort = 'desc',franchise_type = '{{franchise_type}}',category = '{{ category }}',city = '{{ city }}';//默认参数定义
 		    function gotoPage(pageNum) {
 
 		      $.get("{{ api_domain }}/api/leagues/{{ league_id }}/clubs-filter?order="+order+"&sort="+ sort +"&category="+ category +"&city="+ city +"&franchise_type="+ franchise_type +"&page="+pageNum+"&limit="+limit,function(data,status){

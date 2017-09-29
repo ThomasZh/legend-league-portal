@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link href="{{ static_url('css/rili.css') }}" type="text/css" rel="stylesheet">
+	<link href="{{ static_url('leshui/css/yd.css') }}" type="text/css" rel="stylesheet">
+	<link href="{{ static_url('leshui/css/order.css') }}" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
+</head>
+<html>
+<body>
+	<!-- socialbar -->
+	{% module Template("newsup/block-socialbar.html", is_login=is_login, is_ops=is_ops) %}
+	<!-- /socialbar -->
+	<!-- 导航 -->
+	<div class="nav_all">
+		<div class="nav">
+			<a href="/">首页</a>
+			<a class="menu_scenery" href="javascript:;">景区导览</a>
+			<a class="menu_activity" href="javascript:;">近期活动</a>
+			<a class="menu_product" href="javascript:;">旅游产品</a>
+			<a class="menu_news" href="javascript:;">旅游资讯</a>
+			<a class="menu_media" href="javascript:;">精彩瞬间</a>
+			{% if is_login  and is_ops %}
+			<a class="menu_supplier" href="javascript:;">供应商</a>
+			<a class="menu_require" href="javascript:;">景区需求</a>
+			<a class="menu_community" href="javascript:;">经验交流</a>
+			<a class="menu_supplier_product" href="javascript:;">供应商产品</a>
+			<a class="menu_supplier_require" href="javascript:;">供应商需求</a>
+			{% end %}
+		</div>
+	</div>
+	<!-- 手机版头部 -->
+		<div class="ph_nav">
+			<h1><img src="{{ static_url('leshui/images/nav.png') }}"></h1>
+			<h2><img src="{{ static_url('leshui/images/cha.png') }}"></h2>
+			<ul>
+				<li><a href="/">首页</a></li>
+				<li class="menu_scenery"><a href="javascript:;">景区导览</a></li>
+				<li class="menu_activity"><a href="javascript:;">近期活动</a></li>
+				<li class="menu_product"><a href="javascript:;">旅游产品</a></li>
+				<li class="menu_news"><a href="javascript:;">旅游资讯</a></li>
+				<li class="menu_media"><a href="javascript:;">精彩瞬间</a></li>
+				{% if is_login  and is_ops %}
+				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
+				<li class="menu_require"><a href="javascript:;">景区需求</a></li>
+				<li class="menu_community"><a href="javascript:;">经验交流</a></li>
+				<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
+				<li class="menu_supplier_require"><a href="javascript:;">供应商需求</a></li>
+				{% end %}
+			</ul>
+		</div>
+	<!-- 导航 -->
+
+<!-- 主题内容 -->
+<div class="next">
+	<form id="t-form" action="/portal/newsup/ticket-cart?club_id={{ club_id }}" method="post">
+		<div class="next_main">
+			<h1>
+				{% for ticket in tickets %}
+				{% if ticket['_id'] == ticket_id %}
+					{{ ticket['title'] }}
+				<span>￥{{ float(ticket['discount_amount'])/100 }}<small>/张</small></span></h1>
+				{% end %}
+				{% end %}
+				<div class="next_ydxx">
+					<h2>填写预订信息<span>请在游玩当天的16:00前完成预订</span></h2>
+					<div class="next_day">
+						<i>游玩日期</i>
+						<em class="next_em">
+						<input type="text" placeholder="点击选择游玩日期" id="single_cal" class="ture_day">
+						</em>
+					</div>
+					<div class="next_page">
+						<i>购买张数</i>
+						<div class="count">
+		            <span class="reduce">-</span>
+		            <input class="count_input" type="text" value="1">
+		            <span class="add">+</span>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="next_ykxx">
+					<h2>填写出行人信息<span>需最少添加1位出行人</span></h2>
+					<ul>
+						<li>
+							<i>姓名：</i>
+							<input type="text" placeholder="请输入姓名">
+						</li>
+						<li>
+							<i>手机号码：</i>
+							<input type="text" placeholder="请输入手机号码">
+							<p>用于接收取票信息和入园</p>
+						</li>
+					</ul>
+				</div>
+
+		</div>
+	</form>
+	<div class="next_push">
+		<div class="next_push_left">
+			{% for ticket in tickets %}
+			{% if ticket['_id'] == ticket_id %}
+			<p>门票：{{ ticket['title'] }}</p>
+			{% end %}
+			{% end %}
+			<p>张数：1</p>
+		</div>
+		<div class="next_push_money">
+			<b>￥65</b>
+		</div>
+		<input type="button" id="sub-btn" value="去支付" />
+	</div>
+</div>
+
+<!-- 主题内容 -->
+
+<!-- Footer -->
+{% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
+<!-- End Footer -->
+<script src="{{ static_url('leshui/js/order.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ static_url('js/rili.js') }}"></script>
+<script type="text/javascript">
+$(function(){
+
+		// 初始化日历插件
+		// calender('#single_cal').init(function(date){
+	  //   	this.value = date
+		// });
+		calender('#single_cal').init(
+				{
+				    // date : [2017,09,12], //设置默认显示年月日，默认当前年月日
+				    format : 'yyyy-MM-dd', //设置显示格式
+				    button : false, //是否显示按钮
+				    left : 0, //追加left，默认0
+				    top :0, //追加top，默认0
+	    			onload : function(){
+
+						} //初始化完成执行，this为当前创建的日历对象
+				},
+				function(date){
+			    //回调函数
+			    this.value = date;
+				}
+		);
+		// 生成订单操作
+		$("#sub-btn").on('click',function(){
+			var items = [];
+			// 组织json数据
+			for(var i = 1;i<selectInputs.length;i++){
+				// console.log(selectInputs[i].prop('checked'))
+				if(selectInputs[i].checked){
+					var item_id = selectInputs[i].getAttribute("data-pro-id");
+					var spec_id =  "00000000000000000000000000000000";
+					var _this = selectInputs[i];
+					var quantity = $(_this).parent().next().next().next().children('.count-input').val();
+					obj =  {"item_id":item_id,"spec_id":spec_id,"quantity":quantity};
+					items.push(obj);
+					$("#items").val(JSON.stringify(items))
+				}
+			}
+			// console.log(items);
+			if(items.length == 0){
+				return;
+			}else{
+				$('#t-form').submit();
+			}
+		});
+})
+
+</script>
+</body>
+</html>

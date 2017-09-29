@@ -8,7 +8,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<link href="{{ static_url('leshui/css/yd.css') }}" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
-
 </head>
 <html>
 <body>
@@ -59,30 +58,14 @@
 <div class="yd">
 	<div class="yd_main">
 		<h1><img src="images/yd.png" alt=""><span>乐水游推荐</span></h1>
+		{% for ticket in tickets %}
 		<ul>
-			<li class="yd_title">徒步宜兴竹海，登苏南第一峰</li>
-			<li class="yd_yj">票面价格：￥8000</li>
-			<li class="yd_hyj">会员价格：￥5000</li>
-			<li class="yd_order"><em class="yd_butt">预定</em></li>
+			<li class="yd_title">{{ ticket['title'] }}</li>
+			<li class="yd_yj">票面价格：￥{{ float(ticket['amount'])/100 }}</li>
+			<li class="yd_hyj">会员价格：￥{{ float(ticket['discount_amount'])/100 }}</li>
+			<li class="yd_order" onclick="location.href='/portal/newsup/ticket-cart?club_id={{ club_id }}&ticket_id={{ ticket['_id'] }}'"><em class="yd_butt">预定</em></li>
 		</ul>
-		<ul>
-			<li class="yd_title">徒步宜兴竹海，登苏南第一峰</li>
-			<li class="yd_yj">票面价格：￥8000</li>
-			<li class="yd_hyj">会员价格：￥5000</li>
-			<li class="yd_order"><em class="yd_butt">预定</em></li>
-		</ul>
-		<ul>
-			<li class="yd_title">徒步宜兴竹海，登苏南第一峰</li>
-			<li class="yd_yj">票面价格：￥8000</li>
-			<li class="yd_hyj">会员价格：￥5000</li>
-			<li class="yd_order"><em class="yd_butt">预定</em></li>
-		</ul>
-		<ul>
-			<li class="yd_title">徒步宜兴竹海，登苏南第一峰</li>
-			<li class="yd_yj">票面价格：￥8000</li>
-			<li class="yd_hyj">会员价格：￥5000</li>
-			<li class="yd_order"><em class="yd_butt">预定</em></li>
-		</ul>
+		{% end %}
 	</div>
 </div>
 <!-- 主题内容 -->

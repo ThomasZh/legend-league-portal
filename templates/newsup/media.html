@@ -58,88 +58,19 @@
 <!-- 主题内容 -->
 <div class="jc_active">
 	<!-- 一共10个li -->
-	<ul>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
-
-		<li>
-			<a href="#"><img src="images/img.jpg" alt=""></a>
-		</li>
+	<ul class="pic-wrap" id="pic-wrap" style="overflow:auto;">
 		<li>
 			<a href="#"><img src="images/img.jpg" alt=""></a>
 		</li>
 	</ul>
 
 	<div class="page">
-		<a href="#">上一页</a>
-		<a class="page_hover" href="#">1</a>
-		<a href="#">2</a>
-		<a href="#">下一页</a>
+		<a href="javascript:;" id="prev">上一页</a>
+		<span class="pageBox"></span>
+		<a href="javascript:;" id="next">下一页</a>
+		<!-- 共<span id="total_page" style="padding:0 5px;"></span>页 -->
 	</div>
+
 	<div id="ph_page">
 		<a href="#">加载更多</a>
 	</div>
@@ -151,5 +82,75 @@
 <!-- End Footer -->
 <script src="{{ static_url('leshui/js/index.js') }}" type="text/javascript"></script>
 <script type="text/javascript" src="{{ static_url('leshui/js/jc.js') }}"></script>
+<script type="text/javascript">
+	$(function(){
+
+			// 景区分页显示
+			var limit = 10;//每页显示数
+			var currentPage = 0;//当前页
+			var total_page = 0;//总页数
+			function gotoPage(pageNum) {
+				$.get("{{api_domain}}/api/multimedias-pagination?status=publish&filter=league&league_id={{ league_info['_id'] }}&page="+pageNum+"&limit="+limit,function(data,status){
+
+							data_obj = JSON.parse(data);
+							console.log(data_obj);
+							data = data_obj.rs;
+							currentPage = pageNum;
+					var multimedias = data.data;
+							total_page = data.total_page;//总页
+							// $("#total_page").html(total_page);
+							$('#pic-wrap').html("");
+
+					for (var i in multimedias) {
+							var inner_html =	'<li>';
+									inner_html += '<a href="#"><img src="'+ multimedias[i].url +'!370x370" alt=""></a>';
+									inner_html += '</li>';
+						$('#pic-wrap').append(inner_html);
+						// member_num += 1;
+					};
+
+					pageNext = parseInt((currentPage-1)/5) + 1;
+
+						start = (pageNext-1)*5+1;
+						end = pageNext*5;
+						if(end > total_page){
+							end = total_page;
+						}
+
+						$(".pageBox").html("");
+						for (var k=start;k<=end;k++){
+							var inner_html = '<a class="" id="num'+k+'">'+k+'</a>';
+							$(".pageBox").append(inner_html);
+						};
+						 $("#num"+currentPage).addClass("page_hover").siblings().removeClass("page_hover");
+
+				});
+
+			};
+				gotoPage(1);//页面初始化
+
+				// 点击页码操作
+				$(document).on('click','.pageBox > a',function(){
+					var num = $(this).text();
+					gotoPage(num);
+				})
+
+				$("#prev").on("click",function(){
+						if(currentPage<=1){
+
+						}else{
+								gotoPage(--currentPage);
+						}
+				});
+
+				$("#next").on("click",function(){
+						if(currentPage>=total_page){
+
+						}else{
+								gotoPage(++currentPage);
+						}
+				});
+	})
+</script>
 </body>
 </html>

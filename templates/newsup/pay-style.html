@@ -3,12 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-	<link href="css/yd.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
-	<script src="js/order.js" type="text/javascript"></script>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link href="{{ static_url('leshui/css/yd.css') }}" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
 
 </head>
 <html>
@@ -69,6 +68,6 @@
 <!-- Footer -->
 {% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
 <!-- End Footer -->
-
+<script src="{{ static_url('leshui/js/order.js') }}" type="text/javascript"></script>
 </body>
 </html>

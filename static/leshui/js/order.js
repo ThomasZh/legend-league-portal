@@ -24,4 +24,25 @@ $('#cent_pep li').click(function(){
 	$('.center_peple > div').eq(Pindex).show().siblings().hide();
 });
 
+
+
+
+// 预定后下一步
+$('.next_day > div').each(function(){
+	$(this).click(function(){
+		$(this).addClass('next_true_yes').siblings().removeClass('next_true_yes');
+
+		if( $(this).hasClass('next_true2') ){
+			$('.next_em').show();
+		}else{
+			$('.next_em').hide();
+		}
+	});
+});
+
+	
+
+
+
+
 });

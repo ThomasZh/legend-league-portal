@@ -28,7 +28,7 @@ input,select{outline: none;font-family: "微软雅黑"}
 	background:url(../images/serch.png) no-repeat;	background-size: 28px 38px;background-position:left center ;}
 .search_sub{width: 14%;height: 42px;line-height: 42px;float: left;border: none;cursor: pointer;background: #ff9913;
 color: #fff;font-size: 18px;font-family: "微软雅黑"}
-
+.active{background-color: #00a0e9;}
 /*导航*/
 .nav_all{width: 100%;float: left;height: 45px;line-height: 45px;background: #41bbf3;}
 .nav{width:1200px;margin: auto;overflow: hidden;}
@@ -254,4 +254,3 @@ float: left;text-align: center;}
 .jc_active ul li{height: 90px;width:47%;}
 .jc_active ul li a img{height: 90px;}
 }
-

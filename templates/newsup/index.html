@@ -728,14 +728,6 @@
 
 		<div class="in_left_two">
 			<b><img src="{{ static_url('leshui/images/in_icon1.jpg') }}">全国热门城市</b>
-			<a href="/portal/newsup/category">北京</a>
-			<a href="#">上海</a>
-			<a href="#">成都</a>
-			<a href="#">三亚</a>
-			<a href="#">北京</a>
-			<a href="#">上海</a>
-			<a href="#">成都</a>
-			<a href="#">三亚</a>
 			<a href="#">北京</a>
 			<a href="#">上海</a>
 			<a href="#">成都</a>
@@ -743,19 +735,15 @@
 		</div>
 		<div class="in_left_three">
 			<b><img src="{{ static_url('leshui/images/in_icon2.jpg') }}">一周热游榜</b>
-			<a href="#">故宫</a>
-			<a href="#">颐和园</a>
-			<a href="#">八达岭长城</a>
-			<a href="#">北京欢乐谷</a>
-			<a href="#">古北水镇</a>
-			<a href="#">八达岭长城缆车</a>
+			{% for hot_franchise in hot_franchises %}
+			<a href="/portal/newsup/franchise-detail?id={{ hot_franchise['club_id'] }}">{{hot_franchise['name']}}</a>
+			{% end %}
 		</div>
 		<div class="in_left_four">
 			<b><img src="{{ static_url('leshui/images/in_icon3.jpg') }}">当季热门</b>
-			<a href="#">必游景点</a>
-			<a href="#">温泉</a>
-			<a href="#">动植物园</a>
-			<a href="#">水上乐园</a>
+			{% for hot_tag in hot_tags %}
+			<a href="javascript:;" data-id="{{hot_tag['_id']}}">{{hot_tag['title']}}</a>
+			{% end %}
 		</div>
 	</div>
 
@@ -810,7 +798,7 @@
 			<li>热门景区</li>
 			<li>精彩推荐</li>
 		</ul>
-		<a href="#">更多>></a>
+		<a href="/portal/newsup/franchises?franchise_type=scenery">更多>></a>
 	</div>
 	<div class="in_two_mian">
 
@@ -826,28 +814,18 @@
 						<h3>乐水游--中国水利风景区综合服务平台</h3>
 					</div>
 					<div class="in_two_hot_left_bot">
-						<a href="#">温泉</a>
-						<a href="#">古镇</a>
-						<a href="#">山水</a>
-						<a href="#">湿地</a>
-						<a href="#">乐园</a>
-						<a href="#">漂流</a>
-						<a href="#">采摘</a>
-						<a href="#">赏花</a>
+						{% for hot_franchises_tag in hot_franchises_tags %}
+						<a href="#">{{ hot_franchises_tag['title'] }}</a>
+						{% end %}
 					</div>
 				</div>
 			</div>
 			<!-- 手机样式 -->
 			<div class="ph_hot">
 				<p>热门景区推荐</p>
-				<a href="#">温泉</a>
-				<a href="#">古镇</a>
-				<a href="#">山水</a>
-				<a href="#">湿地</a>
-				<a href="#">乐园</a>
-				<a href="#">漂流</a>
-				<a href="#">采摘</a>
-				<a href="#">赏花</a>
+				{% for hot_franchises_tag in hot_franchises_tags %}
+				<a href="#">{{ hot_franchises_tag['title'] }}</a>
+				{% end %}
 			</div>
 			<!-- 手机样式 -->
 			<div class="in_two_hot_right">
@@ -858,7 +836,7 @@
 							<a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}"><h4>{{ franchises[i]['club_name'] }}</h4></a>
 							<p>{{ franchises[i]['introduction'] }}</p>
 						</li>
-				{% end %}
+					{% end %}
 				</ul>
 			</div>
 		</div>
@@ -875,37 +853,28 @@
 						<h3>乐水游--中国水利风景区综合服务平台</h3>
 					</div>
 					<div class="in_two_tj_left_bot">
-						<a href="#">攀岩</a>
-						<a href="#">溜索</a>
-						<a href="#">拓展</a>
-						<a href="#">CS</a>
-						<a href="#">木屋别墅</a>
-						<a href="#">露营基地</a>
-						<a href="#">玻璃观景</a>
-						<a href="#">水上乐园</a>
+						{% for wonder_tag in wonder_tags %}
+						<a href="#">{{ wonder_tag['title'] }}</a>
+						{% end %}
 					</div>
 				</div>
 			</div>
 			<!-- 手机样式 -->
 			<div class="ph_hot">
 				<p>热门主题玩法</p>
-				<a href="#">攀岩</a>
-				<a href="#">溜索</a>
-				<a href="#">拓展</a>
-				<a href="#">CS</a>
-				<a href="#">木屋别墅</a>
-				<a href="#">露营基地</a>
-				<a href="#">玻璃观景</a>
-				<a href="#">水上乐园</a>
+				{% for wonder_tag in wonder_tags %}
+				<a href="#">{{ wonder_tag['title'] }}</a>
+				{% end %}
 			</div>
 			<!-- 手机样式 -->
 			<div class="in_two_hot_right">
 				<ul>
-					{% for multimedia in multimedias %}
-							<li>
-								<a href="#"><img src="{{ multimedia['url'] }}!293x293" alt=""></a>
-								<a href="#"><h4>{{ multimedia['club_name'] }}</h4></a>
-							</li>
+					{% for i in range(len(wonder_franchises)) %}
+						<li>
+							<a href="/portal/newsup/franchise-detail?id={{ wonder_franchises[i]['club_id'] }}"><img src="{{ wonder_franchises[i]['img'] }}!140x106" alt=""></a>
+							<a href="/portal/newsup/franchise-detail?id={{ wonder_franchises[i]['club_id'] }}"><h4>{{ wonder_franchises[i]['club_name'] }}</h4></a>
+							<p>{{ wonder_franchises[i]['introduction'] }}</p>
+						</li>
 					{% end %}
 				</ul>
 			</div>
@@ -915,7 +884,7 @@
 <!-- 第二部分 -->
 <!-- 特色路线 -->
 <div class="in_ts">
-	<h1>特色路线<a href="#">更多>></a></h1>
+	<h1>特色路线<a href="/portal/newsup/franchises?franchise_type=scenery">更多>></a></h1>
 	<div class="in_ts_mian">
 
 			<div class="in_ts_hot_left">
@@ -929,37 +898,27 @@
 						<h3>乐水游--中国水利风景区综合服务平台</h3>
 					</div>
 					<div class="in_ts_hot_left_bot">
-						<a href="#">亲子</a>
-						<a href="#">情侣</a>
-						<a href="#">研学</a>
-						<a href="#">蜜月</a>
-						<a href="#">夕阳红</a>
-						<a href="#">自驾游</a>
-						<a href="#">周边游</a>
-						<a href="#">海滨度假</a>
+						{% for feature_line_tag in feature_line_tags %}
+						<a href="#">{{ feature_line_tag['title'] }}</a>
+						{% end %}
 					</div>
 				</div>
 			</div>
 			<!-- 手机样式 -->
 			<div class="ph_hot">
 				<p>特色路线推荐</p>
-				<a href="#">亲子</a>
-				<a href="#">情侣</a>
-				<a href="#">研学</a>
-				<a href="#">蜜月</a>
-				<a href="#">夕阳红</a>
-				<a href="#">自驾游</a>
-				<a href="#">周边游</a>
-				<a href="#">海滨度假</a>
+				{% for feature_line_tag in feature_line_tags %}
+				<a href="#">{{ feature_line_tag['title'] }}</a>
+				{% end %}
 			</div>
 			<!-- 手机样式 -->
 			<div class="in_ts_hot_right">
 				<ul>
-					{% for article in activities %}
+					{% for i in range(len(feature_line_franchises)) %}
 						<li>
-							<a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!370x278" alt=""></a>
-							<a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><h4>{{ article['title'] }}</h4></a>
-							<p>{{ article['subtitle'] }}</p>
+							<a href="/portal/newsup/franchise-detail?id={{ feature_line_franchises[i]['club_id'] }}"><img src="{{ feature_line_franchises[i]['img'] }}!140x106" alt=""></a>
+							<a href="/portal/newsup/franchise-detail?id={{ feature_line_franchises[i]['club_id'] }}"><h4>{{ feature_line_franchises[i]['club_name'] }}</h4></a>
+							<p>{{ feature_line_franchises[i]['introduction'] }}</p>
 						</li>
 					{% end %}
 				</ul>
@@ -971,14 +930,14 @@
 
 <!-- 近期活动 -->
 <div class="in_active">
-	<h1>近期活动<a href="#">更多>></a></h1>
+	<h1>近期活动<a href="/portal/newsup/category?id=0bbf89e2f73411e69a3c00163e023e51">更多>></a></h1>
 	<ul>
 		<!-- 一共10个li -->
-		{% for article in activities %}
+		{% for activity in activities %}
 			<li>
-				<a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><img src="{{ article['img'] }}!370x278" alt=""></a>
-				<a href="/portal/newsup/item-detail?id={{ article['_id'] }}"><h4>{{ article['title'] }}</h4></a>
-				<p>{{ article['subtitle'] }}</p>
+				<a href="/portal/newsup/item-detail?id={{ activity['_id'] }}"><img src="{{ activity['img'] }}!370x278" alt=""></a>
+				<a href="/portal/newsup/item-detail?id={{ activity['_id'] }}"><h4>{{ activity['title'] }}</h4></a>
+				<p>{{ activity['subtitle'] }}</p>
 			</li>
 		{% end %}
 	</ul>
@@ -988,13 +947,13 @@
 
 <!-- 旅游资讯 -->
 <div class="in_news">
-	<h1>旅游资讯<a href="#">更多>></a></h1>
+	<h1>旅游资讯<a href="/portal/newsup/category?id=065f565e6bd711e7b46300163e023e51">更多>></a></h1>
 	<ul>
 		<!-- 一共10个li -->
 		{% for journey in journeies %}
 			<li>
-				<a href="#"><img src="{{ journey['img'] }}!370x278" alt=""></a>
-				<a href="#"><h4>{{ journey['title'] }}</h4></a>
+				<a href="/portal/newsup/item-detail?id={{ journey['_id'] }}"><img src="{{ journey['img'] }}!370x278" alt=""></a>
+				<a href="/portal/newsup/item-detail?id={{ journey['_id'] }}"><h4>{{ journey['title'] }}</h4></a>
 				<p>{{ journey['subtitle'] }}</p>
 			</li>
 		{% end %}
@@ -1006,18 +965,26 @@
 <!-- End Footer -->
 <script type="text/javascript">
 	$(function(){
-			$("#mudi").text();
-			$(document).on('click','.mdd_min ul a',function(){
-				// var province = $(this).text();
-				_city = $(this).text();
-				$('#mudi').text(_city);
-				// city = encodeURI(encodeURI(_city));
-			}).on('click','.in_mddo a',function(){
-				_city = $(this).text();
-				$('#mudi').text(_city);
-				// city = encodeURI(encodeURI(_city));
-				$('#in_mdd').hide();
-			});
+
+				// 各种查询操作
+				$(document).on('click','.in_left_two a',function(){
+						_city = $(this).text();
+						// city = encodeURI(encodeURI(_city));
+						location.href="/portal/newsup/franchises?franchise_type=scenery&city="+_city
+				}).on('click','.mdd_min ul a',function(){
+					_city = $(this).text();
+					// city = encodeURI(encodeURI(_city));
+					location.href="/portal/newsup/franchises?franchise_type=scenery&city="+_city
+				}).on('click','.in_mddo a',function(){
+					_city = $(this).text();
+					$('#in_mdd').hide();
+					// city = encodeURI(encodeURI(_city));
+					location.href="/portal/newsup/franchises?franchise_type=scenery&city="+_city
+				}).on('click','.in_left_four a',function(){
+					category = $(this).attr('data-id');
+					location.href="/portal/newsup/franchises?franchise_type=scenery&category_id="+category
+				});
+
 			var myVar = isIE();
 			if (myVar == false){
 						// 手机版轮播图
