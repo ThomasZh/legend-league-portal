@@ -1423,6 +1423,16 @@ class NewsupTicketCartHandler(AuthorizationHandler):
         item_id = "00000000000000000000000000000000"
         _timestamp = int(time.time())
 
+        #订票人信息
+        addr = self.get_argument("addr_input", {})
+        logging.info("got addr %r", addr)
+        addr = JSON.loads(addr)
+        logging.info("got addr %r", addr)
+        # 游玩日期
+        # play_time = self.get_argument('single_cal','')
+        # logging.info('got play_time',play_time)
+        # play_time = n_timestamp_datetime(float(play_time))
+
         order_id = str(uuid.uuid1()).replace('-', '')
         # 创建订单索引
         order_index = {
@@ -1434,6 +1444,7 @@ class NewsupTicketCartHandler(AuthorizationHandler):
             "item_name": "", # 由服务器端填写第一个商品名称
             "distributor_type": "item",
             "items":items,
+            "shipping_addr":addr,
             "shipping_cost":0, # 由服务器端计算运费
             "billing_required":0,
             "distributor_id": "00000000000000000000000000000000",
@@ -1460,7 +1471,7 @@ class NewsupTicketCartHandler(AuthorizationHandler):
         response = http_client.fetch(url, method="DELETE", headers=headers)
         logging.info("update item response.body=[%r]", response.body)
 
-        self.redirect("/portal/newsup/ticket-balance?club_id="+club_id+"&order_id="+order_id)
+        self.redirect("/portal/newsup/pay-style?club_id="+club_id+"&order_id="+order_id)
 
 
 # 订票结算页
@@ -1493,7 +1504,7 @@ class NewsupTicketBalanceHandler(AuthorizationHandler):
         _product_description = items[0]['title']
         logging.info("GET items %r", items)
 
-        self.render('newsup/ticket-balance.html',
+        self.render('newsup/pay-style.html',
                 is_login=is_login,
                 is_ops=is_ops,
                 club_id=club_id,

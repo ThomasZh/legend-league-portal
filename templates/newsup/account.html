@@ -86,139 +86,9 @@
 				</ul>
 			</div>
 			<div id="order_right">
-				<div class="order_main">
-					<ul>
-						<li class="order_hao">100245201</li>
-						<li class="order_maney">￥5450</li>
-						<li class="order_zt">待付款</li>
-						<li class="order_xq">
-							<dl>
-								<dt>
-									<a href="#"><img src="images/sm_img.png"></a>
-								</dt>
-								<dd>
-									<p><a href="#">9月2日 徒步宜兴竹海，登苏南第一峰</a></p>
-									<em><img src="images/time2.png" alt="">8月31日<span>星期四</span></em>
-								</dd>
-							</dl>
-						</li>
-					</ul>
-					<ul>
-						<li class="order_hao">100245201</li>
-						<li class="order_maney">￥5450</li>
-						<li class="order_zt">已付款</li>
-						<li class="order_xq">
-							<dl>
-								<dt>
-									<a href="#"><img src="images/sm_img.png"></a>
-								</dt>
-								<dd>
-									<p><a href="#">9月2日 徒步宜兴竹海，登苏南第一峰</a></p>
-									<em><img src="images/time2.png" alt="">8月31日<span>星期四</span></em>
-								</dd>
-							</dl>
-						</li>
-					</ul>
-					<ul>
-						<li class="order_hao">100245201</li>
-						<li class="order_maney">￥5450</li>
-						<li class="order_zt">已完成</li>
-						<li class="order_xq">
-							<dl>
-								<dt>
-									<a href="#"><img src="images/sm_img.png"></a>
-								</dt>
-								<dd>
-									<p><a href="#">9月2日 徒步宜兴竹海，登苏南第一峰</a></p>
-									<em><img src="images/time2.png" alt="">8月31日<span>星期四</span></em>
-								</dd>
-							</dl>
-						</li>
-					</ul>
-					<ul>
-						<li class="order_hao">100245201</li>
-						<li class="order_maney">￥5450</li>
-						<li class="order_zt">已取消</li>
-						<li class="order_xq">
-							<dl>
-								<dt>
-									<a href="#"><img src="images/sm_img.png"></a>
-								</dt>
-								<dd>
-									<p><a href="#">9月2日 徒步宜兴竹海，登苏南第一峰</a></p>
-									<em><img src="images/time2.png" alt="">8月31日<span>星期四</span></em>
-								</dd>
-							</dl>
-						</li>
-					</ul>
-				</div>
-				<div class="order_main">
-					<ul>
-						<li class="order_hao">100245201</li>
-						<li class="order_maney">￥5450</li>
-						<li class="order_zt">已付款</li>
-						<li class="order_xq">
-							<dl>
-								<dt>
-									<a href="#"><img src="images/sm_img.png"></a>
-								</dt>
-								<dd>
-									<p><a href="#">9月2日 徒步宜兴竹海，登苏南第一峰</a></p>
-									<em><img src="images/time2.png" alt="">8月31日<span>星期四</span></em>
-								</dd>
-							</dl>
-						</li>
-					</ul>
-					<ul>
-						<li class="order_hao">100245201</li>
-						<li class="order_maney">￥5450</li>
-						<li class="order_zt">已完成</li>
-						<li class="order_xq">
-							<dl>
-								<dt>
-									<a href="#"><img src="images/sm_img.png"></a>
-								</dt>
-								<dd>
-									<p><a href="#">9月2日 徒步宜兴竹海，登苏南第一峰</a></p>
-									<em><img src="images/time2.png" alt="">8月31日<span>星期四</span></em>
-								</dd>
-							</dl>
-						</li>
-					</ul>
-				</div>
-				<div class="order_main">
-					<ul>
-						<li class="order_hao">100245201</li>
-						<li class="order_maney">￥5450</li>
-						<li class="order_zt">待付款</li>
-						<li class="order_xq">
-							<dl>
-								<dt>
-									<a href="#"><img src="images/sm_img.png"></a>
-								</dt>
-								<dd>
-									<p><a href="#">9月2日 徒步宜兴竹海，登苏南第一峰</a></p>
-									<em><img src="images/time2.png" alt="">8月31日<span>星期四</span></em>
-								</dd>
-							</dl>
-						</li>
-					</ul>
-					<ul>
-						<li class="order_hao">100245201</li>
-						<li class="order_maney">￥5450</li>
-						<li class="order_zt">已取消</li>
-						<li class="order_xq">
-							<dl>
-								<dt>
-									<a href="#"><img src="images/sm_img.png"></a>
-								</dt>
-								<dd>
-									<p><a href="#">9月2日 徒步宜兴竹海，登苏南第一峰</a></p>
-									<em><img src="images/time2.png" alt="">8月31日<span>星期四</span></em>
-								</dd>
-							</dl>
-						</li>
-					</ul>
+				<div class="order_main" id="order-wrap"></div>
+				<div class="order_main" id="payed"></div>
+				<div class="order_main" id="no-pay">
 					<input type="submit" value="立即支付" class="pay">
 				</div>
 			</div>
@@ -444,6 +314,56 @@
 <script src="{{ static_url('upyun/js/upyun-mu.js') }}"></script>
 <script>
 
+		function getLocalTime(nS) { //时间戳转换
+			 return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+		};
+
+		// 查询订单
+		var limit = 10;
+		var pageNum = 1;
+		function getOrders(_states){
+			$.ajax({
+				type: "GET",
+				url: "{{ api_domain }}/api/orders/mine?filter=club&club_id=all&page="+pageNum+"&limit="+limit,
+				dataType: "json",
+				headers: {"Authorization":"Bearer {{access_token}}"},
+				contentType: 'application/json',
+				success: function(data, status, xhr) {
+					console.log(data);
+					// var dataObj = JSON.parse(data);
+					var orders = data.rs.data;
+					var _html = "";
+					for (var i =0 ;i<orders.length;i++){
+							_html += '<ul>';
+							_html += '<li class="order_hao">'+ orders[i].trade_no +'</li>';
+							_html += '<li class="order_maney">￥'+ (parseFloat(orders[i].actual_payment)/100).toFixed(2) +'</li>';
+							_html += '<li class="order_zt">';
+							if (orders[i].pay_status == 30){
+									_html +=  '已支付';
+							}else if(orders[i].pay_status == 20){
+									_html +=  '未支付';
+							}
+							_html += '</li>';
+							_html += '<li class="order_xq">';
+							_html += '<dl>';
+							_html += '<dt>';
+							_html += '<a href="#"><img src="images/sm_img.png"></a>';
+							_html += '</dt>';
+							_html += '<dd>';
+							_html +=			'<p><a href="#">'+ orders[i].item_name +'</a></p>';
+							_html +=			'<em><img src="images/time2.png" alt="">'+ getLocalTime(orders[i].create_time) +'</em>';
+							_html +=		'</dd>';
+							_html += '</dl>';
+							_html += '</li>';
+							_html += '</ul>';
+					}
+					$('#order-wrap').append(_html);
+				}
+			})
+		};
+		getOrders(30)
+
+	// 上传头像到upai云
   function uuid() {
     var s = [];
     var hexDigits = "0123456789abcdef";
@@ -499,6 +419,7 @@
       });
   });
 
+	// 修改个人基本信息
 	$(function(){
 			$('#account-btn').on('click',function(){
 				saveInfo();

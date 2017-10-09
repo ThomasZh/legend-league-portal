@@ -136,7 +136,7 @@ def datetime_timestamp(dt):
      # "2012-03-28 06:53:40" to timestamp(int)
      _timestamp = time.mktime(time.strptime(dt, '%m/%d/%Y %H:%M'))
      return int(_timestamp)
-
+     
 
 def generate_md5(fp):
     m = md5()

@@ -42,7 +42,7 @@ def map():
 
         (r'/portal/newsup/ticket-list', getattr(newsup, 'NewsupTicketListHandler')),
         (r'/portal/newsup/ticket-cart', getattr(newsup, 'NewsupTicketCartHandler')),
-        (r'/portal/newsup/ticket-balance', getattr(newsup, 'NewsupTicketBalanceHandler')),
+        (r'/portal/newsup/pay-style', getattr(newsup, 'NewsupTicketBalanceHandler')),
         (r'/portal/newsup/order-list', getattr(newsup, 'NewsupOrderListHandler')),
 
         (r'/api/portal/newsup/articles', getattr(newsup, 'ApiArticlesXHR')), #获取文章数据api

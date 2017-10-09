@@ -79,7 +79,7 @@
 						<i>购买张数</i>
 						<div class="count">
 		            <span class="reduce">-</span>
-		            <input class="count_input" type="text" value="1">
+		            <input class="count_input" id="ticket-num" type="text" value="1">
 		            <span class="add">+</span>
 						</div>
 					</div>
@@ -91,32 +91,35 @@
 					<ul>
 						<li>
 							<i>姓名：</i>
-							<input type="text" placeholder="请输入姓名">
+							<input type="text" id="t-name" placeholder="请输入姓名">
 						</li>
 						<li>
 							<i>手机号码：</i>
-							<input type="text" placeholder="请输入手机号码">
+							<input type="text" id="t-phone" placeholder="请输入手机号码">
 							<p>用于接收取票信息和入园</p>
 						</li>
 					</ul>
 				</div>
 
 		</div>
+
+		<div class="next_push">
+			<div class="next_push_left">
+				{% for ticket in tickets %}
+				{% if ticket['_id'] == ticket_id %}
+				<p>门票：{{ ticket['title'] }}</p>
+				{% end %}
+				{% end %}
+				<p id="l-ticket-num">张数：1</p>
+			</div>
+			<div class="next_push_money">
+				<b id="total-price">￥65</b>
+			</div>
+			<input type="button" id="sub-btn" value="去支付" />
+		</div>
+		<input type="hidden" name="items" id="items">
+		<input type="hidden" name="addr_input" id="addr_input">
 	</form>
-	<div class="next_push">
-		<div class="next_push_left">
-			{% for ticket in tickets %}
-			{% if ticket['_id'] == ticket_id %}
-			<p>门票：{{ ticket['title'] }}</p>
-			{% end %}
-			{% end %}
-			<p>张数：1</p>
-		</div>
-		<div class="next_push_money">
-			<b>￥65</b>
-		</div>
-		<input type="button" id="sub-btn" value="去支付" />
-	</div>
 </div>
 
 <!-- 主题内容 -->
@@ -133,9 +136,20 @@ $(function(){
 		// calender('#single_cal').init(function(date){
 	  //   	this.value = date
 		// });
+		function getNextDay(){
+        d = new Date();
+				console.log(d);
+        d = + d + 1000*60*60*24;
+        d = new Date(d);
+				var arrDate = new Array(3)
+						arrDate[0] = d.getFullYear()
+						arrDate[1] = (d.getMonth()+1)
+						arrDate[2] = d.getDate()
+				return arrDate;
+    };//下一天
 		calender('#single_cal').init(
 				{
-				    // date : [2017,09,12], //设置默认显示年月日，默认当前年月日
+				    date : getNextDay(), //设置默认显示年月日，默认当前年月日
 				    format : 'yyyy-MM-dd', //设置显示格式
 				    button : false, //是否显示按钮
 				    left : 0, //追加left，默认0
@@ -151,21 +165,20 @@ $(function(){
 		);
 		// 生成订单操作
 		$("#sub-btn").on('click',function(){
-			var items = [];
-			// 组织json数据
-			for(var i = 1;i<selectInputs.length;i++){
-				// console.log(selectInputs[i].prop('checked'))
-				if(selectInputs[i].checked){
-					var item_id = selectInputs[i].getAttribute("data-pro-id");
-					var spec_id =  "00000000000000000000000000000000";
-					var _this = selectInputs[i];
-					var quantity = $(_this).parent().next().next().next().children('.count-input').val();
-					obj =  {"item_id":item_id,"spec_id":spec_id,"quantity":quantity};
-					items.push(obj);
-					$("#items").val(JSON.stringify(items))
-				}
-			}
-			// console.log(items);
+				var items = [];
+				// 组织json数据
+				var item_id = "{{ ticket_id }}";
+				var spec_id =  "00000000000000000000000000000000";
+				var quantity = $("#ticket-num").val();
+				obj =  {"item_id":item_id,"spec_id":spec_id,"quantity":quantity};
+				items.push(obj);
+				$("#items").val(JSON.stringify(items))
+				console.log(items);
+				// 订票人信息
+				var name = $('#t-name').val();
+				var phone = $('#t-phone').val();
+				address = {"name":name,"phone":phone,"_addr":"China"};
+				$("#addr_input").val(JSON.stringify(address));
 			if(items.length == 0){
 				return;
 			}else{
