@@ -83,13 +83,14 @@
 					<li class="order_maney">金额(元)</li>
 					<li class="order_zt">订单状态</li>
 					<li class="order_xq">订单详情</li>
+					<li class="order_set">操作</li>
 				</ul>
 			</div>
 			<div id="order_right">
 				<div class="order_main" id="order-wrap"></div>
 				<div class="order_main" id="payed"></div>
 				<div class="order_main" id="no-pay">
-					<input type="submit" value="立即支付" class="pay">
+
 				</div>
 			</div>
 		</div>
@@ -319,7 +320,7 @@
 		};
 
 		// 查询订单
-		var limit = 10;
+		var limit = 20;
 		var pageNum = 1;
 		function getOrders(_states){
 			$.ajax({
@@ -340,24 +341,31 @@
 							_html += '<li class="order_zt">';
 							if (orders[i].pay_status == 30){
 									_html +=  '已支付';
+							}else if(orders[i].pay_status == 10){
+									_html +=  '未支付';
 							}else if(orders[i].pay_status == 20){
 									_html +=  '未支付';
 							}
 							_html += '</li>';
 							_html += '<li class="order_xq">';
 							_html += '<dl>';
-							_html += '<dt>';
-							_html += '<a href="#"><img src="images/sm_img.png"></a>';
-							_html += '</dt>';
 							_html += '<dd>';
-							_html +=			'<p><a href="#">'+ orders[i].item_name +'</a></p>';
-							_html +=			'<em><img src="images/time2.png" alt="">'+ getLocalTime(orders[i].create_time) +'</em>';
-							_html +=		'</dd>';
+							_html += '<p><a href="/portal/newsup/ticket-list?club_id='+ orders[i].club_id +'">'+ orders[i].item_name +'</a></p>';
+							_html += '<em><img src="images/time2.png" alt="">'+ getLocalTime(orders[i].create_time) +'</em>';
+							_html += '</dd>';
+							_html += '</dl>';
+							_html += '</li>';
+							_html += '<li class="order_set">';
+							_html += '<dl>';
+							_html += '<dd>';
+							_html += '<a href="/portal/newsup/pay-style?order_id='+ orders[i]._id +'"><input type="button" value="立即支付" class="pay"></a>'
+							_html += '</dd>';
 							_html += '</dl>';
 							_html += '</li>';
 							_html += '</ul>';
 					}
 					$('#order-wrap').append(_html);
+					$('#no-pay').append(_html);
 				}
 			})
 		};

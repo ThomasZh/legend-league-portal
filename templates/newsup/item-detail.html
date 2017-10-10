@@ -59,30 +59,30 @@
 <!-- 主题内容 -->
 <div class="th_main">
 	<div class="ht_banner">
-		<img src="{{ static_url('leshui/images/banner.jpg') }}" alt="">
+		<img src="{{ article_info['img'] }}" alt="">
 		<div class="ht_span">
-			<p>{{ franchise['name'] }}</p>
-			<em><img src="{{ static_url('leshui/images/time.png') }}" alt="">{{ franchise['create_time'] }}</em>
+			<p>{{ article_info['title'] }}</p>
+			<em><img src="{{ static_url('leshui/images/time.png') }}" alt="">{{ article_info['publish_time'] }}</em>
 		</div>
 	</div>
 	<div class="ht_bot">
 
 		<div class="ht_bot_left">
 			<div class="ht_bot_left_title">
-				<h1>{{ franchise['name'] }}</h1>
+				<h1>{{ article_info['title'] }}</h1>
 				<div class="ht_bot_left_icon">
-					<i class="ht_eye">{{ franchise['read_num'] }}</i>
-					<i class="ht_love">{{ franchise['like_num'] }}</i>
-					<i class="ht_say">{{ franchise['comment_num'] }}</i>
+					<i class="ht_eye">{{ article_info['read_num'] }}</i>
+					<i class="ht_love">{{ article_info['like_num'] }}</i>
+					<i class="ht_say">{{ article_info['comment_num'] }}</i>
 				</div>
 			</div>
 
 			<div class="ht_hot_left_jj">
-				<p>{% raw franchise['introduction'] %}</p>
+				<p>{% raw article_info['subtitle'] %}</p>
 			</div>
 
 			<div class="ht_hot_left_acti">
-				{% raw franchise['paragraphs'] %}
+				{% raw article_info['paragraphs'] %}
 			</div>
 			<!-- 点赞 -->
 			<div class="ht_hot_left_sc" id="sentLike-btn">
@@ -250,18 +250,6 @@
 								// map.addControl(new AMap.ToolBar());  //设置标尺(添加各种类)
 						});
 
-				// var marker = new AMap.Marker({
-				//     position: [116.48865,40.00286]
-				// });
-				//     marker.setMap(map);   //设置位置标记
-				//
-				// var info = new AMap.InfoWindow({
-				//     content:"这里是金辉大厦11层",
-				//     offset:new AMap.Pixel(0,-28),  //窗体坐标
-				//     size:new AMap.Size(200,50)   //窗体大小
-				// })
-				//     info.open(map,marker.getPosition())
-
 				//地址与经纬度的获取转换
 				AMap.service('AMap.Geocoder',function(){//回调函数
 						//实例化Geocoder
@@ -417,7 +405,7 @@
 		$("#sentLike-btn").on('click',function(){
 				$.ajax({
 					type: "POST",
-					url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/like",
+					url: "{{api_domain}}/api/articles/{{ article_info['_id'] }}/like",
 					dataType: "json",
 					contentType: 'application/json',
 					success: function(data, status, xhr) {
@@ -437,7 +425,7 @@
 				var limit  = 10;
 				$.ajax({
 					type: "GET",
-					url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/comment?idx=0&limit=" + limit,
+					url: "{{api_domain}}/api/articles/{{ article_info['_id'] }}/comment?idx=0&limit=" + limit,
 					async: false,
 					dataType: "json",
 					contentType: 'application/json',
@@ -483,7 +471,7 @@
 				}else{
 					$.ajax({
 						type: "POST",
-						url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/comment",
+						url: "{{api_domain}}/api/articles/{{ article_info['_id'] }}/comment",
 						dataType: "json",
 						data: json,
 						contentType: 'application/json',
