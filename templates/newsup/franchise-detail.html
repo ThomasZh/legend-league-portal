@@ -104,7 +104,7 @@
 				{% if is_login %}
 				<input type="button" value="发表评论" id="sendComment-btn" class="toll_fb">
 				{% else %}
-				<a href="/portal/auth/register">登录发表评论</a>
+				<a href="/portal/auth/login">登录发表评论</a>
 				{% end %}
 			</div>
 
@@ -478,7 +478,7 @@
 				};
 				var json = JSON.stringify(data);
 				if(comment == ""){
-					$(".send-message").show().css({"color":"red"}).html("留言不能为空");
+					$(".send-message").show().css({"color":"red"}).html("评论不能为空");
 					setTimeout(hide,2000);
 					return;
 				}else{

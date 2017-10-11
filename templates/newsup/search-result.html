@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>搜索结果</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link href="{{ static_url('leshui/css/list.css') }}" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
+</head>
+<html>
+<body>
+	<!-- socialbar -->
+	{% module Template("newsup/block-socialbar.html", is_login=is_login, is_ops=is_ops) %}
+	<!-- /socialbar -->
+	<!-- 导航 -->
+	<div class="nav_all">
+		<div class="nav">
+			<a class="" href="/">首页</a>
+			<a class="menu_scenery" href="javascript:;">景区导览</a>
+			<a class="menu_activity" href="javascript:;">近期活动</a>
+			<a class="menu_product" href="javascript:;">旅游产品</a>
+			<a class="menu_news" href="javascript:;">旅游资讯</a>
+			<a class="menu_media" href="javascript:;">精彩瞬间</a>
+			{% if is_login  and is_ops %}
+			<a class="menu_supplier" href="javascript:;">供应商</a>
+			<a class="menu_require" href="javascript:;">景区需求</a>
+			<a class="menu_community" href="javascript:;">经验交流</a>
+			<a class="menu_supplier_product" href="javascript:;">供应商产品</a>
+			<a class="menu_supplier_require" href="javascript:;">供应商需求</a>
+			{% end %}
+		</div>
+	</div>
+	<!-- 手机版头部 -->
+		<div class="ph_nav">
+			<h1><img src="{{ static_url('leshui/images/nav.png') }}"></h1>
+			<h2><img src="{{ static_url('leshui/images/cha.png') }}"></h2>
+			<ul>
+				<li><a href="/">首页</a></li>
+				<li class="menu_scenery"><a href="javascript:;">景区导览</a></li>
+				<li class="menu_activity"><a href="javascript:;">近期活动</a></li>
+				<li class="menu_product"><a href="javascript:;">旅游产品</a></li>
+				<li class="menu_news"><a href="javascript:;">旅游资讯</a></li>
+				<li class="menu_media"><a href="javascript:;">精彩瞬间</a></li>
+				{% if is_login  and is_ops %}
+				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
+				<li class="menu_require"><a href="javascript:;">景区需求</a></li>
+				<li class="menu_community"><a href="javascript:;">经验交流</a></li>
+				<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
+				<li class="menu_supplier_require"><a href="javascript:;">供应商需求</a></li>
+				{% end %}
+			</ul>
+		</div>
+	<!-- 导航 -->
+<!-- 主题内容 -->
+<div class="in_active">
+	<!-- 一共10个li -->
+	<div class="franchise-wrap" id="category-wrap" style="overflow:auto;"></div>
+	<div class="page">
+		<a href="javascript:;" id="prev">上一页</a>
+		<span class="pageBox"></span>
+		<a href="javascript:;" id="next">下一页</a>
+		<!-- 共<span id="total_page" style="padding:0 5px;"></span>页 -->
+	</div>
+
+	<div id="ph_page">
+		<a href="#">加载更多</a>
+	</div>
+
+</div>
+
+<!-- 主题内容 -->
+<!-- Footer -->
+{% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
+<!-- End Footer -->
+<script src="{{ static_url('leshui/js/index.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ static_url('leshui/js/list.js') }}"></script>
+<script>
+$(function(){
+
+		function GetQueryString(name){        //获取URL参数
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if(r!=null)
+				 return  decodeURI(r[2]);
+				 return null;
+			}
+
+		function getLocalTime(nS) { //时间戳转换
+			 return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+		};
+		var preAllow = true;   // when ajax not completed, cannot do the next request
+		var limit = 6;//每页显示数
+		var currentPage = 0;//当前页
+		var total_page = 0;//总页数
+		var q = GetQueryString("q");
+
+		function gotoPage(pageNum) {
+			$.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{ league_id }}&page="+pageNum+"&limit="+limit,function(data,status){
+						console.log(data);
+						data_obj = JSON.parse(data);
+						data = data_obj.rs;
+						currentPage = pageNum;
+				var pageData = data.data;
+						total_page = data.total_page;//总页
+				$('#category-wrap').html("");
+				var inner_html = '';
+				for (var i in pageData) {
+					if (pageData[i]['article_type'] == 'club') {
+							inner_html +=	'<dl>';
+							inner_html += '<dt>';
+							inner_html += 	'<a href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><img src="'+ pageData[i]['img'] +'" alt=""></a>';
+							inner_html += '</dt>';
+							inner_html += '<dd>';
+							inner_html += 	'<a href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><h4>'+ pageData[i]['club_name'] +'</h4></a>';
+							inner_html += 	'<div class="er_xq">';
+							inner_html += 		'<b>'+ pageData[i]['scenery'] +'A景区</b>';
+							inner_html += 		'<span>' + pageData[i]['province'] +'·'+ pageData[i]['city'] +'</span>';
+							inner_html += 		'<i><em>热度：</em>';
+							if (pageData[i]['popular'] == 0) {
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+							} else if (pageData[i]['popular'] == 1) {
+								inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+							} else if (pageData[i]['popular'] == 2) {
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+							}
+							else if (pageData[i]['popular'] == 3) {
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+							}
+							else if (pageData[i]['popular'] == 4) {
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+							}
+							else if (pageData[i]['popular'] == 5) {
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+							}
+							else if (pageData[i]['popular'] == 6) {
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+							}
+							else if (pageData[i]['popular'] == 7) {
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+							}
+							else if (pageData[i]['popular'] == 8) {
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+							}
+							else if (pageData[i]['popular'] == 9) {
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
+							}
+							else if (pageData[i]['popular'] == 10) {
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+							}
+							inner_html += 		'</i>';
+							inner_html += 	'</div>';
+							inner_html += 	'<p>'+ pageData[i]['_addr'] +'</p>';
+							inner_html += 	'<p>'+ pageData[i]['introduction'] +'</p>';
+							inner_html += 	'<em><i>￥</i><b>'+ parseFloat(pageData[i]['display_amount'])/100 +'</b><span>起</span></em>';
+							inner_html += 	'<h5 style="margin-top: 11px;"><a href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><span>详细介绍</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a></h5>';
+							inner_html += '</dd>';
+							inner_html += '</dl>';
+					}
+					else if(pageData[i]['article_type'] == 'article') {
+					    inner_html +=	'<dl>';
+							inner_html += '<dt>';
+							inner_html += 	'<a href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><img src="'+ pageData[i]['img'] +'!370x370" alt=""></a>';
+							inner_html += '</dt>';
+							inner_html += '<dd>';
+							inner_html += 	'<a href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><h4>'+ pageData[i]['title'] +'</h4></a>';
+							inner_html += 	'<p>'+ pageData[i]['subtitle'] +'</p>';
+							inner_html += 	'<p>发布时间:'+ getLocalTime(pageData[i]['publish_time']) +'</p>';
+							inner_html += 	'<h5 style="margin-top: 50px;"><a href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><span>详细介绍</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a></h5>';
+							inner_html += '</dd>';
+							inner_html += '</dl>';
+					}
+
+				};
+				$('#category-wrap').append(inner_html);
+
+				pageNext = parseInt((currentPage-1)/5) + 1;
+
+					start = (pageNext-1)*5+1;
+					end = pageNext*5;
+					if(end > total_page){
+						end = total_page;
+					}
+
+					$(".pageBox").html("");
+					for (var k=start;k<=end;k++){
+						var inner_html = '<a class="page-numbers" style="cursor:pointer;" id="num'+k+'">'+ k +'</a>';
+
+						$(".pageBox").append(inner_html);
+					};
+					 $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+
+
+			});
+
+	};
+
+			gotoPage('1');
+			$(document).on('click','.pageBox > a',function(){
+				var num = $(this).text();
+				gotoPage(num);
+				//  $(this).addClass("current").siblings().removeClass("current");
+			})
+
+			$("#prev").on("click",function(){
+					if(currentPage<=1){
+
+					}else{
+							gotoPage(--currentPage);
+							// $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+					}
+			});
+
+			$("#next").on("click",function(){
+					if(currentPage>=total_page){
+
+					}else{
+							gotoPage(++currentPage);
+							// $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+					}
+			})
+	});
+</script>
+</body>
+</html>

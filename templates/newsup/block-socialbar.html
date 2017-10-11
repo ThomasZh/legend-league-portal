@@ -19,10 +19,17 @@
       <h1>乐水游-中国水利风景区综合服务平台</h1>
     </div>
     <div class="search_main">
-      <input type="text" name="" class="search_sr" placeholder="输入关键词"  />
-      <input type="submit" value="搜索" class="search_sub" />
+      <input type="text" id="searchText" class="search_sr" placeholder="输入关键词"  />
+      <input type="button" value="搜索" id="s-btn" class="search_sub" />
     </div>
 
   </div>
 </div>
+<script type="text/javascript">
+  // $("#searchText").val("输入关键词");
+  $("#s-btn").on('click',function(){
+    var q = $("#searchText").val();
+    location.href="/portal/newsup/search?q="+q;
+  });
+</script>
 <!-- 顶部 -->
