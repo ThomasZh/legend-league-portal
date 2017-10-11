@@ -70,9 +70,9 @@
 			</li>
 			<li>
 				<i>验证码：</i>
-				<input type="text" placeholder="请输入验证码" class="zc_yzm" />
-				<img src="{{ static_url('leshui/images/yzm.jpg') }}" alt="">
-				<a href="#">换一张</a>
+				<input type="text" placeholder="请输入验证码" name="rg_y_code" id="code-input" class="zc_yzm" />
+				<img id="code-box" src="" alt="验证码">
+				<a href="javascript:;" id="change-btn">换一张</a>
 			</li>
 			<li class="lo_wj">
 				<a href="/portal/auth/lost-pwd" class="lo_foget">忘记密码?</a>
@@ -103,7 +103,31 @@
 <script type="text/javascript">
 $(function(){
 		// $.support.cors = true;//判断浏览器是否支持跨域
-
+		var code = "";
+		getImgCode();
+		function getImgCode(){
+			$.ajax({
+				type: "GET",
+				url: "{{api_domain}}/api/auth/verify-codes/image",
+				headers: {
+					"Authorization": "Bearer eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
+				},
+				dataType: "json",
+				contentType: 'application/json',
+				success: function(data, status, xhr) {
+					$('#code-box').attr('src',data.image_url);
+					code = data.code.toLowerCase();
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+				},
+				complete: function(XMLHttpRequest, textStatus) {
+					this; // 调用本次AJAX请求时传递的options参数
+				}
+			});
+		}
+			$('#change-btn').on('click',function(){
+				getImgCode();
+			})
 		// 手机号码验证
 		jQuery.validator.addMethod("mobile", function(value, element) {
 			var length = value.length;
@@ -123,17 +147,35 @@ $(function(){
 				lg_pwd: {
 					required: true,
 				},
+				rg_y_code: {
+					required: true,
+					minlength: 4
+				},
 			},
 			messages: {
 				lg_phone: "请输入正确的手机号码！",
 				lg_pwd: {
 					required: "请输入密码",
-				}
+				},
+				rg_y_code: "请输入正确的验证码",
 			},
 			errorElement: 'span',
 			errorClass: "error",
+			errorPlacement: function(error, element) {
+         error.appendTo(element.parent());
+    	},
 			submitHandler: function(form) {
-				console.log('login');
+				// console.log('login');
+				function hider(){
+					$('.login-form-main-message').hide();
+				}
+				// 验证码校验
+				var input_code = $('#code-input').val();
+				if(input_code != code){
+					$('.login-form-main-message').show().addClass('error').html('验证码输入有误!');
+					setTimeout(hider,3000);
+					return
+				}
 				var data = {
 					action: 'login',
 					login_type: 'phone',
@@ -141,7 +183,7 @@ $(function(){
 					pwd: $.md5($('#lg_pwd').val()),
 				};
 				var json = JSON.stringify(data);
-				console.log(json);
+				// console.log(json);
 
 				$.ajax({
 					type: "POST",
@@ -159,13 +201,11 @@ $(function(){
 
 						} else if(data.err_code == 404){
 							$('.login-form-main-message').addClass('error').html('手机号或密码错误！');
-							function hide(){
-								$('.login-form-main-message').html('');
-							}
-							setTimeout(hide,2000);
+							setTimeout(hider,2000);
 							return
 						} else {
 							$('.login-form-main-message').addClass('error').html('网络异常,刷新重试');
+							setTimeout(hider,2000);
 							return
 						}
 						// console.log("XMLHttpRequest.status++++++:"+ data.rs);

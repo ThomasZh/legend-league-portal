@@ -103,20 +103,22 @@
 				<ul>
 					<li>
 						<i>旧密码：</i>
-						<input type="text" placeholder="请输入旧密码" />
+						<input type="password" id="old-pwd" placeholder="请输入旧密码" />
 					</li>
 					<li>
 						<i>新密码：</i>
-						<input type="text" placeholder="请输入新密码" />
+						<input type="password" id="new-pwd" placeholder="请输入新密码" />
 					</li>
 					<li>
 						<i>确认新密码：</i>
-						<input type="text" placeholder="请再次输入新密码" />
+						<input type="password" id="new-pwd-once" placeholder="请再次输入新密码" />
 					</li>
-
+					<li style="display:none;" id="message">
+						<span style="float:none;line-height: 0px;padding-left:40%;"></span>
+					</li>
 					<li class="zc_email">
 						<i class="zc_greed">&nbsp;</i>
-						<input name="" type="submit" class="lo_login" value="确定" />
+						<input name="" type="button" id="revisepwd-btn" class="lo_login" value="确定" />
 					</li>
 				</ul>
 
@@ -307,6 +309,8 @@
 <!-- End Footer -->
 <script src="{{ static_url('leshui/js/index.js') }}" type="text/javascript"></script>
 <script src="{{ static_url('leshui/js/order.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ static_url('js/md5.min.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('js/json2.js') }}"></script>
 <script type="text/javascript" src="{{ static_url('weui/js/jquery-weui.min.js') }}"></script>
 <!-- fileinput -->
 <script src="{{ static_url('upyun/js/fileinput.min.js') }}"></script>
@@ -318,7 +322,6 @@
 		function getLocalTime(nS) { //时间戳转换
 			 return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
 		};
-
 		// 查询订单
 		var limit = 20;
 		var pageNum = 1;
@@ -385,7 +388,6 @@
     var uuid = s.join("");
     return uuid;
   }
-
   function uploadUpyun(file, elementId) {
     var ext = '.' + file.name.split('.').pop();
 
@@ -413,7 +415,6 @@
 
     return '{{upyun_domain}}' + filename;
   };
-
   $("#file").on("change",function(){
       var times = 0;
       var imgUrl = uploadUpyun(this.files[0],"file");
@@ -426,6 +427,48 @@
         times ++;
       });
   });
+
+	// 修改密码
+	$('#revisepwd-btn').on('click',function(){
+		function hider(){
+			$('#message').hide();
+		}
+		var new_pwd = $.md5($("#new-pwd").val());
+		var new_pwd_sure = $.md5($("#new-pwd-once").val());
+		if (new_pwd != new_pwd_sure){
+			$('#message').show().children().css({'color':'red'}).html('两次新密码输入不相同!');
+			setTimeout(hider,3000);
+			return
+		}
+		var data = { old_pwd:$.md5($("#old-pwd").val()),
+								 new_pwd:new_pwd,
+							 };
+		var json = JSON.stringify(data);
+		$.ajax({
+			url:'{{api_domain}}/api/auth/phone/reset-pwd',
+			type:'PUT',
+			data:json,
+			dataType: "json",
+			headers: {"Authorization":"Bearer {{access_token}}"},
+			contentType: 'application/json',
+			success: function(data, status, xhr) {
+				console.log(data);
+				if(data.err_code == 200){
+					$('#message').show().children().css({'color':'#27e827'}).html('修改成功!');
+					setTimeout(hider,3000);
+				}else if(data.err_code == 409){
+					$('#message').show().children().css({'color':'red'}).html('旧密码输入错误!');
+					setTimeout(hider,3000);
+				}else{
+					$('#message').show().children().css({'color':'red'}).html('服务器错误，稍后再试!');
+					setTimeout(hider,3000);
+				}
+			},
+			error:function(){
+			}
+
+		});
+	})
 
 	// 修改个人基本信息
 	$(function(){
