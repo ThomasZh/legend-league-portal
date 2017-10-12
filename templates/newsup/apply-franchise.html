@@ -59,63 +59,371 @@
 
 <!-- 主题内容 -->
 <div class="zc_main">
-	<h1>完善加盟信息</h1>
-	<ul>
-		<li>
-			<i>加盟名称：</i>
-			<input type="text" placeholder="请输入景区名称" />
-		</li>
-		<li>
-			<i>选择省份：</i>
-			 <form class="form-inline">
-		      <div data-toggle="distpicker">
-		        <div class="form-group">
-		          <label class="sr-only" for="province1">Province</label>
-		          <select class="form-control" id="province1"></select>
-		        </div>
-		        <div class="form-group">
-		          <label class="sr-only" for="city1">City</label>
-		          <select class="form-control" id="city1"></select>
-		        </div>
-		        <div class="form-group">
-		          <label class="sr-only" for="district1">District</label>
-		          <select class="form-control" id="district1"></select>
-		        </div>
-		      </div>
-		    </form>
-	<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
-	<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
-	<script src="js/distpicker.data.js"></script>
-	<script src="js/distpicker.js"></script>
-	<script src="js/main.js"></script>
-		</li>
-		<li class="jq_jm">
-			<i>选择类型：</i>
-			<p class="yk_pepl">
-			    <label>
-			      <input type="radio" name="RadioGroup1" value="男" id="RadioGroup1_0" checked="checked" class="yk_label" />
-			      风景区</label>
-			    <label>
-			      <input type="radio" name="RadioGroup1" value="女" id="RadioGroup1_1" class="yk_label" />
-			      供应商</label>
-			  </p>
-		</li>
-		<li class="jq_jm">
-			<i>加盟简介：</i>
-			<input type="text" placeholder="请输入加盟简介" />
-		</li>
+		<h1>加盟申请信息</h1>
+		<div class="notice" style="width: 420px;margin: auto;">
+			{% if franchise %}
+				{% if franchise['_status'] == 0 %}
+				<h6>待审核</h6>
+				{% elif franchise['_status'] == 10 %}
+				<h6 style="color:red;">被拒绝（可以重新发起请求）</h6>
+				{% elif franchise['_status'] == 20 %}
+				<h6>已批准</h6>
+				{% end %}
+		  {% end %}
+		</div>
+		{% if not franchise %}
+		<div class="wrap">
+			<form action="" onsubmit="return false;" id="apply-form">
+				<ul>
+					<li>
+						<i>加盟名称：</i>
+						<input type="text" name="name" id="name" placeholder="请输入景区名称" />
+					</li>
+					<li>
+						<i>选择省份：</i>
+						<div id="distpicker">
+			          <select class="form-control" id="province" style="width: 30%;"></select>
+			          <select class="form-control" id="city" style="width: 30%;"></select>
+			      </div>
+					</li>
+					<li class="jq_jm">
+						<i>选择类型：</i>
+						<p class="yk_pepl">
+						    <label>
+						      <input type="radio" name="franchise_type" value="风景区" id="RadioGroup1_0" checked="checked" class="yk_label" />
+						      风景区</label>
+						    <label>
+						      <input type="radio" name="franchise_type" value="供应商" id="RadioGroup1_1" class="yk_label" />
+						      供应商</label>
+						  </p>
+					</li>
+					<li>
+						<i>联系方式：</i>
+						<input type="text" name="phone" id="phone" placeholder="请输入手机号码" />
+					</li>
+					<li>
+						<i>电子邮件：</i>
+						<input type="text" name="email" id="email" placeholder="请输入合法的电子邮箱" />
+					</li>
+					<li>
+						<i>背景图：</i>
+						<div style="width:297px;overflow:hidden;float: right;margin-left: 20px;">
+							<img id="user_img" src="http://tripc2c-club-title.b0.upaiyun.com/default/bg.jpg" alt="俱乐部背景图" style="width:100%;border:1px solid #e2e6e5;margin-left: 0;" />
+							<input type="button" value="上传背景图" onclick="openBrowse()" style="color: white;" />
+							<input type="file" id="file" name="file" style="display:none;">
+						</div>
+					</li>
+					<li class="jq_jm">
+						<i>加盟简介：</i>
+						<textarea rows="8" name="introduction" id="introduction" style="resize:none;width:297px;float: right;border: 1px solid #ccc;"></textarea>
+					</li>
+					<li class="jq_jm" style="padding-top: 11px;">
+						<i style="line-height: 20px;">&nbsp;</i>
+						<div class="appy-form-main-message" style="text-align: center;" id="success"></div>
+					</li>
 
-		<li class="zc_email">
-			<i class="zc_greed">&nbsp;</i>
-			<input name="" type="submit" class="lo_login" value="确定" />
-		</li>
-	</ul>
+					<li class="zc_email">
+						<i class="zc_greed">&nbsp;</i>
+						<input name="" type="submit" class="lo_login" value="确定" />
+					</li>
+				</ul>
+			</form>
+		</div>
+		{% else %}
+		{% if franchise['_status'] == 10 %}
+		<div class="wrap">
+			<form action="" onsubmit="return false;" id="apply-form">
+				<ul>
+					<li>
+						<i>加盟名称：</i>
+						<input type="text" name="name" id="name" placeholder="请输入景区名称" value="{{ franchise['club']['name'] }}"/>
+					</li>
+					<li>
+						<i>选择省份：</i>
+			      <div id="distpicker">
+			          <select class="form-control" id="province" style="width: 30%;"></select>
+			          <select class="form-control" id="city" style="width: 30%;"></select>
+			      </div>
+					</li>
+					<li class="jq_jm">
+						<i>选择类型：</i>
+						<p class="yk_pepl">
+							{% if franchise['club']['franchise_type'] == u'风景区' %}
+						    <label>
+						      <input type="radio" name="franchise_type" value="风景区" id="RadioGroup1_0" checked="checked" class="yk_label" />
+						      风景区</label>
+						    <label>
+						      <input type="radio" name="franchise_type" value="供应商" id="RadioGroup1_1" class="yk_label" />
+						      供应商</label>
+							{% else %}
+								<label>
+									<input type="radio" name="franchise_type" value="风景区" id="RadioGroup1_0" class="yk_label" />
+									风景区</label>
+								<label>
+									<input type="radio" name="franchise_type" value="供应商" id="RadioGroup1_1" checked="checked" class="yk_label" />
+									供应商</label>
+							{% end %}
+						  </p>
+					</li>
+					<li>
+						<i>联系方式：</i>
+						<input type="text" name="phone" id="phone" placeholder="请输入手机号码" value="{{ franchise['club']['phone'] }}"/>
+					</li>
+					<li>
+						<i>电子邮件：</i>
+						<input type="text" name="email" id="email" placeholder="请输入合法的电子邮箱" value="{{ franchise['club']['email'] }}"/>
+					</li>
+					<li>
+						<i>背景图：</i>
+						<div style="width:297px;overflow:hidden;float: right;margin-left: 20px;">
+							<img id="user_img" src="{{ franchise['club']['img'] }}" alt="俱乐部背景图" style="width:100%;border:1px solid #e2e6e5;margin-left: 0;" />
+							<input type="button" value="上传背景图" onclick="openBrowse()" style="color: white;" />
+							<input type="file" id="file" name="file" style="display:none;">
+						</div>
+					</li>
+					<li class="jq_jm">
+						<i>加盟简介：</i>
+						<textarea rows="8" name="introduction" id="introduction" style="resize:none;width:297px;float: right;border: 1px solid #ccc;">
+							{{ franchise['club']['introduction'] }}
+						</textarea>
+					</li>
+					<li class="jq_jm" style="padding-top: 11px;">
+						<i style="line-height: 20px;">&nbsp;</i>
+						<div class="appy-form-main-message" style="text-align: center;" id="success"></div>
+					</li>
 
+					<li class="zc_email">
+						<i class="zc_greed">&nbsp;</i>
+						<input name="" type="submit" class="lo_login" value="确定" />
+					</li>
+				</ul>
+			</form>
+		</div>
+		{% else %}
+		<table class="table table-bordered" style="width:420px;margin:auto;">
+			<thead>
+				<tr>
+					<th>标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题</th>
+					<th>内容</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>审核状态</td>
+					{% if franchise['_status'] == 0 %}
+					<td>待审核</td> {% elif franchise['_status'] == 20 %}
+					<td>已批准</td> {% end %}
+				</tr>
+				<tr>
+					<td>申请日期</td>
+					<td>{{ franchise['create_time'] }}</td>
+				</tr>
+				<tr>
+					<td>加盟名称</td>
+					<td>{{ franchise['club']['name'] }}</td>
+				</tr>
+				<tr>
+					<td>加盟类型</td>
+					<td>{{ franchise['club']['franchise_type'] }}</td>
+				</tr>
+				<tr>
+					<td>电话号码</td>
+					<td>{{ franchise['club']['phone'] }}</td>
+				</tr>
+				<tr>
+					<td>电子邮箱</td>
+					<td>{{ franchise['club']['email'] }}</td>
+				</tr>
+				<tr>
+					<td>地址</td>
+					<td>{{ franchise['club']['province'] }}&nbsp {{ franchise['club']['city'] }}</td>
+				</tr>
+				<tr>
+					<td>背景图</td>
+					<td><img style="width:370px;height:278px;" src="{{ franchise['club']['img'] }}" alt="背景图"></td>
+				</tr>
+				<tr>
+					<td>简介</td>
+					<td>{{ franchise['club']['introduction'] }}</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- End Tables -->
+		{% end %}
+	{% end %}
 </div>
 <!-- 主题内容 -->
 <!-- Footer -->
 {% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
 <!-- End Footer -->
+<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+<script src="{{ static_url('leshui/js/distpicker.data.js') }}"></script>
+<script src="{{ static_url('leshui/js/distpicker.js') }}"></script>
+<!-- <script src="{{ static_url('leshui/js/main.js') }}"></script> -->
 <script src="{{ static_url('leshui/js/index.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ static_url('js/jquery.validate.min.js') }}"></script>
+<!-- fileinput -->
+<script src="{{ static_url('upyun/js/fileinput.min.js') }}"></script>
+<script src="{{ static_url('upyun/js/spark-md5.min.js') }}"></script>
+<script src="{{ static_url('upyun/js/async.js') }}"></script>
+<script src="{{ static_url('upyun/js/upyun-mu.js') }}"></script>
+<script>
+	 $(function() {
+		$("#distpicker").distpicker('destroy');
+ 	  $('#distpicker').distpicker({
+ 	    province: "{{ franchise['club']['province'] }}",
+ 	    city: "{{ franchise['club']['city'] }}",
+ 	  });
+
+		// 加盟申请操作
+		$("#apply-form").validate({
+			rules: {
+				name: {
+					required: true,
+				},
+				address: {
+					required: true,
+				},
+				phone: {
+					minlength: 11,
+					maxlength: 11,
+					required: true,
+				},
+				email: {
+					required: true,
+				},
+				introduction: {
+					required: true,
+					minlength: 10,
+				},
+			},
+			messages: {
+				name: "请为您的俱乐部取个名吧！",
+				address: "请填写您俱乐部的所在地址!",
+				phone: "请填写正确的手机号码！",
+				email: "请输入正确的邮箱地址",
+				introduction: {
+					required: "请输入俱乐部简介！",
+					minlength: "至少10个字符！",
+				},
+			},
+			errorClass: "error",
+			errorElement: 'span',
+			errorPlacement: function(error, element) {
+         error.appendTo(element.parent());
+    	},
+			submitHandler: function(form) {
+				var data = {
+					name: $('#name').val(),
+					phone: $('#phone').val(),
+					email: $('#email').val(),
+					franchise_type: $("input[type='radio']:checked").val(),
+					province: $("#province option:selected").text(),
+					city: $("#city option:selected").text(),
+					img: $("#user_img").attr('src'),
+					introduction: $('#introduction').val(),
+				};
+				var json = JSON.stringify(data);
+				console.log(json);
+
+				$.ajax({
+					type: "POST",
+					url: "{{api_domain}}/api/leagues/{{ league_info['_id'] }}/franchises",
+					data: json,
+					dataType: "json",
+					contentType: 'application/json',
+					headers: {
+						"Authorization": "Bearer {{access_token}}"
+					},
+					success: function(data, status, xhr) {
+						console.log(status);
+						$('.appy-form-main-message').css({'color':'#b0e49c'}).html('发送申请成功，请等待审核!');
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						console.log("XMLHttpRequest.status: " + XMLHttpRequest.status);
+						if (XMLHttpRequest.status == 409) {
+							$('.appy-form-main-message').css({'color':'red'}).html('已经申请完毕, 不必重新申请');
+						} else {
+							$('.appy-form-main-message').css({'color':'red'}).html('网络异常,刷新重试');
+						}
+					},
+					complete: function(XMLHttpRequest, textStatus) {
+						this; // 调用本次AJAX请求时传递的options参数
+					}
+				});
+			}
+		});
+
+	});
+</script>
+<script>
+	function uuid() {
+		var s = [];
+		var hexDigits = "0123456789abcdef";
+		for (var i = 0; i < 36; i++) {
+			s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+		}
+		s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+		s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+		s[8] = s[13] = s[18] = s[23] = "-";
+
+		var uuid = s.join("");
+		return uuid;
+	}
+
+	function uploadUpyun(file, elementId) {
+		var ext = '.' + file.name.split('.').pop();
+
+		var config = {
+			// 空间名称
+			bucket: '{{upyun_bucket}}',
+			// 上传请求过期时间
+			expiration: parseInt((new Date().getTime() + 3600000) / 1000),
+			// 尽量不要使用直接传表单 API 的方式，以防泄露造成安全隐患
+			form_api_secret: '{{upyun_form_api_secret}}'
+		};
+
+		var instance = new Sand(config);
+		var options = {
+			'notify_url': '{{upyun_notify_url}}'
+		};
+		instance.setOptions(options);
+		instance.setElementId(elementId);
+
+		var d = new Date();
+		var month = d.getMonth() + 1;
+		var filename = '/avatar/' + d.getFullYear() + '/' + month + '/' + d.getDate() + '/' + uuid() + ext;
+		console.log(filename);
+		instance.upload(filename);
+
+		return '{{upyun_domain}}' + filename;
+	};
+
+	$("#file").on("change", function() {
+		var times = 0;
+		var imgUrl = uploadUpyun(this.files[0], "file");
+		$('#loadingToast').show();
+		document.addEventListener('uploaded', function(e) {
+			if (times == 0) {
+				$("#user_img").attr('src', imgUrl);
+			}
+			$('#loadingToast').hide();
+			times++;
+		});
+
+	});
+	// 打开文件
+	function openBrowse() {
+		var ie = navigator.appName == "Microsoft Internet Explorer" ? true : false;
+		if (ie) {
+			document.getElementById("file").click();
+			document.getElementById("filename").value = document.getElementById("file").value;
+		} else {
+			var a = document.createEvent("MouseEvents"); //FF的处理
+			a.initEvent("click", true, true);
+			document.getElementById("file").dispatchEvent(a);
+		}
+	}
+</script>
 </body>
 </html>

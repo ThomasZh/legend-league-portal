@@ -1429,10 +1429,11 @@ class NewsupTicketCartHandler(AuthorizationHandler):
         logging.info("got addr %r", addr)
         addr = JSON.loads(addr)
         logging.info("got addr %r", addr)
+
         # 游玩日期
-        # play_time = self.get_argument('single_cal','')
-        # logging.info('got play_time',play_time)
-        # play_time = n_timestamp_datetime(float(play_time))
+        play_time = self.get_argument('play-time','')
+        logging.info('got play_time',play_time)
+        play_time = date_timestamp(play_time)
 
         order_id = str(uuid.uuid1()).replace('-', '')
         # 创建订单索引
@@ -1461,7 +1462,7 @@ class NewsupTicketCartHandler(AuthorizationHandler):
             "vouchers": [], #代金券选项,数组
             "points_used": 0, # 使用积分数量
             "bonus_points": 0, # 购买商品获得奖励积分
-            "booking_time": _timestamp,
+            "booking_time": play_time,
         }
         pay_id = self.create_order(order_index)
 

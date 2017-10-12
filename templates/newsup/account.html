@@ -6,9 +6,9 @@
   <meta name="description" content="" />
   <meta name="keywords" content="" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-	<link type="text/css" rel="stylesheet" src="{{ static_url('weui/css/weui.min.css') }}">
-	<link type="text/css" rel="stylesheet" src="{{ static_url('weui/css/jquery-weui.min.css') }}">
-	<link href="{{ static_url('leshui/css/order.css') }}" type="text/css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="{{ static_url('weui/css/weui.min.css') }}">
+	<link type="text/css" rel="stylesheet" href="{{ static_url('weui/css/jquery-weui.min.css') }}">
+	<link type="text/css" rel="stylesheet" href="{{ static_url('leshui/css/order.css') }}" >
 	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
 </head>
 <html>
@@ -135,12 +135,21 @@
 					<li>
 						<i class="yk_xb">性别：</i>
 						  <p class="yk_pepl">
+								{% if user['info']['gender'] == u'男' %}
 						    <label>
 						      <input type="radio" name="RadioGroup1" value="男" id="RadioGroup1_0" checked="checked" class="yk_label" />
 						      男</label>
 						    <label>
 						      <input type="radio" name="RadioGroup1" value="女" id="RadioGroup1_1" class="yk_label" />
 						      女</label>
+								{% else %}
+								<label>
+						      <input type="radio" name="RadioGroup1" value="男" id="RadioGroup1_0" class="yk_label" />
+						      男</label>
+						    <label>
+						      <input type="radio" name="RadioGroup1" value="女" id="RadioGroup1_1"  checked="checked" class="yk_label" />
+						      女</label>
+								{% end %}
 						  </p>
 					</li>
 					<li>
@@ -155,87 +164,220 @@
 					</li>
 					<li>
 						<i>生日：</i>
-						<select name="" class="yk_happy1">
-						    <option>1977</option>
-						    <option>1978</option>
-						    <option>1979</option>
-						    <option>1980</option>
+						<select name="year" class="yk_happy1" id="year">
+							{% for i in range(1950,2018) %}
+								{% if int(user['info']['birth']['Y']) == i %}
+									<option selected="">{{ i }}</option>
+								{% else %}
+									<option>{{ i }}</option>
+								{% end %}
+							{% end %}
 						</select>
 						<strong>年</strong>
-						<select name="" class="yk_happy">
-						    <option>1</option>
-						    <option>2</option>
-						    <option>3</option>
-						    <option>4</option>
+						<select name="month" class="yk_happy" id="month">
+							{% for i in range(1,13) %}
+								{% if int(user['info']['birth']['M']) == i %}
+						    	<option selected="">{{ i }}</option>
+								{% else %}
+									<option>{{ i }}</option>
+								{% end %}
+							{% end %}
 						</select>
 						<strong>月</strong>
-						<select name="" class="yk_happy">
-						    <option>1</option>
-						    <option>2</option>
-						    <option>3</option>
-						    <option>4</option>
+						<select name="data" class="yk_happy" id="data">
+							{% for i in range(1,32) %}
+								{% if int(user['info']['birth']['D']) == i %}
+									<option selected="">{{ i }}</option>
+								{% else %}
+									<option>{{ i }}</option>
+								{% end %}
+							{% end %}
 						</select>
 						<strong>日</strong>
 					</li>
 					<li>
 						<i>群体：</i>
-						<select name="">
-						    <option>学生</option>
-						    <option>上班族</option>
-						    <option>中年</option>
-						    <option>老年</option>
-						    <option>其他</option>
+						<select name="age_stage" id="age_stage">
+							{% if user['info']['age_stage'] == u'学生' %}
+						    <option selected="">学生</option>
+							{% else %}
+								<option>学生</option>
+							{% end %}
+							{% if user['info']['age_stage'] == u'上班族' %}
+						    <option selected="">上班族</option>
+							{% else %}
+								<option>上班族</option>
+							{% end %}
+							{% if user['info']['age_stage'] == u'中年' %}
+						    <option selected="">中年</option>
+							{% else %}
+								<option>中年</option>
+							{% end %}
+							{% if user['info']['age_stage'] == u'老年' %}
+						    <option selected="">老年</option>
+							{% else %}
+								<option>老年</option>
+							{% end %}
+							{% if user['info']['age_stage'] == u'其他' %}
+						    <option selected="">其他</option>
+							{% else %}
+								<option>其他</option>
+							{% end %}
 						</select>
 					</li>
 					<li>
 						<i>爱好：</i>
-						<select name="">
-						    <option>徒步</option>
-						    <option>骑行</option>
-						    <option>露营</option>
-						    <option>自驾</option>
-						    <option>其他</option>
+						<select name="hobby" id="hobby">
+							{% if user['info']['hobby'] == u'徒步' %}
+						    <option selected="">徒步</option>
+							{% else %}
+								<option>徒步</option>
+							{% end %}
+							{% if user['info']['hobby'] == u'骑行' %}
+						    <option selected="">骑行</option>
+							{% else %}
+								<option>骑行</option>
+							{% end %}
+							{% if user['info']['hobby'] == u'露营' %}
+						    <option selected="">露营</option>
+							{% else %}
+								<option>露营</option>
+							{% end %}
+							{% if user['info']['hobby'] == u'自驾' %}
+						    <option selected="">自驾</option>
+							{% else %}
+								<option>自驾</option>
+							{% end %}
+							{% if user['info']['hobby'] == u'其他' %}
+						    <option selected="">其他</option>
+							{% else %}
+								<option>其他</option>
+							{% end %}
 						</select>
 					</li>
 					<li>
 						<i>婚姻状况：</i>
-						<select name="">
-						    <option>单身</option>
-						    <option>已婚</option>
-						    <option>保密</option>
+						<select name="marriage" id="marriage">
+							{% if user['info']['marriage'] == u'单身' %}
+						    <option selected="">单身</option>
+							{% else %}
+								<option>单身</option>
+							{% end %}
+							{% if user['info']['marriage'] == u'已婚' %}
+						    <option selected="">已婚</option>
+							{% else %}
+								<option>已婚</option>
+							{% end %}
+							{% if user['info']['marriage'] == u'保密' %}
+						    <option selected="">保密</option>
+							{% else %}
+								<option>保密</option>
+							{% end %}
 						</select>
 					</li>
 					<li>
 						<i>月收入：</i>
-						<select name="">
-						    <option>2000元以下</option>
-						    <option>2000-3999</option>
-						    <option>4000-5999</option>
-						    <option>6000-7999</option>
-						    <option>8000元以上</option>
+						<select name="salary" id="salary">
+							{% if user['info']['salary'] == u'2000元以下' %}
+						    <option selected="">2000元以下</option>
+							{% else %}
+								<option>2000元以下</option>
+							{% end %}
+							{% if user['info']['salary'] == u'2000-3999' %}
+						    <option selected="">2000-3999</option>
+							{% else %}
+								<option>2000-3999</option>
+							{% end %}
+							{% if user['info']['salary'] == u'4000-5999' %}
+						    <option selected="">4000-5999</option>
+							{% else %}
+								<option>4000-5999</option>
+							{% end %}
+							{% if user['info']['salary'] == u'6000-7999' %}
+						    <option selected="">6000-7999</option>
+							{% else %}
+								<option>6000-7999</option>
+							{% end %}
+							{% if user['info']['salary'] == u'8000元以上' %}
+						    <option selected="">8000元以上</option>
+							{% else %}
+								<option>8000元以上</option>
+							{% end %}
 						</select>
 					</li>
 					<li>
 						<i>教育程度：</i>
-						<select name="">
-						    <option>初中</option>
-						    <option>高中</option>
-						    <option>中专</option>
-						    <option>大专</option>
-						    <option>本科</option>
-						    <option>硕士</option>
-						    <option>博士</option>
-						    <option>其他</option>
+						<select name="education" id="education">
+							{% if user['info']['education'] == u'初中' %}
+						    <option selected="">初中</option>
+							{% else %}
+								<option>初中</option>
+							{% end %}
+							{% if user['info']['education'] == u'高中' %}
+						    <option selected="">高中</option>
+							{% else %}
+								<option>高中</option>
+							{% end %}
+							{% if user['info']['education'] == u'中专' %}
+						    <option selected="">中专</option>
+							{% else %}
+								<option>中专</option>
+							{% end %}
+							{% if user['info']['education'] == u'大专' %}
+						    <option selected="">大专</option>
+							{% else %}
+								<option>大专</option>
+							{% end %}
+							{% if user['info']['education'] == u'本科' %}
+						    <option selected="">本科</option>
+							{% else %}
+								<option>本科</option>
+							{% end %}
+							{% if user['info']['education'] == u'硕士' %}
+						    <option selected="">硕士</option>
+							{% else %}
+								<option>硕士</option>
+							{% end %}
+							{% if user['info']['education'] == u'博士' %}
+						    <option selected="">博士</option>
+							{% else %}
+								<option>博士</option>
+							{% end %}
+							{% if user['info']['education'] == u'其他' %}
+						    <option selected="">其他</option>
+							{% else %}
+								<option>其他</option>
+							{% end %}
 						</select>
 					</li>
 					<li>
 						<i>所在行业：</i>
-						<select name="">
-						    <option>IT、互联网</option>
-						    <option>教育行业</option>
-						    <option>医院</option>
-						    <option>电子行业</option>
-						    <option>其他</option>
+						<select name="career" id="career">
+							{% if user['info']['career'] == u'IT、互联网' %}
+						    <option selected="">IT、互联网</option>
+							{% else %}
+								<option>IT、互联网</option>
+							{% end %}
+							{% if user['info']['career'] == u'教育行业' %}
+						    <option selected="">教育行业</option>
+							{% else %}
+								<option>教育行业</option>
+							{% end %}
+							{% if user['info']['career'] == u'医院' %}
+						    <option selected="">医院</option>
+							{% else %}
+								<option>医院</option>
+							{% end %}
+							{% if user['info']['career'] == u'电子行业' %}
+						    <option selected="">电子行业</option>
+							{% else %}
+								<option>电子行业</option>
+							{% end %}
+							{% if user['info']['career'] == u'其他' %}
+						    <option selected="">其他</option>
+							{% else %}
+								<option>其他</option>
+							{% end %}
 						</select>
 					</li>
 
@@ -253,15 +395,15 @@
 				<ul>
 					<li>
 						<i>姓名：</i>
-						<input type="text" placeholder="请您的真实姓名" />
+						<input type="text" id="real-name" placeholder="请您的真实姓名" value="{{ user['ID']['name'] }}" />
 					</li>
 					<li>
 						<i>身份证号：</i>
-						<input type="text" placeholder="请输入您的身份证号" />
+						<input type="text" id="real-no" placeholder="请输入您的身份证号" value="{{ user['ID']['no'] }}"/>
 					</li>
 					<li class="zc_email">
 						<i class="zc_greed">&nbsp;</i>
-						<input name="" type="submit" class="lo_login" value="确定" />
+						<input name="" type="button" id="num-btn" class="lo_login" value="确定" />
 					</li>
 				</ul>
 
@@ -272,27 +414,27 @@
 				<ul>
 					<li>
 						<i>所在地区：</i>
-						<input type="text" placeholder="请填写所在地区" />
+						<input type="text" id="addr-province" placeholder="请填写所在地区" value="{{ user['_addr']['province'] }}"/>
 					</li>
 					<li>
 						<i>详细地址：</i>
-						<textarea name="" cols="10" rows="20" style="resize:none;"></textarea>
+						<textarea name="" id="addr-addr" cols="10" rows="20" style="resize:none;">{{ user['_addr']['addr'] }}</textarea>
 					</li>
 					<li>
 						<i>邮政编码：</i>
-						<input type="text" placeholder="请输入邮政编码" />
+						<input type="text" id="addr-zip" placeholder="请输入邮政编码" value="{{ user['_addr']['zip'] }}"/>
 					</li>
 					<li>
 						<i>收货人姓名：</i>
-						<input type="text" placeholder="请输入收货人姓名" />
+						<input type="text" id="addr-name" placeholder="请输入收货人姓名" value="{{ user['_addr']['name'] }}"/>
 					</li>
 					<li>
 						<i>联系电话：</i>
-						<input type="text" placeholder="请输入联系电话" />
+						<input type="text" id="addr-phone" placeholder="请输入联系电话" value="{{ user['_addr']['phone'] }}"/>
 					</li>
 					<li class="zc_email">
 						<i class="zc_greed">&nbsp;</i>
-						<input name="" type="submit" class="lo_login" value="确定" />
+						<input name="" type="button" id="addr-btn" class="lo_login" value="确定" />
 					</li>
 				</ul>
 
@@ -317,6 +459,7 @@
 <script src="{{ static_url('upyun/js/spark-md5.min.js') }}"></script>
 <script src="{{ static_url('upyun/js/async.js') }}"></script>
 <script src="{{ static_url('upyun/js/upyun-mu.js') }}"></script>
+
 <script>
 
 		function getLocalTime(nS) { //时间戳转换
@@ -470,14 +613,51 @@
 		});
 	})
 
-	// 修改个人基本信息
+
 	$(function(){
+		// 修改个人基本信息
 			$('#account-btn').on('click',function(){
 				saveInfo();
 			});
+			// 实名制
+			$('#num-btn').on('click',function(){
+				saveInfo();
+			});
+			// 修改收获信息
+			$('#addr-btn').on('click',function(){
+				saveInfo();
+			});
+			// 修改方法
 	    function saveInfo(){
-	      var data = { nickname:$("#nickName").val(),
-	                   avatar:$("#user_img").attr('src'),
+
+	      var data = { 'nickname':$("#nickName").val(),
+	                   'avatar':$("#user_img").attr('src'),
+										 'info': {
+						             'birth':{
+													  'Y':$("#year option:selected").text(),
+												 		'M':$("#month option:selected").text(),
+												 		'D':$("#data option:selected").text(),
+													},
+						             'hobby':$("#hobby option:selected").text(),
+												 'marriage':$("#marriage option:selected").text(),
+												 'gender':$("input[type='radio']:checked").val(),
+						             'salary':$("#salary option:selected").text(),
+												 'education':$("#education option:selected").text(),
+												 'career':$("#career option:selected").text(),
+						             'age_stage':$("#age_stage option:selected").text(),
+				        		  },
+											'ID': {
+							            'name':$('#real-name').val(),
+													'no':$('#real-no').val(),
+						          },
+						          '_addr': {
+						            	'province':$('#addr-province').val(),
+													'city':$('#addr-city').val(),
+													'addr':$('#addr-addr').val(),
+													'zip':$('#addr-zip').val(),
+													'name':$('#addr-name').val(),
+													'phone':$('#addr-phone').val()
+						          }
 	                 };
 	      var json = JSON.stringify(data);
 
@@ -489,7 +669,8 @@
 	        headers: {"Authorization":"Bearer {{access_token}}"},
 	        contentType: 'application/json',
 	        success: function(data, status, xhr) {
-	          $.toast("操作成功");
+						// console.log(data);
+	          $.toast("修改成功");
 	        },
 	        error:function(){
 	        }

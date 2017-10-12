@@ -129,6 +129,15 @@ def timestamp_datetime(value):
     return _dt
 
 
+def date_timestamp(dt):
+     # dt is string
+     time.strptime(dt, '%Y-%m-%d')
+     ## time.struct_time(tm_year=2012, tm_mon=3, tm_mday=28, tm_hour=6, tm_min=53, tm_sec=40, tm_wday=2, tm_yday=88, tm_isdst=-1)
+     # "2012-03-28 06:53:40" to timestamp(int)
+     _timestamp = time.mktime(time.strptime(dt, '%Y-%m-%d'))
+     return int(_timestamp)
+
+
 def datetime_timestamp(dt):
      # dt is string
      time.strptime(dt, '%m/%d/%Y %H:%M')
@@ -136,7 +145,7 @@ def datetime_timestamp(dt):
      # "2012-03-28 06:53:40" to timestamp(int)
      _timestamp = time.mktime(time.strptime(dt, '%m/%d/%Y %H:%M'))
      return int(_timestamp)
-     
+
 
 def generate_md5(fp):
     m = md5()

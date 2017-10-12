@@ -7,6 +7,8 @@
   <meta name="keywords" content="" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<link href="{{ static_url('css/rili.css') }}" type="text/css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="{{ static_url('weui/css/weui.min.css') }}">
+	<link type="text/css" rel="stylesheet" href="{{ static_url('weui/css/jquery-weui.min.css') }}">
 	<link href="{{ static_url('leshui/css/yd.css') }}" type="text/css" rel="stylesheet">
 	<link href="{{ static_url('leshui/css/order.css') }}" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
@@ -64,7 +66,8 @@
 				{% for ticket in tickets %}
 				{% if ticket['_id'] == ticket_id %}
 					{{ ticket['title'] }}
-				<span>￥{{ float(ticket['discount_amount'])/100 }}<small>/张</small></span></h1>
+				<div style="display:inline-block;float:right;">￥<span id="ticket-price" style="float:none;">{{ float(ticket['amount'])/100 }}</span><small>/张</small></div>
+			</h1>
 				{% end %}
 				{% end %}
 				<div class="next_ydxx">
@@ -72,7 +75,7 @@
 					<div class="next_day">
 						<i>游玩日期</i>
 						<em class="next_em">
-						<input type="text" placeholder="点击选择游玩日期" id="single_cal" class="ture_day">
+						<input type="text" placeholder="点击选择游玩日期" name="play-time" id="single_cal" class="ture_day">
 						</em>
 					</div>
 					<div class="next_page">
@@ -104,17 +107,17 @@
 		</div>
 
 		<div class="next_push">
-			<div class="next_push_left">
-				{% for ticket in tickets %}
+			{% for ticket in tickets %}
 				{% if ticket['_id'] == ticket_id %}
-				<p>门票：{{ ticket['title'] }}</p>
+				<div class="next_push_left">
+					<p>门票：{{ ticket['title'] }}</p>
+					<p id="l-ticket-num">张数：<span>1</span></p>
+				</div>
+				<div class="next_push_money">
+					<b id="total-price">￥{{ float(ticket['amount'])/100 }}</b>
+				</div>
 				{% end %}
-				{% end %}
-				<p id="l-ticket-num">张数：1</p>
-			</div>
-			<div class="next_push_money">
-				<b id="total-price">￥65</b>
-			</div>
+			{% end %}
 			<input type="button" id="sub-btn" value="去支付" />
 		</div>
 		<input type="hidden" name="items" id="items">
@@ -129,6 +132,7 @@
 <!-- End Footer -->
 <script src="{{ static_url('leshui/js/order.js') }}" type="text/javascript"></script>
 <script type="text/javascript" src="{{ static_url('js/rili.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('weui/js/jquery-weui.min.js') }}"></script>
 <script type="text/javascript">
 $(function(){
 
@@ -138,7 +142,6 @@ $(function(){
 		// });
 		function getNextDay(){
         d = new Date();
-				console.log(d);
         d = + d + 1000*60*60*24;
         d = new Date(d);
 				var arrDate = new Array(3)
@@ -163,6 +166,43 @@ $(function(){
 			    this.value = date;
 				}
 		);
+		// 增减数量
+		$('.count span').on('click',function(){
+				var cls = $(this).prop('class'); //触发元素的class
+				var ticket_num = parseInt($('#ticket-num').val()); // 数目input
+				//通过判断触发元素的class确定用户点击了哪个元素
+				switch (cls) {
+						case 'add': //点击了加号
+								var _this = this;
+								ticket_num ++;
+								$('#ticket-num').val(ticket_num);
+								$('#l-ticket-num span').text(ticket_num);
+								$('#total-price').text('￥'+ticket_num*parseFloat($('#ticket-price').text()));
+								break;
+						case 'reduce': //点击了减号
+								var _this = this;
+								if (ticket_num > 1) {
+										ticket_num --;
+										$('#ticket-num').val(ticket_num);
+										$('#l-ticket-num span').text(ticket_num);
+										var price = ticket_num*parseFloat($('#ticket-price').text()).toFixed(2);
+										$('#total-price').text('￥'+price);
+								}
+								break;
+				}
+		});
+		$('#ticket-num').on('keyup', function () {
+			var _num = parseInt($(this).val());
+			if (isNaN(_num) || _num <= 0) {
+                _num = 1;
+        	}
+      if (this.value != _num) {
+          this.value = _num;
+      }
+			$('#ticket-num').val(_num);
+			$('#l-ticket-num span').text(_num);
+			$('#total-price').text('￥'+_num*parseFloat($('#ticket-price').text()));
+		});
 		// 生成订单操作
 		$("#sub-btn").on('click',function(){
 				var items = [];
@@ -173,7 +213,6 @@ $(function(){
 				obj =  {"item_id":item_id,"spec_id":spec_id,"quantity":quantity};
 				items.push(obj);
 				$("#items").val(JSON.stringify(items))
-				console.log(items);
 				// 订票人信息
 				var name = $('#t-name').val();
 				var phone = $('#t-phone').val();
@@ -181,6 +220,10 @@ $(function(){
 				$("#addr_input").val(JSON.stringify(address));
 			if(items.length == 0){
 				return;
+			}else if($('#single_cal').val() == ''){
+					$.alert('请选择游玩日期!','温馨提示');
+			}else if(name == '' || phone == ''){
+					$.alert('请完善出行人信息!','温馨提示');
 			}else{
 				$('#t-form').submit();
 			}

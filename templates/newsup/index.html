@@ -728,10 +728,10 @@
 
 		<div class="in_left_two">
 			<b><img src="{{ static_url('leshui/images/in_icon1.jpg') }}">全国热门城市</b>
-			<a href="#">北京</a>
-			<a href="#">上海</a>
-			<a href="#">成都</a>
-			<a href="#">三亚</a>
+			<a href="javascript:;">北京</a>
+			<a href="javascript:;">上海</a>
+			<a href="javascript:;">成都</a>
+			<a href="javascript:;">三亚</a>
 		</div>
 		<div class="in_left_three">
 			<b><img src="{{ static_url('leshui/images/in_icon2.jpg') }}">一周热游榜</b>
@@ -749,10 +749,10 @@
 
 	<div class="in_right1">
 		<div id="banner">
-			<div class="imglist"><a href="#"><img src="{{ static_url('leshui/images/4.jpeg') }}" width="100%"></a></div>
-			<div class="imglist"><a href="#"><img src="{{ static_url('leshui/images/1.jpeg') }}" width="100%"></a></div>
-			<div class="imglist"><a href="#"><img src="{{ static_url('leshui/images/2.jpeg') }}" width="100%"></a></div>
-			<div class="imglist"><a href="#"><img src="{{ static_url('leshui/images/3.jpeg') }}" width="100%"></a></div>
+			<div class="imglist"><a href="javascript:;"><img src="{{ static_url('leshui/images/4.jpeg') }}" width="100%"></a></div>
+			<div class="imglist"><a href="javascript:;"><img src="{{ static_url('leshui/images/1.jpeg') }}" width="100%"></a></div>
+			<div class="imglist"><a href="javascript:;"><img src="{{ static_url('leshui/images/2.jpeg') }}" width="100%"></a></div>
+			<div class="imglist"><a href="javascript:;"><img src="{{ static_url('leshui/images/3.jpeg') }}" width="100%"></a></div>
 				<ul class="btn" style="z-index:999;">
 					<li class="hover" dl="1"></li>
 					<li  dl="2"></li>
@@ -769,16 +769,16 @@
        	  <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <a href="#"><img src="{{ static_url('leshui/images/4.jpeg') }}" width="100%"></a>
+                    <a href="javascript:;"><img src="{{ static_url('leshui/images/4.jpeg') }}" width="100%"></a>
                 </div>
                 <div class="swiper-slide">
-                    <a href="#"><img src="{{ static_url('leshui/images/1.jpeg') }}" width="100%"></a>
+                    <a href="javascript:;"><img src="{{ static_url('leshui/images/1.jpeg') }}" width="100%"></a>
                 </div>
                 <div class="swiper-slide">
-                    <a href="#"><img src="{{ static_url('leshui/images/2.jpeg') }}" width="100%"></a>
+                    <a href="javascript:;"><img src="{{ static_url('leshui/images/2.jpeg') }}" width="100%"></a>
                 </div>
                 <div class="swiper-slide">
-                    <a href="#"><img src="{{ static_url('leshui/images/3.jpeg') }}" width="100%"></a>
+                    <a href="javascript:;"><img src="{{ static_url('leshui/images/3.jpeg') }}" width="100%"></a>
                 </div>
             </div>
                   <!-- 如果需要分页器 -->
@@ -813,9 +813,9 @@
 						<p>热门景区推荐</p>
 						<h3>乐水游--中国水利风景区综合服务平台</h3>
 					</div>
-					<div class="in_two_hot_left_bot">
+					<div class="in_two_hot_left_bot category-wrap">
 						{% for hot_franchises_tag in hot_franchises_tags %}
-						<a href="#">{{ hot_franchises_tag['title'] }}</a>
+						<a href="javascript:;" data-id="{{hot_franchises_tag['_id']}}">{{ hot_franchises_tag['title'] }}</a>
 						{% end %}
 					</div>
 				</div>
@@ -824,7 +824,7 @@
 			<div class="ph_hot">
 				<p>热门景区推荐</p>
 				{% for hot_franchises_tag in hot_franchises_tags %}
-				<a href="#">{{ hot_franchises_tag['title'] }}</a>
+				<a href="javascript:;" data-id="{{hot_franchises_tag['_id']}}">{{ hot_franchises_tag['title'] }}</a>
 				{% end %}
 			</div>
 			<!-- 手机样式 -->
@@ -852,9 +852,9 @@
 						<p>热门主题玩法</p>
 						<h3>乐水游--中国水利风景区综合服务平台</h3>
 					</div>
-					<div class="in_two_tj_left_bot">
+					<div class="in_two_tj_left_bot category-wrap">
 						{% for wonder_tag in wonder_tags %}
-						<a href="#">{{ wonder_tag['title'] }}</a>
+						<a href="javascript:;" data-id="{{wonder_tag['_id']}}">{{ wonder_tag['title'] }}</a>
 						{% end %}
 					</div>
 				</div>
@@ -863,7 +863,7 @@
 			<div class="ph_hot">
 				<p>热门主题玩法</p>
 				{% for wonder_tag in wonder_tags %}
-				<a href="#">{{ wonder_tag['title'] }}</a>
+				<a href="javascript:;" data-id="{{wonder_tag['_id']}}">{{ wonder_tag['title'] }}</a>
 				{% end %}
 			</div>
 			<!-- 手机样式 -->
@@ -897,9 +897,9 @@
 						<p>特色路线推荐</p>
 						<h3>乐水游--中国水利风景区综合服务平台</h3>
 					</div>
-					<div class="in_ts_hot_left_bot">
+					<div class="in_ts_hot_left_bot category-wrap">
 						{% for feature_line_tag in feature_line_tags %}
-						<a href="#">{{ feature_line_tag['title'] }}</a>
+						<a href="javascript:;" data-id="{{feature_line_tag['_id']}}">{{ feature_line_tag['title'] }}</a>
 						{% end %}
 					</div>
 				</div>
@@ -908,7 +908,7 @@
 			<div class="ph_hot">
 				<p>特色路线推荐</p>
 				{% for feature_line_tag in feature_line_tags %}
-				<a href="#">{{ feature_line_tag['title'] }}</a>
+				<a href="javascript:;" data-id="{{feature_line_tag['_id']}}">{{ feature_line_tag['title'] }}</a>
 				{% end %}
 			</div>
 			<!-- 手机样式 -->
@@ -981,6 +981,12 @@
 					// city = encodeURI(encodeURI(_city));
 					location.href="/portal/newsup/franchises?franchise_type=scenery&city="+_city
 				}).on('click','.in_left_four a',function(){
+					category = $(this).attr('data-id');
+					location.href="/portal/newsup/franchises?franchise_type=scenery&category_id="+category
+				}).on('click','.category-wrap a',function(){
+					category = $(this).attr('data-id');
+					location.href="/portal/newsup/franchises?franchise_type=scenery&category_id="+category
+				}).on('click','.ph_hot a',function(){
 					category = $(this).attr('data-id');
 					location.href="/portal/newsup/franchises?franchise_type=scenery&category_id="+category
 				});
