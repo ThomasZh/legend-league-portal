@@ -31,7 +31,7 @@ $(function(){
 		$('.menu_media').click(function(){
 			 location.href = "/portal/newsup/media";
 		});
-		
+
 	$('.in_two_hot_left_bot a:nth-child(2n)').css({'float':'right'});
 	$('.in_two_tj_left_bot a:nth-child(2n)').css({'float':'right'});
 	$('.in_ts_hot_left_bot a:nth-child(2n)').css({'float':'right'});
@@ -110,11 +110,5 @@ $(function(){
 		$('.in_mdd').hide();
 		$('body').css({'overflow':'auto'});
 	});
-
-
-
-
-
-
 
 });

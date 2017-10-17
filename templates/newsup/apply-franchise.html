@@ -6,9 +6,9 @@
   <meta name="description" content="" />
   <meta name="keywords" content="" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-	<link href="{{ static_url('leshui/css/zhuce.css') }}" type="text/css" rel="stylesheet">
 	<!-- 省市插件 -->
 	<link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+	<link href="{{ static_url('leshui/css/zhuce.css') }}" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
 
 </head>
@@ -90,7 +90,7 @@
 						<i>选择类型：</i>
 						<p class="yk_pepl">
 						    <label>
-						      <input type="radio" name="franchise_type" value="风景区" id="RadioGroup1_0" checked="checked" class="yk_label" />
+						      <input type="radio" name="franchise_type" value="景区" id="RadioGroup1_0" checked="checked" class="yk_label" />
 						      风景区</label>
 						    <label>
 						      <input type="radio" name="franchise_type" value="供应商" id="RadioGroup1_1" class="yk_label" />
@@ -271,8 +271,10 @@
 	 $(function() {
 		$("#distpicker").distpicker('destroy');
  	  $('#distpicker').distpicker({
+			{% if franchise %}
  	    province: "{{ franchise['club']['province'] }}",
  	    city: "{{ franchise['club']['city'] }}",
+			{% end %}
  	  });
 
 		// 加盟申请操作
