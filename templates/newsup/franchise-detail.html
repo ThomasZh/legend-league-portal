@@ -59,7 +59,7 @@
 <!-- 主题内容 -->
 <div class="th_main">
 	<div class="ht_banner">
-		<img src="{{ static_url('leshui/images/banner.jpg') }}" alt="">
+		<img src="{{ franchise['img'] }}" alt="">
 		<div class="ht_span">
 			<p>{{ franchise['name'] }}</p>
 			<em><img src="{{ static_url('leshui/images/time.png') }}" alt="">{{ franchise['create_time'] }}</em>
@@ -156,15 +156,15 @@
 						{% end %}
 					</div>
 					<div class="ht_two_bot_main">
-						{% for i in range(len(journeies)) %}
+						{% for i in range(len(last_activities)) %}
 		        {% if i < 4 %}
 						<dl>
 							<dt>
-								<a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}"><img src="{{ journeies[i]['img'] }}!100x76"></a>
+								<a href="/portal/newsup/item-detail?id={{ last_activities[i]['_id'] }}"><img src="{{ last_activities[i]['img'] }}!100x76"></a>
 							</dt>
 							<dd>
-								<p><a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">{{ journeies[i]['title'] }}</a></p>
-								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ journeies[i]['publish_time'] }}</em>
+								<p><a href="/portal/newsup/item-detail?id={{ last_activities[i]['_id'] }}">{{ last_activities[i]['title'] }}</a></p>
+								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ last_activities[i]['publish_time'] }}</em>
 							</dd>
 						</dl>
 						{% end %}
