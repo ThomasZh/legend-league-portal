@@ -268,7 +268,7 @@
 <!-- Footer -->
 {% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
 <!-- End Footer -->
-<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+<!-- <script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script> -->
 <script src="{{ static_url('leshui/js/distpicker.data.js') }}"></script>
 <script src="{{ static_url('leshui/js/distpicker.js') }}"></script>
 <!-- <script src="{{ static_url('leshui/js/main.js') }}"></script> -->
@@ -281,7 +281,7 @@
 <script src="{{ static_url('upyun/js/upyun-mu.js') }}"></script>
 <script>
 	 $(function() {
-		$("#distpicker").distpicker('destroy');
+		// $("#distpicker").distpicker('destroy');
  	  $('#distpicker').distpicker({
 			{% if franchise %}
  	    province: "{{ franchise['club']['province'] }}",

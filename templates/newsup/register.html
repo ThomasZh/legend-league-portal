@@ -140,7 +140,7 @@ $(function(){
 			getImgCode();
 		})
 		// $.support.cors = true;  //判断浏览器是否支持跨域
-		// 获取手机激活码
+		// 获取手机验证码
 		$('#code-button').on('click',function(){
 			SmsVerifyCode();
 		})
@@ -167,7 +167,7 @@ $(function(){
 				var phone = $("#register-phone").val();
 				// console.log(phone);
 				var data = {
-					"action": "lost-pwd",
+					"action": "register",
 					"login_type": "phone",
 					"phone": phone,
 				};
