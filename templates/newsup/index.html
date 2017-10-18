@@ -829,11 +829,13 @@
 			<div class="in_two_hot_right">
 				<ul>
 					{% for i in range(len(franchises)) %}
+					{% if i < 8 %}
 						<li>
 							<a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}"><img src="{{ franchises[i]['img'] }}!140x106" alt=""></a>
 							<a href="/portal/newsup/franchise-detail?id={{ franchises[i]['club_id'] }}"><h4>{{ franchises[i]['club_name'] }}</h4></a>
 							<p>{{ franchises[i]['introduction'] }}</p>
 						</li>
+					{% end %}
 					{% end %}
 				</ul>
 			</div>
@@ -868,11 +870,13 @@
 			<div class="in_two_hot_right">
 				<ul>
 					{% for i in range(len(wonder_franchises)) %}
+					{% if i < 8 %}
 						<li>
 							<a href="/portal/newsup/franchise-detail?id={{ wonder_franchises[i]['club_id'] }}"><img src="{{ wonder_franchises[i]['img'] }}!140x106" alt=""></a>
 							<a href="/portal/newsup/franchise-detail?id={{ wonder_franchises[i]['club_id'] }}"><h4>{{ wonder_franchises[i]['club_name'] }}</h4></a>
 							<p>{{ wonder_franchises[i]['introduction'] }}</p>
 						</li>
+					{% end %}
 					{% end %}
 				</ul>
 			</div>
@@ -913,11 +917,13 @@
 			<div class="in_ts_hot_right">
 				<ul>
 					{% for i in range(len(feature_line_franchises)) %}
+					{% if i < 8 %}
 						<li>
 							<a href="/portal/newsup/franchise-detail?id={{ feature_line_franchises[i]['club_id'] }}"><img src="{{ feature_line_franchises[i]['img'] }}!140x106" alt=""></a>
 							<a href="/portal/newsup/franchise-detail?id={{ feature_line_franchises[i]['club_id'] }}"><h4>{{ feature_line_franchises[i]['club_name'] }}</h4></a>
 							<p>{{ feature_line_franchises[i]['introduction'] }}</p>
 						</li>
+					{% end %}
 					{% end %}
 				</ul>
 			</div>
