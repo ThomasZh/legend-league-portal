@@ -83,10 +83,10 @@
 						<i>选择类型：</i>
 						<p class="yk_pepl">
 						    <label>
-						      <input type="radio" name="franchise_type" value="景区" id="RadioGroup1_0" checked="checked" class="yk_label" />
+						      <input type="radio" name="franchise_type" value="scenery" id="RadioGroup1_0" checked="checked" class="yk_label" />
 						      风景区</label>
 						    <label>
-						      <input type="radio" name="franchise_type" value="供应商" id="RadioGroup1_1" class="yk_label" />
+						      <input type="radio" name="franchise_type" value="supplier" id="RadioGroup1_1" class="yk_label" />
 						      供应商</label>
 						  </p>
 					</li>
@@ -147,17 +147,17 @@
 						<p class="yk_pepl">
 							{% if franchise['club']['franchise_type'] == u'风景区' %}
 						    <label>
-						      <input type="radio" name="franchise_type" value="风景区" id="RadioGroup1_0" checked="checked" class="yk_label" />
+						      <input type="radio" name="franchise_type" value="scenery" id="RadioGroup1_0" checked="checked" class="yk_label" />
 						      风景区</label>
 						    <label>
-						      <input type="radio" name="franchise_type" value="供应商" id="RadioGroup1_1" class="yk_label" />
+						      <input type="radio" name="franchise_type" value="supplier" id="RadioGroup1_1" class="yk_label" />
 						      供应商</label>
 							{% else %}
 								<label>
-									<input type="radio" name="franchise_type" value="风景区" id="RadioGroup1_0" class="yk_label" />
+									<input type="radio" name="franchise_type" value="scenery" id="RadioGroup1_0" class="yk_label" />
 									风景区</label>
 								<label>
-									<input type="radio" name="franchise_type" value="供应商" id="RadioGroup1_1" checked="checked" class="yk_label" />
+									<input type="radio" name="franchise_type" value="supplier" id="RadioGroup1_1" checked="checked" class="yk_label" />
 									供应商</label>
 							{% end %}
 						  </p>
