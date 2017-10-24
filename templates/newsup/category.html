@@ -40,7 +40,6 @@
 			<a class="menu_media" href="javascript:;">精彩瞬间</a>
 
 			{% if is_login  and is_ops %}
-					<a class="menu_supplier" href="javascript:;">供应商</a>
 
 					{% if category_id == '01d6120cf73411e69a3c00163e023e51' %}
 					<a class="menu_require active" href="javascript:;">景区需求</a>
@@ -53,6 +52,8 @@
 					{% else %}
 					<a class="menu_community" href="javascript:;">经验交流</a>
 					{% end %}
+
+					<a class="menu_supplier" href="javascript:;">供应商</a>
 
 					{% if category_id == '2a28cb78f73411e69a3c00163e023e51' %}
 					<a class="menu_supplier_product active" href="javascript:;">供应商产品</a>
@@ -81,9 +82,9 @@
 				<li class="menu_news"><a href="javascript:;">旅游资讯</a></li>
 				<li class="menu_media"><a href="javascript:;">精彩瞬间</a></li>
 				{% if is_login  and is_ops %}
-				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
 				<li class="menu_require"><a href="javascript:;">景区需求</a></li>
 				<li class="menu_community"><a href="javascript:;">经验交流</a></li>
+				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
 				<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
 				<li class="menu_supplier_require"><a href="javascript:;">供应商需求</a></li>
 				{% end %}
