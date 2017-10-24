@@ -97,6 +97,38 @@
 			          <select class="form-control" id="city" style="width: 30%;"></select>
 			      </div>
 					</li>
+					<li class="jq_jm">
+						<i>旺季季节：</i>
+						<p class="yk_pepl">
+								<label>
+									<input type="checkbox" name="popluar_season" value="1" class="yk_label" />
+								春</label>
+								<label>
+									<input type="checkbox" name="popluar_season" value="2" class="yk_label" />
+								夏</label>
+								<label>
+									<input type="checkbox" name="popluar_season" value="3" class="yk_label" />
+								秋</label>
+								<label>
+									<input type="checkbox" name="popluar_season" value="4" class="yk_label" />
+								冬</label>
+					</li>
+					<li class="jq_jm">
+						<i>闭馆季节：</i>
+						<p class="yk_pepl">
+							<label>
+								<input type="checkbox" name="close_season" value="1" class="yk_label" />
+							春</label>
+							<label>
+								<input type="checkbox" name="close_season" value="2" class="yk_label" />
+							夏</label>
+							<label>
+								<input type="checkbox" name="close_season" value="3" class="yk_label" />
+							秋</label>
+							<label>
+								<input type="checkbox" name="close_season" value="4" class="yk_label" />
+							冬</label>
+					</li>
 					<li>
 						<i>详细地址：</i>
 						<input type="text" name="address" id="address" placeholder="请输入详细地址" value=""/>
@@ -145,7 +177,7 @@
 					<li class="jq_jm">
 						<i>选择类型：</i>
 						<p class="yk_pepl">
-							{% if franchise['club']['franchise_type'] == u'风景区' %}
+							{% if franchise['club']['franchise_type'] == 'scenery' %}
 						    <label>
 						      <input type="radio" name="franchise_type" value="scenery" id="RadioGroup1_0" checked="checked" class="yk_label" />
 						      风景区</label>
@@ -169,13 +201,49 @@
 			          <select class="form-control" id="city" style="width: 30%;"></select>
 			      </div>
 					</li>
+					<li class="jq_jm">
+						<i>旺季季节：</i>
+						<p class="yk_pepl">
+								<label>
+									<input type="checkbox" name="popluar_season" value="1" class="yk_label" />
+								春</label>
+								<label>
+									<input type="checkbox" name="popluar_season" value="2" class="yk_label" />
+								夏</label>
+								<label>
+									<input type="checkbox" name="popluar_season" value="3" class="yk_label" />
+								秋</label>
+								<label>
+									<input type="checkbox" name="popluar_season" value="4" class="yk_label" />
+								冬</label>
+					</li>
+					<li class="jq_jm">
+						<i>闭馆季节：</i>
+						<p class="yk_pepl">
+							<label>
+								<input type="checkbox" name="close_season" value="1" class="yk_label" />
+							春</label>
+							<label>
+								<input type="checkbox" name="close_season" value="2" class="yk_label" />
+							夏</label>
+							<label>
+								<input type="checkbox" name="close_season" value="3" class="yk_label" />
+							秋</label>
+							<label>
+								<input type="checkbox" name="close_season" value="4" class="yk_label" />
+							冬</label>
+					</li>
 					<li>
 						<i>详细地址:</i>
+						{% if franchise['club'].has_key('_addr') %}
 						<input type="text" name="address" id="address" placeholder="请输入详细地址" value="{{ franchise['club']['_addr'] }}"/>
+						{% else %}
+						<input type="text" name="address" id="address" placeholder="请输入详细地址" value=""/>
+						{% end %}
 					</li>
 					<li>
 						<i>联系方式：</i>
-						<input type="text" name="phone" id="phone" placeholder="请输入手机号码" value="{{ franchise['club']['phone'] }}"/>
+						<input type="text" name="phone" id="phone" placeholder="请输入电话号码" value="{{ franchise['club']['phone'] }}"/>
 					</li>
 					<li>
 						<i>电子邮件：</i>
@@ -240,7 +308,11 @@
 				</tr>
 				<tr>
 					<td>详细地址</td>
-					<td>{{ franchise['club']['_addr'] }}</td>
+					<td>
+						{% if franchise['club'].has_key('_addr') %}
+						{{ franchise['club']['_addr'] }}
+						{% end %}
+					</td>
 				</tr>
 				<tr>
 					<td>电话号码</td>
@@ -304,7 +376,7 @@
 					required: true,
 				},
 				email: {
-					required: true,
+					required: false,
 				},
 				introduction: {
 					required: true,
