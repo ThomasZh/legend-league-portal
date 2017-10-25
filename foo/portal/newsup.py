@@ -151,14 +151,16 @@ class NewsupIndexHandler(BaseHandler):
         rs = data['rs']
         hot_franchises = rs['data']
 
-        # 当即热门
-        category_id = "fac9e7e6a41b11e7811500163e023e51"
-        url = API_DOMAIN + "/api/def/categories/"+ category_id +"/level2"
+        # 当季热门
+        second_categorys_id = "37eafe76b96b11e7a70e00163e023e51"
+        params = {"page":1, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/categories/"+second_categorys_id+"/clubs", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response.body %r", response.body)
+        logging.info("got response %r", response.body)
         data = json_decode(response.body)
-        hot_tags = data['rs']
+        rs = data['rs']
+        hot_tags = rs['data']
 
         # 热门景区
         hot_franchises_category_id = "757ee072a02511e7b7f600163e023e51"
@@ -181,7 +183,7 @@ class NewsupIndexHandler(BaseHandler):
 
         # 精彩推荐
         wonder_category_id = "8a8556c2a02511e7b7f600163e023e51"
-        url = API_DOMAIN + "/api/def/categories/"+ category_id +"/level2"
+        url = API_DOMAIN + "/api/def/categories/"+ wonder_category_id +"/level2"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response.body %r", response.body)
@@ -1163,7 +1165,6 @@ class NewsupFranchisesHandler(BaseHandler):
         hot_tags = data['rs']
 
         recommend_category_id = "b1fb3e94a1e011e7943000163e023e51"  #推荐路线
-
         params = {"page":1, "limit":10}
         url = url_concat(API_DOMAIN+"/api/def/categories/"+ recommend_category_id +"/level2", params)
         http_client = HTTPClient()
@@ -1172,8 +1173,16 @@ class NewsupFranchisesHandler(BaseHandler):
         data = json_decode(response.body)
         recommend_tags = data['rs']
 
-        specialty_category_id = "0c511b26a1e011e7943000163e023e51"
+        recommend_category_id = "9a2f440eb96911e7a70e00163e023e51"  #旅游时长
+        params = {"page":1, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/def/categories/"+ recommend_category_id +"/level2", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        duration_tags = data['rs']
 
+        specialty_category_id = "0c511b26a1e011e7943000163e023e51"
         params = {"page":1, "limit":10}
         url = url_concat(API_DOMAIN+"/api/def/categories/"+ specialty_category_id +"/level2", params)
         http_client = HTTPClient()
@@ -1200,6 +1209,7 @@ class NewsupFranchisesHandler(BaseHandler):
                 franchise_type=franchise_type,
                 hot_tags=hot_tags,
                 recommend_tags=recommend_tags,
+                duration_tags=duration_tags,
                 specialty_tags=specialty_tags)
 
 

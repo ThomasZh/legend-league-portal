@@ -69,9 +69,11 @@
 		<i id="price-btn"><span>价格</span><img src="{{ static_url('leshui/images/price.png') }}" alt="" id="down"></i>
 		<p id="pc_chose">
 			<span>景点主题：</span>
-			<i class="er_hover2">不限</i>
-			{% for hot_tag in hot_tags %}
-			<i data-id="{{ hot_tag['_id'] }}">{{ hot_tag['title'] }}</i>
+			<i data-id="all" class="er_hover2">不限</i>
+			{% for i in range(len(hot_tags)) %}
+				{%if i <= 10 %}
+				<i data-id="{{ hot_tags[i]['_id'] }}">{{ hot_tags[i]['title'] }}</i>
+				{% end %}
 			{% end %}
 		</p>
 		<p id="ph_chose">
@@ -83,22 +85,13 @@
 		</p>
 
 		<a id="zhuti_more"><span>更多</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a>
+
 		<div class="zhuti_more">
-			<i>温泉</i>
-			<i>山水</i>
-			<i>乐园</i>
-			<i>采摘</i>
-			<i>古镇</i>
-			<i>湿地</i>
-			<i>漂流</i>
-			<i>赏花</i>
-			<i>温泉</i>
-			<i>山水</i>
-			<i>乐园</i>
-			<i>采摘</i>
-			<i>古镇</i>
-			<i>湿地</i>
-			<i>漂流</i>
+			{% for i in range(len(hot_tags)) %}
+				{%if i > 10 %}
+				<i data-id="{{ hot_tags[i]['_id'] }}">{{ hot_tags[i]['title'] }}</i>
+				{% end %}
+			{% end %}
 		</div>
 	</div>
 </div>
@@ -790,6 +783,9 @@
 			<b><img src="{{ static_url('leshui/images/in_icon5.png') }}">推荐路线:</b>
 			{% for recommend_tag in recommend_tags %}
 			<a data-id="{{ recommend_tag['_id'] }}">{{ recommend_tag['title'] }}</a>
+			{% end %}
+			{% for duration_tag in duration_tags %}
+			<a data-id="{{ duration_tag['_id'] }}">{{ duration_tag['title'] }}</a>
 			{% end %}
 		</div>
 	</div>

@@ -740,7 +740,7 @@
 		<div class="in_left_four">
 			<b><img src="{{ static_url('leshui/images/in_icon3.jpg') }}">当季热门</b>
 			{% for hot_tag in hot_tags %}
-			<a href="javascript:;" data-id="{{hot_tag['_id']}}">{{hot_tag['title']}}</a>
+			<a href="/portal/newsup/franchise-detail?id={{ hot_tag['club_id'] }}">{{hot_tag['name']}}</a>
 			{% end %}
 		</div>
 	</div>
