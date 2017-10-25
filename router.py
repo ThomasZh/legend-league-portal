@@ -37,6 +37,8 @@ def map():
         (r'/portal/newsup/category-tile', getattr(newsup, 'NewsupCategoryTileHandler')),
         (r'/portal/newsup/franchises', getattr(newsup, 'NewsupFranchisesHandler')),
         (r'/portal/newsup/franchise-detail', getattr(newsup, 'NewsupFranchiseDetailHandler')),
+        (r'/portal/newsup/suppliers', getattr(newsup, 'NewsupSuppliersHandler')),
+        (r'/portal/newsup/supplier-detail', getattr(newsup, 'NewsupSuppliersDetailHandler')),
         (r'/portal/newsup/apply-franchise', getattr(newsup, 'NewsupApplyFranchiseHandler')),
         (r'/portal/newsup/search', getattr(newsup, 'NewsupSearchResultHandler')),
 

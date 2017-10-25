@@ -1039,7 +1039,7 @@ class NewsupCategorySearchHandler(BaseHandler):
                 api_domain=API_DOMAIN,
                 category=category)
 
-
+# 景区列表
 class NewsupFranchisesHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
@@ -1213,6 +1213,7 @@ class NewsupFranchisesHandler(BaseHandler):
                 specialty_tags=specialty_tags)
 
 
+# 景区详情
 class NewsupFranchiseDetailHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
@@ -1368,6 +1369,339 @@ class NewsupFranchiseDetailHandler(BaseHandler):
                 parkings=parkings,
                 geo_x = geo_x,
                 geo_y = geo_y)
+
+
+# 供应商列表
+class NewsupSuppliersHandler(BaseHandler):
+    def get(self):
+        logging.info(self.request)
+        franchise_type = self.get_argument("franchise_type", "")
+        logging.info("got franchise_type %r from argument", franchise_type)
+
+        city = self.get_argument("city", "all")
+        category = self.get_argument("category_id", "all")
+        logging.info("got city %r from argument", city)
+        logging.info("got category %r from argument", category)
+
+        if isinstance(city, unicode):
+            print city.encode('utf-8')
+        else:
+            print city.decode('utf-8').encode('utf-8')
+
+        city = city.encode('utf-8')
+        logging.info("got city %r encode utf-8", city)
+
+        city = unquote(city)
+        logging.info("got city %r unquote", city)
+
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
+
+        # suppliers(供应商)
+        params = {"franchise_type":franchise_type, "page":1, "limit":8}
+        url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs-filter", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got franchises response %r", response.body)
+        data = json_decode(response.body)
+        suppliers = data['rs']['data']
+
+        # product(特色产品)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":4}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got products response %r", response.body)
+        data = json_decode(response.body)
+        products = data['rs']
+        for product in products:
+            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
+
+        # journey(旅游资讯)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got journeies response %r", response.body)
+        data = json_decode(response.body)
+        journeies = data['rs']
+        for article in journeies:
+            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+
+        # communities(经验交流)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":12}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        communities = data['rs']
+        for article in communities:
+            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+
+        # requires(景区需求/供应商需求)
+        if franchise_type == '\xe6\x99\xaf\xe5\x8c\xba': #景区
+            category_id = '065f565e6bd711e7b46300163e023e51'
+        else:
+            category_id = '404228663a1711e7b21000163e023e51'
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":12}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got requires response %r", response.body)
+        data = json_decode(response.body)
+        requires = data['rs']
+        for article in requires:
+            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+
+        # multimedia
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":4}
+        url = url_concat(API_DOMAIN+"/api/multimedias", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        multimedias = data['rs']
+        for multimedia in multimedias:
+            multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
+
+        # lastest comments(最新的评论)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
+        for comment in lastest_comments:
+            comment['create_time'] = timestamp_friendly_date(comment['create_time'])
+
+        # tag
+        hot_category_id = "8bc87862b98811e7805e00163e045306"  #特色产品
+
+        params = {"page":1, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/def/categories/"+ hot_category_id +"/level2", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        hot_tags = data['rs']
+
+        recommend_category_id = "b1fb3e94a1e011e7943000163e023e51"  #推荐路线
+        params = {"page":1, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/def/categories/"+ recommend_category_id +"/level2", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        recommend_tags = data['rs']
+
+        recommend_category_id = "9a2f440eb96911e7a70e00163e023e51"  #旅游时长
+        params = {"page":1, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/def/categories/"+ recommend_category_id +"/level2", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        duration_tags = data['rs']
+
+        specialty_category_id = "0c511b26a1e011e7943000163e023e51"
+        params = {"page":1, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/def/categories/"+ specialty_category_id +"/level2", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        specialty_tags = data['rs']
+
+        self.render('newsup/suppliers.html',
+                league_info=league_info,
+                is_login=is_login,
+                is_ops=is_ops,
+                city=city,
+                category=category,
+                suppliers=suppliers,
+                requires=requires,
+                products=products,
+                journeies=journeies,
+                communities=communities,
+                multimedias=multimedias,
+                lastest_comments=lastest_comments,
+                league_id=LEAGUE_ID,
+                api_domain=API_DOMAIN,
+                franchise_type=franchise_type,
+                hot_tags=hot_tags,
+                recommend_tags=recommend_tags,
+                duration_tags=duration_tags,
+                specialty_tags=specialty_tags)
+
+
+# 供应商详情
+class NewsupSuppliersDetailHandler(BaseHandler):
+    def get(self):
+        logging.info(self.request)
+        franchise_id = self.get_argument("id", "")
+
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
+        # league(联盟信息)
+        league_info = self.get_league_info()
+
+        # franchise
+        params = {"filter":"detail"}
+        url = url_concat(API_DOMAIN+"/api/clubs/"+franchise_id,params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got article response %r", response.body)
+        data = json_decode(response.body)
+        franchise = data['rs']
+        geo_x = franchise['gcj02']['x']
+        geo_y = franchise['gcj02']['y']
+        if not franchise.has_key('paragraphs'):
+            franchise['paragraphs'] = ''
+        if not franchise.has_key('franchise_type'):
+            franchise['franchise_type'] = 'franchise'
+        if franchise.has_key('create_time'):
+            franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
+        else:
+            franchise['create_time'] = timestamp_friendly_date(0)
+
+        url = API_DOMAIN+"/api/clubs/"+franchise_id+"/car-parks"
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        parkings = data['rs']
+        for parking in parkings:
+            parking['percent'] = int(float(parking['remain_space']) / float(parking['max_space'])*100)
+            logging.info("got parking %r", parking['percent'])
+
+        # update read_num
+        read_num = franchise['read_num']
+        url = API_DOMAIN+"/api/articles/"+franchise_id+"/read"
+        http_client = HTTPClient()
+        _body = {"read_num": read_num+1}
+        _json = json_encode(_body)
+        response = http_client.fetch(url, method="POST", body=_json)
+        logging.info("got update read_num response %r", response.body)
+
+        # product(旅游产品)
+        # params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":4}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        products = data['rs']
+        for product in products:
+            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
+
+        # journey(旅游资讯)
+        # params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        journeies = data['rs']
+        for article in journeies:
+            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+
+        # last_activity(近期活动)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        last_activities = data['rs']
+        for article in last_activities:
+            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+
+        # communities(经验交流)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        communities = data['rs']
+        for article in communities:
+            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+
+        # requires(景区需求)
+        if franchise['franchise_type'] == '景区':
+            category_id = '065f565e6bd711e7b46300163e023e51'
+        else:
+            category_id = '404228663a1711e7b21000163e023e51'
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        requires = data['rs']
+        for article in requires:
+            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+
+        # lastest comments(最新的评论)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
+        url = url_concat(API_DOMAIN+"/api/last-comments", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        lastest_comments = data['rs']
+        for comment in lastest_comments:
+            comment['create_time'] = timestamp_friendly_date(comment['create_time'])
+
+        # multimedia
+        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/multimedias", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        multimedias = data['rs']
+        for multimedia in multimedias:
+            multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
+
+        self.render('newsup/supplier-detail.html',
+                is_login=is_login,
+                is_ops=is_ops,
+                access_token=access_token,
+                league_info=league_info,
+                franchise=franchise,
+                products=products,
+                journeies=journeies,
+                last_activities=last_activities,
+                communities=communities,
+                requires=requires,
+                multimedias=multimedias,
+                api_domain=API_DOMAIN,
+                lastest_comments=lastest_comments,
+                parkings=parkings,
+                geo_x = geo_x,
+                geo_y = geo_y)
+
 
 # 票列表
 class NewsupTicketListHandler(AuthorizationHandler):

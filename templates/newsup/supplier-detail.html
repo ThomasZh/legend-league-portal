@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>供应商详情</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<link type="text/css" rel="stylesheet" href="{{ static_url('weui/css/weui.min.css') }}">
+	<link type="text/css" rel="stylesheet" href="{{ static_url('weui/css/jquery-weui.min.css') }}">
+	<link href="{{ static_url('leshui/css/three.css') }}" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
+</head>
+<html>
+<body>
+	<!-- socialbar -->
+	{% module Template("newsup/block-socialbar.html", is_login=is_login, is_ops=is_ops) %}
+	<!-- /socialbar -->
+	<!-- 导航 -->
+	<div class="nav_all">
+		<div class="nav">
+			<a href="/">首页</a>
+			<a class="menu_scenery" href="javascript:;">景区导览</a>
+			<a class="menu_activity" href="javascript:;">近期活动</a>
+			<a class="menu_product" href="javascript:;">旅游产品</a>
+			<a class="menu_news" href="javascript:;">旅游资讯</a>
+			<a class="menu_media" href="javascript:;">精彩瞬间</a>
+			{% if is_login  and is_ops %}
+			<a class="menu_require" href="javascript:;">景区需求</a>
+			<a class="menu_community" href="javascript:;">经验交流</a>
+			<a class="menu_supplier" href="javascript:;">供应商</a>
+			<a class="menu_supplier_product" href="javascript:;">供应商产品</a>
+			<a class="menu_supplier_require" href="javascript:;">供应商需求</a>
+			{% end %}
+		</div>
+	</div>
+	<!-- 手机版头部 -->
+		<div class="ph_nav">
+			<h1><img src="{{ static_url('leshui/images/nav.png') }}"></h1>
+			<h2><img src="{{ static_url('leshui/images/cha.png') }}"></h2>
+			<ul>
+				<li><a href="/">首页</a></li>
+				<li class="menu_scenery"><a href="javascript:;">景区导览</a></li>
+				<li class="menu_activity"><a href="javascript:;">近期活动</a></li>
+				<li class="menu_product"><a href="javascript:;">旅游产品</a></li>
+				<li class="menu_news"><a href="javascript:;">旅游资讯</a></li>
+				<li class="menu_media"><a href="javascript:;">精彩瞬间</a></li>
+				{% if is_login  and is_ops %}
+				<li class="menu_require"><a href="javascript:;">景区需求</a></li>
+				<li class="menu_community"><a href="javascript:;">经验交流</a></li>
+				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
+				<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
+				<li class="menu_supplier_require"><a href="javascript:;">供应商需求</a></li>
+				{% end %}
+			</ul>
+		</div>
+	<!-- 导航 -->
+
+<!-- 主题内容 -->
+<div class="th_main">
+	<div class="ht_banner">
+		<img src="{{ franchise['img'] }}" alt="">
+		<div class="ht_span">
+			<p>{{ franchise['name'] }}</p>
+			<em><img src="{{ static_url('leshui/images/time.png') }}" alt="">{{ franchise['create_time'] }}</em>
+		</div>
+	</div>
+	<div class="ht_bot">
+
+		<div class="ht_bot_left">
+			<div class="ht_bot_left_title">
+				<h1>{{ franchise['name'] }}</h1>
+				<div class="ht_bot_left_icon">
+					<i class="ht_eye">{{ franchise['read_num'] }}</i>
+					<i class="ht_love">{{ franchise['like_num'] }}</i>
+					<i class="ht_say">{{ franchise['comment_num'] }}</i>
+				</div>
+			</div>
+
+			<div class="ht_hot_left_jj">
+				<p>{% raw franchise['introduction'] %}</p>
+			</div>
+
+			<div class="ht_hot_left_acti">
+				{% raw franchise['paragraphs'] %}
+			</div>
+			<!-- 点赞 -->
+			<div class="ht_hot_left_sc" id="sentLike-btn">
+				<img src="{{ static_url('leshui/images/sc1.png') }}" alt="" id="sc1">
+				<img src="{{ static_url('leshui/images/sc2.png') }}" alt="" id="sc2">
+			</div>
+			<!-- 评论 -->
+			<div class="ht_hot_left_say">
+				<h1 id="commentNum"></h1>
+				<div class="ht_hot_left_dl" id="one-comments"></div>
+				<em>查看更多</em>
+			</div>
+			<!-- 添加评论 -->
+			<div class="ht_hot_left_toll">
+				<h1>添加评论</h1>
+				<textarea rows="10" cols="30" placeholder="添加评论内容" id="comment-text" class="toll_true" style="resize:none;" ></textarea>
+				<div class="send-message" style="display:none;font-size:12px;"></div>
+				{% if is_login %}
+				<input type="button" value="发表评论" id="sendComment-btn" class="toll_fb">
+				{% else %}
+				<a href="/portal/auth/login">登录发表评论</a>
+				{% end %}
+			</div>
+
+		</div>
+		<!-- 右侧部分 -->
+		<div class="ht_bot_right">
+			<div class="ht_bot_right_two">
+				<div class="ht_two_title">
+					<ul>
+						<li>旅游产品</li>
+						<li>旅游资讯</li>
+						<li>近期活动</li>
+					</ul>
+				</div>
+				<div class="ht_two_bot">
+					<div class="ht_two_bot_main">
+						{% for i in range(len(products)) %}
+		        {% if i < 4 %}
+						<dl>
+							<dt>
+								<a href="/portal/newsup/item-detail?id={{ products[i]['_id'] }}"><img src="{{ products[i]['img'] }}!100x76"></a>
+							</dt>
+							<dd>
+								<p><a href="/portal/newsup/item-detail?id={{ products[i]['_id'] }}">{{ products[i]['title'] }}</a></p>
+								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ products[i]['publish_time'] }}</em>
+							</dd>
+						</dl>
+					{% end %}
+					{% end %}
+					</div>
+					<div class="ht_two_bot_main">
+
+						{% for i in range(len(journeies)) %}
+		        {% if i < 4 %}
+						<dl>
+							<dt>
+								<a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}"><img src="{{ journeies[i]['img'] }}!100x76"></a>
+							</dt>
+							<dd>
+								<p><a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">{{ journeies[i]['title'] }}</a></p>
+								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ journeies[i]['publish_time'] }}</em>
+							</dd>
+						</dl>
+						{% end %}
+						{% end %}
+					</div>
+					<div class="ht_two_bot_main">
+						{% for i in range(len(last_activities)) %}
+		        {% if i < 4 %}
+						<dl>
+							<dt>
+								<a href="/portal/newsup/item-detail?id={{ last_activities[i]['_id'] }}"><img src="{{ last_activities[i]['img'] }}!100x76"></a>
+							</dt>
+							<dd>
+								<p><a href="/portal/newsup/item-detail?id={{ last_activities[i]['_id'] }}">{{ last_activities[i]['title'] }}</a></p>
+								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ last_activities[i]['publish_time'] }}</em>
+							</dd>
+						</dl>
+						{% end %}
+						{% end %}
+					</div>
+				</div>
+			</div>
+
+			<div class="ht_bot_right_four">
+				<h1>联系我们</h1>
+				<div id="container" style="width:100%; height:300px"></div>
+				<i><img src="{{ static_url('leshui/images/dz.png') }}">{{ franchise['name'] }}</i>
+				<i><img src="{{ static_url('leshui/images/sf.png') }}">{{ franchise['province'] }}{{ franchise['city'] }}</i>
+				<i><img src="{{ static_url('leshui/images/dh.png') }}">{{ franchise['phone'] }}</i>
+				<i><img src="{{ static_url('leshui/images/yx.png') }}">{{ franchise['email'] }}</i>
+			</div>
+
+		</div>
+	</div>
+	<!-- 最新评论 -->
+	<div class="ht_new">
+		<h1>最新评论</h1>
+		<div class="layout">
+		    <div class="hotPic">
+		        <div class="JQ-slide">
+		            <div class="JQ-slide-nav">
+		            	<a class="prev" href="javascript:void(0);"><img src="{{ static_url('leshui/images/right.jpg') }}" /></a>
+		            	<a class="next" href="javascript:void(0);"><img src="{{ static_url('leshui/images/left.jpg') }}" /></a>
+		            </div>
+		            <div class="wrap">
+		                <ul class="JQ-slide-content imgList">
+											{% for comment in lastest_comments %}
+		                    <li>
+		                        <img src="{{ comment['avatar'] }}!100x100" />
+		                        <div class="pepole_R">
+		                        	<h2>{{ comment['nickname'] }}</h2>
+															<i><img src="{{ static_url('leshui/images/time2.png') }}">{{ comment['create_time'] }}</i>
+															<p>{{ comment['comment'] }}</p>
+														</div>
+		                    </li>
+											{% end %}
+		                </ul>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>
+<!-- 主题内容 -->
+<!-- Footer -->
+{% module Template("newsup/block-footer.html", is_login=is_login, is_ops=is_ops) %}
+<!-- End Footer -->
+<script type="text/javascript" src="{{ static_url('leshui/js/index.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('leshui/js/three.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('weui/js/jquery-weui.min.js') }}"></script>
+<!-- Big_Slide -->
+<script src="{{ static_url('leshui/js/BigSlide.js') }}" type="text/javascript"></script>
+<script src="{{ static_url('js/echarts.min.js') }}" type="text/javascript"></script>
+<script src="{{ static_url('js/echarts-style.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=f72ae6a1b42b43ed29f1c7981f57bc53&callback=init"></script>
+<script>
+		function init(){
+
+				var map = new AMap.Map('container', {
+						center: [{{ geo_x }},{{ geo_y }}],
+						zoom: 11,
+						// mapStyle:'macaron'
+				});
+						// map.setMapStyle('amap://styles/macaron');  //设置地图显示样式
+						map.plugin(["AMap.ToolBar"], function() {
+								// map.addControl(new AMap.ToolBar());  //设置标尺(添加各种类)
+						});
+
+				// var marker = new AMap.Marker({
+				//     position: [116.48865,40.00286]
+				// });
+				//     marker.setMap(map);   //设置位置标记
+				//
+				// var info = new AMap.InfoWindow({
+				//     content:"这里是金辉大厦11层",
+				//     offset:new AMap.Pixel(0,-28),  //窗体坐标
+				//     size:new AMap.Size(200,50)   //窗体大小
+				// })
+				//     info.open(map,marker.getPosition())
+
+				//地址与经纬度的获取转换
+				AMap.service('AMap.Geocoder',function(){//回调函数
+						//实例化Geocoder
+						geocoder = new AMap.Geocoder({
+								city: "010"//城市，默认：“全国”
+						});
+						var marker = new AMap.Marker({
+								 map:map,
+								 bubble:true
+						})
+						//TODO: 使用geocoder 对象完成相关功能
+						//逆地理编码
+						var input = document.getElementById('input');
+						var message = document.getElementById('message');
+						map.on('click',function(e){
+								marker.setPosition(e.lnglat);
+								geocoder.getAddress(e.lnglat,function(status,result){
+									if(status=='complete'){
+										 input.value = result.regeocode.formattedAddress
+										 message.innerHTML = ''
+									}else{
+										 message.innerHTML = '无法获取地址'
+									}
+								})
+						})
+				});
+		};
+
+</script>
+<script type="text/javascript">
+	$(function (){
+
+		function switchTime(t){
+			var t = new Date(t*1000);
+			var month = t.getMonth()+1;
+			var day = t.getDate();
+			return month+"月"+day;
+		};
+	    /* 用按钮控制图片左右滚动 */
+	    $(".hotPic .JQ-slide").Slide({
+	        effect:"scroolLoop",
+	        autoPlay:false,
+	        speed:"normal",
+	        timer:3000,
+	        steps:1
+	    });
+
+		// 点赞操作
+		$("#sentLike-btn").on('click',function(){
+				$.ajax({
+					type: "POST",
+					url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/like",
+					dataType: "json",
+					contentType: 'application/json',
+					success: function(data, status, xhr) {
+						// console.log(data);
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+					},
+					complete: function(XMLHttpRequest, textStatus) {
+						this; // 调用本次AJAX请求时传递的options参数
+					}
+				});
+		});
+
+		// 获取一个景区的评论
+		function getOneComments(){
+				var limit  = 10;
+				$.ajax({
+					type: "GET",
+					url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/comment?idx=0&limit=" + limit,
+					async: false,
+					dataType: "json",
+					contentType: 'application/json',
+					success: function(data, status, xhr) {
+						var data_obj = data.rs;
+						$('#commentNum').text(data_obj.length+"条评论");
+						for (var i = 0;i<data_obj.length;i++){
+							var _html = '<dl>';
+									_html += '<dt><img src="'+ data_obj[i].avatar +'" alt=""></dt>';
+									_html += '<dd>';
+									_html += 	'<h2>'+ data_obj[i].nickname +'</h2>';
+									_html += 	'<i><img src="{{ static_url('leshui/images/time2.png') }}">'+ switchTime(data_obj[i].create_time) +'</i>';
+									_html += 	'<p>'+ data_obj[i].comment +'</p>';
+									_html += '</dd>';
+									_html += '</dl>';
+								$('#one-comments').append(_html);
+						}
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+					},
+					complete: function(XMLHttpRequest, textStatus) {
+						this; // 调用本次AJAX请求时传递的options参数
+					}
+				});
+			};
+		getOneComments();
+
+		// 添加评论操作
+		$('#sendComment-btn').on('click',function(){
+				var comment = $('#comment-text').val();
+				function hide(){
+					$(".send-message").hide();
+				};
+				var data = {
+					"comment": comment,
+				};
+				var json = JSON.stringify(data);
+				if(comment == ""){
+					$(".send-message").show().css({"color":"red"}).html("评论不能为空");
+					setTimeout(hide,2000);
+					return;
+				}else{
+					$.ajax({
+						type: "POST",
+						url: "{{api_domain}}/api/articles/{{ franchise['_id'] }}/comment",
+						dataType: "json",
+						data: json,
+						contentType: 'application/json',
+						headers: {"Authorization":"Bearer {{access_token}}"},
+						success: function(data, status, xhr) {
+							$("#comment-text").val("");
+							$(".send-message").show().html("评论成功！");
+							setTimeout(hide,3000);
+							$('#one-comments').html('');
+							getOneComments();
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrown) {
+							console.log("XMLHttpRequest.status:" + XMLHttpRequest.status);
+						},
+						complete: function(XMLHttpRequest, textStatus) {
+							this; // 调用本次AJAX请求时传递的options参数
+						}
+					});
+				}
+		})
+	});
+</script>
+</body>
+</html>

@@ -5,7 +5,7 @@ $(function(){
 			 location.href = "/portal/newsup/franchises?franchise_type=scenery";
 		})
 		$('.menu_supplier').click(function(){
-			 location.href = "/portal/newsup/franchises?franchise_type=supplier";
+			 location.href = "/portal/newsup/suppliers?franchise_type=supplier";
 		})
 		$('.menu_activity').click(function(){
 			 location.href = "/portal/newsup/category?id=0bbf89e2f73411e69a3c00163e023e51";
@@ -46,9 +46,6 @@ $(function(){
 			$('.in_two_mian > div').eq(Index).show().siblings().hide();
 		});
 	});
-
-
-
 
 	// 选择目的地
 	$('.in_left_one span').click(function(){
