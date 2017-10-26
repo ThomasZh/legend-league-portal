@@ -574,6 +574,16 @@ class NewsupItemDetailHandler(BaseHandler):
         logging.info("got article response %r", response.body)
         data = json_decode(response.body)
         franchise = data['rs']
+        geo_x = franchise['gcj02']['x']
+        geo_y = franchise['gcj02']['y']
+        if not franchise.has_key('paragraphs'):
+            franchise['paragraphs'] = ''
+        if not franchise.has_key('franchise_type'):
+            franchise['franchise_type'] = 'franchise'
+        if franchise.has_key('create_time'):
+            franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
+        else:
+            franchise['create_time'] = timestamp_friendly_date(0)
 
         # product(旅游产品)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":10}
@@ -660,25 +670,6 @@ class NewsupItemDetailHandler(BaseHandler):
         data = json_decode(response.body)
         multimedias = data['rs']
 
-        # franchise
-        params = {"filter":"detail"}
-        url = url_concat(API_DOMAIN+"/api/clubs/"+franchise['_id'],params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got article response %r", response.body)
-        data = json_decode(response.body)
-        franchise = data['rs']
-        geo_x = franchise['gcj02']['x']
-        geo_y = franchise['gcj02']['y']
-        if not franchise.has_key('paragraphs'):
-            franchise['paragraphs'] = ''
-        if not franchise.has_key('franchise_type'):
-            franchise['franchise_type'] = 'franchise'
-        if franchise.has_key('create_time'):
-            franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
-        else:
-            franchise['create_time'] = timestamp_friendly_date(0)
-
         url = API_DOMAIN+"/api/clubs/"+franchise['_id']+"/car-parks"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -688,6 +679,28 @@ class NewsupItemDetailHandler(BaseHandler):
         for parking in parkings:
             parking['percent'] = int(float(parking['remain_space']) / float(parking['max_space'])*100)
             logging.info("got parking %r", parking['percent'])
+
+        # supplier_product(供应商产品)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"2a28cb78f73411e69a3c00163e023e51", "idx":0, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        supplier_products = data['rs']
+        for product in supplier_products:
+            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
+
+        # need(供应商需求)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"404228663a1711e7b21000163e023e51", "idx":0, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        supplier_needs = data['rs']
+        for supplier_need in supplier_needs:
+            supplier_need['publish_time'] = timestamp_friendly_date(supplier_need['publish_time'])
 
         self.render('newsup/item-detail.html',
                 is_login=is_login,
@@ -706,7 +719,9 @@ class NewsupItemDetailHandler(BaseHandler):
                 lastest_comments=lastest_comments,
                 parkings=parkings,
                 geo_x = geo_x,
-                geo_y = geo_y)
+                geo_y = geo_y,
+                supplier_products=supplier_products,
+                supplier_needs=supplier_needs)
 
 
 class NewsupNewHandler(BaseHandler):
@@ -1571,8 +1586,6 @@ class NewsupSuppliersDetailHandler(BaseHandler):
         logging.info("got article response %r", response.body)
         data = json_decode(response.body)
         franchise = data['rs']
-        geo_x = franchise['gcj02']['x']
-        geo_y = franchise['gcj02']['y']
         if not franchise.has_key('paragraphs'):
             franchise['paragraphs'] = ''
         if not franchise.has_key('franchise_type'):
@@ -1581,16 +1594,6 @@ class NewsupSuppliersDetailHandler(BaseHandler):
             franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
         else:
             franchise['create_time'] = timestamp_friendly_date(0)
-
-        url = API_DOMAIN+"/api/clubs/"+franchise_id+"/car-parks"
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        parkings = data['rs']
-        for parking in parkings:
-            parking['percent'] = int(float(parking['remain_space']) / float(parking['max_space'])*100)
-            logging.info("got parking %r", parking['percent'])
 
         # update read_num
         read_num = franchise['read_num']
@@ -1601,9 +1604,9 @@ class NewsupSuppliersDetailHandler(BaseHandler):
         response = http_client.fetch(url, method="POST", body=_json)
         logging.info("got update read_num response %r", response.body)
 
-        # product(旅游产品)
+        # product(供应商产品)
         # params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":4}
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":10}
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"2a28cb78f73411e69a3c00163e023e51", "idx":0, "limit":10}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -1613,54 +1616,16 @@ class NewsupSuppliersDetailHandler(BaseHandler):
         for product in products:
             product['publish_time'] = timestamp_friendly_date(product['publish_time'])
 
-        # journey(旅游资讯)
-        # params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":4}
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":10}
+        # need(供应商需求)
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"404228663a1711e7b21000163e023e51", "idx":0, "limit":10}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
         data = json_decode(response.body)
-        journeies = data['rs']
-        for article in journeies:
-            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
-
-        # last_activity(近期活动)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        last_activities = data['rs']
-        for article in last_activities:
-            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
-
-        # communities(经验交流)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        communities = data['rs']
-        for article in communities:
-            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
-
-        # requires(景区需求)
-        if franchise['franchise_type'] == '景区':
-            category_id = '065f565e6bd711e7b46300163e023e51'
-        else:
-            category_id = '404228663a1711e7b21000163e023e51'
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        requires = data['rs']
-        for article in requires:
-            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+        supplier_needs = data['rs']
+        for supplier_need in supplier_needs:
+            supplier_need['publish_time'] = timestamp_friendly_date(supplier_need['publish_time'])
 
         # lastest comments(最新的评论)
         params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
@@ -1673,17 +1638,6 @@ class NewsupSuppliersDetailHandler(BaseHandler):
         for comment in lastest_comments:
             comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
-        # multimedia
-        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/multimedias", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        multimedias = data['rs']
-        for multimedia in multimedias:
-            multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
-
         self.render('newsup/supplier-detail.html',
                 is_login=is_login,
                 is_ops=is_ops,
@@ -1691,16 +1645,9 @@ class NewsupSuppliersDetailHandler(BaseHandler):
                 league_info=league_info,
                 franchise=franchise,
                 products=products,
-                journeies=journeies,
-                last_activities=last_activities,
-                communities=communities,
-                requires=requires,
-                multimedias=multimedias,
+                supplier_needs=supplier_needs,
                 api_domain=API_DOMAIN,
-                lastest_comments=lastest_comments,
-                parkings=parkings,
-                geo_x = geo_x,
-                geo_y = geo_y)
+                lastest_comments=lastest_comments)
 
 
 # 票列表

@@ -113,9 +113,8 @@
 			<div class="ht_bot_right_two">
 				<div class="ht_two_title">
 					<ul>
-						<li>旅游产品</li>
-						<li>旅游资讯</li>
-						<li>近期活动</li>
+						<li>供应商产品</li>
+						<li>供应商需求</li>
 					</ul>
 				</div>
 				<div class="ht_two_bot">
@@ -135,31 +134,15 @@
 					{% end %}
 					</div>
 					<div class="ht_two_bot_main">
-
-						{% for i in range(len(journeies)) %}
+						{% for i in range(len(supplier_needs)) %}
 		        {% if i < 4 %}
 						<dl>
 							<dt>
-								<a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}"><img src="{{ journeies[i]['img'] }}!100x76"></a>
+								<a href="/portal/newsup/item-detail?id={{ supplier_needs[i]['_id'] }}"><img src="{{ supplier_needs[i]['img'] }}!100x76"></a>
 							</dt>
 							<dd>
-								<p><a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">{{ journeies[i]['title'] }}</a></p>
-								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ journeies[i]['publish_time'] }}</em>
-							</dd>
-						</dl>
-						{% end %}
-						{% end %}
-					</div>
-					<div class="ht_two_bot_main">
-						{% for i in range(len(last_activities)) %}
-		        {% if i < 4 %}
-						<dl>
-							<dt>
-								<a href="/portal/newsup/item-detail?id={{ last_activities[i]['_id'] }}"><img src="{{ last_activities[i]['img'] }}!100x76"></a>
-							</dt>
-							<dd>
-								<p><a href="/portal/newsup/item-detail?id={{ last_activities[i]['_id'] }}">{{ last_activities[i]['title'] }}</a></p>
-								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ last_activities[i]['publish_time'] }}</em>
+								<p><a href="/portal/newsup/item-detail?id={{ supplier_needs[i]['_id'] }}">{{ supplier_needs[i]['title'] }}</a></p>
+								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ supplier_needs[i]['publish_time'] }}</em>
 							</dd>
 						</dl>
 						{% end %}
@@ -170,7 +153,6 @@
 
 			<div class="ht_bot_right_four">
 				<h1>联系我们</h1>
-				<div id="container" style="width:100%; height:300px"></div>
 				<i><img src="{{ static_url('leshui/images/dz.png') }}">{{ franchise['name'] }}</i>
 				<i><img src="{{ static_url('leshui/images/sf.png') }}">{{ franchise['province'] }}{{ franchise['city'] }}</i>
 				<i><img src="{{ static_url('leshui/images/dh.png') }}">{{ franchise['phone'] }}</i>
@@ -219,61 +201,6 @@
 <script src="{{ static_url('leshui/js/BigSlide.js') }}" type="text/javascript"></script>
 <script src="{{ static_url('js/echarts.min.js') }}" type="text/javascript"></script>
 <script src="{{ static_url('js/echarts-style.js') }}" type="text/javascript"></script>
-<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=f72ae6a1b42b43ed29f1c7981f57bc53&callback=init"></script>
-<script>
-		function init(){
-
-				var map = new AMap.Map('container', {
-						center: [{{ geo_x }},{{ geo_y }}],
-						zoom: 11,
-						// mapStyle:'macaron'
-				});
-						// map.setMapStyle('amap://styles/macaron');  //设置地图显示样式
-						map.plugin(["AMap.ToolBar"], function() {
-								// map.addControl(new AMap.ToolBar());  //设置标尺(添加各种类)
-						});
-
-				// var marker = new AMap.Marker({
-				//     position: [116.48865,40.00286]
-				// });
-				//     marker.setMap(map);   //设置位置标记
-				//
-				// var info = new AMap.InfoWindow({
-				//     content:"这里是金辉大厦11层",
-				//     offset:new AMap.Pixel(0,-28),  //窗体坐标
-				//     size:new AMap.Size(200,50)   //窗体大小
-				// })
-				//     info.open(map,marker.getPosition())
-
-				//地址与经纬度的获取转换
-				AMap.service('AMap.Geocoder',function(){//回调函数
-						//实例化Geocoder
-						geocoder = new AMap.Geocoder({
-								city: "010"//城市，默认：“全国”
-						});
-						var marker = new AMap.Marker({
-								 map:map,
-								 bubble:true
-						})
-						//TODO: 使用geocoder 对象完成相关功能
-						//逆地理编码
-						var input = document.getElementById('input');
-						var message = document.getElementById('message');
-						map.on('click',function(e){
-								marker.setPosition(e.lnglat);
-								geocoder.getAddress(e.lnglat,function(status,result){
-									if(status=='complete'){
-										 input.value = result.regeocode.formattedAddress
-										 message.innerHTML = ''
-									}else{
-										 message.innerHTML = '无法获取地址'
-									}
-								})
-						})
-				});
-		};
-
-</script>
 <script type="text/javascript">
 	$(function (){
 

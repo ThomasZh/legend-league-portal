@@ -8,6 +8,24 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<link href="{{ static_url('leshui/css/list.css') }}" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="{{ static_url('leshui/js/jquery-1.12.1.min.js') }}"></script>
+	<style media="screen">
+		.total-page-box,.select-page-box{
+			display: inline-block;
+	    font-size: 12px;
+	    line-height: 2.5;
+	    color: #949191;
+		}
+		.select-page-box{
+			margin-left: 10px;
+		}
+		#select-page-btn{
+			margin-left: 3px;
+	    border: 1px solid #b4b0b0;
+	    background-color: #eee;
+	    border-radius: 3px;
+	    cursor: pointer;
+		}
+	</style>
 </head>
 <html>
 <body>
@@ -61,7 +79,11 @@
 		<a href="javascript:;" id="prev">上一页</a>
 		<span class="pageBox"></span>
 		<a href="javascript:;" id="next">下一页</a>
-		<!-- 共<span id="total_page" style="padding:0 5px;"></span>页 -->
+		<p class="total-page-box">共<span id="total_page" style="padding:0 5px;"></span>页</p>
+		<p class="select-page-box">到第
+			<input type="text" id="page-input" style="width: 35px;margin: 0 5px;text-align:center;">页
+			<button id="select-page-btn">确定</button>
+		</p>
 	</div>
 
 	<div id="ph_page">
@@ -83,7 +105,7 @@ $(function(){
 			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
 			var r = window.location.search.substr(1).match(reg);
 			if(r!=null)
-				 return  decodeURI(r[2]);
+				 return  r[2];
 				 return null;
 			}
 
@@ -95,10 +117,10 @@ $(function(){
 		var currentPage = 0;//当前页
 		var total_page = 0;//总页数
 		var q = GetQueryString("q");
-
 		function gotoPage(pageNum) {
+			console.log(q);
 			$.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{ league_id }}&page="+pageNum+"&limit="+limit,function(data,status){
-						console.log(data);
+						// console.log(data);
 						data_obj = JSON.parse(data);
 						data = data_obj.rs;
 						currentPage = pageNum;
@@ -233,7 +255,7 @@ $(function(){
 
 						$(".pageBox").append(inner_html);
 					};
-					 $("#num"+currentPage).addClass("current").siblings().removeClass("current");
+					 $("#num"+currentPage).addClass("page_hover").siblings().removeClass("page_hover");
 
 
 			});
@@ -263,7 +285,11 @@ $(function(){
 							gotoPage(++currentPage);
 							// $("#num"+currentPage).addClass("current").siblings().removeClass("current");
 					}
-			})
+			});
+			$('#select-page-btn').on('click',function(){
+				var pageNum = $('#page-input').val();
+						gotoPage(pageNum);
+			});
 	});
 </script>
 </body>

@@ -110,10 +110,12 @@
 		</div>
 		<!-- 右侧部分 -->
 		<div class="ht_bot_right">
+			{% if franchise['franchise_type'] == 'scenery' or franchise['franchise_type'] == u'景区' %}
 			<div class="ht_bot_right_one">
 				<h1>景区客流量</h1>
 				<div id="main" style="width:100%; height:300px"></div>
 			</div>
+
 			<div class="ht_bot_right_two">
 				<div class="ht_two_title">
 					<ul>
@@ -184,10 +186,54 @@
 					{% end %}
 				</ul>
 			</div>
+			{% elif franchise['franchise_type'] == 'supplier' or franchise['franchise_type'] == u'供应商'  %}
+			<div class="ht_bot_right_two">
+				<div class="ht_two_title">
+					<ul>
+						<li>供应商产品</li>
+						<li>供应商需求</li>
+					</ul>
+				</div>
+				<div class="ht_two_bot">
+					<div class="ht_two_bot_main">
+						{% for i in range(len(supplier_products)) %}
+		        {% if i < 4 %}
+						<dl>
+							<dt>
+								<a href="/portal/newsup/item-detail?id={{ supplier_products[i]['_id'] }}"><img src="{{ supplier_products[i]['img'] }}!100x76"></a>
+							</dt>
+							<dd>
+								<p><a href="/portal/newsup/item-detail?id={{ supplier_products[i]['_id'] }}">{{ supplier_products[i]['title'] }}</a></p>
+								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ supplier_products[i]['publish_time'] }}</em>
+							</dd>
+						</dl>
+					{% end %}
+					{% end %}
+					</div>
+					<div class="ht_two_bot_main">
 
+						{% for i in range(len(supplier_needs)) %}
+		        {% if i < 4 %}
+						<dl>
+							<dt>
+								<a href="/portal/newsup/item-detail?id={{ supplier_needs[i]['_id'] }}"><img src="{{ supplier_needs[i]['img'] }}!100x76"></a>
+							</dt>
+							<dd>
+								<p><a href="/portal/newsup/item-detail?id={{ supplier_needs[i]['_id'] }}">{{ supplier_needs[i]['title'] }}</a></p>
+								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ supplier_needs[i]['publish_time'] }}</em>
+							</dd>
+						</dl>
+						{% end %}
+						{% end %}
+					</div>
+				</div>
+			</div>
+			{% end %}
 			<div class="ht_bot_right_four">
 				<h1>联系我们</h1>
-				<div id="container" style="width:100%; height:300px"></div>
+				{% if franchise['franchise_type'] == 'scenery' or franchise['franchise_type'] == u'景区'  %}
+				 <div id="container" style="width:100%; height:300px"></div>
+				{% end %}
 				<i><img src="{{ static_url('leshui/images/dz.png') }}">{{ franchise['name'] }}</i>
 				<i><img src="{{ static_url('leshui/images/sf.png') }}">{{ franchise['province'] }}{{ franchise['city'] }}</i>
 				<i><img src="{{ static_url('leshui/images/dh.png') }}">{{ franchise['phone'] }}</i>

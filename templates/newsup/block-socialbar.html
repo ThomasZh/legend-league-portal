@@ -29,6 +29,7 @@
   // $("#searchText").val("输入关键词");
   $("#s-btn").on('click',function(){
     var q = $("#searchText").val();
+        q = encodeURI(encodeURI(q)); 
     location.href="/portal/newsup/search?q="+q;
   });
 </script>
