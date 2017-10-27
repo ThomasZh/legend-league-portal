@@ -975,17 +975,17 @@
 				// 各种查询操作
 				$(document).on('click','.in_left_two a',function(){
 						_city = $(this).text();
-						// city = encodeURI(encodeURI(_city));
-						location.href="/portal/newsup/franchises?franchise_type=scenery&city="+_city
+						city = encodeURI(encodeURI(_city));
+						location.href="/portal/newsup/franchises?franchise_type=scenery&city="+city
 				}).on('click','.mdd_min ul a',function(){
 					_city = $(this).text();
-					// city = encodeURI(encodeURI(_city));
-					location.href="/portal/newsup/franchises?franchise_type=scenery&city="+_city
+					city = encodeURI(encodeURI(_city));
+					location.href="/portal/newsup/franchises?franchise_type=scenery&city="+city
 				}).on('click','.in_mddo a',function(){
 					_city = $(this).text();
 					$('#in_mdd').hide();
-					// city = encodeURI(encodeURI(_city));
-					location.href="/portal/newsup/franchises?franchise_type=scenery&city="+_city
+					city = encodeURI(encodeURI(_city));
+					location.href="/portal/newsup/franchises?franchise_type=scenery&city="+city
 				}).on('click','.in_left_four a',function(){
 					category = $(this).attr('data-id');
 					location.href="/portal/newsup/franchises?franchise_type=scenery&category_id="+category

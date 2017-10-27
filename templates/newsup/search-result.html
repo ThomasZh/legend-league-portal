@@ -118,9 +118,8 @@ $(function(){
 		var total_page = 0;//总页数
 		var q = GetQueryString("q");
 		function gotoPage(pageNum) {
-			console.log(q);
 			$.get("{{api_domain}}/api/articles-search?q=" + q + "&filter=league&league_id={{ league_id }}&page="+pageNum+"&limit="+limit,function(data,status){
-						// console.log(data);
+						console.log(data);
 						data_obj = JSON.parse(data);
 						data = data_obj.rs;
 						currentPage = pageNum;
@@ -137,89 +136,96 @@ $(function(){
 							inner_html += '<dd>';
 							inner_html += 	'<a href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><h4>'+ pageData[i]['club_name'] +'</h4></a>';
 							inner_html += 	'<div class="er_xq">';
-							inner_html += 		'<b>'+ pageData[i]['scenery'] +'A景区</b>';
+							if (pageData[i].franchise_type == 'scenery' || pageData[i].franchise_type == '景区'){
+								inner_html += 		'<b>'+ pageData[i]['scenery'] +'A景区</b>';
+							}
 							inner_html += 		'<span>' + pageData[i]['province'] +'·'+ pageData[i]['city'] +'</span>';
-							inner_html += 		'<i><em>热度：</em>';
-							if (pageData[i]['popular'] == 0) {
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-							} else if (pageData[i]['popular'] == 1) {
-								inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-							} else if (pageData[i]['popular'] == 2) {
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+							if (pageData[i].franchise_type == 'scenery' || pageData[i].franchise_type == '景区'){
+
+								inner_html += 		'<i><em>热度：</em>';
+								if (pageData[i]['popular'] == 0) {
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								} else if (pageData[i]['popular'] == 1) {
+									inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								} else if (pageData[i]['popular'] == 2) {
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								}
+								else if (pageData[i]['popular'] == 3) {
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								}
+								else if (pageData[i]['popular'] == 4) {
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								}
+								else if (pageData[i]['popular'] == 5) {
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								}
+								else if (pageData[i]['popular'] == 6) {
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								}
+								else if (pageData[i]['popular'] == 7) {
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								}
+								else if (pageData[i]['popular'] == 8) {
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
+								}
+								else if (pageData[i]['popular'] == 9) {
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
+								}
+								else if (pageData[i]['popular'] == 10) {
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+									inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
+								}
+								inner_html += 		'</i>';
 							}
-							else if (pageData[i]['popular'] == 3) {
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-							}
-							else if (pageData[i]['popular'] == 4) {
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-							}
-							else if (pageData[i]['popular'] == 5) {
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-							}
-							else if (pageData[i]['popular'] == 6) {
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-							}
-							else if (pageData[i]['popular'] == 7) {
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-							}
-							else if (pageData[i]['popular'] == 8) {
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star3.png') }}">';
-							}
-							else if (pageData[i]['popular'] == 9) {
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star2.png') }}">';
-							}
-							else if (pageData[i]['popular'] == 10) {
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-								inner_html += 			'<img src="{{ static_url('leshui/images/star1.png') }}">';
-							}
-							inner_html += 		'</i>';
 							inner_html += 	'</div>';
 							inner_html += 	'<p>'+ pageData[i]['_addr'] +'</p>';
 							inner_html += 	'<p>'+ pageData[i]['introduction'] +'</p>';
-							inner_html += 	'<em><i>￥</i><b>'+ parseFloat(pageData[i]['display_amount'])/100 +'</b><span>起</span></em>';
+							if (pageData[i].franchise_type == 'scenery' || pageData[i].franchise_type == '景区'){
+								inner_html += 	'<em><i>￥</i><b>'+ parseFloat(pageData[i]['display_amount'])/100 +'</b><span>起</span></em>';
+							}
 							inner_html += 	'<h5 style="margin-top: 11px;"><a href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><span>详细介绍</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a></h5>';
 							inner_html += '</dd>';
 							inner_html += '</dl>';

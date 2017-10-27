@@ -1605,8 +1605,8 @@ class NewsupSuppliersDetailHandler(BaseHandler):
         logging.info("got update read_num response %r", response.body)
 
         # product(供应商产品)
-        # params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":4}
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"2a28cb78f73411e69a3c00163e023e51", "idx":0, "limit":10}
+        params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"2a28cb78f73411e69a3c00163e023e51", "idx":0, "limit":10}
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"2a28cb78f73411e69a3c00163e023e51", "idx":0, "limit":10}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -1617,7 +1617,8 @@ class NewsupSuppliersDetailHandler(BaseHandler):
             product['publish_time'] = timestamp_friendly_date(product['publish_time'])
 
         # need(供应商需求)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"404228663a1711e7b21000163e023e51", "idx":0, "limit":10}
+        params = {"filter":"club", "club_id":franchise_id, "status":"publish", "category":"404228663a1711e7b21000163e023e51", "idx":0, "limit":10}
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"404228663a1711e7b21000163e023e51", "idx":0, "limit":10}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
