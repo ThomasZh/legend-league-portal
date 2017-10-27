@@ -167,7 +167,7 @@
 									inner_html += 	'<a href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><h4>'+ pageData[i]['title'] +'</h4></a>';
 									inner_html += 	'<p>'+ pageData[i]['subtitle'] +'</p>';
 									inner_html += 	'<p>发布时间:'+ getLocalTime(pageData[i]['publish_time']) +'</p>';
-									inner_html += 	'<h5><a href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><span>详细介绍</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a></h5>';
+									inner_html += 	'<h5><a target="_blank" href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><span>详细介绍</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a></h5>';
 									inner_html += '</dd>';
 									inner_html += '</dl>';
 						$('#category-wrap').append(inner_html);

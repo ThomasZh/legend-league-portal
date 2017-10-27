@@ -955,7 +955,7 @@
 								inner_html += 	'<p>'+ pageData[i]['_addr'] +'</p>';
 								inner_html += 	'<p>'+ pageData[i]['introduction'] +'</p>';
 								inner_html += 	'<em><i>￥</i><b>'+ parseFloat(pageData[i]['display_amount'])/100 +'</b><span>起</span></em>';
-								inner_html += 	'<h5><a href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><span>详细介绍</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a></h5>';
+								inner_html += 	'<h5><a target="_blank" href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><span>详细介绍</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a></h5>';
 								inner_html += '</dd>';
 								inner_html += '</dl>';
 		          $('#franchise-wrap').append(inner_html);
