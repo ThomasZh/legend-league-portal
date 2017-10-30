@@ -119,8 +119,8 @@
 		<a href="javascript:;" id="next">下一页</a>
 		<p class="total-page-box">共<span id="total_page" style="padding:0 5px;"></span>页</p>
 		<p class="select-page-box">到第
-			<input type="text" id="page-input" style="width: 35px;margin: 0 5px;text-align:center;">页
-			<button id="select-page-btn">确定</button>
+			<input type="text" id="page-input" style="width: 35px;margin: 0 5px;text-align:center; height:24px;">页
+			<button class="btn btn-success btn-xs" id="select-page-btn">确定</button>
 		</p>
 	</div>
 
@@ -161,10 +161,10 @@
 
 							var inner_html =	'<dl>';
 									inner_html += '<dt>';
-									inner_html += 	'<a href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><img src="'+ pageData[i]['img'] +'!370x370" alt=""></a>';
+									inner_html += 	'<a target="_blank" href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><img src="'+ pageData[i]['img'] +'!370x370" alt=""></a>';
 									inner_html += '</dt>';
 									inner_html += '<dd>';
-									inner_html += 	'<a href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><h4>'+ pageData[i]['title'] +'</h4></a>';
+									inner_html += 	'<a target="_blank" href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><h4>'+ pageData[i]['title'] +'</h4></a>';
 									inner_html += 	'<p>'+ pageData[i]['subtitle'] +'</p>';
 									inner_html += 	'<p>发布时间:'+ getLocalTime(pageData[i]['publish_time']) +'</p>';
 									inner_html += 	'<h5><a target="_blank" href="/portal/newsup/item-detail?id='+ pageData[i]['_id'] + '"><span>详细介绍</span><img src="{{ static_url('leshui/images/more.png') }}" alt=""></a></h5>';

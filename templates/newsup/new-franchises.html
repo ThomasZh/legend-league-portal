@@ -867,10 +867,10 @@
 		        for (var i in pageData) {
 								var inner_html =	'<dl>';
 								inner_html += '<dt>';
-								inner_html += 	'<a href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><img src="'+ pageData[i]['img'] +'" alt=""></a>';
+								inner_html += 	'<a target="_blank" href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><img src="'+ pageData[i]['img'] +'" alt=""></a>';
 								inner_html += '</dt>';
 								inner_html += '<dd>';
-								inner_html += 	'<a href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><h4>'+ pageData[i]['club_name'] +'</h4></a>';
+								inner_html += 	'<a target="_blank" href="/portal/newsup/franchise-detail?id='+ pageData[i]['club_id'] + '"><h4>'+ pageData[i]['club_name'] +'</h4></a>';
 								inner_html += 	'<div class="er_xq">';
 								inner_html += 		'<b>'+ pageData[i]['scenery'] +'A景区</b>';
 								inner_html += 		'<span>' + pageData[i]['province'] +'·'+ pageData[i]['city'] +'</span>';
