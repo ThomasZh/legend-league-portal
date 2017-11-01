@@ -747,10 +747,11 @@
 
 	<div class="in_right1">
 		<div id="banner">
-			<div class="imglist"><a href="javascript:;"><img src="{{ static_url('leshui/images/4.jpeg') }}" width="100%"></a></div>
-			<div class="imglist"><a href="javascript:;"><img src="{{ static_url('leshui/images/1.jpeg') }}" width="100%"></a></div>
-			<div class="imglist"><a href="javascript:;"><img src="{{ static_url('leshui/images/2.jpeg') }}" width="100%"></a></div>
-			<div class="imglist"><a href="javascript:;"><img src="{{ static_url('leshui/images/3.jpeg') }}" width="100%"></a></div>
+			{% for i in range(len(cover_imgs)) %}
+				{% if i < 5 %}
+				<div class="imglist"><a href="{{ cover_imgs[i]['url'] }}"><img src="{{ cover_imgs[i]['img'] }}" width="100%"></a></div>
+				{% end %}
+			{% end %}
 				<ul class="btn" style="z-index:999;">
 					<li class="hover" dl="1"></li>
 					<li  dl="2"></li>

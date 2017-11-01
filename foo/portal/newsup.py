@@ -219,6 +219,14 @@ class NewsupIndexHandler(BaseHandler):
         rs = data['rs']
         feature_line_franchises = rs['data']
 
+        # 轮播图
+        url = API_DOMAIN+"/api/leagues/"+ league_info['_id'] + "/cover_img"
+        http_client = HTTPClient()
+        response = http_client.fetch(url, method="GET")
+        logging.info("got response %r", response.body)
+        data = json_decode(response.body)
+        cover_imgs = data['rs']
+
         self.render('newsup/index.html',
                 api_domain=API_DOMAIN,
                 league_info=league_info,
@@ -236,7 +244,8 @@ class NewsupIndexHandler(BaseHandler):
                 wonder_tags=wonder_tags,
                 wonder_franchises=wonder_franchises,
                 feature_line_tags=feature_line_tags,
-                feature_line_franchises=feature_line_franchises)
+                feature_line_franchises=feature_line_franchises,
+                cover_imgs=cover_imgs)
 
 
 class NewsupAccountHandler(AuthorizationHandler):
