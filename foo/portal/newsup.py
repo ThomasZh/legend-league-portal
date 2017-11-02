@@ -577,23 +577,38 @@ class NewsupItemDetailHandler(BaseHandler):
         article_info['publish_time'] = timestamp_friendly_date(article_info['publish_time'])
         club_id = article_info['club_id']
 
-        # club
-        url = API_DOMAIN+"/api/clubs/"+article_info['club_id']
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got article response %r", response.body)
-        data = json_decode(response.body)
-        franchise = data['rs']
-        geo_x = franchise['gcj02']['x']
-        geo_y = franchise['gcj02']['y']
-        if not franchise.has_key('paragraphs'):
+        franchise = {}
+        geo_x = 0
+        geo_y = 0
+        _club_id = "00000000000000000000000000000000"
+        if article_info['club_id'] == _club_id:
+            franchise['_id'] = _club_id
+            franchise['name'] = u'乐水游'
+            franchise['province'] = '北京'
+            franchise['city'] = '北京'
+            franchise['phone'] = '18600000107'
+            franchise['email'] = '18600000107@qq.com'
             franchise['paragraphs'] = ''
-        if not franchise.has_key('franchise_type'):
             franchise['franchise_type'] = 'franchise'
-        if franchise.has_key('create_time'):
-            franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
-        else:
             franchise['create_time'] = timestamp_friendly_date(0)
+        else:
+            # club
+            url = API_DOMAIN+"/api/clubs/"+article_info['club_id']
+            http_client = HTTPClient()
+            response = http_client.fetch(url, method="GET")
+            logging.info("got article response %r", response.body)
+            data = json_decode(response.body)
+            franchise = data['rs']
+            geo_x = franchise['gcj02']['x']
+            geo_y = franchise['gcj02']['y']
+            if not franchise.has_key('paragraphs'):
+                franchise['paragraphs'] = ''
+            if not franchise.has_key('franchise_type'):
+                franchise['franchise_type'] = 'franchise'
+            if franchise.has_key('create_time'):
+                franchise['create_time'] = timestamp_friendly_date(franchise['create_time'])
+            else:
+                franchise['create_time'] = timestamp_friendly_date(0)
 
         # product(旅游产品)
         params = {"filter":"club", "club_id":club_id, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":10}
@@ -685,7 +700,7 @@ class NewsupItemDetailHandler(BaseHandler):
         data = json_decode(response.body)
         multimedias = data['rs']
 
-        url = API_DOMAIN+"/api/clubs/"+franchise['_id']+"/car-parks"
+        url = API_DOMAIN+"/api/clubs/"+ club_id +"/car-parks"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
         logging.info("got response %r", response.body)
