@@ -1118,16 +1118,16 @@ class NewsupFranchisesHandler(BaseHandler):
         logging.info("got city %r from argument", city)
         logging.info("got category %r from argument", category)
 
-        if isinstance(city, unicode):
-            print city.encode('utf-8')
-        else:
-            print city.decode('utf-8').encode('utf-8')
+        # if isinstance(city, unicode):
+        #     print city.encode('utf-8')
+        # else:
+        #     print city.decode('utf-8').encode('utf-8')
 
-        city = city.encode('utf-8')
-        logging.info("got city %r encode utf-8", city)
+        display_city = city.encode('utf-8')
+        logging.info("got display_city %r encode utf-8", display_city)
 
-        city = unquote(city)
-        logging.info("got city %r unquote", city)
+        display_city = unquote(display_city)
+        logging.info("got display_city %r unquote", display_city)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -1263,6 +1263,7 @@ class NewsupFranchisesHandler(BaseHandler):
                 is_login=is_login,
                 is_ops=is_ops,
                 city=city,
+                display_city=display_city,
                 category=category,
                 franchises=franchises,
                 requires=requires,
