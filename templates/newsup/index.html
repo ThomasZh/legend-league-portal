@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>乐水游</title>
+		<metahttp-equiv="X-UA-Compatible"content="IE=8"><!--以IE8模式渲染-->
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -28,7 +29,6 @@
 			<a class="menu_require" href="javascript:;">景区需求</a>
 			<a class="menu_community" href="javascript:;">经验交流</a>
 			<a class="menu_supplier" href="javascript:;">供应商</a>
-			<a class="menu_supplier_product" href="javascript:;">供应商产品</a>
 			<a class="menu_supplier_require" href="javascript:;">交流活动</a>
 			{% end %}
 		</div>
@@ -48,7 +48,6 @@
 				<li class="menu_require"><a href="javascript:;">景区需求</a></li>
 				<li class="menu_community"><a href="javascript:;">经验交流</a></li>
 				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
-				<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
 				<li class="menu_supplier_require"><a href="javascript:;">交流活动</a></li>
 				{% end %}
 			</ul>
@@ -767,18 +766,13 @@
 		<div class="xingxiang">
        	  <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <a href="javascript:;"><img src="{{ static_url('leshui/images/4.jpeg') }}" width="100%"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="javascript:;"><img src="{{ static_url('leshui/images/1.jpeg') }}" width="100%"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="javascript:;"><img src="{{ static_url('leshui/images/2.jpeg') }}" width="100%"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="javascript:;"><img src="{{ static_url('leshui/images/3.jpeg') }}" width="100%"></a>
-                </div>
+							{% for i in range(len(cover_imgs)) %}
+								{% if i < 5 %}
+								<div class="swiper-slide">
+										<a href="{{ cover_imgs[i]['url'] }}"><img src="{{ cover_imgs[i]['img'] }}" width="100%"></a>
+								</div>
+								{% end %}
+							{% end %}
             </div>
                   <!-- 如果需要分页器 -->
              <div class="swiper-pagination"></div>

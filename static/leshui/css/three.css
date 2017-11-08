@@ -108,6 +108,7 @@ margin-top: 10px; }
 .ht_two_bot{width: 100%;float: left;padding-top:4%}
 .ht_two_bot_main{width: 100%;float: left;display: none;}
 .ht_two_bot_main dl{width: 100%;float: left;padding-bottom:4%}
+.ht_two_bot_main .more a{float: right;margin-right: 10%;font-size: 12px;color: black;}
 .ht_two_bot_main dl dt{float: left;width: 30%;}
 .ht_two_bot_main dl dt img{float: left;width: 80px;height: 60px;}
 .ht_two_bot_main dl dd{float: left;width: 70%;}
@@ -330,6 +331,7 @@ body{background: #fff;}
 .ht_bot_left_icon{width: 43%;}
 .ht_hot_left_acti img{max-width: 100%}
 
+.ht_two_bot_main .more a{float: right;margin-right: 10px;font-size: 12px;color: black;}
 
 .ht_hot_left_sc,.ht_hot_left_dl dl{padding: 20px 0;}
 .ht_hot_left_say h1{padding-bottom: 10px;}

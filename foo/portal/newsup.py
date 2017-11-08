@@ -967,6 +967,27 @@ class NewsupCategoryHandler(BaseHandler):
                 category=category)
 
 
+class NewsupMoreArticlesHandler(BaseHandler):
+    def get(self):
+        logging.info(self.request)
+        club_id = self.get_argument("club_id", "")
+
+        is_login = False
+        access_token = self.get_secure_cookie("access_token")
+        if access_token:
+            is_login = True
+
+        is_ops = False
+        if is_login:
+            is_ops = self.is_ops(access_token)
+
+        self.render('newsup/more-articles.html',
+                is_login=is_login,
+                is_ops=is_ops,
+                club_id=club_id,
+                api_domain=API_DOMAIN)
+
+
 class NewsupCategorySearchHandler(BaseHandler):
     def get(self):
         logging.info(self.request)

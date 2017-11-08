@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>供应商详情</title>
+	<metahttp-equiv="X-UA-Compatible"content="IE=8"><!--以IE8模式渲染-->
   <meta name="description" content="" />
   <meta name="keywords" content="" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -29,7 +30,6 @@
 			<a class="menu_require" href="javascript:;">景区需求</a>
 			<a class="menu_community" href="javascript:;">经验交流</a>
 			<a class="menu_supplier" href="javascript:;">供应商</a>
-			<a class="menu_supplier_product" href="javascript:;">供应商产品</a>
 			<a class="menu_supplier_require" href="javascript:;">交流活动</a>
 			{% end %}
 		</div>
@@ -49,7 +49,6 @@
 				<li class="menu_require"><a href="javascript:;">景区需求</a></li>
 				<li class="menu_community"><a href="javascript:;">经验交流</a></li>
 				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
-				<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
 				<li class="menu_supplier_require"><a href="javascript:;">交流活动</a></li>
 				{% end %}
 			</ul>
@@ -114,7 +113,6 @@
 				<div class="ht_two_title">
 					<ul>
 						<li>供应商产品</li>
-						<li>交流活动</li>
 					</ul>
 				</div>
 				<div class="ht_two_bot">
@@ -130,23 +128,9 @@
 								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ products[i]['publish_time'] }}</em>
 							</dd>
 						</dl>
+						<dl class="more"><a href="/portal/newsup/more-articles?club_id={{ franchise['_id'] }}">查看更多>></a></dl>
 					{% end %}
 					{% end %}
-					</div>
-					<div class="ht_two_bot_main">
-						{% for i in range(len(supplier_needs)) %}
-		        {% if i < 4 %}
-						<dl>
-							<dt>
-								<a href="/portal/newsup/item-detail?id={{ supplier_needs[i]['_id'] }}"><img src="{{ supplier_needs[i]['img'] }}!100x76"></a>
-							</dt>
-							<dd>
-								<p><a href="/portal/newsup/item-detail?id={{ supplier_needs[i]['_id'] }}">{{ supplier_needs[i]['title'] }}</a></p>
-								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ supplier_needs[i]['publish_time'] }}</em>
-							</dd>
-						</dl>
-						{% end %}
-						{% end %}
 					</div>
 				</div>
 			</div>

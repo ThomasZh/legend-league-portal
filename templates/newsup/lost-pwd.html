@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>忘记密码</title>
+	<metahttp-equiv="X-UA-Compatible"content="IE=8"><!--以IE8模式渲染-->
   <meta name="description" content="" />
   <meta name="keywords" content="" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -28,7 +29,6 @@
 			<a class="menu_require" href="javascript:;">景区需求</a>
 			<a class="menu_community" href="javascript:;">经验交流</a>
 			<a class="menu_supplier" href="javascript:;">供应商</a>
-			<a class="menu_supplier_product" href="javascript:;">供应商产品</a>
 			<a class="menu_supplier_require" href="javascript:;">供应商需求</a>
 			{% end %}
 		</div>
@@ -48,7 +48,6 @@
 				<li class="menu_require"><a href="javascript:;">景区需求</a></li>
 				<li class="menu_community"><a href="javascript:;">经验交流</a></li>
 				<li class="menu_supplier"><a href="javascript:;">供应商</a></li>
-				<li class="menu_supplier_product"><a href="javascript:;">供应商产品</a></li>
 				<li class="menu_supplier_require"><a href="javascript:;">供应商需求</a></li>
 				{% end %}
 			</ul>
@@ -107,6 +106,7 @@ $(function(){
 			headers: {
 				"Authorization": "Bearer eHfWk+OqSWaR7FhDTkW/d7TIZqP3q0W3nVGXKZY5A8Q="
 			},
+			cache:false,
 			dataType: "json",
 			contentType: 'application/json',
 			success: function(data, status, xhr) {
