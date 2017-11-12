@@ -39,19 +39,9 @@ from tornado import ioloop, gen
 from comm import *
 from global_const import *
 
-from tornado.concurrent import Future
-
-def async_fetch_future(url):
-    http_client = AsyncHTTPClient()
-    my_future = Future()
-    fetch_future = http_client.fetch(url)
-    fetch_future.add_done_callback(
-        lambda f: my_future.set_result(f.result()))
-    return my_future
-
 
 class WxMpVerifyHandler(tornado.web.RequestHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         self.finish('qdkkOWgyqqLTrijx')
@@ -59,12 +49,15 @@ class WxMpVerifyHandler(tornado.web.RequestHandler):
 
 
 class NewsupLoginNextHandler(tornado.web.RequestHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
         logging.info("GET %r", self.request.uri)
+        protocol = self.request.headers['protocol']
+        host = self.request.headers['Host']
+        API_DOMAIN = protocol + "://" + host
 
         access_token = self.get_secure_cookie("access_token")
         logging.info("got access_token=[%r]",access_token)
@@ -84,9 +77,10 @@ class NewsupLoginNextHandler(tornado.web.RequestHandler):
 
 class NewsupIndexHandler(BaseHandler):
     # @tornado.web.asynchronous
-    # @tornado.gen.coroutine
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -276,11 +270,12 @@ class NewsupIndexHandler(BaseHandler):
 
 
 class NewsupAccountHandler(AuthorizationHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -315,10 +310,11 @@ class NewsupAccountHandler(AuthorizationHandler):
 
 
 class NewsupAuthorHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -385,10 +381,11 @@ class NewsupAuthorHandler(BaseHandler):
 
 
 class NewsupMediaHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -479,10 +476,11 @@ class NewsupMediaHandler(BaseHandler):
 
 
 class NewsupShortcodesHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -537,10 +535,11 @@ class NewsupShortcodesHandler(BaseHandler):
 
 
 class NewsupContactHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -575,12 +574,13 @@ class NewsupContactHandler(BaseHandler):
 
 
 class NewsupItemDetailHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
         logging.info("GET %r", self.request.uri)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         article_id = self.get_argument("id", "")
 
@@ -784,10 +784,11 @@ class NewsupItemDetailHandler(BaseHandler):
 
 
 class NewsupNewHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -808,10 +809,11 @@ class NewsupNewHandler(BaseHandler):
 
 
 class NewsupCategoryTileHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -882,6 +884,8 @@ class NewsupCategoryHandler(BaseHandler):
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
+
         category_id = self.get_argument("id", "")
 
         is_login = False
@@ -994,10 +998,12 @@ class NewsupCategoryHandler(BaseHandler):
 
 
 class NewsupMoreArticlesHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
+
         club_id = self.get_argument("club_id", "")
 
         is_login = False
@@ -1016,11 +1022,12 @@ class NewsupMoreArticlesHandler(BaseHandler):
 
 
 class NewsupCategorySearchHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         category_id = self.get_argument("id", "")
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -1137,12 +1144,13 @@ class NewsupCategorySearchHandler(BaseHandler):
 
 # 景区列表
 class NewsupFranchisesHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         franchise_type = self.get_argument("franchise_type", "")
         logging.info("got franchise_type %r from argument", franchise_type)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         city = self.get_argument("city", "all")
         category = self.get_argument("category_id", "all")
@@ -1313,11 +1321,12 @@ class NewsupFranchisesHandler(BaseHandler):
 
 # 景区详情
 class NewsupFranchiseDetailHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         franchise_id = self.get_argument("id", "")
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -1475,12 +1484,13 @@ class NewsupFranchiseDetailHandler(BaseHandler):
 
 # 供应商列表
 class NewsupSuppliersHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         franchise_type = self.get_argument("franchise_type", "")
         logging.info("got franchise_type %r from argument", franchise_type)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         city = self.get_argument("city", "all")
         category = self.get_argument("category_id", "all")
@@ -1648,11 +1658,12 @@ class NewsupSuppliersHandler(BaseHandler):
 
 # 供应商详情
 class NewsupSuppliersDetailHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         franchise_id = self.get_argument("id", "")
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -1740,11 +1751,12 @@ class NewsupSuppliersDetailHandler(BaseHandler):
 
 # 票列表
 class NewsupTicketListHandler(AuthorizationHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -1779,12 +1791,13 @@ class NewsupTicketListHandler(AuthorizationHandler):
 
 # 订票购物车
 class NewsupTicketCartHandler(AuthorizationHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
         ticket_id = self.get_argument("ticket_id",'')
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -1819,12 +1832,15 @@ class NewsupTicketCartHandler(AuthorizationHandler):
                 tickets=tickets)
 
 
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def post(self):
         club_id = self.get_argument('club_id','')
         logging.info('got club_id',club_id)
+        protocol = self.request.headers['protocol']
+        host = self.request.headers['Host']
+        API_DOMAIN = protocol + "://" + host
 
         access_token = self.get_secure_cookie("access_token")
         #购物车商品json
@@ -1890,11 +1906,14 @@ class NewsupTicketCartHandler(AuthorizationHandler):
 
 # 订票结算页
 class NewsupTicketBalanceHandler(AuthorizationHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
+        protocol = self.request.headers['protocol']
+        host = self.request.headers['Host']
+        API_DOMAIN = protocol + "://" + host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -1932,11 +1951,14 @@ class NewsupTicketBalanceHandler(AuthorizationHandler):
 
 # 订单列表页
 class NewsupOrderListHandler(AuthorizationHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
+        protocol = self.request.headers['protocol']
+        host = self.request.headers['Host']
+        API_DOMAIN = protocol + "://" + host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -1972,11 +1994,14 @@ class NewsupOrderListHandler(AuthorizationHandler):
 
 
 class NewsupApplyFranchiseHandler(AuthorizationHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
+        protocol = self.request.headers['protocol']
+        host = self.request.headers['Host']
+        API_DOMAIN = protocol + "://" + host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -2038,11 +2063,14 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
 
 
 class NewsupSearchResultHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         # category_id = self.get_argument("id", "")
+        protocol = self.request.headers['protocol']
+        host = self.request.headers['Host']
+        API_DOMAIN = protocol + "://" + host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -2131,11 +2159,15 @@ class NewsupSearchResultHandler(BaseHandler):
 
 # ajax 访问数据API
 class ApiArticlesXHR(AuthorizationHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self, vendor_id):
         logging.info("got vendor_id %r in uri", vendor_id)
+        protocol = self.request.headers['protocol']
+        host = self.request.headers['Host']
+        API_DOMAIN = protocol + "://" + host
+
         category_id = self.get_argument("category", "")
         logging.debug("get category_id=[%r]", category_id)
         page = self.get_argument("page", 1)

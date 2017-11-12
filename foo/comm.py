@@ -218,27 +218,11 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header("expires","0")
 
 
-    @tornado.web.asynchronous
-    @tornado.gen.coroutine
-    def get_recently_activities(self):
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-
-        http_client = AsyncHTTPClient()
-        response = yield gen.Task(http_client.fetch, url)
-        logging.info("got activitie response %r", response.body)
-
-        data = json_decode(response.body)
-        activities = data['rs']
-        for activitie in activities:
-            activitie['publish_time'] = timestamp_friendly_date(activitie['publish_time'])
-
-        raise gen.Return(activities)
-
-
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get_league_info(self):
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
+
         # league(联盟信息)
         url = API_DOMAIN+"/api/leagues/"+LEAGUE_ID
 
@@ -255,9 +239,11 @@ class BaseHandler(tornado.web.RequestHandler):
         raise gen.Return(league_info)
 
 
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get_code(self):
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
+
         url = API_DOMAIN+"/api/auth/codes"
         http_client = HTTPClient()
         data = {"appid":"7x24hs:blog",
@@ -278,9 +264,11 @@ class BaseHandler(tornado.web.RequestHandler):
                 status_code=status_code)
 
 
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def is_ops(self, access_token):
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
+
         try:
             params = {"filter":"ops"}
             url = url_concat(API_DOMAIN+"/api/myinfo", params)
@@ -300,9 +288,11 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 class AuthorizationHandler(BaseHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get_current_user(self):
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
+
         self.set_secure_cookie("login_next", self.request.uri)
 
         access_token = self.get_secure_cookie("access_token")
@@ -344,9 +334,11 @@ class AuthorizationHandler(BaseHandler):
                     return None
 
 
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def create_order(self, order_index):
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
+
         access_token = self.get_access_token()
         headers = {"Authorization":"Bearer "+access_token}
 
@@ -360,9 +352,11 @@ class AuthorizationHandler(BaseHandler):
         return rs['pay_id']
 
 
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get_access_token(self):
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
+
         access_token = self.get_secure_cookie("access_token")
         if access_token:
             logging.info("got access_token=[%r] from cookie", access_token)
@@ -380,9 +374,11 @@ class AuthorizationHandler(BaseHandler):
         return access_token
 
 
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get_symbol_object(self, _id):
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
+
         url = API_DOMAIN + "/api/symbols/" + _id
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
@@ -394,9 +390,11 @@ class AuthorizationHandler(BaseHandler):
         return symbol_object
 
 
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get_order_index(self, order_id):
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
+
         headers = {"Authorization":"Bearer "+"00000000000000000000000000000000"}
 
         url = API_DOMAIN + "/api/orders/" + order_id
