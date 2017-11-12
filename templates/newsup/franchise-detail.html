@@ -128,10 +128,20 @@
 		        {% if i < 4 %}
 						<dl>
 							<dt>
-								<a href="/portal/newsup/item-detail?id={{ products[i]['_id'] }}"><img src="{{ products[i]['img'] }}!100x76"></a>
+								<a href="/portal/newsup/item-detail?id={{ products[i]['_id'] }}">
+									{% if products[i].has_key('img') %}
+									<img src="{{ products[i]['img'] }}!100x76">
+									{% else %}
+									<img src="#">
+									{% end %}
+								</a>
 							</dt>
 							<dd>
-								<p><a href="/portal/newsup/item-detail?id={{ products[i]['_id'] }}">{{ products[i]['title'] }}</a></p>
+								<p><a href="/portal/newsup/item-detail?id={{ products[i]['_id'] }}">
+									{% if products[i].has_key('title') %}
+									{{ products[i]['title'] }}
+									{% end %}
+								</a></p>
 								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ products[i]['publish_time'] }}</em>
 							</dd>
 						</dl>
@@ -145,10 +155,20 @@
 		        {% if i < 4 %}
 						<dl>
 							<dt>
-								<a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}"><img src="{{ journeies[i]['img'] }}!100x76"></a>
+								<a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">
+									{% if journeies[i].has_key('img') %}
+									<img src="{{ journeies[i]['img'] }}!100x76">
+									{% else %}
+									<img src="#">
+									{% end %}
+								</a>
 							</dt>
 							<dd>
-								<p><a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">{{ journeies[i]['title'] }}</a></p>
+								<p><a href="/portal/newsup/item-detail?id={{ journeies[i]['_id'] }}">
+									{% if journeies[i].has_key('title') %}
+									{{ journeies[i]['title'] }}
+									{% end %}
+								</a></p>
 								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ journeies[i]['publish_time'] }}</em>
 							</dd>
 						</dl>
@@ -161,10 +181,20 @@
 		        {% if i < 4 %}
 						<dl>
 							<dt>
-								<a href="/portal/newsup/item-detail?id={{ last_activities[i]['_id'] }}"><img src="{{ last_activities[i]['img'] }}!100x76"></a>
+								<a href="/portal/newsup/item-detail?id={{ last_activities[i]['_id'] }}">
+									{% if last_activities[i].has_key('img') %}
+									<img src="{{ last_activities[i]['img'] }}!100x76">
+									{% else %}
+									<img src="#">
+									{% end %}
+								</a>
 							</dt>
 							<dd>
-								<p><a href="/portal/newsup/item-detail?id={{ last_activities[i]['_id'] }}">{{ last_activities[i]['title'] }}</a></p>
+								<p><a href="/portal/newsup/item-detail?id={{ last_activities[i]['_id'] }}">
+									{% if last_activities[i].has_key('title') %}
+									{{ last_activities[i]['title'] }}
+									{% end %}
+								</a></p>
 								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ last_activities[i]['publish_time'] }}</em>
 							</dd>
 						</dl>

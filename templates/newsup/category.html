@@ -141,7 +141,7 @@
 			var currentPage = 0;//当前页
 			var total_page = 0;//总页数
 			function gotoPage(pageNum) {
-				$.get("{{api_domain}}/api/articles-pagination?filter=league&league_id={{ league_info['_id'] }}&status=publish&category={{ category_id }}&page="+pageNum+"&limit="+limit,function(data,status){
+				$.get("{{api_domain}}/api/articles-pagination?filter=league&league_id={{ LEAGUE_ID }}&status=publish&category={{ category_id }}&page="+pageNum+"&limit="+limit,function(data,status){
 							// console.log(data);
 							data_obj = JSON.parse(data);
 							data = data_obj.rs;

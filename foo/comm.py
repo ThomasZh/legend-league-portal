@@ -32,7 +32,7 @@ from bson import json_util
 from tornado.escape import json_encode, json_decode
 from tornado.httpclient import *
 from tornado.httputil import url_concat
-
+from tornado import ioloop, gen
 from global_const import *
 
 
@@ -217,17 +217,46 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header("Cache-Control","no-cache")
         self.set_header("expires","0")
 
+
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
+    def get_recently_activities(self):
+        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"0bbf89e2f73411e69a3c00163e023e51", "idx":0, "limit":10}
+        url = url_concat(API_DOMAIN+"/api/articles", params)
+
+        http_client = AsyncHTTPClient()
+        response = yield gen.Task(http_client.fetch, url)
+        logging.info("got activitie response %r", response.body)
+
+        data = json_decode(response.body)
+        activities = data['rs']
+        for activitie in activities:
+            activitie['publish_time'] = timestamp_friendly_date(activitie['publish_time'])
+
+        raise gen.Return(activities)
+
+
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get_league_info(self):
         # league(联盟信息)
         url = API_DOMAIN+"/api/leagues/"+LEAGUE_ID
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+
+        http_client = AsyncHTTPClient()
+        response = yield gen.Task(http_client.fetch, url)
+
+        logging.info("got league_info response %r", response.body)
         data = json_decode(response.body)
         league_info = data['rs']
-        return league_info
+        # return league_info
+        raise gen.Return(league_info)
 
 
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get_code(self):
         url = API_DOMAIN+"/api/auth/codes"
         http_client = HTTPClient()
@@ -240,32 +269,17 @@ class BaseHandler(tornado.web.RequestHandler):
         code = session_code['code']
         return code
 
+
     def write_error(self, status_code, **kwargs):
         host = self.request.headers['Host']
-        logging.info("got host %r", host)
-
-        try:
-            reason = ""
-            for line in traceback.format_exception(*kwargs["exc_info"]):
-                if "HTTP 404: Not Found" in line:
-                    self.render('comm/page-404.html')
-                    self.finish()
-                reason += line
-            logging.info("got status_code %r reason %r", status_code, reason)
-
-            params = {"app":"club-ops", "sys":host, "level":status_code, "message": reason}
-            url = url_concat("http://kit.7x24hs.com/api/sys-error", params)
-            http_client = HTTPClient()
-            _json = json_encode(params)
-            response = http_client.fetch(url, method="POST", body=_json)
-            logging.info("got response.body %r", response.body)
-        except:
-            logging.warn("write log to http://kit.7x24hs.com/api/sys-error error")
+        logging.error("got error=[%r] request=[%r]", status_code, self.request)
 
         self.render("comm/page-500.html",
                 status_code=status_code)
 
 
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def is_ops(self, access_token):
         try:
             params = {"filter":"ops"}
@@ -273,7 +287,7 @@ class BaseHandler(tornado.web.RequestHandler):
             http_client = HTTPClient()
             headers={"Authorization":"Bearer "+access_token}
             response = http_client.fetch(url, method="GET", headers=headers)
-            logging.info("got response %r", response.body)
+            logging.info("got ops response %r", response.body)
             # account_id,nickname,avatar,club_id,club_name,league_id,_rank
             data = json_decode(response.body)
             ops = data['rs']
@@ -286,6 +300,8 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 class AuthorizationHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get_current_user(self):
         self.set_secure_cookie("login_next", self.request.uri)
 
@@ -328,6 +344,8 @@ class AuthorizationHandler(BaseHandler):
                     return None
 
 
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def create_order(self, order_index):
         access_token = self.get_access_token()
         headers = {"Authorization":"Bearer "+access_token}
@@ -342,6 +360,8 @@ class AuthorizationHandler(BaseHandler):
         return rs['pay_id']
 
 
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get_access_token(self):
         access_token = self.get_secure_cookie("access_token")
         if access_token:
@@ -360,6 +380,8 @@ class AuthorizationHandler(BaseHandler):
         return access_token
 
 
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get_symbol_object(self, _id):
         url = API_DOMAIN + "/api/symbols/" + _id
         http_client = HTTPClient()
@@ -372,6 +394,8 @@ class AuthorizationHandler(BaseHandler):
         return symbol_object
 
 
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get_order_index(self, order_id):
         headers = {"Authorization":"Bearer "+"00000000000000000000000000000000"}
 

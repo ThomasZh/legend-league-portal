@@ -934,9 +934,15 @@
 		<!-- 一共10个li -->
 		{% for activity in activities %}
 			<li>
+				{% if activity.has_key('img') %}
 				<a href="/portal/newsup/item-detail?id={{ activity['_id'] }}"><img src="{{ activity['img'] }}!370x278" alt=""></a>
 				<a href="/portal/newsup/item-detail?id={{ activity['_id'] }}"><h4>{{ activity['title'] }}</h4></a>
 				<p>{{ activity['subtitle'] }}</p>
+				{% else %}
+				<a href="/portal/newsup/item-detail?id={{ activity['_id'] }}"><img src="#" alt=""></a>
+				<a href="/portal/newsup/item-detail?id={{ activity['_id'] }}"><h4></h4></a>
+				<p></p>
+				{% end %}
 			</li>
 		{% end %}
 	</ul>
@@ -951,9 +957,15 @@
 		<!-- 一共10个li -->
 		{% for journey in journeies %}
 			<li>
+				{% if journey.has_key('img') %}
 				<a href="/portal/newsup/item-detail?id={{ journey['_id'] }}"><img src="{{ journey['img'] }}!370x278" alt=""></a>
 				<a href="/portal/newsup/item-detail?id={{ journey['_id'] }}"><h4>{{ journey['title'] }}</h4></a>
 				<p>{{ journey['subtitle'] }}</p>
+				{% else %}
+				<a href="/portal/newsup/item-detail?id={{ journey['_id'] }}"><img src="#" alt=""></a>
+				<a href="/portal/newsup/item-detail?id={{ journey['_id'] }}"><h4></h4></a>
+				<p></p>
+				{% end %}
 			</li>
 		{% end %}
 	</ul>

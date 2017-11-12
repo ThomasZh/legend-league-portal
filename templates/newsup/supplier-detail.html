@@ -121,10 +121,20 @@
 		        {% if i < 4 %}
 						<dl>
 							<dt>
-								<a href="/portal/newsup/item-detail?id={{ products[i]['_id'] }}"><img src="{{ products[i]['img'] }}!100x76"></a>
+								<a href="/portal/newsup/item-detail?id={{ products[i]['_id'] }}">
+									{% if products[i].has_key('img') %}
+									<img src="{{ products[i]['img'] }}!100x76">
+									{% else %}
+									<img src="#">
+									{% end %}
+								</a>
 							</dt>
 							<dd>
-								<p><a href="/portal/newsup/item-detail?id={{ products[i]['_id'] }}">{{ products[i]['title'] }}</a></p>
+								<p><a href="/portal/newsup/item-detail?id={{ products[i]['_id'] }}">
+									{% if products[i].has_key('title') %}
+									{{ products[i]['title'] }}
+									{% end %}
+								</a></p>
 								<em><img src="{{ static_url('leshui/images/time2.png') }}" alt="">{{ products[i]['publish_time'] }}</em>
 							</dd>
 						</dl>

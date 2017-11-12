@@ -16,7 +16,7 @@ import router
 
 
 define("port", default=8019, help="run on the given port", type=int)
-define("debug", default=True, help="run in debug mode")
+define("debug", default=False, help="run in debug mode")
 
 
 def main():
@@ -39,6 +39,7 @@ def main():
     # tornado.locale.load_gettext_translations(os.path.join(os.path.dirname(__file__), "locale"), "aplan")
     tornado.locale.set_default_locale("en_US")
     tornado.options.parse_command_line()
+    tornado.process.fork_processes(0) # 开启多进程，0表示自动识别CPU核心数
     app.listen(options.port)
     tornado.ioloop.IOLoop.current().start()
 

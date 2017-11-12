@@ -35,18 +35,32 @@ from tornado.escape import json_encode, json_decode
 from tornado.httpclient import *
 from tornado.httputil import url_concat
 from bson import json_util
-
+from tornado import ioloop, gen
 from comm import *
 from global_const import *
 
+from tornado.concurrent import Future
+
+def async_fetch_future(url):
+    http_client = AsyncHTTPClient()
+    my_future = Future()
+    fetch_future = http_client.fetch(url)
+    fetch_future.add_done_callback(
+        lambda f: my_future.set_result(f.result()))
+    return my_future
+
 
 class WxMpVerifyHandler(tornado.web.RequestHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         self.finish('qdkkOWgyqqLTrijx')
         return
 
 
 class NewsupLoginNextHandler(tornado.web.RequestHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
@@ -69,20 +83,17 @@ class NewsupLoginNextHandler(tornado.web.RequestHandler):
 
 
 class NewsupIndexHandler(BaseHandler):
+    # @tornado.web.asynchronous
+    # @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
 
-        # league(联盟信息)
-        league_info = self.get_league_info()
-
         is_login = False
         access_token = self.get_secure_cookie("access_token")
-        logging.info("got access_token>>>>> %r",access_token)
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # activity(近期活动)
@@ -90,55 +101,63 @@ class NewsupIndexHandler(BaseHandler):
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.debug("got response %r", response.body)
         data = json_decode(response.body)
         activities = data['rs']
         for activitie in activities:
             activitie['publish_time'] = timestamp_friendly_date(activitie['publish_time'])
+        # http_client = tornado.httpclient.AsyncHTTPClient()
+        # response = http_client.fetch(url)
+        # logging.info("got response %r", response)
+        # activities = []
 
         # product(旅游产品)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        products = data['rs']
-        for product in products:
-            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":10}
+        # url = url_concat(API_DOMAIN+"/api/articles", params)
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+        # logging.debug("got response %r", response.body)
+        # data = json_decode(response.body)
+        # products = data['rs']
+        # for product in products:
+        #     product['publish_time'] = timestamp_friendly_date(product['publish_time'])
+        # # products = []
 
         # requires(景区需求)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":'065f565e6bd711e7b46300163e023e51', "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        requires = data['rs']
-        for article in requires:
-            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":'065f565e6bd711e7b46300163e023e51', "idx":0, "limit":10}
+        # url = url_concat(API_DOMAIN+"/api/articles", params)
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+        # logging.debug("got response %r", response.body)
+        # data = json_decode(response.body)
+        # requires = data['rs']
+        # for article in requires:
+        #     article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+        # # requires = []
 
         # journey(旅游资讯)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":10}
         url = url_concat(API_DOMAIN+"/api/articles", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.debug("got response %r", response.body)
         data = json_decode(response.body)
         journeies = data['rs']
         for article in journeies:
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+        # journeies = []
 
         # communities(经验交流)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        communities = data['rs']
-        for article in communities:
-            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":10}
+        # url = url_concat(API_DOMAIN+"/api/articles", params)
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+        # logging.debug("got response %r", response.body)
+        # data = json_decode(response.body)
+        # communities = data['rs']
+        # for article in communities:
+        #     article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+        # # communities = []
 
         # 一周热游榜(景区)
         second_categorys_id = "b8fa1f3ea41b11e7811500163e023e51"
@@ -146,10 +165,11 @@ class NewsupIndexHandler(BaseHandler):
         url = url_concat(API_DOMAIN+"/api/categories/"+second_categorys_id+"/clubs", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.debug("got response %r", response.body)
         data = json_decode(response.body)
         rs = data['rs']
         hot_franchises = rs['data']
+        # hot_franchises = []
 
         # 当季热门
         second_categorys_id = "37eafe76b96b11e7a70e00163e023e51"
@@ -157,87 +177,94 @@ class NewsupIndexHandler(BaseHandler):
         url = url_concat(API_DOMAIN+"/api/categories/"+second_categorys_id+"/clubs", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.debug("got response %r", response.body)
         data = json_decode(response.body)
         rs = data['rs']
         hot_tags = rs['data']
+        # hot_tags = []
 
         # 热门景区
         hot_franchises_category_id = "757ee072a02511e7b7f600163e023e51"
         url = API_DOMAIN + "/api/def/categories/"+ hot_franchises_category_id +"/level2"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response.body %r", response.body)
+        logging.debug("got response.body %r", response.body)
         data = json_decode(response.body)
         hot_franchises_tags = data['rs']
+        # hot_franchises_tags = []
 
         # franchises(热门景区列表)
         params = {"filter":"level1", "franchise_type":"scenery", "page":1, "limit":10, "category":hot_franchises_category_id}
         url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs-filter", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.debug("got response %r", response.body)
         data = json_decode(response.body)
         rs = data['rs']
         franchises = rs['data']
+        # franchises = []
 
         # 精彩推荐
         wonder_category_id = "8a8556c2a02511e7b7f600163e023e51"
         url = API_DOMAIN + "/api/def/categories/"+ wonder_category_id +"/level2"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response.body %r", response.body)
+        logging.debug("got response.body %r", response.body)
         data = json_decode(response.body)
         wonder_tags = data['rs']
+        # wonder_tags = []
 
         # franchises(精彩推荐景区列表)
         params = {"filter":"level1", "franchise_type":"scenery", "page":1, "limit":10, "category":wonder_category_id}
         url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs-filter", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.debug("got response %r", response.body)
         data = json_decode(response.body)
         rs = data['rs']
         wonder_franchises = rs['data']
+        # wonder_franchises = []
 
         #  特色路线
         feature_line_category_id = "b1fb3e94a1e011e7943000163e023e51"
         url = API_DOMAIN + "/api/def/categories/"+ feature_line_category_id +"/level2"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response.body %r", response.body)
+        logging.debug("got response.body %r", response.body)
         data = json_decode(response.body)
         feature_line_tags = data['rs']
+        # feature_line_tags = []
 
         # franchises(特色路线列表)
         params = {"filter":"level1", "franchise_type":"scenery", "page":1, "limit":10, "category":feature_line_category_id}
         url = url_concat(API_DOMAIN+"/api/leagues/"+LEAGUE_ID+"/clubs-filter", params)
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.debug("got response %r", response.body)
         data = json_decode(response.body)
         rs = data['rs']
         feature_line_franchises = rs['data']
+        # feature_line_franchises = []
 
         # 轮播图
-        url = API_DOMAIN+"/api/leagues/"+ league_info['_id'] + "/cover_img"
+        url = API_DOMAIN+"/api/leagues/"+ LEAGUE_ID + "/cover_img"
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.debug("got response %r", response.body)
         data = json_decode(response.body)
         cover_imgs = data['rs']
+        # cover_imgs = []
 
         self.render('newsup/index.html',
                 api_domain=API_DOMAIN,
-                league_info=league_info,
                 is_login=is_login,
                 is_ops=is_ops,
                 franchises=franchises,
                 activities=activities,
-                products=products,
-                requires=requires,
+                # products=products,
+                # requires=requires,
                 journeies=journeies,
-                communities=communities,
+                # communities=communities,
                 hot_franchises=hot_franchises,
                 hot_tags=hot_tags,
                 hot_franchises_tags=hot_franchises_tags,
@@ -249,17 +276,18 @@ class NewsupIndexHandler(BaseHandler):
 
 
 class NewsupAccountHandler(AuthorizationHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -287,16 +315,17 @@ class NewsupAccountHandler(AuthorizationHandler):
 
 
 class NewsupAuthorHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -356,20 +385,18 @@ class NewsupAuthorHandler(BaseHandler):
 
 
 class NewsupMediaHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
-
-        # league(联盟信息)
-        league_info = self.get_league_info()
 
         # product(旅游产品)
         params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":10}
@@ -441,7 +468,6 @@ class NewsupMediaHandler(BaseHandler):
         self.render('newsup/media.html',
                 is_login=is_login,
                 is_ops=is_ops,
-                league_info=league_info,
                 products=products,
                 journeies=journeies,
                 communities=communities,
@@ -453,16 +479,17 @@ class NewsupMediaHandler(BaseHandler):
 
 
 class NewsupShortcodesHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -510,16 +537,17 @@ class NewsupShortcodesHandler(BaseHandler):
 
 
 class NewsupContactHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -547,6 +575,8 @@ class NewsupContactHandler(BaseHandler):
 
 
 class NewsupItemDetailHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
@@ -557,11 +587,9 @@ class NewsupItemDetailHandler(BaseHandler):
         is_login = False
         access_token = self.get_secure_cookie("access_token")
         logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -756,16 +784,17 @@ class NewsupItemDetailHandler(BaseHandler):
 
 
 class NewsupNewHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -779,16 +808,17 @@ class NewsupNewHandler(BaseHandler):
 
 
 class NewsupCategoryTileHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -848,137 +878,134 @@ class NewsupCategoryTileHandler(BaseHandler):
 
 
 class NewsupCategoryHandler(BaseHandler):
+    # @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         category_id = self.get_argument("id", "")
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
-
-        # league(联盟信息)
-        league_info = self.get_league_info()
 
         # query category_name by category_id
         url = API_DOMAIN+"/api/categories/" + category_id
         http_client = HTTPClient()
         response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
+        logging.debug("got response %r", response.body)
         data = json_decode(response.body)
         category = data['rs']
 
         # query by category_id
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        sceneries = data['rs']
-        for article in sceneries:
-            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":category_id, "idx":0, "limit":10}
+        # url = url_concat(API_DOMAIN+"/api/articles", params)
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+        # logging.debug("got response %r", response.body)
+        # data = json_decode(response.body)
+        # sceneries = data['rs']
+        # for article in sceneries:
+        #     article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # product(旅游产品)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got products response %r", response.body)
-        data = json_decode(response.body)
-        products = data['rs']
-        for product in products:
-            product['publish_time'] = timestamp_friendly_date(product['publish_time'])
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"b0569f58144f11e78d3400163e023e51", "idx":0, "limit":10}
+        # url = url_concat(API_DOMAIN+"/api/articles", params)
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+        # logging.debug("got products response %r", response.body)
+        # data = json_decode(response.body)
+        # products = data['rs']
+        # for product in products:
+        #     product['publish_time'] = timestamp_friendly_date(product['publish_time'])
 
         # journey(旅游资讯)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got journeies response %r", response.body)
-        data = json_decode(response.body)
-        journeies = data['rs']
-        for article in journeies:
-            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"065f565e6bd711e7b46300163e023e51", "idx":0, "limit":10}
+        # url = url_concat(API_DOMAIN+"/api/articles", params)
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+        # logging.debug("got journeies response %r", response.body)
+        # data = json_decode(response.body)
+        # journeies = data['rs']
+        # for article in journeies:
+        #     article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # communities(经验交流)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        communities = data['rs']
-        for article in communities:
-            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":"1b86ad38f73411e69a3c00163e023e51", "idx":0, "limit":10}
+        # url = url_concat(API_DOMAIN+"/api/articles", params)
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+        # logging.debug("got response %r", response.body)
+        # data = json_decode(response.body)
+        # communities = data['rs']
+        # for article in communities:
+        #     article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # requires(景区需求)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":'065f565e6bd711e7b46300163e023e51', "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/articles", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        requires = data['rs']
-        for article in requires:
-            article['publish_time'] = timestamp_friendly_date(article['publish_time'])
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "status":"publish", "category":'065f565e6bd711e7b46300163e023e51', "idx":0, "limit":10}
+        # url = url_concat(API_DOMAIN+"/api/articles", params)
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+        # logging.debug("got response %r", response.body)
+        # data = json_decode(response.body)
+        # requires = data['rs']
+        # for article in requires:
+        #     article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # multimedia
-        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":10}
-        url = url_concat(API_DOMAIN+"/api/multimedias", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        multimedias = data['rs']
-        for multimedia in multimedias:
-            multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":10}
+        # url = url_concat(API_DOMAIN+"/api/multimedias", params)
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+        # logging.debug("got response %r", response.body)
+        # data = json_decode(response.body)
+        # multimedias = data['rs']
+        # for multimedia in multimedias:
+        #     multimedia['publish_time'] = timestamp_friendly_date(multimedia['publish_time'])
 
         # lastest comments(最新的评论)
-        params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
-        url = url_concat(API_DOMAIN+"/api/last-comments", params)
-        http_client = HTTPClient()
-        response = http_client.fetch(url, method="GET")
-        logging.info("got response %r", response.body)
-        data = json_decode(response.body)
-        lastest_comments = data['rs']
-        for comment in lastest_comments:
-            comment['create_time'] = timestamp_friendly_date(comment['create_time'])
+        # params = {"filter":"league", "league_id":LEAGUE_ID, "idx":0, "limit":5}
+        # url = url_concat(API_DOMAIN+"/api/last-comments", params)
+        # http_client = HTTPClient()
+        # response = http_client.fetch(url, method="GET")
+        # logging.debug("got response %r", response.body)
+        # data = json_decode(response.body)
+        # lastest_comments = data['rs']
+        # for comment in lastest_comments:
+        #     comment['create_time'] = timestamp_friendly_date(comment['create_time'])
 
         self.render('newsup/category.html',
                 is_login=is_login,
                 is_ops=is_ops,
-                league_info=league_info,
                 LEAGUE_ID = LEAGUE_ID,
-                sceneries=sceneries,
-                products=products,
-                journeies=journeies,
-                communities=communities,
-                requires=requires,
-                lastest_comments=lastest_comments,
-                multimedias=multimedias,
-                league_id=LEAGUE_ID,
+                # sceneries=sceneries,
+                # products=products,
+                # journeies=journeies,
+                # communities=communities,
+                # requires=requires,
+                # lastest_comments=lastest_comments,
+                # multimedias=multimedias,
                 category_id=category_id,
                 api_domain=API_DOMAIN,
                 category=category)
 
 
 class NewsupMoreArticlesHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         club_id = self.get_argument("club_id", "")
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         self.render('newsup/more-articles.html',
@@ -989,17 +1016,18 @@ class NewsupMoreArticlesHandler(BaseHandler):
 
 
 class NewsupCategorySearchHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         category_id = self.get_argument("id", "")
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -1106,8 +1134,11 @@ class NewsupCategorySearchHandler(BaseHandler):
                 api_domain=API_DOMAIN,
                 category=category)
 
+
 # 景区列表
 class NewsupFranchisesHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         franchise_type = self.get_argument("franchise_type", "")
@@ -1131,11 +1162,10 @@ class NewsupFranchisesHandler(BaseHandler):
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -1184,7 +1214,7 @@ class NewsupFranchisesHandler(BaseHandler):
             article['publish_time'] = timestamp_friendly_date(article['publish_time'])
 
         # requires(景区需求/供应商需求)
-        if franchise_type == '\xe6\x99\xaf\xe5\x8c\xba': #景区
+        if franchise_type == u'景区': #景区
             category_id = '065f565e6bd711e7b46300163e023e51'
         else:
             category_id = '404228663a1711e7b21000163e023e51'
@@ -1283,17 +1313,18 @@ class NewsupFranchisesHandler(BaseHandler):
 
 # 景区详情
 class NewsupFranchiseDetailHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         franchise_id = self.get_argument("id", "")
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -1444,6 +1475,8 @@ class NewsupFranchiseDetailHandler(BaseHandler):
 
 # 供应商列表
 class NewsupSuppliersHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         franchise_type = self.get_argument("franchise_type", "")
@@ -1458,20 +1491,17 @@ class NewsupSuppliersHandler(BaseHandler):
             print city.encode('utf-8')
         else:
             print city.decode('utf-8').encode('utf-8')
-
         city = city.encode('utf-8')
         logging.info("got city %r encode utf-8", city)
-
         city = unquote(city)
         logging.info("got city %r unquote", city)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -1618,17 +1648,18 @@ class NewsupSuppliersHandler(BaseHandler):
 
 # 供应商详情
 class NewsupSuppliersDetailHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         franchise_id = self.get_argument("id", "")
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -1709,17 +1740,18 @@ class NewsupSuppliersDetailHandler(BaseHandler):
 
 # 票列表
 class NewsupTicketListHandler(AuthorizationHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -1747,17 +1779,19 @@ class NewsupTicketListHandler(AuthorizationHandler):
 
 # 订票购物车
 class NewsupTicketCartHandler(AuthorizationHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
         ticket_id = self.get_argument("ticket_id",'')
+
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -1784,6 +1818,9 @@ class NewsupTicketCartHandler(AuthorizationHandler):
                 ticket_id=ticket_id,
                 tickets=tickets)
 
+
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def post(self):
         club_id = self.get_argument('club_id','')
@@ -1853,17 +1890,18 @@ class NewsupTicketCartHandler(AuthorizationHandler):
 
 # 订票结算页
 class NewsupTicketBalanceHandler(AuthorizationHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -1894,17 +1932,18 @@ class NewsupTicketBalanceHandler(AuthorizationHandler):
 
 # 订单列表页
 class NewsupOrderListHandler(AuthorizationHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -1933,17 +1972,18 @@ class NewsupOrderListHandler(AuthorizationHandler):
 
 
 class NewsupApplyFranchiseHandler(AuthorizationHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self):
         logging.info(self.request)
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -1998,17 +2038,18 @@ class NewsupApplyFranchiseHandler(AuthorizationHandler):
 
 
 class NewsupSearchResultHandler(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
         logging.info(self.request)
         # category_id = self.get_argument("id", "")
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
+        logging.info("got access_token=[%r]", access_token)
+        is_ops = False
         if access_token:
             is_login = True
-
-        is_ops = False
-        if is_login:
             is_ops = self.is_ops(access_token)
 
         # league(联盟信息)
@@ -2090,6 +2131,8 @@ class NewsupSearchResultHandler(BaseHandler):
 
 # ajax 访问数据API
 class ApiArticlesXHR(AuthorizationHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     @tornado.web.authenticated  # if no session, redirect to login page
     def get(self, vendor_id):
         logging.info("got vendor_id %r in uri", vendor_id)
