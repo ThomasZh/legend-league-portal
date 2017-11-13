@@ -44,6 +44,7 @@ from global_const import *
 class AuthRegisterHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -64,6 +65,7 @@ class AuthRegisterHandler(BaseHandler):
 class AuthLoginHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -84,6 +86,7 @@ class AuthLoginHandler(BaseHandler):
 class AuthLostpwdHandler(BaseHandler):
     def get(self):
         logging.info(self.request)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         is_login = False
         access_token = self.get_secure_cookie("access_token")
@@ -107,6 +110,7 @@ class AuthLogoutHandler(BaseHandler):
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
         logging.info("GET %r", self.request.uri)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         access_token = self.get_secure_cookie("access_token")
         logging.info("got access_token=[%r]", access_token)
@@ -139,6 +143,7 @@ class AuthLeagueSignupXHR(BaseHandler):
         logging.info("^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^ ^^^^^")
         logging.info("POST %r", self.request.uri)
         logging.info(self.request.body)
+        API_DOMAIN = self.request.protocol + "://" + self.request.host
 
         session_ticket = json_decode(self.request.body)
         self.set_secure_cookie("access_token", session_ticket['access_token'])
