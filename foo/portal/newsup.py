@@ -1901,13 +1901,13 @@ class NewsupTicketBalanceHandler(AuthorizationHandler):
         order_id = self.get_argument('order_id','')
         logging.info('got order_id',order_id)
 
-        order = self.get_symbol_object(order_id)
-        logging.info("GET order %r", order)
-        order['create_time'] = timestamp_datetime(float(order['create_time']))
-
-        items = order['items']
-        _product_description = items[0]['title']
-        logging.info("GET items %r", items)
+        # order = self.get_symbol_object(order_id)
+        # logging.info("GET order %r", order)
+        # order['create_time'] = timestamp_datetime(float(order['create_time']))
+        #
+        # items = order['items']
+        # _product_description = items[0]['title']
+        # logging.info("GET items %r", items)
 
         self.render('newsup/pay-style.html',
                 is_login=is_login,
@@ -1916,8 +1916,9 @@ class NewsupTicketBalanceHandler(AuthorizationHandler):
                 league_info=league_info,
                 access_token=access_token,
                 api_domain=API_DOMAIN,
-                order = order,
-                items=items)
+                # order = order,
+                # items=items
+                )
 
 
 # 订单列表页
