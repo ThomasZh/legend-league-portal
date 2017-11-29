@@ -289,9 +289,10 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class AuthorizationHandler(BaseHandler):
     # @tornado.web.asynchronous
-    @tornado.gen.coroutine
+    # @tornado.gen.coroutine
     def get_current_user(self):
         API_DOMAIN = self.request.protocol + "://" + self.request.host
+        logging.info("API_DOMAIN %r",API_DOMAIN)
 
         self.set_secure_cookie("login_next", self.request.uri)
 

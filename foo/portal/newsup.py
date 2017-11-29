@@ -48,7 +48,7 @@ class WxMpVerifyHandler(tornado.web.RequestHandler):
         return
 
 
-class NewsupLoginNextHandler(tornado.web.RequestHandler):
+class NewsupLoginNextHandler(AuthorizationHandler):
     # @tornado.web.asynchronous
     @tornado.gen.coroutine
     def get(self):
