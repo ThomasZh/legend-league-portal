@@ -79,9 +79,9 @@
 		<div class="ht_bot_right">
 			<div class="ht_bot_right_four">
 				<h1>联系我们</h1>
-				<i><img src="{{ static_url('leshui/images/sf.png') }}">北京市朝阳区望京启阳路金辉大厦</i>
-				<i><img src="{{ static_url('leshui/images/dh.png') }}">13910586316</i>
-				<i><img src="{{ static_url('leshui/images/yx.png') }}">support@leshuiyou.cn</i>
+				<i><img src="{{ static_url('leshui/images/sf.png') }}">北京市西城区广安门内大街基业大厦707</i>
+				<i><img src="{{ static_url('leshui/images/dh.png') }}">010-63204755</i>
+				<i><img src="{{ static_url('leshui/images/yx.png') }}">3380928340@qq.com</i>
 			</div>
 		</div>
 	</div>
@@ -146,7 +146,7 @@
 <script>
 		var map = new AMap.Map('mapContainer', {
 			 zoom : 14,
-			 center: [116.48872, 40.003264]
+			 center: [116.353567, 39.88841]
 		 });
 
 		 map.plugin(["AMap.ToolBar"], function() {
@@ -154,11 +154,11 @@
 		 });
 
 		 var marker = new AMap.Marker({
-						 position : [116.48872, 40.003264],
+						 position : [116.353567, 39.88841],
 						 offset : new AMap.Pixel(-12,-12),
 						 map : map
 		 });
-		 marker.setTitle("望京启阳路金辉大厦");
+		 marker.setTitle("北京市西城区广安门内大街基业大厦");
 
 		AMap.plugin('AMap.Geocoder',function(){
 			var geocoder = new AMap.Geocoder({
