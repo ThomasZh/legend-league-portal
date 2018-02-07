@@ -67,8 +67,8 @@ color: #fff;font-size: 18px;font-family: "微软雅黑"}
 .ht_hot_left_jj{width: 99.8%;float: left;margin-top:2%;border: 1px #eee solid;}
 .ht_hot_left_jj p{width: 96%;float: left;line-height: 25px;color: #666;text-indent: 2em;padding:2%;font-size: 14px;}
 .ht_hot_left_acti{width: 100%;float: left;padding-top: 2%; overflow: hidden;}
-.ht_hot_left_acti img{max-width: 80%;}
-.ht_hot_left_acti p{width: 100%;float: left;line-height: 30px;color: #666;text-indent: 2em;font-size: 14px;}
+.ht_hot_left_acti img{max-width: 60%;}
+.ht_hot_left_acti p{width: 100%;float: left;line-height: 30px;color: #666;font-size: 14px;}
 .ht_hot_left_sc{width: 50px;margin: auto;padding:1% 0;overflow: hidden;}
 .ht_hot_left_sc #sc2{display: none;}
 
