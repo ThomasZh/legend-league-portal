@@ -265,7 +265,7 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
     # @tornado.web.asynchronous
-    @tornado.gen.coroutine
+    #@tornado.gen.coroutine
     def is_ops(self, access_token):
         API_DOMAIN = self.request.protocol + "://" + self.request.host
 
